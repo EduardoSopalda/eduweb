@@ -1,0 +1,10 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "type": "command",
+        "command": "sh scripts/setup-spec-kit.sh"
+      }
+    ]
+  }
+}

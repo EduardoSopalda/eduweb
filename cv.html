@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eduardo Sopalda — CV</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --navy:   #192B4A;
+      --gold:   #C8922A;
+      --light:  #EFF2F8;
+      --text:   #1F2933;
+      --muted:  #5C6A7A;
+      --sidebar-text: #D8E3F0;
+      --sidebar-muted: #8FA3C0;
+    }
+
+    @page {
+      size: A4 portrait;
+      margin: 0;
+    }
+
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 8pt;
+      color: var(--text);
+      background: #ccc;
+    }
+
+    /* ── Page shells ─────────────────────────────────────── */
+    .page {
+      width: 210mm;
+      height: 297mm;
+      overflow: hidden;
+      background: white;
+      display: flex;
+      flex-direction: column;
+      margin: 0 auto 6mm;
+      box-shadow: 0 2px 12px rgba(0,0,0,.18);
+      page-break-after: always;
+    }
+    .page:last-child { page-break-after: auto; margin-bottom: 0; }
+
+    @media print {
+      body { background: none; }
+      .page { box-shadow: none; margin: 0; }
+    }
+
+    /* ── Header (page 1 only) ───────────────────────────── */
+    .header {
+      background: var(--navy);
+      color: white;
+      padding: 7mm 9mm 6mm;
+      flex-shrink: 0;
+    }
+    .header h1 {
+      font-size: 21pt;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      line-height: 1;
+    }
+    .header .subtitle {
+      font-size: 8pt;
+      color: var(--gold);
+      margin-top: 2.5mm;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+    .header .contact-bar {
+      margin-top: 3.5mm;
+      font-size: 7.5pt;
+      color: var(--sidebar-muted);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0 14px;
+      line-height: 1.6;
+    }
+    .header .contact-bar span::before {
+      margin-right: 3px;
+      color: var(--gold);
+    }
+
+    /* ── Two-column layout ──────────────────────────────── */
+    .body-cols {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
+    }
+
+    /* ── Sidebar ────────────────────────────────────────── */
+    .sidebar {
+      width: 67mm;
+      flex-shrink: 0;
+      background: var(--navy);
+      color: var(--sidebar-text);
+      padding: 6mm 7mm;
+      overflow: hidden;
+    }
+
+    .s-title {
+      font-size: 6.5pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--gold);
+      border-bottom: 1px solid rgba(200,146,42,.35);
+      padding-bottom: 1.5mm;
+      margin-top: 4mm;
+      margin-bottom: 2.5mm;
+    }
+    .s-title:first-child { margin-top: 0; }
+
+    .s-body {
+      font-size: 7.5pt;
+      line-height: 1.45;
+      color: var(--sidebar-text);
+    }
+
+    .s-item {
+      margin-bottom: 2.5mm;
+    }
+    .s-item .s-name {
+      font-weight: 700;
+      font-size: 7.5pt;
+      color: white;
+    }
+    .s-item .s-detail {
+      font-size: 7pt;
+      color: var(--sidebar-muted);
+      line-height: 1.4;
+    }
+
+    /* Education */
+    .edu-entry {
+      margin-bottom: 3mm;
+    }
+    .edu-entry .deg {
+      font-weight: 700;
+      font-size: 7.5pt;
+      color: white;
+      line-height: 1.3;
+    }
+    .edu-entry .school {
+      font-size: 7pt;
+      color: var(--sidebar-muted);
+      line-height: 1.35;
+    }
+    .edu-entry .year {
+      font-size: 6.5pt;
+      color: var(--gold);
+    }
+
+    /* Certs table */
+    .cert-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 7pt;
+    }
+    .cert-table tr { border-bottom: 1px solid rgba(255,255,255,.07); }
+    .cert-table td {
+      padding: 1.5mm 0;
+      vertical-align: top;
+      color: var(--sidebar-text);
+    }
+    .cert-table td.cert-issuer {
+      text-align: right;
+      color: var(--sidebar-muted);
+      padding-left: 3mm;
+      white-space: nowrap;
+    }
+
+    /* ── Main content ───────────────────────────────────── */
+    .main {
+      flex: 1;
+      padding: 6mm 8mm 6mm 7mm;
+      overflow: hidden;
+    }
+
+    .m-title {
+      font-size: 6.5pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--navy);
+      border-bottom: 2px solid var(--gold);
+      padding-bottom: 1.5mm;
+      margin-top: 4.5mm;
+      margin-bottom: 3mm;
+    }
+    .m-title:first-child { margin-top: 0; }
+
+    /* Profile */
+    .profile {
+      font-size: 8pt;
+      line-height: 1.5;
+      color: var(--text);
+    }
+    .profile strong { color: var(--navy); }
+
+    /* Jobs */
+    .job { margin-bottom: 3.5mm; }
+    .job-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 4mm;
+    }
+    .job-title {
+      font-weight: 700;
+      font-size: 8pt;
+      color: var(--navy);
+      line-height: 1.2;
+    }
+    .job-company {
+      font-size: 7.5pt;
+      font-weight: 600;
+      color: var(--gold);
+      line-height: 1.3;
+    }
+    .job-meta {
+      font-size: 7pt;
+      color: var(--muted);
+      text-align: right;
+      white-space: nowrap;
+      flex-shrink: 0;
+      line-height: 1.4;
+    }
+    .job ul {
+      list-style: none;
+      margin-top: 1.5mm;
+    }
+    .job ul li {
+      font-size: 7.5pt;
+      line-height: 1.38;
+      padding-left: 8px;
+      position: relative;
+      margin-bottom: 1mm;
+      color: var(--text);
+    }
+    .job ul li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--gold);
+      font-size: 7pt;
+      top: 0.5px;
+    }
+    .job ul li:last-child { margin-bottom: 0; }
+
+    /* Speaking */
+    .speak-item { margin-bottom: 3mm; }
+    .speak-head {
+      font-weight: 700;
+      font-size: 7.5pt;
+      color: var(--navy);
+      line-height: 1.3;
+    }
+    .speak-body {
+      font-size: 7pt;
+      color: var(--muted);
+      line-height: 1.4;
+      margin-top: 0.5mm;
+    }
+    .speak-body em { font-style: italic; color: var(--text); }
+
+    /* Community */
+    .comm-item { margin-bottom: 2.5mm; }
+    .comm-head {
+      font-weight: 700;
+      font-size: 7.5pt;
+      color: var(--navy);
+    }
+    .comm-body {
+      font-size: 7pt;
+      color: var(--muted);
+      line-height: 1.4;
+      margin-top: 0.5mm;
+    }
+
+    /* Divider */
+    .rule { border: none; border-top: 1px solid #e0e5ec; margin: 2.5mm 0; }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════ PAGE 1 -->
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <h1>Eduardo Sopalda</h1>
+    <div class="subtitle">AI Governance Manager &nbsp;·&nbsp; Chemical &amp; Life Sciences Industry &nbsp;·&nbsp; 20+ Years Experience</div>
+    <div class="contact-bar">
+      <span>Barcelona, Spain</span>
+      <span>esopalda@me.com</span>
+      <span>+34 620 139 809</span>
+      <span>linkedin.com/in/eduardo-sopalda</span>
+      <span>eduardosopalda.com</span>
+    </div>
+  </div>
+
+  <div class="body-cols">
+
+    <!-- SIDEBAR P1 -->
+    <div class="sidebar">
+
+      <div class="s-title">AI Governance &amp; Policy</div>
+      <div class="s-body">AI framework design · EU AI Act / GDPR / NIS2 / DORA / ISO 42001 · Responsible AI · Control-by-design · Federated stewardship · Governance Council · AI maturity assessment · Agentic AI governance · DAMA DMBOK</div>
+
+      <div class="s-title">AI Assurance &amp; Quality</div>
+      <div class="s-body">Human-in-the-Loop ML oversight · Root Cause Analysis · Model accuracy monitoring · Prompt engineering · AI quality lifecycle · Auditable AI controls · Vector AI systems</div>
+
+      <div class="s-title">Analytics &amp; Tooling</div>
+      <div class="s-body">Power BI · Tableau · Databricks · SQL · Python · Azure OpenAI &amp; Key Vault · GCP · Microsoft Copilot · KPI dashboards</div>
+
+      <div class="s-title">Leadership &amp; Stakeholder</div>
+      <div class="s-body">Executive communication · Cross-functional influence · Change management · Multicultural leadership (20+ yrs) · Coaching &amp; mentoring · Thought leadership · Governance adoption</div>
+
+      <div class="s-title">Community</div>
+
+      <div class="s-item">
+        <div class="s-name">DAMA International · Member #824</div>
+        <div class="s-detail">Spanish Chapter · Oct 2025 – Present<br>
+        Co-authoring white paper on Citizen AI &amp; Agentic AI Governance</div>
+      </div>
+      <div class="s-item">
+        <div class="s-name">Career Mentor · ECS</div>
+        <div class="s-detail">European Career Support · 15,000+ members<br>
+        Advising transitions into AI, data governance &amp; digital transformation</div>
+      </div>
+      <div class="s-item">
+        <div class="s-name">AI Governance Author</div>
+        <div class="s-detail">eduardosopalda.com/writings.html<br>
+        Audience: practitioners, executives &amp; policy professionals</div>
+      </div>
+
+    </div>
+
+    <!-- MAIN P1 -->
+    <div class="main">
+
+      <div class="m-title">Executive Profile</div>
+      <div class="profile">
+        AI Governance leader with <strong>20+ years of cross-industry experience</strong>, currently driving Data &amp; AI Governance at <strong>dsm-firmenich</strong> — a direct peer of Symrise in global flavours, fragrances, and food &amp; beverage ingredients. Specialised in designing, implementing, and operationalising enterprise AI governance frameworks at global scale, translating regulatory requirements (<strong>EU AI Act / GDPR / NIS2 / DORA / ISO 42001</strong>) into pragmatic, embedded, and automated controls. Previously 8 years as Human-in-the-Loop AI/Data Quality authority at <strong>TELUS Digital (Meta)</strong>. Confirmed speaker at <strong>AutomaChem 2026</strong> (Berlin) and panelist at the <strong>Sigmoid AI Governance Roundtable</strong> (London). Active contributor to the <strong>DAMA España AI Governance Working Group</strong>.
+      </div>
+
+      <div class="m-title">Professional Experience</div>
+
+      <div class="job">
+        <div class="job-head">
+          <div>
+            <div class="job-title">Data &amp; AI Governance Lead</div>
+            <div class="job-company">dsm-firmenich</div>
+          </div>
+          <div class="job-meta">Mar 2026 – Present<br>Barcelona, Hybrid</div>
+        </div>
+        <ul>
+          <li>Design and operationalise global AI governance policies, standards, and controls across a federated stewardship model spanning multiple business units.</li>
+          <li>Develop and enforce AI and data quality KPIs; embed governance requirements into ERP transformation programs and AI system design.</li>
+          <li>Facilitate the Data &amp; AI Governance Council: structured decision-making, accountability frameworks, and cross-domain stewardship.</li>
+          <li>Embed EU AI Act, GDPR, NIS2, DORA, and ISO 42001 compliance requirements into AI lifecycle controls and operational models.</li>
+        </ul>
+      </div>
+
+      <div class="job">
+        <div class="job-head">
+          <div>
+            <div class="job-title">AI / Data Quality Analyst &amp; Process Optimization Consultant</div>
+            <div class="job-company">TELUS Digital (Meta)</div>
+          </div>
+          <div class="job-meta">Jun 2018 – Feb 2026<br>Barcelona</div>
+        </div>
+        <ul>
+          <li>Led continuous closed-loop, policy-driven ML observability; applied RCA for auditable AI oversight — improved model accuracy by 12 points.</li>
+          <li>Integrated GDPR and EU AI Act criteria into training frameworks; supported compliance readiness and onboarding of 60+ professionals.</li>
+          <li>Designed and scaled AI quality initiative (Fuel iX) under mentorship of Bret Kinsella (Voicebot.ai / Synthedia), boosting KPI by 15%+.</li>
+          <li>Mentored 20+ SMEs; reduced resolution time ~20% through prompt engineering and copilot tooling.</li>
+          <li>Drove 17% uplift in resolution quality via Tableau dashboards, VoC analytics, and data-driven CX redesign.</li>
+        </ul>
+      </div>
+
+      <div class="job">
+        <div class="job-head">
+          <div>
+            <div class="job-title">Project Manager</div>
+            <div class="job-company">Villasis i Associats SLP</div>
+          </div>
+          <div class="job-meta">Sep 2017 – Oct 2018<br>Barcelona &amp; Mexico</div>
+        </div>
+        <ul>
+          <li>Managed 6+ residential projects end-to-end with 100% SLA adherence; increased investor ROI by 25% through streamlined documentation and approval processes.</li>
+        </ul>
+      </div>
+
+      <div class="job">
+        <div class="job-head">
+          <div>
+            <div class="job-title">Cloud &amp; Incident Operations Manager · Strategic CSM</div>
+            <div class="job-company">Colt Technology · B2B SaaS</div>
+          </div>
+          <div class="job-meta">Jan 2011 – Sep 2017<br>Barcelona</div>
+        </div>
+        <ul>
+          <li>Strategic Incident Manager for KDDI Japan; increased CSAT by 35% through proactive communication and service alignment workshops in London.</li>
+          <li>Managed Tier 1/2 SLA/KPI adherence for enterprise clients (Siebel CRM); led RCA and RFO delivery.</li>
+        </ul>
+      </div>
+
+      <div class="job">
+        <div class="job-head">
+          <div>
+            <div class="job-title">Project Manager &amp; Designer</div>
+            <div class="job-company">Alberto Villasis Arquitectos</div>
+          </div>
+          <div class="job-meta">Mar 2005 – Dec 2010<br>Spain &amp; International</div>
+        </div>
+        <ul>
+          <li>Led 10+ design and construction projects (up to €3M cumulative value); won 1st prize in the Municipal Pool of Roses architectural competition.</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════ PAGE 2 -->
+<div class="page">
+  <div class="body-cols">
+
+    <!-- SIDEBAR P2 -->
+    <div class="sidebar">
+
+      <div class="s-title" style="margin-top:0">Education</div>
+
+      <div class="edu-entry">
+        <div class="deg">DEA — Doctoral Programme in Architectural Projects</div>
+        <div class="school">Universitat Politècnica de Catalunya</div>
+        <div class="year">2008 / Certified 2025 · Grade: Notable</div>
+      </div>
+
+      <div class="edu-entry">
+        <div class="deg">Master's in AI &amp; Innovation</div>
+        <div class="school">Founderz Business School &amp; Microsoft</div>
+        <div class="year">Jun 2025 – Mar 2026</div>
+      </div>
+
+      <div class="edu-entry">
+        <div class="deg">Master in Data Analytics</div>
+        <div class="school">NODO / Desafío Latam · Accenture · Globant</div>
+        <div class="year">2025</div>
+      </div>
+
+      <div class="edu-entry">
+        <div class="deg">Master in Process Management &amp; Improvement</div>
+        <div class="school">Udemy / ADN Lean</div>
+        <div class="year">Completed Jun 2025</div>
+      </div>
+
+      <div class="edu-entry">
+        <div class="deg">Master's Degree in Project Management</div>
+        <div class="school">Universitat Politècnica de Catalunya</div>
+        <div class="year">2003 – 2005</div>
+      </div>
+
+      <div class="edu-entry">
+        <div class="deg">Degree in Architecture</div>
+        <div class="school">Universidad de Panamá</div>
+        <div class="year">1995 – 2001</div>
+      </div>
+
+      <div class="s-title">Certifications</div>
+      <table class="cert-table">
+        <tr>
+          <td>Agentic AI Commander (105h)</td>
+          <td class="cert-issuer">Founderz &amp; Microsoft · 2026</td>
+        </tr>
+        <tr>
+          <td>AI Automation &amp; Digital Transformation (150h)</td>
+          <td class="cert-issuer">NODO · 2025</td>
+        </tr>
+        <tr>
+          <td>Databricks Fundamentals Accreditation</td>
+          <td class="cert-issuer">Databricks · 2026</td>
+        </tr>
+        <tr>
+          <td>Generative AI Fundamentals</td>
+          <td class="cert-issuer">Databricks · 2025</td>
+        </tr>
+        <tr>
+          <td>Data Governance Fundamentals</td>
+          <td class="cert-issuer">Databricks · 2025</td>
+        </tr>
+        <tr>
+          <td>Certified Process Improvement Expert</td>
+          <td class="cert-issuer">Six Sigma · 2025</td>
+        </tr>
+        <tr>
+          <td>Google Data Analytics</td>
+          <td class="cert-issuer">Google · 2025</td>
+        </tr>
+        <tr>
+          <td>Power BI</td>
+          <td class="cert-issuer">Microsoft · 2025</td>
+        </tr>
+        <tr>
+          <td>Root Cause Analysis</td>
+          <td class="cert-issuer">LinkedIn Learning · 2025</td>
+        </tr>
+      </table>
+
+    </div>
+
+    <!-- MAIN P2 -->
+    <div class="main">
+
+      <div class="m-title" style="margin-top:0">Selected Projects</div>
+
+      <div class="job">
+        <div class="job-head">
+          <div>
+            <div class="job-title">LEXA — Responsible AI Governance Framework</div>
+            <div class="job-company">DAMA España · 2025</div>
+          </div>
+        </div>
+        <ul>
+          <li>Designed LEXA, an enterprise Responsible AI governance framework on Azure to operationalise trust, accountability, and regulatory compliance (EU AI Act / GDPR / DORA / ISO 42001).</li>
+          <li>Developed a Python-based Risk &amp; Compliance Matrix mapping regulatory requirements to auditable controls for model risk, drift, and lifecycle oversight.</li>
+          <li>Implemented governance architecture (Azure OpenAI, Key Vault, managed identities) enforcing controlled access, metadata validation, and GenAI usage policies.</li>
+        </ul>
+      </div>
+
+      <div class="m-title">Industry Engagement &amp; Speaking</div>
+
+      <div class="speak-item">
+        <div class="speak-head">Confirmed Speaker · AutomaChem 2026 &nbsp;·&nbsp; Berlin</div>
+        <div class="speak-body">Chemical Automation &amp; Digitalisation Congress · Day 1 Opening Panel · <em>"AI Governance as the Foundation for Sustainable Digital Transformation in the Chemical Industry"</em> · Alongside leaders from BASF, Linde, Evonik, Covestro, Merck &amp; Clariant. 250+ delegates, 45+ speakers.</div>
+      </div>
+
+      <div class="speak-item">
+        <div class="speak-head">Panelist · Sigmoid AI Governance Roundtable &nbsp;·&nbsp; London 2026</div>
+        <div class="speak-body">Invited alongside governance leaders from PepsiCo, Mars, and Heineken; discussed federated stewardship models and responsible AI deployment at enterprise scale.</div>
+      </div>
+
+      <div class="speak-item">
+        <div class="speak-head">Speaker · Summit on Data Security &nbsp;·&nbsp; Madrid 2026</div>
+        <div class="speak-body">Presented on enterprise data protection strategies, regulatory alignment (GDPR / EU AI Act / NIS2), and embedding security controls into AI governance operating models.</div>
+      </div>
+
+      <div class="speak-item">
+        <div class="speak-head">Speaker · DataNext: Agentic AI Summit &nbsp;·&nbsp; 2026</div>
+        <div class="speak-body">Governance and assurance implications of Agentic AI; control-by-design patterns and responsible AI deployment frameworks for enterprise environments.</div>
+      </div>
+
+      <div class="speak-item">
+        <div class="speak-head">Workshop Participant · Kith AI Lab — Vector AI &amp; Ontology Design &nbsp;·&nbsp; USA 2025</div>
+        <div class="speak-body">Invited workshop with Diego &amp; Yvonne Espinosa (Kith AI Lab); explored vector-based AI data harvesting and applied ontology design as the knowledge foundation for auditable AI systems.</div>
+      </div>
+
+      <div class="m-title">Thought Leadership &amp; Community</div>
+
+      <div class="comm-item">
+        <div class="comm-head">DAMA International · Member #824 · Spanish Chapter &nbsp;·&nbsp; Oct 2025 – Present</div>
+        <div class="comm-body">Co-authoring white paper <em>"Citizen AI &amp; Agentic AI Governance"</em> — addresses governance, risk, and control challenges of uncontrolled AI adoption; proposes a structured path from Data Governance to AI Governance with control-by-design patterns for autonomous agents.</div>
+      </div>
+
+      <div class="comm-item">
+        <div class="comm-head">AI Governance Author &nbsp;·&nbsp; eduardosopalda.com/writings.html</div>
+        <div class="comm-body">Publishes articles on AI governance, responsible AI, agentic systems, and enterprise AI strategy for practitioners, executives, and policy professionals across Europe.</div>
+      </div>
+
+      <div class="comm-item">
+        <div class="comm-head">Career Mentor · European Career Support (ECS) &nbsp;·&nbsp; 15,000+ members</div>
+        <div class="comm-body">Active mentor advising on career transitions into AI, data governance, and digital transformation roles.</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

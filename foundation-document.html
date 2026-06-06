@@ -599,7 +599,73 @@
             .footer { padding: 32px 24px; flex-direction: column; }
             .footer-r { text-align: left; }
         }
+
+        /* ── TEMPLATES ─────────────────────────────────── */
+        .tmpl-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .tmpl-card {
+            background: var(--teal-bg); border-radius: 12px;
+            border: 1px solid var(--border); overflow: hidden;
+            display: flex; flex-direction: column;
+        }
+        .tmpl-head {
+            background: var(--teal-dk); color: white;
+            padding: 16px 20px; display: flex; align-items: center; gap: 12px;
+        }
+        .tmpl-num {
+            font-size: 22px; font-weight: 900; opacity: 0.35;
+            line-height: 1; letter-spacing: -1px; flex-shrink: 0;
+        }
+        .tmpl-name { flex: 1; font-size: 15px; font-weight: 700; line-height: 1.3; }
+        .tmpl-copy {
+            background: rgba(255,255,255,0.18); color: white; border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 6px; padding: 5px 13px; font-size: 12px; font-weight: 700;
+            cursor: pointer; white-space: nowrap; transition: background 0.15s;
+            font-family: inherit;
+        }
+        .tmpl-copy:hover { background: rgba(255,255,255,0.30); }
+        .tmpl-copy.copied { background: var(--lime-dk); border-color: var(--lime-dk); }
+        .tmpl-note {
+            padding: 10px 20px; font-size: 12px; color: var(--teal-dk);
+            background: rgba(61,187,165,0.12); border-bottom: 1px solid var(--border);
+            font-style: italic; line-height: 1.5;
+        }
+        .tmpl-body { padding: 16px 20px; flex: 1; }
+        .tmpl-field { margin-bottom: 9px; line-height: 1.5; }
+        .tmpl-key { font-weight: 700; color: var(--dark); font-size: 14px; }
+        .tmpl-val { color: var(--light); font-size: 13px; font-style: italic; }
+        .tmpl-section {
+            font-size: 11px; font-weight: 700; letter-spacing: 1.5px;
+            text-transform: uppercase; color: var(--teal-dk);
+            margin: 14px 0 6px; display: block;
+        }
+        .tmpl-list { list-style: none; padding: 0; margin: 0 0 10px 0; display: grid; gap: 5px; }
+        .tmpl-list li {
+            display: flex; gap: 9px; font-size: 13px; color: var(--mid); line-height: 1.5;
+        }
+        .tmpl-list li::before {
+            content: ''; width: 6px; height: 6px; border-radius: 50%;
+            background: var(--teal); margin-top: 8px; flex-shrink: 0;
+        }
+        .tmpl-test {
+            margin-top: 14px; padding: 10px 14px;
+            background: rgba(30,122,104,0.08); border-radius: 8px;
+            border-left: 3px solid var(--teal-dk);
+            font-size: 13px; color: var(--teal-dk); font-style: italic; line-height: 1.5;
+        }
+        .tmpl-raw { display: none; }
+        .tmpl-wide { grid-column: 1 / -1; }
+        @media (max-width: 860px) { .tmpl-grid { grid-template-columns: 1fr; } }
     </style>
+    <script>
+    function copyTemplate(btn) {
+        const raw = btn.closest('.tmpl-card').querySelector('.tmpl-raw').value;
+        navigator.clipboard.writeText(raw).then(() => {
+            btn.textContent = 'Copied';
+            btn.classList.add('copied');
+            setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2200);
+        });
+    }
+    </script>
 </head>
 <body>
 
@@ -648,6 +714,7 @@
     <a href="#s10">10 &middot; Backlog</a>
     <a href="#s11">11 &middot; What We Watch</a>
     <a href="#s12">12 &middot; Urgency</a>
+    <a href="#templates">Templates</a>
 </nav>
 
 <main class="page">
@@ -1290,6 +1357,353 @@
         <div style="margin-top: 16px; padding: 12px 16px; background: var(--bg); border-radius: 8px; font-size: 14px; color: var(--mid); font-style: italic;">
             The simple test: if the person taking over could continue without finding you, the handover is done. If they would have to ask you, it is not.
         </div>
+    </div>
+</section>
+
+<!-- TEMPLATES -->
+<section id="templates">
+    <div class="sh">
+        <div class="sh-label">Copilot Ready</div>
+        <h2>Templates</h2>
+        <p>Seven structured forms &mdash; one for every recurring action on the board. Use the same field names every time. Copilot in Jira reads these fields reliably when the format is consistent. Click <strong>Copy</strong> to grab any template and paste it directly into a card or a Copilot prompt.</p>
+    </div>
+
+    <div class="tmpl-grid">
+
+        <!-- T1: Open a new card -->
+        <div class="tmpl-card">
+            <div class="tmpl-head">
+                <span class="tmpl-num">01</span>
+                <span class="tmpl-name">Open a new card</span>
+                <button class="tmpl-copy" onclick="copyTemplate(this)">Copy</button>
+            </div>
+            <p class="tmpl-note">Use when a new piece of work is created. Do not leave Summary, Outcome, Epic, or Assignee empty. A card is not ready to start until the Definition of Ready is met.</p>
+            <div class="tmpl-body">
+                <div class="tmpl-field"><span class="tmpl-key">Summary:</span> <span class="tmpl-val">[one line, plain &mdash; what is this piece of work]</span></div>
+                <div class="tmpl-field"><span class="tmpl-key">Description:</span> <span class="tmpl-val">[a few sentences &mdash; what and why, enough that someone else understands it]</span></div>
+                <div class="tmpl-field"><span class="tmpl-key">Outcome:</span> <span class="tmpl-val">[what done looks like, in one sentence]</span></div>
+                <div class="tmpl-field"><span class="tmpl-key">Epic:</span> <span class="tmpl-val">[Governance Foundation / Data Office and OPS / Business Data Steward Operationalization / Data Health and Data Quality / Enterprise Data Management]</span></div>
+                <div class="tmpl-field"><span class="tmpl-key">Type:</span> <span class="tmpl-val">[Task, Spike, or Impediment]</span></div>
+                <div class="tmpl-field"><span class="tmpl-key">Assignee:</span> <span class="tmpl-val">[who owns the work &mdash; ask first if it is not you]</span></div>
+                <div class="tmpl-field"><span class="tmpl-key">Reporter:</span> <span class="tmpl-val">[who raised it]</span></div>
+                <div class="tmpl-field"><span class="tmpl-key">Priority:</span> <span class="tmpl-val">[Normal, or P1 / P2 / P3 &mdash; see the urgency protocol]</span></div>
+                <div class="tmpl-field"><span class="tmpl-key">Story Points:</span> <span class="tmpl-val">[rough size, not hours &mdash; leave blank until refined]</span></div>
+                <div class="tmpl-field"><span class="tmpl-key">Sprint:</span> <span class="tmpl-val">[leave blank until pulled into a sprint at planning]</span></div>
+                <span class="tmpl-section">Acceptance Criteria</span>
+                <ul class="tmpl-list">
+                    <li>Given [context], when [action], then [result].</li>
+                    <li>[add as many as needed &mdash; each one testable]</li>
+                </ul>
+                <span class="tmpl-section">Definition of Ready &mdash; all must be true before starting</span>
+                <ul class="tmpl-list">
+                    <li>The Outcome is clear.</li>
+                    <li>It has an Assignee.</li>
+                    <li>It is small enough to finish inside a sprint, or it has been broken down.</li>
+                    <li>Known blockers are named.</li>
+                    <li>It sits under an Epic.</li>
+                </ul>
+            </div>
+            <textarea class="tmpl-raw" readonly>Summary: [one line, plain. What is this piece of work.]
+Description: [a few sentences. What and why. Enough that someone who is not you understands it.]
+Outcome: [what done looks like, in one sentence.]
+Epic: [Governance Foundation, Data Office and OPS, Business Data Steward Operationalization, Data Health and Data Quality, or Enterprise Data Management.]
+Type: [Task, Spike, or Impediment.]
+Assignee: [who owns the work. Ask first if it is not you.]
+Reporter: [who raised it.]
+Priority: [Normal, or an urgency level P1, P2, P3. See the urgency protocol.]
+Story Points: [rough size, not hours. Leave blank until refined.]
+Sprint: [leave blank until pulled into a sprint at planning.]
+
+Acceptance Criteria:
+- Given [context], when [action], then [result].
+- [add as many as needed. Each one testable.]
+
+Definition of Ready (the card can be started when all are true):
+- The Outcome is clear.
+- It has an Assignee.
+- It is small enough to finish inside a sprint, or it has been broken down.
+- Known blockers are named.
+- It sits under an Epic.</textarea>
+        </div>
+
+        <!-- T2: Update a card -->
+        <div class="tmpl-card">
+            <div class="tmpl-head">
+                <span class="tmpl-num">02</span>
+                <span class="tmpl-name">Update a card</span>
+                <button class="tmpl-copy" onclick="copyTemplate(this)">Copy</button>
+            </div>
+            <p class="tmpl-note">Post as a comment. Keep it short. Fill every field. This is the format the team already uses.</p>
+            <div class="tmpl-body">
+                <div class="tmpl-field"><span class="tmpl-key">Title:</span> <span class="tmpl-val">[card summary]</span></div>
+                <div class="tmpl-field"><span class="tmpl-key">Status:</span> <span class="tmpl-val">[To Do / In Progress / In Review / Blocked / Done]</span></div>
+                <div class="tmpl-field"><span class="tmpl-key">Description:</span> <span class="tmpl-val">[one line on what the card is, for anyone new to it]</span></div>
+                <span class="tmpl-section">Work completed</span>
+                <ul class="tmpl-list"><li>[what has actually been done since the last update]</li></ul>
+                <span class="tmpl-section">Current status</span>
+                <ul class="tmpl-list"><li>[where it stands right now, in one or two lines]</li></ul>
+                <span class="tmpl-section">Blockers</span>
+                <ul class="tmpl-list"><li>[what is in the way. If blocked, name what would unblock it. If none, write None.]</li></ul>
+                <span class="tmpl-section">Next steps</span>
+                <ul class="tmpl-list"><li>[what happens next, and by when]</li></ul>
+                <div class="tmpl-field"><span class="tmpl-key">Owner:</span> <span class="tmpl-val">[assignee]</span></div>
+                <div class="tmpl-field"><span class="tmpl-key">Stakeholders:</span> <span class="tmpl-val">[who needs to know]</span></div>
+            </div>
+            <textarea class="tmpl-raw" readonly>Title: [card summary]
+Status: [To Do, In Progress, In Review, Blocked, or Done]
+Description: [one line on what the card is, for anyone new to it.]
+
+Work completed:
+- [what has actually been done since the last update.]
+
+Current status:
+- [where it stands right now, in one or two lines.]
+
+Blockers:
+- [what is in the way, if anything. If blocked, name what would unblock it. If none, write None.]
+
+Next steps:
+- [what happens next, and by when.]
+
+Owner: [assignee]
+Stakeholders: [who needs to know]</textarea>
+        </div>
+
+        <!-- T3: Hand over a card -->
+        <div class="tmpl-card">
+            <div class="tmpl-head">
+                <span class="tmpl-num">03</span>
+                <span class="tmpl-name">Hand over a card</span>
+                <button class="tmpl-copy" onclick="copyTemplate(this)">Copy</button>
+            </div>
+            <p class="tmpl-note">Use when work passes from one person to another &mdash; including leave, role change, or a card crossing to another board. The handover is not complete until all three checks are true.</p>
+            <div class="tmpl-body">
+                <div class="tmpl-field"><span class="tmpl-key">Card:</span> <span class="tmpl-val">[key and summary, e.g. DGDS-000 Data Domain profile update process]</span></div>
+                <div class="tmpl-field"><span class="tmpl-key">From:</span> <span class="tmpl-val">[current assignee]</span></div>
+                <div class="tmpl-field"><span class="tmpl-key">To:</span> <span class="tmpl-val">[new assignee &mdash; they must agree before this is final]</span></div>
+                <div class="tmpl-field"><span class="tmpl-key">Epic:</span> <span class="tmpl-val">[which epic the card sits under]</span></div>
+                <div class="tmpl-field"><span class="tmpl-key">Date of handover:</span> <span class="tmpl-val">[date]</span></div>
+                <span class="tmpl-section">State of the work</span>
+                <ul class="tmpl-list">
+                    <li>Status: [To Do / In Progress / In Review / Blocked / Done]</li>
+                    <li>What is done: [short]</li>
+                    <li>What is left: [short]</li>
+                    <li>Known blockers: [short, or None]</li>
+                </ul>
+                <span class="tmpl-section">Context that travels with the work</span>
+                <ul class="tmpl-list">
+                    <li>Links: [documents, the Hub, related cards]</li>
+                    <li>Key decisions and the why: [so the receiver does not start from zero]</li>
+                </ul>
+                <span class="tmpl-section">Handover checks &mdash; all three must be true</span>
+                <ul class="tmpl-list">
+                    <li>The card is current: status, blockers, and remaining work are written down.</li>
+                    <li>The receiver has said yes: [confirmed by, date]</li>
+                    <li>Context is attached: links and decisions are on the card or in the Hub.</li>
+                </ul>
+                <div class="tmpl-test">If the receiver could continue without finding the sender, the handover is done.</div>
+            </div>
+            <textarea class="tmpl-raw" readonly>Card: [key and summary, for example DGDS-000 Data Domain profile update process]
+From: [current assignee]
+To: [new assignee. They must agree before this is final.]
+Epic: [which epic the card sits under]
+Date of handover: [date]
+
+State of the work:
+- Status: [To Do, In Progress, In Review, Blocked, Done]
+- What is done: [short]
+- What is left: [short]
+- Known blockers: [short, or None]
+
+Context that travels with the work:
+- Links: [documents, the Hub, related cards]
+- Key decisions and the why: [so the receiver does not start from zero]
+
+Handover checks (all three must be true):
+- The card is current: status, blockers, and remaining work are written down.
+- The receiver has said yes: [confirmed by, date]
+- Context is attached: links and decisions are on the card or in the Hub.
+
+Test: if the receiver could continue without finding the sender, the handover is done.</textarea>
+        </div>
+
+        <!-- T4: Propose a new epic -->
+        <div class="tmpl-card">
+            <div class="tmpl-head">
+                <span class="tmpl-num">04</span>
+                <span class="tmpl-name">Propose a new epic</span>
+                <button class="tmpl-copy" onclick="copyTemplate(this)">Copy</button>
+            </div>
+            <p class="tmpl-note">An epic takes an equal share of review time. Each new one is a deliberate decision, confirmed by the Product Owner.</p>
+            <div class="tmpl-body">
+                <div class="tmpl-field"><span class="tmpl-key">Proposed epic name:</span> <span class="tmpl-val">[plain, clear]</span></div>
+                <div class="tmpl-field"><span class="tmpl-key">Proposed by:</span> <span class="tmpl-val">[name]</span></div>
+                <div class="tmpl-field"><span class="tmpl-key">Proposed owner:</span> <span class="tmpl-val">[who would own it &mdash; no epic goes live without an owner]</span></div>
+                <span class="tmpl-section">The four questions</span>
+                <ul class="tmpl-list">
+                    <li>What body of work is this? [scope, in a few lines]</li>
+                    <li>Why is it big and distinct enough to stand on its own, rather than live as cards under an existing epic?</li>
+                    <li>Who would own it?</li>
+                    <li>What outcome is it meant to deliver?</li>
+                </ul>
+                <span class="tmpl-section">Decision</span>
+                <ul class="tmpl-list">
+                    <li>Product Owner confirms it fits priority and value: [yes or no, by whom, date]</li>
+                    <li>Team agreed at planning: [date]</li>
+                </ul>
+                <div class="tmpl-test">Large, ongoing, and genuinely distinct from the existing epics earns an epic. A handful of cards that fit somewhere existing does not.</div>
+            </div>
+            <textarea class="tmpl-raw" readonly>Proposed epic name: [plain, clear]
+Proposed by: [name]
+Proposed owner: [who would own it. No epic goes live without an owner.]
+
+The four questions:
+- What body of work is this? [scope, in a few lines]
+- Why is it big and distinct enough to stand on its own, rather than live as cards under an existing epic?
+- Who would own it?
+- What outcome is it meant to deliver?
+
+Decision:
+- Product Owner confirms it fits priority and value: [yes or no, by whom, date]
+- Team agreed at planning: [date]
+
+Test: large, ongoing, and genuinely distinct from the existing epics earns an epic. A handful of cards that fit somewhere existing do not.</textarea>
+        </div>
+
+        <!-- T5: Sprint planning and review agenda -->
+        <div class="tmpl-card tmpl-wide">
+            <div class="tmpl-head">
+                <span class="tmpl-num">05</span>
+                <span class="tmpl-name">Sprint planning &amp; review agenda</span>
+                <button class="tmpl-copy" onclick="copyTemplate(this)">Copy</button>
+            </div>
+            <p class="tmpl-note">Use to set up the Monday review and the Tuesday planning. The review looks back. The planning looks forward. Time is divided equally across epics.</p>
+            <div class="tmpl-body" style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+                <div>
+                    <div class="tmpl-field"><span class="tmpl-key">Sprint:</span> <span class="tmpl-val">[name, e.g. Sprint Jun 10]</span></div>
+                    <div class="tmpl-field"><span class="tmpl-key">Sprint goal:</span> <span class="tmpl-val">[one sentence &mdash; what this sprint is really for]</span></div>
+                    <span class="tmpl-section">Sprint review &mdash; Monday, one hour</span>
+                    <p style="font-size:13px;color:var(--mid);margin:0 0 8px;">For each epic, in its slot:</p>
+                    <ul class="tmpl-list">
+                        <li>Epic: [name]</li>
+                        <li>Owner runs the slot. Scrum Master keeps time. For the Scrum Master&rsquo;s own epic, the Agile Coach keeps time.</li>
+                        <li>What the sprint produced: [short]</li>
+                        <li>What carried over and why: [short]</li>
+                    </ul>
+                    <span class="tmpl-section">Improvement loop</span>
+                    <ul class="tmpl-list">
+                        <li>Estimate against actual this sprint: [what we expected versus what happened]</li>
+                        <li>One thing to adjust next sprint: [short]</li>
+                    </ul>
+                </div>
+                <div>
+                    <span class="tmpl-section">Sprint planning &mdash; Tuesday, one hour</span>
+                    <ul class="tmpl-list">
+                        <li>Carry-over from last sprint: [cards]</li>
+                        <li>New cards pulled from the top of the backlog: [cards]</li>
+                        <li>Sprint goal for the new sprint: [one sentence]</li>
+                        <li>Capacity check: realistic, not hoped for.</li>
+                    </ul>
+                </div>
+            </div>
+            <textarea class="tmpl-raw" readonly>Sprint: [name, for example Sprint Jun 10]
+Sprint goal: [one sentence. What this sprint is really for.]
+
+Sprint review (Monday, one hour). Time divided equally across the epics.
+For each epic, in its slot:
+- Epic: [name]
+- Owner runs the slot. Scrum Master keeps time. For the Scrum Master's own epic, the Agile Coach keeps time.
+- What the sprint produced: [short]
+- What carried over and why: [short]
+
+Improvement loop:
+- Estimate against actual this sprint: [what we expected versus what happened]
+- One thing to adjust next sprint: [short]
+
+Sprint planning (Tuesday, one hour):
+- Carry-over from last sprint: [cards]
+- New cards pulled from the top of the backlog: [cards]
+- Sprint goal for the new sprint: [one sentence]
+- Capacity check: realistic, not hoped for.</textarea>
+        </div>
+
+        <!-- T6: Intake a request from the mailbox -->
+        <div class="tmpl-card">
+            <div class="tmpl-head">
+                <span class="tmpl-num">06</span>
+                <span class="tmpl-name">Intake a mailbox request</span>
+                <button class="tmpl-copy" onclick="copyTemplate(this)">Copy</button>
+            </div>
+            <p class="tmpl-note">Use when a request arrives in the Data Office mailbox. Every request becomes a card. The mailbox is a front door, not a parallel backlog.</p>
+            <div class="tmpl-body">
+                <div class="tmpl-field"><span class="tmpl-key">Received from:</span> <span class="tmpl-val">[name, team]</span></div>
+                <div class="tmpl-field"><span class="tmpl-key">Date received:</span> <span class="tmpl-val">[date]</span></div>
+                <div class="tmpl-field"><span class="tmpl-key">Handled by:</span> <span class="tmpl-val">[Eduardo or Oriol, whoever holds the mailbox this rotation]</span></div>
+                <div class="tmpl-field"><span class="tmpl-key">Request in one line:</span> <span class="tmpl-val">[what they are asking for]</span></div>
+                <span class="tmpl-section">Turned into a card</span>
+                <ul class="tmpl-list">
+                    <li>Summary: [the card summary]</li>
+                    <li>Epic: [best fit, or to be confirmed at refinement]</li>
+                    <li>Priority: [Normal, or P1 / P2 / P3]</li>
+                    <li>Added to backlog: [yes, at the bottom unless urgency says otherwise]</li>
+                </ul>
+                <div class="tmpl-field" style="margin-top:8px;"><span class="tmpl-key">Reply sent to requester:</span> <span class="tmpl-val">[yes or no &mdash; acknowledge and point to the card]</span></div>
+            </div>
+            <textarea class="tmpl-raw" readonly>Received from: [name, team]
+Date received: [date]
+Handled by: [Eduardo or Oriol, whoever holds the mailbox this rotation]
+Request in one line: [what they are asking for]
+
+Turned into a card:
+- Summary: [the card summary]
+- Epic: [best fit, or to be confirmed at refinement]
+- Priority: [Normal, or P1, P2, P3]
+- Added to backlog: [yes, at the bottom unless urgency says otherwise]
+
+Reply sent to requester: [yes or no. Acknowledge and point to the card.]</textarea>
+        </div>
+
+        <!-- T7: Raise a blocker -->
+        <div class="tmpl-card">
+            <div class="tmpl-head">
+                <span class="tmpl-num">07</span>
+                <span class="tmpl-name">Raise a blocker</span>
+                <button class="tmpl-copy" onclick="copyTemplate(this)">Copy</button>
+            </div>
+            <p class="tmpl-note">Use when work is blocked. A blocker is a signal that pulls help, not an admission. Raise it the same day.</p>
+            <div class="tmpl-body">
+                <div class="tmpl-field"><span class="tmpl-key">Card:</span> <span class="tmpl-val">[key and summary]</span></div>
+                <div class="tmpl-field"><span class="tmpl-key">Raised by:</span> <span class="tmpl-val">[name]</span></div>
+                <div class="tmpl-field"><span class="tmpl-key">Date raised:</span> <span class="tmpl-val">[date]</span></div>
+                <div class="tmpl-field"><span class="tmpl-key">What is blocked:</span> <span class="tmpl-val">[one line]</span></div>
+                <div class="tmpl-field"><span class="tmpl-key">Why:</span> <span class="tmpl-val">[what is waiting on what]</span></div>
+                <span class="tmpl-section">Urgency</span>
+                <ul class="tmpl-list">
+                    <li><strong>P1</strong> &mdash; drop everything: broken or at risk right now.</li>
+                    <li><strong>P2</strong> &mdash; this sprint: important and time-bound.</li>
+                    <li><strong>P3</strong> &mdash; soon: real but not pressing.</li>
+                </ul>
+                <div class="tmpl-field"><span class="tmpl-key">Who can unblock it:</span> <span class="tmpl-val">[name or team]</span></div>
+                <div class="tmpl-field"><span class="tmpl-key">What is needed to clear it:</span> <span class="tmpl-val">[one line]</span></div>
+                <div class="tmpl-test">The card is moved to Blocked and stays visible until cleared.</div>
+            </div>
+            <textarea class="tmpl-raw" readonly>Card: [key and summary]
+Raised by: [name]
+Date raised: [date]
+What is blocked: [one line]
+Why: [what is waiting on what]
+
+Urgency:
+- P1, drop everything: broken or at risk right now.
+- P2, this sprint: important and time bound.
+- P3, soon: real but not pressing.
+
+Who can unblock it: [name or team]
+What is needed to clear it: [one line]
+
+The card is moved to Blocked, and stays visible until cleared.</textarea>
+        </div>
+
     </div>
 </section>
 

@@ -1,0 +1,1470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foundation Document · Governing Unstructured Data · dsm-firmenich</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --green-deep:    #003D2E;
+            --green-dark:    #004C3F;
+            --green-primary: #00614D;
+            --green-mid:     #00855A;
+            --green-light:   #00A651;
+            --green-pale:    #E8F5EE;
+            --orange:        #E8591A;
+            --orange-pale:   #FEF0E8;
+            --blue:          #0055A5;
+            --blue-light:    #EEF4FC;
+            --purple:        #6B21A8;
+            --purple-light:  #F3E8FF;
+            --teal:          #007B8A;
+            --teal-light:    #E6F4F6;
+            --text-dark:     #1A1A18;
+            --text-mid:      #4A4A48;
+            --text-light:    #8A8A88;
+            --bg:            #F4F6F4;
+            --white:         #FFFFFF;
+            --border:        #DEE4E0;
+            --bronze:        #B45309;
+            --silver-dark:   #475569;
+            --gold-dark:     #92400E;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            color: var(--text-dark);
+            background: var(--bg);
+            line-height: 1.65;
+            font-size: 15px;
+        }
+
+        /* ─── COVER ─────────────────────────────────────── */
+        .cover {
+            background: var(--green-deep);
+            color: var(--white);
+            padding: 72px 72px 56px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cover-orb {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.04);
+        }
+        .cover-orb.a { width: 480px; height: 480px; top: -160px; right: -80px; }
+        .cover-orb.b { width: 300px; height: 300px; bottom: -100px; right: 200px; }
+        .cover-orb.c { width: 180px; height: 180px; top: 40px; right: 260px; border: 1px solid rgba(255,255,255,0.08); background: transparent; }
+
+        .cover-pills {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 36px;
+            flex-wrap: wrap;
+        }
+        .cover-pill {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 5px 18px;
+            border-radius: 100px;
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .cover h1 {
+            font-size: 40px;
+            font-weight: 800;
+            line-height: 1.15;
+            max-width: 680px;
+            margin-bottom: 14px;
+            letter-spacing: -0.5px;
+        }
+
+        .cover-sub {
+            font-size: 16px;
+            opacity: 0.75;
+            max-width: 580px;
+            margin-bottom: 52px;
+            line-height: 1.6;
+        }
+
+        .cover-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            border-top: 1px solid rgba(255,255,255,0.15);
+            padding-top: 28px;
+        }
+        .cover-meta-item label {
+            display: block;
+            font-size: 10px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            opacity: 0.6;
+            margin-bottom: 5px;
+        }
+        .cover-meta-item span {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        /* ─── TOP NAV ────────────────────────────────────── */
+        .topnav {
+            background: var(--white);
+            border-bottom: 1px solid var(--border);
+            padding: 0 72px;
+            position: sticky;
+            top: 0;
+            z-index: 200;
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            overflow-x: auto;
+        }
+        .topnav a {
+            padding: 15px 18px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-mid);
+            text-decoration: none;
+            white-space: nowrap;
+            border-bottom: 3px solid transparent;
+            transition: all 0.15s;
+        }
+        .topnav a:hover { color: var(--green-primary); border-bottom-color: var(--green-primary); }
+
+        /* ─── LAYOUT ─────────────────────────────────────── */
+        .page { max-width: 1120px; margin: 0 auto; padding: 64px 40px; }
+
+        .divider { height: 1px; background: var(--border); margin: 64px 0; }
+
+        /* ─── SECTION HEADER ─────────────────────────────── */
+        .sh {
+            margin-bottom: 40px;
+            padding-left: 20px;
+            position: relative;
+        }
+        .sh::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 0; bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, var(--green-primary), var(--green-light));
+            border-radius: 2px;
+        }
+        .sh-label {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--green-primary);
+            margin-bottom: 8px;
+        }
+        .sh h2 {
+            font-size: 26px;
+            font-weight: 800;
+            color: var(--green-deep);
+            margin-bottom: 8px;
+            letter-spacing: -0.3px;
+        }
+        .sh p { font-size: 14px; color: var(--text-mid); max-width: 640px; }
+
+        /* ─── SUB-SECTION HEADER ─────────────────────────── */
+        .ssh { margin: 40px 0 20px; }
+        .ssh h3 { font-size: 18px; font-weight: 700; color: var(--green-deep); margin-bottom: 6px; }
+        .ssh p { font-size: 14px; color: var(--text-mid); }
+
+        /* ─── CARD BASE ──────────────────────────────────── */
+        .card {
+            background: var(--white);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+        }
+
+        /* ─── PURPOSE BOX ────────────────────────────────── */
+        .purpose-box {
+            background: var(--white);
+            border-radius: 14px;
+            border: 1px solid var(--border);
+            padding: 32px 36px;
+            margin-bottom: 40px;
+            border-left: 5px solid var(--green-primary);
+        }
+        .purpose-box h3 { font-size: 17px; font-weight: 700; color: var(--green-deep); margin-bottom: 12px; }
+        .purpose-box p { color: var(--text-mid); font-size: 15px; line-height: 1.8; }
+
+        /* ─── THREE DATA TYPES ───────────────────────────── */
+        .data-types { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 32px; }
+
+        .dt-card { background: var(--white); border-radius: 14px; overflow: hidden; border: 1px solid var(--border); box-shadow: 0 2px 8px rgba(0,0,0,0.07); }
+
+        .dt-head { padding: 24px 24px 20px; color: white; }
+        .dt-head.structured  { background: linear-gradient(135deg, #0055A5, #1D6EC2); }
+        .dt-head.semi        { background: linear-gradient(135deg, #007B8A, #009BAC); }
+        .dt-head.unstructured{ background: linear-gradient(135deg, #B84A13, #E8591A); }
+
+        .dt-head-icon { font-size: 26px; margin-bottom: 10px; }
+        .dt-head h3 { font-size: 17px; font-weight: 800; margin-bottom: 8px; }
+        .dt-head p  { font-size: 12px; opacity: 0.88; line-height: 1.5; }
+
+        .dt-body { padding: 20px 24px; }
+        .dt-row { padding: 10px 0; border-bottom: 1px solid var(--border); }
+        .dt-row:last-child { border-bottom: none; padding-bottom: 0; }
+        .dt-row label {
+            display: block;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--text-light);
+            margin-bottom: 4px;
+        }
+        .dt-row p { font-size: 13px; color: var(--text-mid); }
+
+        /* ─── NUANCE NOTE ────────────────────────────────── */
+        .nuance {
+            background: #FFFBEB;
+            border: 1px solid #FDE68A;
+            border-left: 4px solid #F59E0B;
+            border-radius: 10px;
+            padding: 20px 24px;
+            margin-bottom: 40px;
+        }
+        .nuance h4 { font-size: 13px; font-weight: 700; color: #92400E; margin-bottom: 6px; }
+        .nuance p  { font-size: 13px; color: #78350F; line-height: 1.65; }
+
+        /* ─── GLOSSARY ───────────────────────────────────── */
+        .glossary { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+
+        .gl-card {
+            background: var(--white);
+            border-radius: 10px;
+            padding: 18px 20px 18px 22px;
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--green-primary);
+        }
+        .gl-card h4 { font-size: 14px; font-weight: 700; color: var(--green-deep); margin-bottom: 6px; }
+        .gl-card p  { font-size: 12.5px; color: var(--text-mid); line-height: 1.6; }
+
+        /* ─── ROLES ──────────────────────────────────────── */
+        .roles { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 40px; }
+
+        .role-card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 22px 24px;
+            border: 1px solid var(--border);
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+        .role-icon {
+            width: 48px; height: 48px;
+            border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 20px;
+            color: white;
+            flex-shrink: 0;
+        }
+        .role-card.analyst   .role-icon { background: var(--blue); }
+        .role-card.steward   .role-icon { background: var(--green-mid); }
+        .role-card.claire    .role-icon { background: var(--purple); }
+        .role-card.dataoffice .role-icon { background: var(--teal); }
+
+        .role-body h4 { font-size: 15px; font-weight: 700; color: var(--text-dark); margin-bottom: 3px; }
+        .role-type {
+            font-size: 10px; font-weight: 700; letter-spacing: 1.2px;
+            text-transform: uppercase; margin-bottom: 8px;
+        }
+        .role-card.analyst   .role-type { color: var(--blue); }
+        .role-card.steward   .role-type { color: var(--green-mid); }
+        .role-card.claire    .role-type { color: var(--purple); }
+        .role-card.dataoffice .role-type { color: var(--teal); }
+        .role-body p { font-size: 13px; color: var(--text-mid); line-height: 1.55; }
+
+        /* ─── KNOWLEDGE PRODUCT ──────────────────────────── */
+        .kp-hero {
+            background: linear-gradient(135deg, var(--green-deep) 0%, var(--green-primary) 100%);
+            color: white;
+            border-radius: 16px;
+            padding: 32px 36px;
+            margin-bottom: 32px;
+        }
+        .kp-hero h3 { font-size: 19px; font-weight: 800; margin-bottom: 12px; }
+        .kp-hero p  { font-size: 14px; opacity: 0.88; line-height: 1.75; }
+
+        /* ─── FILTER GATES ───────────────────────────────── */
+        .filter-flow {
+            display: flex;
+            gap: 0;
+            margin-bottom: 40px;
+            align-items: stretch;
+        }
+        .filter-gate {
+            flex: 1;
+            background: var(--white);
+            border: 1px solid var(--border);
+            padding: 28px 22px;
+            position: relative;
+        }
+        .filter-gate:first-child { border-radius: 14px 0 0 14px; }
+        .filter-gate:last-child  { border-radius: 0 14px 14px 0; }
+
+        .gate-num {
+            width: 38px; height: 38px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 16px; font-weight: 800; color: white;
+            margin-bottom: 14px;
+        }
+        .filter-gate:nth-child(1) .gate-num { background: var(--blue); }
+        .filter-gate:nth-child(2) .gate-num { background: var(--teal); }
+        .filter-gate:nth-child(3) .gate-num { background: var(--green-primary); }
+
+        .gate-title {
+            font-size: 15px; font-weight: 700; margin-bottom: 10px;
+        }
+        .filter-gate:nth-child(1) .gate-title { color: var(--blue); }
+        .filter-gate:nth-child(2) .gate-title { color: var(--teal); }
+        .filter-gate:nth-child(3) .gate-title { color: var(--green-primary); }
+
+        .gate-tags {
+            display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 12px;
+        }
+        .gate-tag {
+            font-size: 10px; font-weight: 600; padding: 3px 10px;
+            border-radius: 100px;
+        }
+        .filter-gate:nth-child(1) .gate-tag { background: var(--blue-light); color: var(--blue); }
+        .filter-gate:nth-child(2) .gate-tag { background: var(--teal-light); color: var(--teal); }
+        .filter-gate:nth-child(3) .gate-tag { background: var(--green-pale); color: var(--green-primary); }
+
+        .filter-gate p { font-size: 12.5px; color: var(--text-mid); margin-bottom: 14px; line-height: 1.6; }
+
+        .gate-q {
+            background: #F9FAFB;
+            border: 1px dashed #CBD5E1;
+            border-radius: 8px;
+            padding: 10px 14px;
+            font-size: 12.5px;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .gate-sep {
+            display: flex; align-items: center; justify-content: center;
+            width: 32px; flex-shrink: 0;
+            background: var(--bg);
+            font-size: 18px;
+            color: var(--green-primary);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            font-weight: 700;
+        }
+
+        /* ─── AI CONFIDENCE ──────────────────────────────── */
+        .ai-conf { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 40px; }
+
+        .conf-card { background: var(--white); border-radius: 12px; padding: 26px; border: 1px solid var(--border); }
+        .conf-card.hi { border-top: 4px solid #16A34A; }
+        .conf-card.lo { border-top: 4px solid #EA580C; }
+
+        .conf-icon {
+            width: 40px; height: 40px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 18px; margin-bottom: 14px;
+        }
+        .conf-card.hi .conf-icon { background: #DCFCE7; }
+        .conf-card.lo .conf-icon { background: #FFEDD5; }
+
+        .conf-card h4 { font-size: 15px; font-weight: 700; margin-bottom: 8px; }
+        .conf-card.hi h4 { color: #166534; }
+        .conf-card.lo h4 { color: #9A3412; }
+        .conf-card p { font-size: 13px; color: var(--text-mid); line-height: 1.65; }
+
+        /* ─── MEDALLION ──────────────────────────────────── */
+        .medallion { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 40px; }
+
+        .med-card { border-radius: 14px; overflow: hidden; border: 1px solid var(--border); box-shadow: 0 2px 8px rgba(0,0,0,0.07); }
+
+        .med-head { padding: 22px 24px; color: white; }
+        .med-head.bronze { background: linear-gradient(135deg, #92400E, #B45309); }
+        .med-head.silver { background: linear-gradient(135deg, #374151, #64748B); }
+        .med-head.gold   { background: linear-gradient(135deg, #78350F, #B45309); }
+
+        .med-head .med-lbl {
+            font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+            opacity: 0.75; margin-bottom: 4px;
+        }
+        .med-head .med-arrow {
+            font-size: 22px; opacity: 0.5; float: right; margin-top: -28px;
+        }
+        .med-head h3 { font-size: 22px; font-weight: 900; margin-bottom: 8px; letter-spacing: -0.5px; }
+        .med-head p  { font-size: 12px; opacity: 0.85; }
+
+        .med-body { background: var(--white); padding: 20px 24px; }
+        .med-body p { font-size: 13px; color: var(--text-mid); margin-bottom: 14px; }
+
+        .dsm-tag {
+            background: #F0FDF4;
+            border-radius: 8px;
+            padding: 10px 14px;
+            display: flex;
+            gap: 10px;
+            font-size: 12.5px;
+            color: var(--text-mid);
+        }
+        .dsm-lbl {
+            font-size: 9px; font-weight: 800; letter-spacing: 1.5px;
+            text-transform: uppercase; color: var(--green-primary);
+            white-space: nowrap; padding-top: 1px;
+        }
+
+        /* ─── FIVE PRINCIPLES ────────────────────────────── */
+        .principles { display: grid; gap: 14px; margin-bottom: 40px; }
+
+        .prin-card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 22px 24px;
+            border: 1px solid var(--border);
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+        }
+        .prin-num {
+            width: 48px; height: 48px;
+            background: var(--green-deep);
+            color: white;
+            border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 20px; font-weight: 900;
+            flex-shrink: 0;
+        }
+        .prin-body h4 { font-size: 15px; font-weight: 700; color: var(--green-deep); margin-bottom: 6px; }
+        .prin-body p  { font-size: 13.5px; color: var(--text-mid); }
+
+        /* ─── RESULT BANNER ──────────────────────────────── */
+        .result-bar {
+            background: linear-gradient(135deg, var(--green-deep), #005A3C);
+            color: white;
+            border-radius: 14px;
+            padding: 30px 36px;
+            display: flex;
+            gap: 40px;
+            align-items: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+        .res-stat h3 { font-size: 52px; font-weight: 900; line-height: 1; letter-spacing: -2px; }
+        .res-stat p  { font-size: 12px; opacity: 0.8; margin-top: 4px; }
+        .res-vline   { width: 1px; height: 60px; background: rgba(255,255,255,0.2); flex-shrink: 0; }
+        .res-ctx     { flex: 1; font-size: 14px; opacity: 0.88; line-height: 1.7; }
+
+        /* ─── HIL CYCLE ──────────────────────────────────── */
+        .info-bar {
+            background: #EFF6FF;
+            border: 1px solid #BFDBFE;
+            border-left: 4px solid #2563EB;
+            border-radius: 10px;
+            padding: 20px 24px;
+            margin-bottom: 32px;
+        }
+        .info-bar h4 { font-size: 13px; font-weight: 700; color: #1E40AF; margin-bottom: 6px; }
+        .info-bar p  { font-size: 13px; color: #1E3A8A; line-height: 1.65; }
+
+        .hil-week {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 0;
+            margin-bottom: 32px;
+        }
+        .hil-day {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-right: none;
+            padding: 24px 14px;
+            text-align: center;
+        }
+        .hil-day:first-child { border-radius: 12px 0 0 12px; }
+        .hil-day:last-child  { border-radius: 0 12px 12px 0; border-right: 1px solid var(--border); }
+
+        .hil-day-label {
+            font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
+            text-transform: uppercase; margin-bottom: 10px;
+        }
+        .hil-day:nth-child(1) .hil-day-label { color: var(--blue); }
+        .hil-day:nth-child(2) .hil-day-label { color: var(--teal); }
+        .hil-day:nth-child(3) .hil-day-label { color: var(--orange); }
+        .hil-day:nth-child(4) .hil-day-label { color: var(--purple); }
+        .hil-day:nth-child(5) .hil-day-label { color: var(--green-primary); }
+
+        .hil-emoji { font-size: 26px; margin-bottom: 10px; }
+        .hil-day h4 { font-size: 13px; font-weight: 700; margin-bottom: 6px; color: var(--text-dark); }
+        .hil-day p  { font-size: 11.5px; color: var(--text-mid); line-height: 1.5; }
+
+        /* ─── RCA LOOP ───────────────────────────────────── */
+        .rca-box {
+            background: var(--white);
+            border-radius: 14px;
+            border: 1px solid var(--border);
+            padding: 28px 32px;
+            margin-bottom: 40px;
+        }
+        .rca-box h3 { font-size: 15px; font-weight: 700; color: var(--green-deep); margin-bottom: 24px; }
+
+        .rca-loop {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .rca-step {
+            background: #F9FAFB;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 16px 18px;
+            text-align: center;
+            min-width: 120px;
+        }
+        .rca-step .step-icon { font-size: 24px; margin-bottom: 8px; }
+        .rca-step h4 { font-size: 12.5px; font-weight: 700; color: var(--text-dark); margin-bottom: 3px; }
+        .rca-step p  { font-size: 11px; color: var(--text-light); }
+        .rca-arr { font-size: 22px; color: var(--green-primary); font-weight: 700; }
+
+        /* ─── STATUS TABLE ───────────────────────────────── */
+        .status-wrap { overflow-x: auto; margin-bottom: 40px; border-radius: 12px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+
+        .status-tbl { width: 100%; border-collapse: collapse; background: var(--white); border-radius: 12px; overflow: hidden; }
+        .status-tbl th {
+            background: var(--green-deep);
+            color: white;
+            padding: 13px 20px;
+            text-align: left;
+            font-size: 11px;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+        .status-tbl td {
+            padding: 13px 20px;
+            font-size: 13px;
+            border-bottom: 1px solid var(--border);
+            vertical-align: top;
+            color: var(--text-mid);
+        }
+        .status-tbl tr:last-child td { border-bottom: none; }
+        .status-tbl tbody tr:hover td { background: #FAFAFA; }
+
+        .badge {
+            display: inline-flex; align-items: center; gap: 5px;
+            padding: 4px 12px; border-radius: 100px;
+            font-size: 11px; font-weight: 700; letter-spacing: 0.3px;
+            white-space: nowrap;
+        }
+        .badge.active      { background: #DCFCE7; color: #166534; }
+        .badge.critical    { background: #FEE2E2; color: #991B1B; }
+        .badge.disabled    { background: #FEF9C3; color: #713F12; }
+        .badge.inactive    { background: #FFEDD5; color: #9A3412; }
+        .badge.notstarted  { background: #F3F4F6; color: #374151; }
+        .badge.available   { background: #DBEAFE; color: #1E40AF; }
+
+        /* ─── ROADMAP ────────────────────────────────────── */
+        .roadmap { position: relative; padding-left: 56px; }
+        .roadmap::before {
+            content: '';
+            position: absolute;
+            left: 20px; top: 28px; bottom: 28px;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--green-primary), var(--green-light));
+            border-radius: 1px;
+        }
+
+        .rm-phase {
+            position: relative;
+            background: var(--white);
+            border-radius: 12px;
+            padding: 24px 26px;
+            border: 1px solid var(--border);
+            margin-bottom: 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .rm-dot {
+            position: absolute;
+            left: -47px; top: 24px;
+            width: 28px; height: 28px;
+            background: var(--green-primary);
+            border-radius: 50%;
+            border: 3px solid var(--bg);
+            box-shadow: 0 0 0 2px var(--green-primary);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 11px; font-weight: 800; color: white;
+        }
+        .rm-header { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; flex-wrap: wrap; }
+        .rm-phase-lbl  { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--green-primary); }
+        .rm-when       { font-size: 12.5px; color: var(--text-mid); background: var(--green-pale); padding: 3px 12px; border-radius: 100px; font-weight: 500; }
+        .rm-owner      { margin-left: auto; font-size: 11.5px; font-weight: 600; color: var(--text-light); background: #F9FAFB; padding: 3px 12px; border-radius: 6px; }
+
+        .rm-items { list-style: none; display: grid; gap: 7px; }
+        .rm-items li { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; color: var(--text-mid); }
+        .rm-items li::before {
+            content: '';
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            background: var(--green-primary);
+            margin-top: 7px;
+            flex-shrink: 0;
+        }
+
+        /* ─── THREE ASKS ─────────────────────────────────── */
+        .asks { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 40px; }
+
+        .ask-card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 26px;
+            border: 1px solid var(--border);
+            border-top: 4px solid;
+        }
+        .ask-card:nth-child(1) { border-top-color: var(--green-primary); }
+        .ask-card:nth-child(2) { border-top-color: var(--blue); }
+        .ask-card:nth-child(3) { border-top-color: var(--orange); }
+
+        .ask-n {
+            font-size: 36px; font-weight: 900; margin-bottom: 8px; line-height: 1;
+        }
+        .ask-card:nth-child(1) .ask-n { color: var(--green-primary); }
+        .ask-card:nth-child(2) .ask-n { color: var(--blue); }
+        .ask-card:nth-child(3) .ask-n { color: var(--orange); }
+
+        .ask-card h4 { font-size: 14px; font-weight: 700; margin-bottom: 8px; color: var(--text-dark); }
+        .ask-card p  { font-size: 13px; color: var(--text-mid); line-height: 1.6; }
+
+        /* ─── EXEC CALLOUT ───────────────────────────────── */
+        .exec-msg {
+            background: linear-gradient(135deg, #1D4ED8, #1E3A8A);
+            color: white;
+            border-radius: 14px;
+            padding: 30px 36px;
+            margin-bottom: 40px;
+        }
+        .exec-msg h3 { font-size: 15px; font-weight: 700; margin-bottom: 10px; opacity: 0.85; letter-spacing: 0.5px; }
+        .exec-msg p  { font-size: 16px; line-height: 1.75; font-weight: 300; }
+        .exec-msg strong { font-weight: 700; }
+
+        /* ─── FOOTER ─────────────────────────────────────── */
+        .footer {
+            background: var(--green-deep);
+            color: white;
+            padding: 40px 72px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 24px;
+        }
+        .footer-l h3 { font-size: 15px; font-weight: 700; margin-bottom: 5px; }
+        .footer-l p  { font-size: 12.5px; opacity: 0.65; }
+        .footer-r    { font-size: 12px; opacity: 0.6; text-align: right; line-height: 1.8; }
+
+        /* ─── RESPONSIVE ─────────────────────────────────── */
+        @media (max-width: 900px) {
+            .cover { padding: 48px 32px 40px; }
+            .cover h1 { font-size: 28px; }
+            .topnav { padding: 0 20px; }
+            .page { padding: 48px 24px; }
+            .data-types { grid-template-columns: 1fr; }
+            .filter-flow { flex-direction: column; }
+            .filter-gate { border-radius: 12px !important; border-right: 1px solid var(--border) !important; }
+            .gate-sep { height: 32px; width: 100%; border-left: 1px solid var(--border); border-right: 1px solid var(--border); border-top: none; border-bottom: none; }
+            .ai-conf { grid-template-columns: 1fr; }
+            .medallion { grid-template-columns: 1fr; }
+            .hil-week { grid-template-columns: 1fr 1fr; }
+            .hil-day:nth-child(5) { border-radius: 0 0 12px 12px !important; border-right: 1px solid var(--border); }
+            .roles { grid-template-columns: 1fr; }
+            .glossary { grid-template-columns: 1fr; }
+            .asks { grid-template-columns: 1fr; }
+            .result-bar { flex-direction: column; gap: 24px; }
+            .res-vline { display: none; }
+            .footer { padding: 32px 24px; flex-direction: column; }
+            .footer-r { text-align: left; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════
+     COVER
+════════════════════════════════════════ -->
+<header class="cover">
+    <div class="cover-orb a"></div>
+    <div class="cover-orb b"></div>
+    <div class="cover-orb c"></div>
+
+    <div class="cover-pills">
+        <span class="cover-pill">Foundation Document</span>
+        <span class="cover-pill">Internal Guide</span>
+        <span class="cover-pill">Permanent Reference</span>
+    </div>
+
+    <h1>Governing Unstructured Data<br>at dsm-firmenich</h1>
+    <p class="cover-sub">From the Meta reference model to our programme. Definitions, methodology, architecture, operating cycle and roadmap.</p>
+
+    <div class="cover-meta">
+        <div class="cover-meta-item">
+            <label>Prepared by</label>
+            <span>Eduardo Sopalda</span>
+        </div>
+        <div class="cover-meta-item">
+            <label>For</label>
+            <span>Sherwin Juco &amp; the D&amp;T Team</span>
+        </div>
+        <div class="cover-meta-item">
+            <label>Role</label>
+            <span>Global D&amp;T Governance Expert · Barcelona</span>
+        </div>
+        <div class="cover-meta-item">
+            <label>Date &amp; Version</label>
+            <span>April 2026 · v1.0</span>
+        </div>
+    </div>
+</header>
+
+<!-- ════════════════════════════════════════
+     TOP NAV
+════════════════════════════════════════ -->
+<nav class="topnav">
+    <a href="#purpose">Purpose</a>
+    <a href="#s1">1 · Definitions</a>
+    <a href="#glossary">Glossary</a>
+    <a href="#roles">Roles</a>
+    <a href="#s2">2 · Knowledge Product</a>
+    <a href="#s3">3 · Meta Reference</a>
+    <a href="#s4">4 · HIL Cycle</a>
+    <a href="#s5">5 · Roadmap</a>
+</nav>
+
+<main class="page">
+
+    <!-- ── PURPOSE ──────────────────────────────────── -->
+    <section id="purpose">
+        <div class="purpose-box">
+            <h3>Purpose of this Document</h3>
+            <p>This document is the starting point for the unstructured data governance programme at dsm-firmenich. It serves simultaneously as an <strong>internal working guide</strong> for the team, as the <strong>foundation from which the executive Point of View will be built</strong>, and as a <strong>permanent programme reference</strong>. It draws on direct experience governing unstructured data at scale at Meta, validated against our current implementation of Informatica IDMC.</p>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ══════════════════════════════════════════════
+         SECTION 1 · FUNDAMENTAL DEFINITIONS
+    ══════════════════════════════════════════════ -->
+    <section id="s1">
+        <div class="sh">
+            <div class="sh-label">Section 01</div>
+            <h2>Fundamental Definitions</h2>
+            <p>The distinction between these three concepts is not semantic. It defines the type of governance intervention required for each. Conflating them produces strategies that work for one data type and fail the other two.</p>
+        </div>
+
+        <!-- Three data type cards -->
+        <div class="data-types">
+
+            <div class="dt-card">
+                <div class="dt-head structured">
+                    <div class="dt-head-icon">📊</div>
+                    <h3>Structured Data</h3>
+                    <p>Predefined schema. Every field has a name, a type, and a fixed position. The structure exists before the data does.</p>
+                </div>
+                <div class="dt-body">
+                    <div class="dt-row">
+                        <label>Metadata</label>
+                        <p>Inherent. The schema IS the metadata — every field is named and typed by design.</p>
+                    </div>
+                    <div class="dt-row">
+                        <label>dsm-firmenich Examples</label>
+                        <p>SAP/ERP tables, MDM records, supply chain transaction data, Gold &amp; Silver layer tables in Databricks.</p>
+                    </div>
+                    <div class="dt-row">
+                        <label>Governance Challenge</label>
+                        <p>Not the structure itself. The challenge is the operating model: ownership, accountability, and making governance a mandatory delivery step.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dt-card">
+                <div class="dt-head semi">
+                    <div class="dt-head-icon">📨</div>
+                    <h3>Semi-Structured Data</h3>
+                    <p>Carries some self-describing properties but does not conform to a rigid schema. Metadata is embedded within the data.</p>
+                </div>
+                <div class="dt-body">
+                    <div class="dt-row">
+                        <label>Metadata</label>
+                        <p>Partial. Some fields are structured (email headers: From, To, Date) but the payload is free-form or variable.</p>
+                    </div>
+                    <div class="dt-row">
+                        <label>dsm-firmenich Examples</label>
+                        <p>Emails, JSON event logs from manufacturing, application logs, XML regulatory data feeds, SharePoint document metadata.</p>
+                    </div>
+                    <div class="dt-row">
+                        <label>Governance Challenge</label>
+                        <p>Extracting and standardising the structural elements that exist, then applying classification to the variable payload.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dt-card">
+                <div class="dt-head unstructured">
+                    <div class="dt-head-icon">🖼️</div>
+                    <h3>Unstructured Data</h3>
+                    <p>No inherent metadata whatsoever. The data does not describe itself. All metadata must be created externally.</p>
+                </div>
+                <div class="dt-body">
+                    <div class="dt-row">
+                        <label>Metadata</label>
+                        <p>None inherent. A photograph knows nothing about itself. Structure must be entirely imposed from outside.</p>
+                    </div>
+                    <div class="dt-row">
+                        <label>dsm-firmenich Examples</label>
+                        <p>Laboratory photographs, QC voice recordings, process documentation videos, scanned documents without OCR, raw sensor output.</p>
+                    </div>
+                    <div class="dt-row">
+                        <label>Governance Challenge</label>
+                        <p>The hardest category. A classification engine must generate metadata at scale, with sufficient reliability to govern against.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="nuance">
+            <h4>Important nuance: assets at the boundary</h4>
+            <p>Many assets sit between categories. A scanned PDF without OCR is unstructured; once OCR is applied and text is extractable, it becomes semi-structured. An email has a structured header and an unstructured body. A SharePoint library carries structured metadata attached to files that may themselves be unstructured. Governance decisions must account for <em>which layer of the asset</em> is being governed at any given point.</p>
+        </div>
+    </section>
+
+    <!-- ── 1.2 GLOSSARY ─────────────────────────────── -->
+    <section id="glossary">
+        <div class="ssh">
+            <h3>1.2 Programme Glossary</h3>
+            <p>The following terms are used throughout this programme. Each has a single, precise definition. They are not interchangeable.</p>
+        </div>
+
+        <div class="glossary" style="margin-bottom: 40px;">
+            <div class="gl-card">
+                <h4>Pool</h4>
+                <p>A logical grouping of related data assets organised by affinity, created before individual asset classification begins. The pool is the initial unit of governance. An owner is assigned to the pool before the details of every asset within it are known.</p>
+            </div>
+            <div class="gl-card">
+                <h4>Container</h4>
+                <p>A governed object within a pool representing a specific data type. Individual assets inherit governance properties from their container: owner, sensitivity tier, retention policy, and purpose tag. Governance operates at container level, not file level.</p>
+            </div>
+            <div class="gl-card">
+                <h4>Purpose Tag</h4>
+                <p>A mandatory metadata field on every container declaring its intended downstream use: ML model training, regulatory reporting, analytics, product, or research. Purpose determines governance treatment and is a legal requirement under GDPR Article 5.</p>
+            </div>
+            <div class="gl-card">
+                <h4>Lineage</h4>
+                <p>Complete traceability of a data asset: where it came from (source system), where it was classified (layer and timestamp), and where it is delivered (target system or consumption pipeline). Tracked at container level, not file level.</p>
+            </div>
+            <div class="gl-card">
+                <h4>HIL — Human in the Loop</h4>
+                <p>A governance practice in which human review is embedded in the AI classification decision cycle at a defined cadence. The HIL cycle ensures the classification engine remains aligned to the current governance policy, not a stale version of it.</p>
+            </div>
+            <div class="gl-card">
+                <h4>RCA — Root Cause Analysis</h4>
+                <p>A structured document identifying why a specific policy violation occurred, distinguishing the proximate cause from contributing factors, and recommending precise interventions. Produced weekly as the primary driver of the HIL feedback loop.</p>
+            </div>
+            <div class="gl-card">
+                <h4>Medallion Architecture</h4>
+                <p>A lakehouse architecture in three layers: <strong>Bronze</strong> (raw ingestion, no rules), <strong>Silver</strong> (classified, enriched, policies applied), <strong>Gold</strong> (governed, AI-ready, published as a data product). Unstructured data enters at Bronze and acquires metadata in transit through Silver.</p>
+            </div>
+            <div class="gl-card">
+                <h4>Knowledge Product</h4>
+                <p>The unstructured data equivalent of a data product. A governed, enriched, and contextually meaningful collection of unstructured assets that has passed through three sequential filter layers and is ready for AI consumption or marketplace publication.</p>
+            </div>
+            <div class="gl-card">
+                <h4>Taxonomy</h4>
+                <p>The classification framework that governs how unstructured data is organised and tagged. Defined before classification scanning begins. Every new data asset is tagged against the taxonomy at the point of ingestion. The governance layer sits on top of the taxonomy as its organisational backbone.</p>
+            </div>
+            <div class="gl-card">
+                <h4>Contextual Semantics</h4>
+                <p>The meaningful context and relationships that AI-generated metadata attaches to an unstructured asset. Contextual semantics make an asset findable, interpretable, and usable by both humans and AI systems. Generated at the knowledge layer of the three filter model.</p>
+            </div>
+            <div class="gl-card">
+                <h4>CLAIRE</h4>
+                <p>Informatica's AI engine within IDMC. Responsible for automated metadata classification, business term matching, data quality rule generation, and anomaly detection. The functional equivalent of the classification engine used on top of Atlan at Meta.</p>
+            </div>
+            <div class="gl-card">
+                <h4>CDGC</h4>
+                <p>Cloud Data Governance Catalog. The Informatica IDMC module containing the business glossary, data catalog, lineage graph, and governance policies. The programme's primary governance tool today.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── ROLES ────────────────────────────────────── -->
+    <section id="roles">
+        <div class="ssh">
+            <h3>Key Roles &amp; Their Interactions</h3>
+            <p>Understanding who does what — and who holds authority — is essential to making governance operational.</p>
+        </div>
+
+        <div class="roles">
+            <div class="role-card analyst">
+                <div class="role-icon">🔍</div>
+                <div class="role-body">
+                    <h4>Data Quality Analyst</h4>
+                    <div class="role-type">Technical Role</div>
+                    <p>Interface between human governance and the automated classification system. Monitors engine output, records and categorises violations, and prepares the technical component of the RCA. <strong>Does not make policy decisions.</strong></p>
+                </div>
+            </div>
+            <div class="role-card steward">
+                <div class="role-icon">⚖️</div>
+                <div class="role-body">
+                    <h4>Data Steward</h4>
+                    <div class="role-type">Business Role · Governance Authority</div>
+                    <p>Interprets policy within their domain, makes disposition decisions on flagged assets, validates business terms, and leads analyst retraining sessions. <strong>Does not execute technical work.</strong></p>
+                </div>
+            </div>
+            <div class="role-card claire">
+                <div class="role-icon">🤖</div>
+                <div class="role-body">
+                    <h4>CLAIRE (AI Engine)</h4>
+                    <div class="role-type">Automated · Informatica IDMC</div>
+                    <p>Automated metadata classification, business term matching, data quality rule generation, and anomaly detection. Always operates under human oversight through the weekly HIL cycle.</p>
+                </div>
+            </div>
+            <div class="role-card dataoffice">
+                <div class="role-icon">🏛️</div>
+                <div class="role-body">
+                    <h4>Data Office</h4>
+                    <div class="role-type">Programme Oversight</div>
+                    <p>Approves domain creation. Manages programme delivery. Signs off on phase activations. Coordinates with DPLs and DGLs across the organisation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ══════════════════════════════════════════════
+         SECTION 2 · THE KNOWLEDGE PRODUCT MODEL
+    ══════════════════════════════════════════════ -->
+    <section id="s2">
+        <div class="sh">
+            <div class="sh-label">Section 02</div>
+            <h2>The Knowledge Product Model</h2>
+            <p>The unstructured data equivalent of a data product — governed, enriched, and contextually meaningful.</p>
+        </div>
+
+        <div class="kp-hero">
+            <h3>What is a Knowledge Product?</h3>
+            <p>A Knowledge Product is a governed, enriched, and contextually meaningful collection of unstructured data assets that has passed through three mandatory filter layers before it is published or made available for AI consumption. It is not simply a collection of files. It is a curated knowledge asset with verified access rights, confirmed quality, and enriched metadata that makes it findable, usable, and trustworthy.</p>
+        </div>
+
+        <div class="ssh">
+            <h3>2.2 The Three Filter Layers</h3>
+            <p>These layers are not parallel checks. They are <strong>gates</strong>. A failure at any layer stops promotion until the issue is resolved.</p>
+        </div>
+
+        <div class="filter-flow">
+
+            <div class="filter-gate">
+                <div class="gate-num">1</div>
+                <div class="gate-title">Access &amp; Restriction</div>
+                <div class="gate-tags">
+                    <span class="gate-tag">Restricted</span>
+                    <span class="gate-tag">Non-restrictive</span>
+                    <span class="gate-tag">Sensitive</span>
+                </div>
+                <p>Can this data be used at all? Is it restricted by regulation, contractual obligation, or internal policy? Is it sensitive in a way that requires special handling? This layer stops data that should never be consumed from entering the knowledge pipeline.</p>
+                <div class="gate-q">🚦 Can we use this data?</div>
+            </div>
+
+            <div class="gate-sep">→</div>
+
+            <div class="filter-gate">
+                <div class="gate-num">2</div>
+                <div class="gate-title">Data Quality</div>
+                <div class="gate-tags">
+                    <span class="gate-tag">Uniqueness</span>
+                    <span class="gate-tag">Bias</span>
+                    <span class="gate-tag">Relevance</span>
+                </div>
+                <p>Is the data of sufficient quality to be trusted? Is it unique or does it duplicate existing assets? Does it carry bias that would distort AI model outputs? Low-quality data that passes Layer 1 is filtered here before it contaminates the knowledge layer.</p>
+                <div class="gate-q">✅ Is this data good enough?</div>
+            </div>
+
+            <div class="gate-sep">→</div>
+
+            <div class="filter-gate">
+                <div class="gate-num">3</div>
+                <div class="gate-title">Knowledge Layer</div>
+                <div class="gate-tags">
+                    <span class="gate-tag">Context</span>
+                    <span class="gate-tag">Semantics</span>
+                    <span class="gate-tag">Enrichment</span>
+                </div>
+                <p>Data that passes the first two layers is enriched with metadata using intelligent models. This is how context and semantics are built. The enriched asset becomes findable, contextually meaningful, and ready for AI consumption.</p>
+                <div class="gate-q">💡 Can this generate real knowledge?</div>
+            </div>
+
+        </div>
+
+        <!-- AI Confidence -->
+        <div class="ssh">
+            <h3>2.4 AI-Generated Metadata: How Tagging Works</h3>
+        </div>
+
+        <div class="ai-conf">
+            <div class="conf-card hi">
+                <div class="conf-icon">✅</div>
+                <h4>HIGH CONFIDENCE Tags</h4>
+                <p>Tags are <strong>automatically approved and applied</strong>. No human review required. The asset moves forward in the pipeline. The engine learns continuously from positive examples (correct tags) and negative examples (corrections).</p>
+            </div>
+            <div class="conf-card lo">
+                <div class="conf-icon">⚠️</div>
+                <h4>LOW CONFIDENCE Tags</h4>
+                <p>Tags are <strong>flagged for human review</strong>. A Data Steward makes the final call. The decision becomes a training example for the next cycle. This is precisely where the weekly HIL cycle operates.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ══════════════════════════════════════════════
+         SECTION 3 · THE META REFERENCE MODEL
+    ══════════════════════════════════════════════ -->
+    <section id="s3">
+        <div class="sh">
+            <div class="sh-label">Section 03</div>
+            <h2>The Meta Reference Model</h2>
+            <p>What was done at scale, and what was learned. The five principles that do not change regardless of tooling or scale.</p>
+        </div>
+
+        <!-- Medallion -->
+        <div class="ssh">
+            <h3>3.2 Medallion Architecture — Bronze → Silver → Gold</h3>
+            <p>Governance flow is always <strong>unidirectional</strong>. No data is promoted to the next layer without meeting that layer's governance standard.</p>
+        </div>
+
+        <div class="medallion">
+            <div class="med-card">
+                <div class="med-head bronze">
+                    <div class="med-lbl">Layer 01 · Entry</div>
+                    <span class="med-arrow">⬇</span>
+                    <h3>Bronze</h3>
+                    <p>Raw ingestion zone — maximum entropy</p>
+                </div>
+                <div class="med-body">
+                    <p>No rules. No classification. No ownership. Unstructured data assets arrive here with no inherent metadata. Maximum entropy.</p>
+                    <div class="dsm-tag">
+                        <span class="dsm-lbl">dsm-f</span>
+                        <span>Bronze layer scanning is not yet active. Known gap. Priority action before the Barcelona launch.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="med-card">
+                <div class="med-head silver">
+                    <div class="med-lbl">Layer 02 · Processing</div>
+                    <span class="med-arrow">⬇</span>
+                    <h3>Silver</h3>
+                    <p>Classification and pooling</p>
+                </div>
+                <div class="med-body">
+                    <p>Pools and containers created. Metadata and lineage attached. Data policies applied. GDPR alerting runs. Purpose tags validated.</p>
+                    <div class="dsm-tag">
+                        <span class="dsm-lbl">dsm-f</span>
+                        <span>Silver and gold layers already scanned. CLAIRE AI term matching in progress. Approval workflows designed but not yet live.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="med-card">
+                <div class="med-head gold">
+                    <div class="med-lbl">Layer 03 · Output</div>
+                    <span class="med-arrow">★</span>
+                    <h3>Gold</h3>
+                    <p>Governed, AI-ready, published</p>
+                </div>
+                <div class="med-body">
+                    <p>Owner confirmed. Classification complete. Lineage traceable. Purpose tag mandatory. Data product published in the marketplace for ML pipelines or analytics.</p>
+                    <div class="dsm-tag">
+                        <span class="dsm-lbl">dsm-f</span>
+                        <span>Catalog active. Cataloguing is not yet a mandatory step in use case delivery. Barcelona is the inflection point.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Five principles -->
+        <div class="ssh">
+            <h3>3.3 The Five Principles That Do Not Change</h3>
+            <p>These principles held at Meta across petabytes of data. They hold at any smaller scale. They are independent of the tooling.</p>
+        </div>
+
+        <div class="principles">
+            <div class="prin-card">
+                <div class="prin-num">1</div>
+                <div class="prin-body">
+                    <h4>Contain before classifying</h4>
+                    <p>Create pools by affinity before touching individual assets. A pool with an owner is governable. A million ungrouped files are not.</p>
+                </div>
+            </div>
+            <div class="prin-card">
+                <div class="prin-num">2</div>
+                <div class="prin-body">
+                    <h4>Govern the container, not the file</h4>
+                    <p>Individual assets inherit governance from their container. Classifying asset by asset does not scale.</p>
+                </div>
+            </div>
+            <div class="prin-card">
+                <div class="prin-num">3</div>
+                <div class="prin-body">
+                    <h4>Purpose is not optional</h4>
+                    <p>Every container declares its intended use. Purpose determines the governance standard, the quality threshold, and the legal basis required under GDPR.</p>
+                </div>
+            </div>
+            <div class="prin-card">
+                <div class="prin-num">4</div>
+                <div class="prin-body">
+                    <h4>Track lineage at container level</h4>
+                    <p>Not per individual asset. Origin, classification point, and delivery target are recorded at the moment of container assignment.</p>
+                </div>
+            </div>
+            <div class="prin-card">
+                <div class="prin-num">5</div>
+                <div class="prin-body">
+                    <h4>Human and machine retrained on the same rhythm</h4>
+                    <p>The weekly HIL cycle keeps the classification engine aligned to the current policy. Without it, the machine drifts.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results banner -->
+        <div class="result-bar">
+            <div class="res-stat">
+                <h3>74%</h3>
+                <p>Reduction in policy<br>violation rate</p>
+            </div>
+            <div class="res-vline"></div>
+            <div class="res-stat">
+                <h3>81%</h3>
+                <p>Reduction in false<br>positive rate</p>
+            </div>
+            <div class="res-vline"></div>
+            <div class="res-ctx">
+                Achieved at Meta over <strong>18 months</strong> applying these five principles on top of Atlan — the functional equivalent of Informatica IDMC. <strong>The tooling was not the determining factor. The principles were.</strong>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ══════════════════════════════════════════════
+         SECTION 4 · THE WEEKLY HIL CYCLE
+    ══════════════════════════════════════════════ -->
+    <section id="s4">
+        <div class="sh">
+            <div class="sh-label">Section 04</div>
+            <h2>The Weekly HIL Cycle &amp; RCA Process</h2>
+            <p>Seven days. Fixed rhythm. No exceptions. The mechanism that keeps human intent and machine behaviour aligned.</p>
+        </div>
+
+        <div class="info-bar">
+            <h4>Why the weekly rhythm was non-negotiable</h4>
+            <p>The data policy was constant. The AI models that applied it were not. They drifted. They encountered edge cases not covered by their training data. They made classification errors that compounded over time. Without regular human calibration, the gap between the intended policy and the policy the engine was actually enforcing grew wider week by week. The HIL cycle was the alignment mechanism: seven days, fixed rhythm, no exceptions.</p>
+        </div>
+
+        <!-- 7-Day cycle -->
+        <div class="hil-week">
+            <div class="hil-day">
+                <div class="hil-day-label">Wednesday</div>
+                <div class="hil-emoji">🔔</div>
+                <h4>Cycle Opens</h4>
+                <p>Engine records every divergence from policy-compliant behaviour. These are the week's violations.</p>
+            </div>
+            <div class="hil-day">
+                <div class="hil-day-label">Thursday</div>
+                <div class="hil-emoji">🔎</div>
+                <h4>Evaluate &amp; Classify</h4>
+                <p>Data Quality Analysts review violations against a defined rubric. Output: classified violation register.</p>
+            </div>
+            <div class="hil-day">
+                <div class="hil-day-label">Friday</div>
+                <div class="hil-emoji">🎓</div>
+                <h4>Human Retraining</h4>
+                <p>Data Stewards run mandatory retraining sessions. Real violations, correct policy, prior week review.</p>
+            </div>
+            <div class="hil-day">
+                <div class="hil-day-label">Mon – Tue</div>
+                <div class="hil-emoji">📋</div>
+                <h4>Full RCA Prepared</h4>
+                <p>Complete diagnostic: every violation category, proximate cause, contributing factors, and specific intervention.</p>
+            </div>
+            <div class="hil-day">
+                <div class="hil-day-label">Wed AM</div>
+                <div class="hil-emoji">✉️</div>
+                <h4>RCA Sent · Closes</h4>
+                <p>RCA reaches reporting team. Model retraining begins. Updated model deployed. New cycle opens.</p>
+            </div>
+        </div>
+
+        <!-- Closed feedback loop -->
+        <div class="rca-box">
+            <h3>The Closed Feedback Loop — Human &amp; Machine Retrained in Parallel, Every Seven Days</h3>
+            <div class="rca-loop">
+                <div class="rca-step">
+                    <div class="step-icon">🤖</div>
+                    <h4>Machine Flags</h4>
+                    <p>Violation detected</p>
+                </div>
+                <div class="rca-arr">→</div>
+                <div class="rca-step">
+                    <div class="step-icon">👤</div>
+                    <h4>Human Evaluates</h4>
+                    <p>Analyst reviews</p>
+                </div>
+                <div class="rca-arr">→</div>
+                <div class="rca-step">
+                    <div class="step-icon">📄</div>
+                    <h4>RCA Documents</h4>
+                    <p>Root cause identified</p>
+                </div>
+                <div class="rca-arr">→</div>
+                <div class="rca-step">
+                    <div class="step-icon">⚙️</div>
+                    <h4>Team Processes</h4>
+                    <p>Recommendations actioned</p>
+                </div>
+                <div class="rca-arr">→</div>
+                <div class="rca-step">
+                    <div class="step-icon">🔄</div>
+                    <h4>Model Retrains</h4>
+                    <p>Deployed within the week</p>
+                </div>
+                <div class="rca-arr">→</div>
+                <div class="rca-step" style="background: #F0FDF4; border-color: var(--green-light);">
+                    <div class="step-icon">🔔</div>
+                    <h4>Next Cycle</h4>
+                    <p>Standard rises</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ══════════════════════════════════════════════
+         SECTION 5 · ROADMAP
+    ══════════════════════════════════════════════ -->
+    <section id="s5">
+        <div class="sh">
+            <div class="sh-label">Section 05</div>
+            <h2>Roadmap: Phases, Milestones &amp; Ownership</h2>
+            <p>Current state assessment, phased delivery plan, and three asks for leadership alignment.</p>
+        </div>
+
+        <!-- Current state table -->
+        <div class="ssh">
+            <h3>5.1 Current State — Where the Programme Stands</h3>
+            <p>The Informatica IDMC catalog is technically operational. The gap is not tooling — it is the activation of the governance operating model.</p>
+        </div>
+
+        <div class="status-wrap">
+            <table class="status-tbl">
+                <thead>
+                    <tr>
+                        <th>Capability</th>
+                        <th>Status</th>
+                        <th>Action Required</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Informatica IDMC catalog (domains, subdomains, glossary)</td>
+                        <td><span class="badge active">● Active</span></td>
+                        <td>Expand coverage. Ensure all domains have business terms linked to technical assets.</td>
+                    </tr>
+                    <tr>
+                        <td>Silver and Gold layer scanning in Databricks</td>
+                        <td><span class="badge active">● Active</span></td>
+                        <td>Maintain. Increase scan frequency as use case volume grows.</td>
+                    </tr>
+                    <tr>
+                        <td>Bronze layer scanning</td>
+                        <td><span class="badge critical">⚠ Critical Gap</span></td>
+                        <td>Activate before the Barcelona launch. Lineage is incomplete without it.</td>
+                    </tr>
+                    <tr>
+                        <td>Approval workflows</td>
+                        <td><span class="badge disabled">◉ Disabled</span></td>
+                        <td>Design a tiered approval matrix and reactivate. Domain creation: Data Office. System assets: DPL. Business terms: steward self-serve.</td>
+                    </tr>
+                    <tr>
+                        <td>Mandatory cataloguing step in use case delivery</td>
+                        <td><span class="badge inactive">◌ Not Active</span></td>
+                        <td>Barcelona is the inflection point. No new data product published without a catalog entry and DPL sign-off.</td>
+                    </tr>
+                    <tr>
+                        <td>Unstructured data classification</td>
+                        <td><span class="badge notstarted">○ Not Started</span></td>
+                        <td>Phase Q3 2026. Informatica CDGC Unstructured module currently in private preview.</td>
+                    </tr>
+                    <tr>
+                        <td>AI Governance Catalog</td>
+                        <td><span class="badge available">◈ Available, Not Activated</span></td>
+                        <td>Activate Q4 2026. Register all active AI models and RAG pipelines with purpose tags and lineage.</td>
+                    </tr>
+                    <tr>
+                        <td>Weekly HIL cycle</td>
+                        <td><span class="badge notstarted">○ Not Designed</span></td>
+                        <td>Design and launch Q4 2026. This document is the starting point for that design.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Phased roadmap -->
+        <div class="ssh">
+            <h3>5.2 The Phased Roadmap</h3>
+        </div>
+
+        <div class="roadmap" style="margin-bottom: 48px;">
+
+            <div class="rm-phase">
+                <div class="rm-dot">0</div>
+                <div class="rm-header">
+                    <span class="rm-phase-lbl">Phase 0</span>
+                    <span class="rm-when">Now · April 2026</span>
+                    <span class="rm-owner">Data Office + Thorsten</span>
+                </div>
+                <ul class="rm-items">
+                    <li>Define unstructured data pools by domain. Assign pool owners.</li>
+                    <li>Activate bronze layer scanning in Databricks.</li>
+                    <li>Run proxy trial: two use cases end-to-end through Informatica.</li>
+                    <li>Align on this document with Sherwin before responding to the executive POV request.</li>
+                </ul>
+            </div>
+
+            <div class="rm-phase">
+                <div class="rm-dot">1</div>
+                <div class="rm-header">
+                    <span class="rm-phase-lbl">Phase 1</span>
+                    <span class="rm-when">May 2026 · Barcelona</span>
+                    <span class="rm-owner">All DPLs</span>
+                </div>
+                <ul class="rm-items">
+                    <li>Cataloguing becomes mandatory for all new use case delivery. No exceptions.</li>
+                    <li>DPL sign-off required before any data product is published.</li>
+                    <li>Formal programme launch communicated to all DPLs.</li>
+                    <li>Tiered approval workflows reactivated.</li>
+                </ul>
+            </div>
+
+            <div class="rm-phase">
+                <div class="rm-dot">2</div>
+                <div class="rm-header">
+                    <span class="rm-phase-lbl">Phase 2</span>
+                    <span class="rm-when">Q3 2026</span>
+                    <span class="rm-owner">Data Office + DGLs + Tech</span>
+                </div>
+                <ul class="rm-items">
+                    <li>Activate CDGC Unstructured module in Informatica.</li>
+                    <li>First classification scan: SharePoint, Teams, and R&amp;D documents.</li>
+                    <li>Assign sensitivity tiers and owners per container.</li>
+                    <li>Flag GDPR-relevant content. First retention review.</li>
+                </ul>
+            </div>
+
+            <div class="rm-phase">
+                <div class="rm-dot">3</div>
+                <div class="rm-header">
+                    <span class="rm-phase-lbl">Phase 3</span>
+                    <span class="rm-when">Q4 2026</span>
+                    <span class="rm-owner">AI Stewards + DGLs + Data Office</span>
+                </div>
+                <ul class="rm-items">
+                    <li>Register all active AI models in the AI Governance Catalog.</li>
+                    <li>Purpose tag mandatory for every dataset feeding an AI system.</li>
+                    <li>Design and launch the weekly HIL cycle at dsm-firmenich.</li>
+                    <li>RCA process defined and operational.</li>
+                </ul>
+            </div>
+
+            <div class="rm-phase">
+                <div class="rm-dot">4</div>
+                <div class="rm-header">
+                    <span class="rm-phase-lbl">Phase 4</span>
+                    <span class="rm-when">2027 · Sustain</span>
+                    <span class="rm-owner">Full D&amp;T Organisation</span>
+                </div>
+                <ul class="rm-items">
+                    <li>Unstructured data governance embedded in the standard delivery process.</li>
+                    <li>Every new AI initiative starts with governed data by design.</li>
+                    <li>HIL programme self-sustaining. Human and machine retrained in sync.</li>
+                    <li>Handover at close of the Data Foundation Programme.</li>
+                </ul>
+            </div>
+
+        </div>
+
+        <!-- Three asks -->
+        <div class="ssh">
+            <h3>5.3 What This Document Is Asking For</h3>
+            <p>This document does not request additional budget or headcount at this stage. It requests three things:</p>
+        </div>
+
+        <div class="asks">
+            <div class="ask-card">
+                <div class="ask-n">01</div>
+                <h4>Strategic Alignment</h4>
+                <p>Sherwin's confirmation that the five-principle model and the phased roadmap reflect the correct strategic direction for dsm-firmenich.</p>
+            </div>
+            <div class="ask-card">
+                <div class="ask-n">02</div>
+                <h4>Prioritisation Signal</h4>
+                <p>Which domains carry the highest unstructured data risk — so the activation sequence can be set according to business criticality.</p>
+            </div>
+            <div class="ask-card">
+                <div class="ask-n">03</div>
+                <h4>Green Light for the POV</h4>
+                <p>Once aligned internally, this document becomes the foundation for the two-page executive Point of View for the April 23rd meeting with Sanjay and Gaston.</p>
+            </div>
+        </div>
+
+        <!-- Executive message -->
+        <div class="exec-msg">
+            <h3>The Central Message for Executive Leadership</h3>
+            <p>Unstructured data is where the organisation's <strong>AI risk lives today</strong>. It is also where the <strong>AI opportunity lives</strong>. The two are inseparable. Governing it well is not a compliance exercise. It is what makes the AI investment <strong>trustworthy, traceable, and defensible to any regulator</strong>.</p>
+        </div>
+
+    </section>
+
+</main>
+
+<!-- ════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════ -->
+<footer class="footer">
+    <div class="footer-l">
+        <h3>Eduardo Sopalda · Global D&amp;T Governance Expert</h3>
+        <p>dsm-firmenich Barcelona · April 2026 · Version 1.0</p>
+    </div>
+    <div class="footer-r">
+        For internal review and alignment<br>
+        before external distribution
+    </div>
+</footer>
+
+</body>
+</html>

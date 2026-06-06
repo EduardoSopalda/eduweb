@@ -73,8 +73,8 @@
         .cover-pills { display: flex; gap: 8px; margin-bottom: 32px; flex-wrap: wrap; }
         .cover-pill {
             background: rgba(255,255,255,0.12);
-            border: 1px solid rgba(255,255,255,0.22);
-            padding: 5px 18px; border-radius: 100px;
+            border: none;
+            padding: 5px 18px;
             font-size: 10px; letter-spacing: 2px;
             text-transform: uppercase; font-weight: 600;
         }
@@ -220,7 +220,7 @@
             border-left: 4px solid var(--teal); border-radius: 10px;
             padding: 18px 22px; margin-bottom: 40px;
         }
-        .safe-note p { font-size: 14px; color: var(--teal-dk); line-height: 1.65; }
+        .safe-note p { font-size: 14px; color: var(--dark); line-height: 1.65; }
 
         /* ── ONBOARDING STEPS ──────────────────────────── */
         .steps { display: grid; gap: 12px; margin-bottom: 40px; }
@@ -599,7 +599,6 @@
             .footer { padding: 32px 24px; flex-direction: column; }
             .footer-r { text-align: left; }
         }
-
         /* ── TEMPLATES ─────────────────────────────────── */
         .tmpl-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
         .tmpl-card {
@@ -676,9 +675,8 @@
     <div class="cover-orb c"></div>
 
     <div class="cover-pills">
-        <span class="cover-pill">Internal Guide</span>
-        <span class="cover-pill">Permanent Reference</span>
-        <span class="cover-pill">Draft v1</span>
+        <span class="cover-pill">The Data Office / dsm-firmenich</span>
+       
     </div>
 
     <h1>The Data Office Board:<br>How We Work</h1>
@@ -693,10 +691,7 @@
             <label>Sponsor</label>
             <span>Sherwin Juco</span>
         </div>
-        <div class="cover-meta-item">
-            <label>Status</label>
-            <span>Draft v1</span>
-        </div>
+        
     </div>
 </header>
 
@@ -723,7 +718,7 @@
 <section id="what" style="padding-top: 8px;">
     <div class="sh">
         <div class="sh-label">What This Is</div>
-        <h2>A Scrumban System</h2>
+        <h2>A Scrum-ban System</h2>
         <p>We run Scrum&rsquo;s rhythm and roles on a Kanban board. Scrum gives us the predictable heartbeat. Kanban gives us visible flow for work that arrives continuously &mdash; which is the reality of a data office.</p>
     </div>
 
@@ -755,7 +750,7 @@
         <ul class="dc-list">
             <li>Cadences are decoupled. The retrospective is monthly, not at every sprint boundary. The rhythms do not have to match.</li>
             <li>No mandatory Daily Scrum. The daily standup is an optional help window, not a required daily sync.</li>
-            <li>Cards are checked continuously in the In Review column, not only at end of sprint. The Sprint Review is Scrum. Continuous check is Kanban. We keep both.</li>
+            <li>Cards are checked continuously in the In Review column, not only at end of sprint. The Sprint Review is Scrum method. Continuous check is Kanban. We keep both.</li>
             <li>A fourth role &mdash; Agile Coach &mdash; sits beside the three Scrum accountabilities for one specific, narrow reason. Section 9 explains it.</li>
         </ul>
     </div>
@@ -782,7 +777,7 @@
     <div class="sh">
         <div class="sh-label">Section 02</div>
         <h2>How We Work Together</h2>
-        <p>Three things hold this together.</p>
+        <p>Three things hold this together:</p>
     </div>
 
     <div class="values">
@@ -813,7 +808,7 @@
     <div class="sh">
         <div class="sh-label">Section 03</div>
         <h2>Start Here: Your First Cycle</h2>
-        <p>New to the board? You can take part in week one without reading the rest of this. Five steps.</p>
+        <p>New to the board? You can dive in from week one, just follow these five steps:</p>
     </div>
 
     <div class="steps">
@@ -842,7 +837,7 @@
             <div class="step-num">4</div>
             <div class="step-body">
                 <h4>Know the three meetings</h4>
-                <p>An optional daily standup any day you need help. A Sprint Review every other Monday. Sprint Planning the following Tuesday.</p>
+                <p>An optional daily standup any day you need help. A Sprint Review every other Monday. Sprint Planning the day after on Tuesday.</p>
             </div>
         </div>
         <div class="step-card">
@@ -860,7 +855,7 @@
     <div class="sh">
         <div class="sh-label">Section 04</div>
         <h2>A Few Habits That Help</h2>
-        <p>These habits make keeping the board current cost almost nothing. Suggestions, not rules.</p>
+        <p>These habits make keeping the board current cost almost nothing. Some suggestions (not rules):</p>
     </div>
 
     <div class="habits">
@@ -874,7 +869,7 @@
         </div>
         <div class="habit-card">
             <h4>Mark a card blocked the same day it gets stuck</h4>
-            <p>Blocked means waiting on something outside your control. It is not an admission &mdash; it is a signal, and it is how help finds you fast.</p>
+            <p>Blocked means waiting on something outside your control. It is not an admission of failure,  it is a signal for help to find you fast.</p>
         </div>
         <div class="habit-card">
             <h4>Glance at your cards before the sprint review</h4>
@@ -882,7 +877,7 @@
         </div>
         <div class="habit-card">
             <h4>Close what no longer matters</h4>
-            <p>If a card is dead, say so and let it go. A clean board is a kind one.</p>
+            <p>If a card is dead, say so and let it go. A clean board is a kind board.</p>
         </div>
         <div class="habit-card">
             <h4>Assign by consent</h4>
@@ -896,7 +891,7 @@
     <div class="sh">
         <div class="sh-label">Section 05</div>
         <h2>What Lives on the Board</h2>
-        <p>Everything the data office is actively working on, organised under epics. An epic is a large piece of work that groups many smaller cards under one goal.</p>
+        <p>Everything the data office is actively working on, organised under epics. An epic is a large piece of work that groups many smaller cards under one goal, a bit like a chapter in a book.</p>
     </div>
 
     <div class="ssh"><h3>The Live Epics</h3></div>
@@ -943,7 +938,7 @@
     </div>
 
     <div class="epic-rule">
-        <h4>The test for a new epic in one line</h4>
+        <h4>The test for a new epic in a nutshell</h4>
         <p>If the work is large, ongoing, and genuinely distinct from the epics we already have, it earns an epic. If it is a handful of cards that fit somewhere that already exists, it lives there. Every new epic adds a standing commitment and divides the shared hour in the Sprint Review. The call is made together &mdash; the Product Owner confirms it fits priority and value, the team agrees at Sprint Planning, and no epic goes live without a named owner.</p>
     </div>
 
@@ -1226,14 +1221,14 @@
     <div class="sh">
         <div class="sh-label">Section 10</div>
         <h2>How the Backlog Stays Honest</h2>
-        <p>A backlog is only useful if it can be trusted &mdash; and a backlog rots quietly.</p>
+        <p>A backlog is only useful if it can be trusted.</p>
     </div>
 
     <div class="backlog-grid">
         <div class="bl-card">
             <div class="bl-num">01</div>
             <h4>Intake</h4>
-            <p>Every request becomes a card. The board is the single front door. No work lives only in a hallway promise. Requests arriving by email come through the Data Office mailbox, managed by Eduardo and Oriol on a rotating two-week basis. New work enters at the bottom, not the top.</p>
+            <p>Every request becomes a card. The board is the only repository for requests.  Requests arriving by email come through the Data Office mailbox, managed by Eduardo and Oriol on a rotating two-week basis. New work enters at the bottom, not the top.</p>
         </div>
         <div class="bl-card">
             <div class="bl-num">02</div>

@@ -578,6 +578,90 @@
         .badge.notstarted  { background: #F3F4F6; color: #374151; }
         .badge.available   { background: #DBEAFE; color: #1E40AF; }
 
+        /* ─── SCRUM BADGES & MAPPING ────────────────────── */
+        .scrum-badge {
+            display: inline-flex; align-items: center; gap: 5px;
+            background: #FFF7ED;
+            border: 1px solid #FED7AA;
+            color: #9A3412;
+            padding: 3px 10px;
+            border-radius: 100px;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+        }
+        .scrum-badge::before { content: '⟳'; font-size: 11px; }
+
+        .scrum-map {
+            background: #FFF7ED;
+            border: 1px solid #FED7AA;
+            border-radius: 16px;
+            padding: 32px 36px;
+            margin-bottom: 40px;
+        }
+        .scrum-map-title {
+            display: flex; align-items: center; gap: 12px; margin-bottom: 24px;
+        }
+        .scrum-map-title h3 { font-size: 18px; font-weight: 800; color: #7C2D12; }
+        .scrum-map-title .sm-icon {
+            width: 40px; height: 40px; background: #EA580C; border-radius: 10px;
+            display: flex; align-items: center; justify-content: center; font-size: 18px; color: white; flex-shrink: 0;
+        }
+        .scrum-map-intro { font-size: 13.5px; color: #92400E; margin-bottom: 28px; line-height: 1.65; }
+
+        .sm-cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+
+        .sm-col h4 {
+            font-size: 11px; font-weight: 700; letter-spacing: 1.5px;
+            text-transform: uppercase; color: #C2410C; margin-bottom: 14px;
+            padding-bottom: 8px; border-bottom: 1px solid #FED7AA;
+        }
+        .sm-row {
+            display: flex; flex-direction: column; gap: 8px; margin-bottom: 8px;
+        }
+        .sm-gov  { font-size: 13px; font-weight: 700; color: var(--green-deep); }
+        .sm-scrum {
+            font-size: 12px; color: #9A3412; font-weight: 600;
+            background: rgba(255,255,255,0.6); border-radius: 6px;
+            padding: 3px 10px; display: inline-block;
+        }
+        .sm-divider { height: 1px; background: #FED7AA; margin: 10px 0; }
+
+        .jira-map {
+            background: var(--white);
+            border-radius: 12px;
+            border: 2px solid #E0E7FF;
+            padding: 28px 32px;
+            margin-top: 24px;
+        }
+        .jira-map h4 {
+            font-size: 13px; font-weight: 700; letter-spacing: 1px;
+            text-transform: uppercase; color: #3730A3; margin-bottom: 20px;
+        }
+        .jira-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+        .jira-item {
+            background: #EEF2FF;
+            border-radius: 10px;
+            padding: 14px 16px;
+            border: 1px solid #C7D2FE;
+        }
+        .jira-item .jira-label {
+            font-size: 10px; font-weight: 700; letter-spacing: 1px;
+            text-transform: uppercase; color: #4338CA; margin-bottom: 4px;
+        }
+        .jira-item .jira-val  { font-size: 13px; font-weight: 700; color: var(--text-dark); margin-bottom: 3px; }
+        .jira-item .jira-gov  { font-size: 11.5px; color: var(--text-mid); }
+
+        /* HIL scrum sub-label */
+        .hil-scrum {
+            font-size: 9.5px; font-weight: 700; letter-spacing: 1px;
+            text-transform: uppercase; color: #9A3412;
+            background: #FFF7ED; border: 1px solid #FED7AA;
+            border-radius: 6px; padding: 2px 8px;
+            margin-top: 8px; display: inline-block;
+        }
+
         /* ─── ROADMAP ────────────────────────────────────── */
         .roadmap { position: relative; padding-left: 56px; }
         .roadmap::before {
@@ -690,6 +774,8 @@
             .medallion { grid-template-columns: 1fr; }
             .hil-week { grid-template-columns: 1fr 1fr; }
             .hil-day:nth-child(5) { border-radius: 0 0 12px 12px !important; border-right: 1px solid var(--border); }
+            .sm-cols { grid-template-columns: 1fr; }
+            .jira-grid { grid-template-columns: repeat(2, 1fr); }
             .roles { grid-template-columns: 1fr; }
             .glossary { grid-template-columns: 1fr; }
             .asks { grid-template-columns: 1fr; }
@@ -747,6 +833,7 @@
     <a href="#s1">1 · Definitions</a>
     <a href="#glossary">Glossary</a>
     <a href="#roles">Roles</a>
+    <a href="#scrum">Scrum Mapping</a>
     <a href="#s2">2 · Knowledge Product</a>
     <a href="#s3">3 · Meta Reference</a>
     <a href="#s4">4 · HIL Cycle</a>
@@ -923,7 +1010,8 @@
                 <div class="role-body">
                     <h4>Data Quality Analyst</h4>
                     <div class="role-type">Technical Role</div>
-                    <p>Interface between human governance and the automated classification system. Monitors engine output, records and categorises violations, and prepares the technical component of the RCA. <strong>Does not make policy decisions.</strong></p>
+                    <span class="scrum-badge">Scrum: Dev Team Member</span>
+                    <p style="margin-top:10px;">Interface between human governance and the automated classification system. Monitors engine output, records and categorises violations, and prepares the technical component of the RCA. <strong>Does not make policy decisions.</strong></p>
                 </div>
             </div>
             <div class="role-card steward">
@@ -931,7 +1019,8 @@
                 <div class="role-body">
                     <h4>Data Steward</h4>
                     <div class="role-type">Business Role · Governance Authority</div>
-                    <p>Interprets policy within their domain, makes disposition decisions on flagged assets, validates business terms, and leads analyst retraining sessions. <strong>Does not execute technical work.</strong></p>
+                    <span class="scrum-badge">Scrum: Product Owner</span>
+                    <p style="margin-top:10px;">Interprets policy within their domain, makes disposition decisions on flagged assets, validates business terms, and leads analyst retraining sessions. <strong>Does not execute technical work.</strong></p>
                 </div>
             </div>
             <div class="role-card claire">
@@ -939,7 +1028,8 @@
                 <div class="role-body">
                     <h4>CLAIRE (AI Engine)</h4>
                     <div class="role-type">Automated · Informatica IDMC</div>
-                    <p>Automated metadata classification, business term matching, data quality rule generation, and anomaly detection. Always operates under human oversight through the weekly HIL cycle.</p>
+                    <span class="scrum-badge">Scrum: CI/CD Pipeline</span>
+                    <p style="margin-top:10px;">Automated metadata classification, business term matching, data quality rule generation, and anomaly detection. Always operates under human oversight through the weekly HIL cycle.</p>
                 </div>
             </div>
             <div class="role-card dataoffice">
@@ -947,7 +1037,180 @@
                 <div class="role-body">
                     <h4>Data Office</h4>
                     <div class="role-type">Programme Oversight</div>
-                    <p>Approves domain creation. Manages programme delivery. Signs off on phase activations. Coordinates with DPLs and DGLs across the organisation.</p>
+                    <span class="scrum-badge">Scrum: Scrum Master</span>
+                    <p style="margin-top:10px;">Approves domain creation. Manages programme delivery. Signs off on phase activations. Coordinates with DPLs and DGLs across the organisation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── SCRUM REFERENCE ──────────────────────────── -->
+    <section id="scrum">
+        <div class="ssh">
+            <h3>Scrum Framework Reference</h3>
+            <p>This programme operates on a weekly cadence that maps directly onto Scrum. Use this reference when working in Jira or joining ceremonies — both languages describe the same work.</p>
+        </div>
+
+        <div class="scrum-map">
+            <div class="scrum-map-title">
+                <div class="sm-icon">⟳</div>
+                <h3>Governance Language ↔ Scrum Language</h3>
+            </div>
+            <p class="scrum-map-intro">For colleagues coming from an Agile background: every governance concept has a direct Scrum equivalent. The governance language is used in this programme for precision and for alignment with other boards. The Scrum mapping is here so you can navigate both without confusion.</p>
+
+            <div class="sm-cols">
+
+                <!-- ROLES -->
+                <div class="sm-col">
+                    <h4>Roles</h4>
+
+                    <div class="sm-row">
+                        <span class="sm-gov">Data Steward</span>
+                        <span class="sm-scrum">⟶ Product Owner</span>
+                    </div>
+                    <div class="sm-divider"></div>
+                    <div class="sm-row">
+                        <span class="sm-gov">Data Office</span>
+                        <span class="sm-scrum">⟶ Scrum Master</span>
+                    </div>
+                    <div class="sm-divider"></div>
+                    <div class="sm-row">
+                        <span class="sm-gov">Data Quality Analyst</span>
+                        <span class="sm-scrum">⟶ Development Team Member</span>
+                    </div>
+                    <div class="sm-divider"></div>
+                    <div class="sm-row">
+                        <span class="sm-gov">DPLs &amp; DGLs</span>
+                        <span class="sm-scrum">⟶ Stakeholders</span>
+                    </div>
+                    <div class="sm-divider"></div>
+                    <div class="sm-row">
+                        <span class="sm-gov">CLAIRE (AI engine)</span>
+                        <span class="sm-scrum">⟶ CI/CD Automation Pipeline</span>
+                    </div>
+                </div>
+
+                <!-- CEREMONIES -->
+                <div class="sm-col">
+                    <h4>Ceremonies</h4>
+
+                    <div class="sm-row">
+                        <span class="sm-gov">HIL Cycle Opens (Wed)</span>
+                        <span class="sm-scrum">⟶ Sprint Planning</span>
+                    </div>
+                    <div class="sm-divider"></div>
+                    <div class="sm-row">
+                        <span class="sm-gov">Violation Review (Thu)</span>
+                        <span class="sm-scrum">⟶ Backlog Refinement</span>
+                    </div>
+                    <div class="sm-divider"></div>
+                    <div class="sm-row">
+                        <span class="sm-gov">Retraining Session (Fri)</span>
+                        <span class="sm-scrum">⟶ Sprint Review</span>
+                    </div>
+                    <div class="sm-divider"></div>
+                    <div class="sm-row">
+                        <span class="sm-gov">RCA Preparation (Mon–Tue)</span>
+                        <span class="sm-scrum">⟶ Sprint Retrospective</span>
+                    </div>
+                    <div class="sm-divider"></div>
+                    <div class="sm-row">
+                        <span class="sm-gov">RCA Sent &amp; Cycle Closes (Wed AM)</span>
+                        <span class="sm-scrum">⟶ Sprint Done / Next Sprint</span>
+                    </div>
+                </div>
+
+                <!-- ARTIFACTS -->
+                <div class="sm-col">
+                    <h4>Artifacts &amp; Concepts</h4>
+
+                    <div class="sm-row">
+                        <span class="sm-gov">HIL 7-Day Cycle</span>
+                        <span class="sm-scrum">⟶ Sprint (1-week)</span>
+                    </div>
+                    <div class="sm-divider"></div>
+                    <div class="sm-row">
+                        <span class="sm-gov">Pool (domain grouping)</span>
+                        <span class="sm-scrum">⟶ Epic</span>
+                    </div>
+                    <div class="sm-divider"></div>
+                    <div class="sm-row">
+                        <span class="sm-gov">Container (data type unit)</span>
+                        <span class="sm-scrum">⟶ User Story / Feature</span>
+                    </div>
+                    <div class="sm-divider"></div>
+                    <div class="sm-row">
+                        <span class="sm-gov">Policy Violation</span>
+                        <span class="sm-scrum">⟶ Bug / Defect</span>
+                    </div>
+                    <div class="sm-divider"></div>
+                    <div class="sm-row">
+                        <span class="sm-gov">Violation Register</span>
+                        <span class="sm-scrum">⟶ Sprint Backlog</span>
+                    </div>
+                    <div class="sm-divider"></div>
+                    <div class="sm-row">
+                        <span class="sm-gov">Purpose Tag</span>
+                        <span class="sm-scrum">⟶ Acceptance Criteria</span>
+                    </div>
+                    <div class="sm-divider"></div>
+                    <div class="sm-row">
+                        <span class="sm-gov">RCA Action Items</span>
+                        <span class="sm-scrum">⟶ Retrospective Actions</span>
+                    </div>
+                    <div class="sm-divider"></div>
+                    <div class="sm-row">
+                        <span class="sm-gov">Phases 0–4</span>
+                        <span class="sm-scrum">⟶ Programme Increments (PI)</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Jira board mapping -->
+            <div class="jira-map">
+                <h4>🗂 Jira Board Mapping</h4>
+                <div class="jira-grid">
+                    <div class="jira-item">
+                        <div class="jira-label">Epic</div>
+                        <div class="jira-val">Pool</div>
+                        <div class="jira-gov">Domain data grouping with assigned owner</div>
+                    </div>
+                    <div class="jira-item">
+                        <div class="jira-label">Story / Feature</div>
+                        <div class="jira-val">Container</div>
+                        <div class="jira-gov">Governed data type unit within a pool</div>
+                    </div>
+                    <div class="jira-item">
+                        <div class="jira-label">Acceptance Criteria</div>
+                        <div class="jira-val">Purpose Tag</div>
+                        <div class="jira-gov">Declared downstream use — mandatory field</div>
+                    </div>
+                    <div class="jira-item">
+                        <div class="jira-label">Bug / Defect</div>
+                        <div class="jira-val">Policy Violation</div>
+                        <div class="jira-gov">Classification divergence logged for RCA</div>
+                    </div>
+                    <div class="jira-item">
+                        <div class="jira-label">Sprint</div>
+                        <div class="jira-val">HIL 7-Day Cycle</div>
+                        <div class="jira-gov">Wed → Wed fixed governance cadence</div>
+                    </div>
+                    <div class="jira-item">
+                        <div class="jira-label">Sprint Backlog</div>
+                        <div class="jira-val">Violation Register</div>
+                        <div class="jira-gov">This week's classified divergences</div>
+                    </div>
+                    <div class="jira-item">
+                        <div class="jira-label">Retro Actions</div>
+                        <div class="jira-val">RCA Interventions</div>
+                        <div class="jira-gov">Model retrain / policy clarification / data fix</div>
+                    </div>
+                    <div class="jira-item">
+                        <div class="jira-label">Programme Increment</div>
+                        <div class="jira-val">Phase 0–4</div>
+                        <div class="jira-gov">Delivery milestones Apr 2026 → 2027</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1192,30 +1455,35 @@
                 <div class="hil-emoji">🔔</div>
                 <h4>Cycle Opens</h4>
                 <p>Engine records every divergence from policy-compliant behaviour. These are the week's violations.</p>
+                <div class="hil-scrum">Sprint Planning</div>
             </div>
             <div class="hil-day">
                 <div class="hil-day-label">Thursday</div>
                 <div class="hil-emoji">🔎</div>
                 <h4>Evaluate &amp; Classify</h4>
                 <p>Data Quality Analysts review violations against a defined rubric. Output: classified violation register.</p>
+                <div class="hil-scrum">Backlog Refinement</div>
             </div>
             <div class="hil-day">
                 <div class="hil-day-label">Friday</div>
                 <div class="hil-emoji">🎓</div>
                 <h4>Human Retraining</h4>
                 <p>Data Stewards run mandatory retraining sessions. Real violations, correct policy, prior week review.</p>
+                <div class="hil-scrum">Sprint Review</div>
             </div>
             <div class="hil-day">
                 <div class="hil-day-label">Mon – Tue</div>
                 <div class="hil-emoji">📋</div>
                 <h4>Full RCA Prepared</h4>
                 <p>Complete diagnostic: every violation category, proximate cause, contributing factors, and specific intervention.</p>
+                <div class="hil-scrum">Retrospective</div>
             </div>
             <div class="hil-day">
                 <div class="hil-day-label">Wed AM</div>
                 <div class="hil-emoji">✉️</div>
                 <h4>RCA Sent · Closes</h4>
                 <p>RCA reaches reporting team. Model retraining begins. Updated model deployed. New cycle opens.</p>
+                <div class="hil-scrum">Sprint Done</div>
             </div>
         </div>
 

@@ -7,36 +7,62 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
+        /* Official DSM-Firmenich typefaces per brand guidelines */
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&display=swap');
+
         :root {
-            --green-deep:    #003D2E;
-            --green-dark:    #004C3F;
-            --green-primary: #00614D;
-            --green-mid:     #00855A;
-            --green-light:   #00A651;
-            --green-pale:    #E8F5EE;
-            --orange:        #E8591A;
-            --orange-pale:   #FEF0E8;
-            --blue:          #0055A5;
-            --blue-light:    #EEF4FC;
-            --purple:        #6B21A8;
-            --purple-light:  #F3E8FF;
-            --teal:          #007B8A;
-            --teal-light:    #E6F4F6;
-            --text-dark:     #1A1A18;
-            --text-mid:      #4A4A48;
-            --text-light:    #8A8A88;
-            --bg:            #F4F6F4;
-            --white:         #FFFFFF;
-            --border:        #DEE4E0;
-            --bronze:        #B45309;
-            --silver-dark:   #475569;
-            --gold-dark:     #92400E;
+            /* ── DSM-Firmenich Official Brand Palette ── */
+            --dsm-teal:      #3DBBA5;   /* primary brand teal */
+            --dsm-teal-dk:   #1E7A68;   /* dark teal — headers, cover */
+            --dsm-teal-bg:   #E6F7F4;   /* light teal surface */
+            --dsm-orange:    #F5A520;   /* orange accent */
+            --dsm-orange-dk: #C27A08;   /* dark orange text */
+            --dsm-orange-bg: #FEF6E0;   /* light orange surface */
+            --dsm-lime:      #C2D940;   /* lime green */
+            --dsm-lime-dk:   #7A9200;   /* dark lime */
+            --dsm-lime-bg:   #F3F8D8;   /* light lime surface */
+            --dsm-purple:    #B85CC8;   /* purple */
+            --dsm-purple-dk: #7A2E8A;   /* dark purple */
+            --dsm-purple-bg: #F6E8FA;   /* light purple surface */
+            --dsm-red:       #C13A4A;   /* berry red */
+            --dsm-red-dk:    #8A1E2C;   /* dark red */
+            --dsm-red-bg:    #FAEBEC;   /* light red surface */
+            --dsm-blue:      #4EA8D0;   /* blue */
+            --dsm-blue-dk:   #1E6A90;   /* dark blue */
+            --dsm-blue-bg:   #E6F3FA;   /* light blue surface */
+
+            /* Aliases used throughout the document */
+            --green-deep:    var(--dsm-teal-dk);
+            --green-dark:    var(--dsm-teal-dk);
+            --green-primary: var(--dsm-teal);
+            --green-mid:     var(--dsm-teal);
+            --green-light:   #5ECDB8;
+            --green-pale:    var(--dsm-teal-bg);
+            --orange:        var(--dsm-orange);
+            --orange-pale:   var(--dsm-orange-bg);
+            --blue:          var(--dsm-blue-dk);
+            --blue-light:    var(--dsm-blue-bg);
+            --purple:        var(--dsm-purple);
+            --purple-light:  var(--dsm-purple-bg);
+            --teal:          var(--dsm-teal);
+            --teal-light:    var(--dsm-teal-bg);
+
+            /* Neutrals */
+            --text-dark:  #1A1A18;
+            --text-mid:   #4A4A48;
+            --text-light: #8A8A88;
+            --bg:         #F2F5F4;
+            --white:      #FFFFFF;
+            --border:     #DDE5E2;
+            --bronze:     #B45309;
+            --silver-dark:#475569;
+            --gold-dark:  #92400E;
         }
 
         html { scroll-behavior: smooth; }
 
         body {
-            font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            font-family: 'DM Sans', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
             color: var(--text-dark);
             background: var(--bg);
             line-height: 1.65;
@@ -45,7 +71,7 @@
 
         /* ─── COVER ─────────────────────────────────────── */
         .cover {
-            background: var(--green-deep);
+            background: linear-gradient(135deg, var(--dsm-teal-dk) 0%, #28907A 60%, var(--dsm-teal) 100%);
             color: var(--white);
             padding: 72px 72px 56px;
             position: relative;
@@ -143,7 +169,8 @@
         /* ─── LAYOUT ─────────────────────────────────────── */
         .page { max-width: 1120px; margin: 0 auto; padding: 64px 40px; }
 
-        .divider { height: 1px; background: var(--border); margin: 64px 0; }
+        /* Brand rule: no lines or separators between sections — use spacing only */
+        .divider { height: 0; margin: 56px 0; }
 
         /* ─── SECTION HEADER ─────────────────────────────── */
         .sh {
@@ -207,9 +234,9 @@
         .dt-card { background: var(--white); border-radius: 14px; overflow: hidden; border: 1px solid var(--border); box-shadow: 0 2px 8px rgba(0,0,0,0.07); }
 
         .dt-head { padding: 24px 24px 20px; color: white; }
-        .dt-head.structured  { background: linear-gradient(135deg, #0055A5, #1D6EC2); }
-        .dt-head.semi        { background: linear-gradient(135deg, #007B8A, #009BAC); }
-        .dt-head.unstructured{ background: linear-gradient(135deg, #B84A13, #E8591A); }
+        .dt-head.structured  { background: linear-gradient(135deg, var(--dsm-blue-dk), var(--dsm-blue)); }
+        .dt-head.semi        { background: linear-gradient(135deg, var(--dsm-teal-dk), var(--dsm-teal)); }
+        .dt-head.unstructured{ background: linear-gradient(135deg, var(--dsm-orange-dk), var(--dsm-orange)); }
 
         .dt-head-icon { font-size: 26px; margin-bottom: 10px; }
         .dt-head h3 { font-size: 17px; font-weight: 800; margin-bottom: 8px; }
@@ -274,25 +301,25 @@
             color: white;
             flex-shrink: 0;
         }
-        .role-card.analyst   .role-icon { background: var(--blue); }
-        .role-card.steward   .role-icon { background: var(--green-mid); }
-        .role-card.claire    .role-icon { background: var(--purple); }
-        .role-card.dataoffice .role-icon { background: var(--teal); }
+        .role-card.analyst   .role-icon { background: var(--dsm-blue-dk); }
+        .role-card.steward   .role-icon { background: var(--dsm-teal-dk); }
+        .role-card.claire    .role-icon { background: var(--dsm-purple); }
+        .role-card.dataoffice .role-icon { background: var(--dsm-lime-dk); }
 
         .role-body h4 { font-size: 15px; font-weight: 700; color: var(--text-dark); margin-bottom: 3px; }
         .role-type {
             font-size: 10px; font-weight: 700; letter-spacing: 1.2px;
             text-transform: uppercase; margin-bottom: 8px;
         }
-        .role-card.analyst   .role-type { color: var(--blue); }
-        .role-card.steward   .role-type { color: var(--green-mid); }
-        .role-card.claire    .role-type { color: var(--purple); }
-        .role-card.dataoffice .role-type { color: var(--teal); }
+        .role-card.analyst   .role-type { color: var(--dsm-blue-dk); }
+        .role-card.steward   .role-type { color: var(--dsm-teal-dk); }
+        .role-card.claire    .role-type { color: var(--dsm-purple-dk); }
+        .role-card.dataoffice .role-type { color: var(--dsm-lime-dk); }
         .role-body p { font-size: 13px; color: var(--text-mid); line-height: 1.55; }
 
         /* ─── KNOWLEDGE PRODUCT ──────────────────────────── */
         .kp-hero {
-            background: linear-gradient(135deg, var(--green-deep) 0%, var(--green-primary) 100%);
+            background: linear-gradient(135deg, var(--dsm-teal-dk) 0%, var(--dsm-teal) 100%);
             color: white;
             border-radius: 16px;
             padding: 32px 36px;
@@ -325,16 +352,16 @@
             font-size: 16px; font-weight: 800; color: white;
             margin-bottom: 14px;
         }
-        .filter-gate:nth-child(1) .gate-num { background: var(--blue); }
-        .filter-gate:nth-child(2) .gate-num { background: var(--teal); }
-        .filter-gate:nth-child(3) .gate-num { background: var(--green-primary); }
+        .filter-gate:nth-child(1) .gate-num { background: var(--dsm-blue-dk); }
+        .filter-gate:nth-child(2) .gate-num { background: var(--dsm-orange-dk); }
+        .filter-gate:nth-child(3) .gate-num { background: var(--dsm-teal-dk); }
 
         .gate-title {
             font-size: 15px; font-weight: 700; margin-bottom: 10px;
         }
-        .filter-gate:nth-child(1) .gate-title { color: var(--blue); }
-        .filter-gate:nth-child(2) .gate-title { color: var(--teal); }
-        .filter-gate:nth-child(3) .gate-title { color: var(--green-primary); }
+        .filter-gate:nth-child(1) .gate-title { color: var(--dsm-blue-dk); }
+        .filter-gate:nth-child(2) .gate-title { color: var(--dsm-orange-dk); }
+        .filter-gate:nth-child(3) .gate-title { color: var(--dsm-teal-dk); }
 
         .gate-tags {
             display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 12px;
@@ -343,9 +370,9 @@
             font-size: 10px; font-weight: 600; padding: 3px 10px;
             border-radius: 100px;
         }
-        .filter-gate:nth-child(1) .gate-tag { background: var(--blue-light); color: var(--blue); }
-        .filter-gate:nth-child(2) .gate-tag { background: var(--teal-light); color: var(--teal); }
-        .filter-gate:nth-child(3) .gate-tag { background: var(--green-pale); color: var(--green-primary); }
+        .filter-gate:nth-child(1) .gate-tag { background: var(--dsm-blue-bg); color: var(--dsm-blue-dk); }
+        .filter-gate:nth-child(2) .gate-tag { background: var(--dsm-orange-bg); color: var(--dsm-orange-dk); }
+        .filter-gate:nth-child(3) .gate-tag { background: var(--dsm-teal-bg); color: var(--dsm-teal-dk); }
 
         .filter-gate p { font-size: 12.5px; color: var(--text-mid); margin-bottom: 14px; line-height: 1.6; }
 
@@ -454,7 +481,7 @@
 
         /* ─── RESULT BANNER ──────────────────────────────── */
         .result-bar {
-            background: linear-gradient(135deg, var(--green-deep), #005A3C);
+            background: linear-gradient(135deg, var(--dsm-teal-dk), #28907A);
             color: white;
             border-radius: 14px;
             padding: 30px 36px;
@@ -501,11 +528,11 @@
             font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
             text-transform: uppercase; margin-bottom: 10px;
         }
-        .hil-day:nth-child(1) .hil-day-label { color: var(--blue); }
-        .hil-day:nth-child(2) .hil-day-label { color: var(--teal); }
-        .hil-day:nth-child(3) .hil-day-label { color: var(--orange); }
-        .hil-day:nth-child(4) .hil-day-label { color: var(--purple); }
-        .hil-day:nth-child(5) .hil-day-label { color: var(--green-primary); }
+        .hil-day:nth-child(1) .hil-day-label { color: var(--dsm-teal-dk); }
+        .hil-day:nth-child(2) .hil-day-label { color: var(--dsm-blue-dk); }
+        .hil-day:nth-child(3) .hil-day-label { color: var(--dsm-orange-dk); }
+        .hil-day:nth-child(4) .hil-day-label { color: var(--dsm-purple-dk); }
+        .hil-day:nth-child(5) .hil-day-label { color: var(--dsm-teal-dk); }
 
         .hil-emoji { font-size: 26px; margin-bottom: 10px; }
         .hil-day h4 { font-size: 13px; font-weight: 700; margin-bottom: 6px; color: var(--text-dark); }
@@ -719,23 +746,23 @@
             border: 1px solid var(--border);
             border-top: 4px solid;
         }
-        .ask-card:nth-child(1) { border-top-color: var(--green-primary); }
-        .ask-card:nth-child(2) { border-top-color: var(--blue); }
-        .ask-card:nth-child(3) { border-top-color: var(--orange); }
+        .ask-card:nth-child(1) { border-top-color: var(--dsm-teal); }
+        .ask-card:nth-child(2) { border-top-color: var(--dsm-blue-dk); }
+        .ask-card:nth-child(3) { border-top-color: var(--dsm-orange); }
 
         .ask-n {
             font-size: 36px; font-weight: 900; margin-bottom: 8px; line-height: 1;
         }
-        .ask-card:nth-child(1) .ask-n { color: var(--green-primary); }
-        .ask-card:nth-child(2) .ask-n { color: var(--blue); }
-        .ask-card:nth-child(3) .ask-n { color: var(--orange); }
+        .ask-card:nth-child(1) .ask-n { color: var(--dsm-teal); }
+        .ask-card:nth-child(2) .ask-n { color: var(--dsm-blue-dk); }
+        .ask-card:nth-child(3) .ask-n { color: var(--dsm-orange); }
 
         .ask-card h4 { font-size: 14px; font-weight: 700; margin-bottom: 8px; color: var(--text-dark); }
         .ask-card p  { font-size: 13px; color: var(--text-mid); line-height: 1.6; }
 
         /* ─── EXEC CALLOUT ───────────────────────────────── */
         .exec-msg {
-            background: linear-gradient(135deg, #1D4ED8, #1E3A8A);
+            background: linear-gradient(135deg, var(--dsm-purple-dk), var(--dsm-purple));
             color: white;
             border-radius: 14px;
             padding: 30px 36px;

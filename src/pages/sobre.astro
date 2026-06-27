@@ -5,41 +5,85 @@ import Hero from '../components/Hero.astro';
 
 <Base
   title="Manuel Monró"
-  description="Manuel Monró — coreógrafo, intérprete y director artístico de La Tulpa. Trayectoria en danza contemporánea y creación inclusiva."
+  description="Manuel Monró — coreógrafo, intérprete y director artístico de La Tulpa. Danza contemporánea, danza teatro y creación inclusiva desde Sevilla y Barcelona."
 >
   <Hero
     title="Manuel Monró"
-    subtitle="Coreógrafo · Intérprete"
+    subtitle="Director · Coreógrafo · Dramaturgo · Intérprete"
     height="section"
   />
 
-  <section class="section container about-content" aria-labelledby="about-heading">
+  <section class="section container" aria-labelledby="about-heading">
     <div class="about-grid">
-      <div class="about-main reveal">
+      <div class="about-main">
         <h2 id="about-heading" class="sr-only">Sobre Manuel Monró</h2>
 
-        <div class="about-portrait">
+        <div class="about-portrait reveal">
           <!-- PENDING FROM MANUEL: portrait photo -->
           <div class="empty-media empty-media--portrait" aria-hidden="true"></div>
         </div>
 
-        <div class="prose about-text">
+        <div class="prose about-text reveal reveal-delay-1">
+          <p class="about-role">Director. Coreógrafo. Dramaturgo. Intérprete.</p>
           <p>
-            Manuel Monró es coreógrafo, intérprete y director artístico de La Tulpa, compañía de danza fundada en 2023 dentro del Festival Internacional Escena Mobile de Arte y Diversidad en Sevilla.
+            Manuel Monró trabaja entre Barcelona y Sevilla. Su lenguaje se mueve en el territorio de la danza contemporánea, la danza teatro y la creación inclusiva. No busca ilustrar la diferencia. Trabaja desde ella.
           </p>
           <p>
-            Su trabajo se sitúa en el cruce entre danza contemporánea, danza teatro y creación inclusiva. Una práctica donde el movimiento, simple y preciso, busca lo que las palabras no alcanzan.
+            Vinculado al circuito de la danza inclusiva, colabora estrechamente con la Compañía Danza Mobile de Sevilla. En 2023, a raíz de su participación en el XVI Festival Internacional Escena Mobile de Arte y Diversidad, funda <a href="/obra/la-tulpa">La Tulpa</a>.
           </p>
-          <!-- PENDING FROM MANUEL: extended bio, personal statement, artistic trajectory -->
+          <!-- PENDING FROM MANUEL: training, detailed career, artist statement -->
+        </div>
+
+        <div class="about-language reveal reveal-delay-2">
+          <h2 class="accent-underline">Lenguaje</h2>
+          <div class="prose">
+            <p>
+              Lo que ocurre en escena nace de la diferencia: de cuerpos distintos que se encuentran, se escuchan, se transforman. Movimiento simple y preciso. Una estética de claroscuro que busca la penumbra para mirar con más cuidado.
+            </p>
+            <p>
+              Cada pieza es una investigación. Cada función, un acto de presencia.
+            </p>
+          </div>
+        </div>
+
+        <div class="about-international reveal reveal-delay-3">
+          <h2 class="accent-underline">Presencia internacional</h2>
+          <div class="prose">
+            <p>
+              Ha girado por España, Corea del Sur y Alemania. Trabaja en estrecha relación con la Compañía Danza Mobile de Sevilla y con el circuito internacional de la danza accesible.
+            </p>
+          </div>
+          <ul class="about-tour-list">
+            <li>
+              <span class="marginalia">2023</span>
+              <span>XVI Festival Internacional Escena Mobile, Sevilla</span>
+            </li>
+            <li>
+              <span class="marginalia">2024</span>
+              <span>Festival Kiada, Festival Internacional de Danza Accesible, Seúl</span>
+            </li>
+            <li>
+              <span class="marginalia">2024</span>
+              <span>Festival de Kirchheimbolanden, Alemania</span>
+            </li>
+            <li>
+              <span class="marginalia">2025</span>
+              <span>Madrid en Danza, Teatros del Canal, Madrid</span>
+            </li>
+          </ul>
         </div>
       </div>
 
-      <aside class="about-aside reveal reveal-delay-1">
-        <div class="about-meta">
+      <aside class="about-aside">
+        <div class="about-meta reveal reveal-delay-1">
           <dl class="about-facts">
             <div class="about-fact">
               <dt class="marginalia">Compañía</dt>
-              <dd>La Tulpa</dd>
+              <dd><a href="/obra/la-tulpa">La Tulpa</a></dd>
+            </div>
+            <div class="about-fact">
+              <dt class="marginalia">Base</dt>
+              <dd>Barcelona / Sevilla</dd>
             </div>
             <div class="about-fact">
               <dt class="marginalia">Fundación</dt>
@@ -53,7 +97,23 @@ import Hero from '../components/Hero.astro';
               <dt class="marginalia">Disciplinas</dt>
               <dd>Danza contemporánea, danza teatro, creación inclusiva</dd>
             </div>
+            <div class="about-fact">
+              <dt class="marginalia">Internacional</dt>
+              <dd>España, Corea del Sur, Alemania</dd>
+            </div>
           </dl>
+        </div>
+
+        <div class="about-quote reveal reveal-delay-2">
+          <blockquote>
+            <p>Un pensamiento que se hace cuerpo.</p>
+          </blockquote>
+          <p class="marginalia">— Sobre el nombre <em>La Tulpa</em></p>
+        </div>
+
+        <div class="about-cta reveal reveal-delay-3">
+          <a href="/obra" class="cta-link">Ver obra &rarr;</a>
+          <a href="/agenda" class="cta-link">Agenda &rarr;</a>
         </div>
       </aside>
     </div>
@@ -98,8 +158,43 @@ import Hero from '../components/Hero.astro';
     transform: none;
   }
 
+  .about-role {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-accent-interactive);
+    margin-bottom: var(--space-md);
+    letter-spacing: 0.02em;
+  }
+
   .about-text p {
     margin-bottom: var(--space-sm);
+  }
+
+  .about-language,
+  .about-international {
+    margin-top: var(--space-xl);
+    padding-top: var(--space-lg);
+    border-top: 1px solid var(--color-warm-grey);
+  }
+
+  .about-language h2,
+  .about-international h2 {
+    margin-bottom: var(--space-md);
+  }
+
+  .about-tour-list {
+    list-style: none;
+    padding: 0;
+    margin-top: var(--space-md);
+  }
+
+  .about-tour-list li {
+    display: grid;
+    grid-template-columns: 4rem 1fr;
+    gap: var(--space-sm);
+    padding-block: var(--space-xs);
+    border-bottom: 1px solid var(--color-warm-grey);
+    font-size: 0.95rem;
   }
 
   .about-meta {
@@ -122,5 +217,42 @@ import Hero from '../components/Hero.astro';
   .about-fact dd {
     font-size: 0.95rem;
     color: var(--color-text);
+  }
+
+  .about-quote {
+    margin-top: var(--space-lg);
+  }
+
+  .about-quote blockquote {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-style: italic;
+    color: var(--color-text);
+    border-left: 3px solid var(--color-accent-solid);
+    padding-left: var(--space-md);
+    margin-bottom: var(--space-xs);
+  }
+
+  .about-cta {
+    margin-top: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .cta-link {
+    display: inline-block;
+    font-family: var(--font-display);
+    font-size: 1rem;
+    color: var(--color-accent-interactive);
+    background-image: none;
+    border-bottom: 2px solid var(--color-accent);
+    padding-bottom: 0.15rem;
+    transition: color var(--transition-fast), border-color var(--transition-fast);
+  }
+
+  .cta-link:hover {
+    color: var(--color-accent-hover);
+    border-color: var(--color-accent-hover);
   }
 </style>

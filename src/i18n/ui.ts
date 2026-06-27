@@ -10,7 +10,7 @@ export type Lang = keyof typeof languages;
 export const ui = {
   es: {
     'nav.home': 'Inicio',
-    'nav.about': 'Manuel Monró',
+    'nav.about': 'Manuel Monrò',
     'nav.work': 'La Tulpa',
     'nav.tulpa': 'La Tulpa',
     'nav.schedule': 'Agenda',
@@ -35,7 +35,7 @@ export const ui = {
   },
   en: {
     'nav.home': 'Home',
-    'nav.about': 'Manuel Monró',
+    'nav.about': 'Manuel Monrò',
     'nav.work': 'La Tulpa',
     'nav.tulpa': 'La Tulpa',
     'nav.schedule': 'Schedule',

@@ -1,15 +1,15 @@
 ---
 import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
 ---
 
 <Base
   title="Contacto"
   description="Contacto y contratación de La Tulpa, compañía de danza de Manuel Monró."
 >
-  <section class="section container">
-    <span class="accent-line"></span>
-    <h1>Contacto y contratación</h1>
+  <Hero title="Contacto" subtitle="Contratación y programación" height="section" />
 
+  <section class="section container">
     <div class="contact-grid">
       <div class="prose reveal">
         <p>
@@ -17,28 +17,25 @@ import Base from '../layouts/Base.astro';
         </p>
 
         <div class="contact-block">
-          <h2>Correo electrónico</h2>
-          <p class="placeholder">
-            [Pendiente de Manuel: dirección de correo de contacto]
-          </p>
+          <h2 class="contact-heading">Correo electrónico</h2>
+          <!-- PENDING FROM MANUEL: contact email address -->
+          <p class="contact-placeholder-text">Próximamente</p>
         </div>
 
         <div class="contact-block">
-          <h2>Redes</h2>
-          <p class="placeholder">
-            [Pendiente de Manuel: perfiles de redes sociales (Instagram, etc.)]
-          </p>
+          <h2 class="contact-heading">Redes</h2>
+          <!-- PENDING FROM MANUEL: social media profiles (Instagram, Vimeo/YouTube) -->
+          <p class="contact-placeholder-text">Próximamente</p>
         </div>
 
         <div class="contact-block">
-          <h2>Dossier y rider técnico</h2>
-          <p class="placeholder">
-            [Pendiente de Manuel: archivo PDF del dossier de la compañía y rider técnico para descarga]
-          </p>
+          <h2 class="contact-heading">Dossier y rider técnico</h2>
+          <!-- PENDING FROM MANUEL: PDF press kit and technical rider for download -->
+          <p class="contact-placeholder-text">Disponible bajo petición</p>
         </div>
       </div>
 
-      <div class="contact-aside reveal">
+      <div class="contact-aside reveal reveal-delay-1">
         <div class="contact-note">
           <h3>Para programadores y festivales</h3>
           <p>
@@ -54,7 +51,6 @@ import Base from '../layouts/Base.astro';
   .contact-grid {
     display: grid;
     gap: var(--space-lg);
-    margin-top: var(--space-md);
   }
 
   @media (min-width: 48rem) {
@@ -67,14 +63,25 @@ import Base from '../layouts/Base.astro';
     margin-top: var(--space-lg);
   }
 
-  .contact-block h2 {
-    font-size: 1.25rem;
+  .contact-heading {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--color-text-secondary);
     margin-bottom: var(--space-xs);
+  }
+
+  .contact-placeholder-text {
+    color: var(--color-text-secondary);
+    font-style: italic;
+    font-size: 0.95rem;
   }
 
   .contact-note {
     background-color: var(--color-base-raised);
-    border-left: 3px solid var(--color-accent);
+    border-left: 4px solid var(--color-accent-solid);
     padding: var(--space-md);
     border-radius: 2px;
   }

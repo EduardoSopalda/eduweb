@@ -1,35 +1,30 @@
 ---
 import Base from '../../layouts/Base.astro';
-import ImagePlaceholder from '../../components/ImagePlaceholder.astro';
+import Hero from '../../components/Hero.astro';
 ---
 
 <Base
   title="Manuel Monró"
   description="Manuel Monró, director, choreographer, playwright and performer. Creator of La Tulpa."
 >
+  <!-- ASSET: Replace with portrait of Manuel (image prop) when available -->
+  <Hero title="Manuel Monró" subtitle="Creator" height="section" />
+
   <article class="section container">
     <div class="creator-grid">
       <div class="creator-portrait reveal">
-        <ImagePlaceholder
-          aspect="3/4"
-          label="[Portrait of Manuel Monró — pending from Manuel]"
-        />
+        <!-- ASSET: Replace with portrait photo of Manuel Monró -->
+        <div class="portrait-empty" role="img" aria-label="Manuel Monró"></div>
       </div>
-      <div class="prose reveal">
-        <span class="accent-line"></span>
-        <h1>Manuel Monró</h1>
+      <div class="prose reveal reveal-delay-1">
         <p class="creator-role">Director. Choreographer. Playwright. Performer.</p>
-
         <p>
           Manuel Monró works between Barcelona and Seville. His language moves in the territory of contemporary dance, dance theatre and inclusive creation. He does not seek to illustrate difference. He works from it.
         </p>
         <p>
           Linked to the inclusive dance circuit, he collaborates closely with Compañía Danza Mobile in Seville. In 2023, following his participation in the 16th Escena Mobile International Festival of Art and Diversity, he founded La Tulpa.
         </p>
-
-        <div class="placeholder">
-          [Pending from Manuel: training, detailed career, artist statement. No biographical data has been invented. This section will be completed with the information Manuel provides.]
-        </div>
+        <!-- PENDING FROM MANUEL: training, detailed career, artist statement -->
       </div>
     </div>
   </article>
@@ -48,9 +43,19 @@ import ImagePlaceholder from '../../components/ImagePlaceholder.astro';
     }
   }
 
+  .portrait-empty {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    border-radius: 2px;
+    background:
+      radial-gradient(ellipse at 50% 30%, #1a1520 0%, transparent 60%),
+      linear-gradient(165deg, #0f0e12, #0B0B0D 50%, #100d14);
+  }
+
   .creator-role {
     font-size: 1.125rem;
-    color: var(--color-text-secondary);
+    font-weight: 600;
+    color: var(--color-accent-interactive);
     margin-bottom: var(--space-md);
     letter-spacing: 0.02em;
   }

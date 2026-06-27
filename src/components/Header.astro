@@ -17,7 +17,7 @@ const navItems = [
 ];
 ---
 
-<header class="site-header" role="banner">
+<header class="site-header" role="banner" transition:persist>
   <div class="header-inner container">
     <a href={getLocalePath('/', lang)} class="site-logo" aria-label="La Tulpa — Inicio">
       La Tulpa
@@ -41,7 +41,7 @@ const navItems = [
           </li>
         ))}
         <li class="nav-lang">
-          <a href={alternateUrl} class="nav-link" lang={alternateLang} hreflang={alternateLang}>
+          <a href={alternateUrl} class="nav-link nav-link--lang" lang={alternateLang} hreflang={alternateLang}>
             {languages[alternateLang]}
           </a>
         </li>
@@ -51,37 +51,46 @@ const navItems = [
 </header>
 
 <script>
-  const toggle = document.querySelector('.nav-toggle') as HTMLButtonElement;
-  const menu = document.getElementById('nav-menu') as HTMLUListElement;
+  function initNav() {
+    const toggle = document.querySelector('.nav-toggle') as HTMLButtonElement;
+    const menu = document.getElementById('nav-menu') as HTMLUListElement;
+    if (!toggle || !menu) return;
 
-  toggle?.addEventListener('click', () => {
-    const expanded = toggle.getAttribute('aria-expanded') === 'true';
-    toggle.setAttribute('aria-expanded', String(!expanded));
-    menu.classList.toggle('is-open');
+    toggle.addEventListener('click', () => {
+      const expanded = toggle.getAttribute('aria-expanded') === 'true';
+      toggle.setAttribute('aria-expanded', String(!expanded));
+      menu.classList.toggle('is-open');
+      if (!expanded) {
+        const firstLink = menu.querySelector('a');
+        firstLink?.focus();
+      }
+    });
 
-    if (!expanded) {
-      const firstLink = menu.querySelector('a');
-      firstLink?.focus();
-    }
-  });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && menu.classList.contains('is-open')) {
+        toggle.setAttribute('aria-expanded', 'false');
+        menu.classList.remove('is-open');
+        toggle.focus();
+      }
+    });
+  }
 
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && menu.classList.contains('is-open')) {
-      toggle.setAttribute('aria-expanded', 'false');
-      menu.classList.remove('is-open');
-      toggle.focus();
-    }
-  });
+  initNav();
+  document.addEventListener('astro:after-swap', initNav);
 </script>
 
 <style>
   .site-header {
-    position: sticky;
+    position: fixed;
     top: 0;
+    left: 0;
+    right: 0;
     z-index: 100;
-    background-color: rgba(11, 11, 13, 0.95);
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid var(--color-accent);
+    background-color: rgba(11, 11, 13, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(122, 34, 34, 0.3);
+    transition: background-color var(--transition-base);
   }
 
   .header-inner {
@@ -93,15 +102,19 @@ const navItems = [
 
   .site-logo {
     font-family: var(--font-display);
-    font-size: 1.5rem;
+    font-size: 1.35rem;
     font-weight: 700;
     color: var(--color-text);
     text-decoration: none;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background-image: none;
+    transition: color var(--transition-fast);
   }
 
   .site-logo:hover {
     color: var(--color-accent-interactive);
+    background-image: none;
   }
 
   .nav-toggle {
@@ -148,28 +161,37 @@ const navItems = [
     top: 100%;
     left: 0;
     right: 0;
-    background-color: var(--color-base);
-    border-bottom: 1px solid var(--color-accent);
-    padding: var(--space-sm);
+    background-color: rgba(11, 11, 13, 0.97);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(122, 34, 34, 0.3);
+    padding: var(--space-md) var(--space-sm);
     gap: var(--space-xs);
   }
 
   .nav-link {
-    color: var(--color-text);
+    color: var(--color-text-secondary);
     text-decoration: none;
-    font-size: 1rem;
+    font-size: 0.875rem;
     font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
     padding: var(--space-xs) 0;
     display: block;
+    background-image: none;
     transition: color var(--transition-fast);
   }
 
   .nav-link:hover {
+    color: var(--color-text);
+    background-image: none;
+  }
+
+  .nav-link--lang {
     color: var(--color-accent-interactive);
   }
 
   .nav-lang {
-    border-top: 1px solid var(--color-accent);
+    border-top: 1px solid var(--color-warm-grey);
     padding-top: var(--space-xs);
     margin-top: var(--space-xs);
   }
@@ -191,13 +213,14 @@ const navItems = [
       background: none;
       border: none;
       padding: 0;
+      backdrop-filter: none;
     }
 
     .nav-lang {
       border-top: none;
       padding-top: 0;
       margin-top: 0;
-      border-left: 1px solid var(--color-accent);
+      border-left: 1px solid var(--color-warm-grey);
       padding-left: var(--space-md);
     }
   }

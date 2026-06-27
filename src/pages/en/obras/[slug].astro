@@ -1,6 +1,6 @@
 ---
 import Base from '../../../layouts/Base.astro';
-import ImagePlaceholder from '../../../components/ImagePlaceholder.astro';
+import Hero from '../../../components/Hero.astro';
 import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -20,23 +20,22 @@ const d = obra.data;
   title={d.title}
   description={`${d.title} (${d.year}). ${d.type}. Choreography by ${d.choreography}.`}
 >
+  <!-- ASSET: Replace with production photo (image prop) when available -->
+  <Hero title={d.title} subtitle={String(d.year)} height="section" />
+
   <article class="section container">
     <div class="obra-header reveal">
       <a href="/en/obras" class="obra-back">&larr; Back to works</a>
-      <span class="accent-line"></span>
-      <h1>{d.title}</h1>
-      <p class="obra-year">{d.year}</p>
     </div>
 
     <div class="obra-layout">
       <div class="obra-media reveal">
-        <ImagePlaceholder
-          aspect="16/9"
-          label={`[Photograph of ${d.title} — pending from Manuel]`}
-        />
+        <!-- ASSET: Replace with production photo or video -->
+        <div class="obra-media-empty" aria-hidden="true"></div>
       </div>
 
-      <div class="obra-details reveal">
+      <div class="obra-details reveal reveal-delay-1">
+        {d.touring && <span class="label" style="margin-bottom: var(--space-md); display: inline-block;">On tour</span>}
         <dl class="obra-ficha">
           <dt>Choreography</dt>
           <dd>{d.choreography}</dd>
@@ -51,13 +50,10 @@ const d = obra.data;
           <dt>Format</dt>
           <dd>{d.type}</dd>
         </dl>
-        {d.touring && (
-          <span class="obra-touring-badge">On tour</span>
-        )}
       </div>
     </div>
 
-    <div class="obra-body prose reveal">
+    <div class="obra-body prose reveal reveal-delay-2">
       <Content />
     </div>
   </article>
@@ -68,7 +64,7 @@ const d = obra.data;
     display: inline-block;
     font-size: 0.875rem;
     color: var(--color-text-secondary);
-    text-decoration: none;
+    background-image: none;
     margin-bottom: var(--space-md);
     transition: color var(--transition-fast);
   }
@@ -77,16 +73,10 @@ const d = obra.data;
     color: var(--color-accent-interactive);
   }
 
-  .obra-year {
-    font-size: 1.25rem;
-    color: var(--color-text-secondary);
-    margin-top: var(--space-xs);
-  }
-
   .obra-layout {
     display: grid;
     gap: var(--space-lg);
-    margin-top: var(--space-lg);
+    margin-top: var(--space-md);
   }
 
   @media (min-width: 48rem) {
@@ -95,40 +85,40 @@ const d = obra.data;
     }
   }
 
+  .obra-media-empty {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    border-radius: 2px;
+    background:
+      radial-gradient(ellipse at 40% 50%, #1a1520 0%, transparent 60%),
+      linear-gradient(165deg, #0f0e12, #0B0B0D 50%, #100d14);
+  }
+
   .obra-ficha {
     display: grid;
     grid-template-columns: auto 1fr;
-    gap: 0.5rem var(--space-md);
+    gap: 0.75rem var(--space-md);
+    padding: var(--space-md);
+    background-color: var(--color-base-raised);
+    border-left: 4px solid var(--color-accent-solid);
+    border-radius: 2px;
   }
 
   .obra-ficha dt {
-    font-weight: 600;
+    font-weight: 700;
     color: var(--color-text-secondary);
-    font-size: 0.875rem;
+    font-size: 0.75rem;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.1em;
   }
 
   .obra-ficha dd {
     margin: 0;
   }
 
-  .obra-touring-badge {
-    display: inline-block;
-    margin-top: var(--space-md);
-    font-size: 0.75rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--color-accent-interactive);
-    border: 1px solid var(--color-accent);
-    padding: 0.2em 0.6em;
-    border-radius: 2px;
-  }
-
   .obra-body {
-    margin-top: var(--space-lg);
-    border-top: 1px solid var(--color-accent);
+    margin-top: var(--space-xl);
+    border-top: 1px solid var(--color-warm-grey);
     padding-top: var(--space-lg);
   }
 
@@ -144,9 +134,5 @@ const d = obra.data;
 
   .obra-body :global(li) {
     margin-bottom: 0.5rem;
-  }
-
-  .obra-body :global(em) {
-    font-style: italic;
   }
 </style>

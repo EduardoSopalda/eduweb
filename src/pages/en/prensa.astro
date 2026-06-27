@@ -1,15 +1,15 @@
 ---
 import Base from '../../layouts/Base.astro';
+import Hero from '../../components/Hero.astro';
 ---
 
 <Base
   title="Press"
   description="Reviews and press coverage of La Tulpa and the works of Manuel Monró."
 >
-  <section class="section container">
-    <span class="accent-line"></span>
-    <h1>Press</h1>
+  <Hero title="Press" height="section" />
 
+  <section class="section container">
     <div class="prose reveal">
       <p>
         Selected excerpts from reviews and media coverage of La Tulpa's work.
@@ -17,7 +17,7 @@ import Base from '../../layouts/Base.astro';
     </div>
 
     <div class="press-list">
-      <article class="press-item reveal">
+      <article class="press-item reveal reveal-delay-1">
         <blockquote>
           <p>
             &laquo;The aesthetic may seem sinister, but these beings are harmless.&raquo;
@@ -26,15 +26,11 @@ import Base from '../../layouts/Base.astro';
         <p class="press-source">
           Review of <em>Ensayo sobre nadie</em>, following its premiere at the 16th Escena Mobile Festival, Seville, 2023.
         </p>
-        <p class="placeholder">
-          [Pending: author and publication of the review, for proper attribution. Edu will provide the full text. Link to original article when available.]
-        </p>
+        <!-- PENDING: author and publication of the review, for proper attribution -->
+        <!-- PENDING: link to original article when available -->
       </article>
     </div>
-
-    <div class="placeholder reveal" style="margin-top: var(--space-lg);">
-      [Pending: additional reviews and press coverage. This section will be expanded with clippings provided by Manuel.]
-    </div>
+    <!-- PENDING: additional reviews and press coverage -->
   </section>
 </Base>
 
@@ -48,20 +44,18 @@ import Base from '../../layouts/Base.astro';
 
   .press-item blockquote {
     font-family: var(--font-display);
-    font-size: clamp(1.25rem, 2.5vw, 1.75rem);
-    border-left: 3px solid var(--color-accent);
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    border-left: 4px solid var(--color-accent-solid);
     padding-left: var(--space-md);
     color: var(--color-text);
     font-style: italic;
-    margin-bottom: var(--space-sm);
+    margin-bottom: var(--space-md);
+    line-height: 1.4;
   }
 
   .press-source {
     color: var(--color-text-secondary);
     font-size: 0.875rem;
-  }
-
-  .press-source em {
-    font-style: italic;
+    padding-left: calc(var(--space-md) + 4px);
   }
 </style>

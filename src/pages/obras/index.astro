@@ -1,6 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
-import ImagePlaceholder from '../../components/ImagePlaceholder.astro';
+import Hero from '../../components/Hero.astro';
 import { getCollection } from 'astro:content';
 
 const obras = await getCollection('obras');
@@ -11,33 +11,32 @@ const obrasSorted = obras.sort((a, b) => a.data.order - b.data.order);
   title="Obras"
   description="Histórico de obras producidas por La Tulpa, compañía de danza de Manuel Monró."
 >
+  <Hero title="Obras" subtitle="Histórico" height="section" />
+
   <section class="section container">
-    <span class="accent-line"></span>
-    <h1>Obras producidas</h1>
     <div class="obras-list">
-      {obrasSorted.map((obra) => (
-        <article class="obra-card reveal">
+      {obrasSorted.map((obra, i) => (
+        <article class:list={['obra-card', 'reveal', `reveal-delay-${i + 1}`]}>
           <a href={`/obras/${obra.data.slug}`} class="obra-card-link">
-            <ImagePlaceholder
-              aspect="16/9"
-              label={`[Fotografía de ${obra.data.title} — pendiente de Manuel]`}
-            />
+            <div class="obra-card-image">
+              <!-- ASSET: Replace with production photo -->
+              <div class="obra-card-empty" aria-hidden="true"></div>
+              <div class="obra-card-overlay">
+                <span class="label">{obra.data.year}</span>
+              </div>
+            </div>
             <div class="obra-card-info">
               <h2>{obra.data.title}</h2>
-              <p class="obra-card-meta">
-                {obra.data.year} — {obra.data.type}
-              </p>
+              <p class="obra-card-meta">{obra.data.type}</p>
               {obra.data.touring && (
-                <span class="obra-touring-badge">En gira</span>
+                <span class="label label--outline">En gira</span>
               )}
             </div>
           </a>
         </article>
       ))}
     </div>
-    <div class="placeholder reveal" style="margin-top: var(--space-lg);">
-      [Pendiente de Manuel: otras obras producidas después de Ensayo sobre nadie, si las hay.]
-    </div>
+    <!-- PENDING FROM MANUEL: other works produced after Ensayo sobre nadie, if any -->
   </section>
 </Base>
 
@@ -45,7 +44,6 @@ const obrasSorted = obras.sort((a, b) => a.data.order - b.data.order);
   .obras-list {
     display: grid;
     gap: var(--space-lg);
-    margin-top: var(--space-lg);
   }
 
   @media (min-width: 48rem) {
@@ -55,40 +53,64 @@ const obrasSorted = obras.sort((a, b) => a.data.order - b.data.order);
   }
 
   .obra-card-link {
-    text-decoration: none;
-    color: inherit;
     display: block;
+    color: inherit;
+    background-image: none;
+    border-radius: 2px;
+    overflow: hidden;
+    background-color: var(--color-base-raised);
+    transition: background-color var(--transition-fast);
+  }
+
+  .obra-card-link:hover {
+    background-color: var(--color-base-surface);
+    background-image: none;
   }
 
   .obra-card-link:hover h2 {
     color: var(--color-accent-interactive);
   }
 
+  .obra-card-image {
+    position: relative;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+  }
+
+  .obra-card-empty {
+    width: 100%;
+    height: 100%;
+    background:
+      radial-gradient(ellipse at 40% 50%, #1a1520 0%, transparent 60%),
+      linear-gradient(165deg, #0f0e12, #0B0B0D 50%, #100d14);
+    transition: transform 0.8s ease-out;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .obra-card-link:hover .obra-card-empty {
+      transform: scale(1.05);
+    }
+  }
+
+  .obra-card-overlay {
+    position: absolute;
+    bottom: var(--space-sm);
+    left: var(--space-sm);
+  }
+
   .obra-card-info {
-    padding-top: var(--space-sm);
+    padding: var(--space-md);
   }
 
   .obra-card-info h2 {
     font-size: 1.5rem;
+    margin-bottom: 0.25rem;
     transition: color var(--transition-fast);
   }
 
   .obra-card-meta {
     color: var(--color-text-secondary);
     font-size: 0.875rem;
-    margin-top: 0.25rem;
-  }
-
-  .obra-touring-badge {
-    display: inline-block;
-    margin-top: var(--space-xs);
-    font-size: 0.75rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--color-accent-interactive);
-    border: 1px solid var(--color-accent);
-    padding: 0.2em 0.6em;
-    border-radius: 2px;
+    margin-bottom: var(--space-xs);
   }
 </style>

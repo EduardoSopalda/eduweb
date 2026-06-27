@@ -1,17 +1,17 @@
 ---
 import Base from '../../layouts/Base.astro';
-import ImagePlaceholder from '../../components/ImagePlaceholder.astro';
+import Hero from '../../components/Hero.astro';
 ---
 
 <Base
   title="The company"
   description="La Tulpa, contemporary dance and dance theatre company founded in 2023 by Manuel Monró. Inclusive creation from Seville and Barcelona."
 >
+  <!-- ASSET: Replace with company photo (image prop) when available -->
+  <Hero title="The company" height="section" />
+
   <article class="section container">
     <div class="prose">
-      <span class="accent-line"></span>
-      <h1>The company</h1>
-
       <div class="reveal">
         <p>
           La Tulpa was born in 2023. Not from a plan, but from an encounter: Manuel Monró meeting the 16th Escena Mobile International Festival of Art and Diversity in Seville. A festival that since 2007 has opened space for inclusive arts and everything that conventional stages leave out.
@@ -21,25 +21,16 @@ import ImagePlaceholder from '../../components/ImagePlaceholder.astro';
         </p>
       </div>
 
-      <div class="reveal">
-        <ImagePlaceholder
-          aspect="16/9"
-          label="[Photograph of the company on stage — pending from Manuel]"
-        />
-      </div>
-
-      <div class="reveal">
-        <h2>The name</h2>
+      <div class="reveal reveal-delay-1">
+        <h2 class="accent-underline">The name</h2>
         <p>
           In the Tibetan tradition, a tulpa is a being that takes form through thought and will. A thought that becomes body. The image fits the company's poetics: bodies that think, thought that moves.
         </p>
-        <p class="placeholder">
-          [Note for Manuel: please confirm the meaning you give to the name. Is this the origin you want to convey, or is there another reading?]
-        </p>
+        <!-- NOTE FOR MANUEL: please confirm the meaning you give to the name -->
       </div>
 
-      <div class="reveal">
-        <h2>Language</h2>
+      <div class="reveal reveal-delay-2">
+        <h2 class="accent-underline">Language</h2>
         <p>
           La Tulpa works in the territory of inclusive creation. Not as a theme, but as a form. What happens on stage is born from difference: from distinct bodies that meet, listen, transform one another. Each piece is an investigation. Each performance, an act of presence.
         </p>

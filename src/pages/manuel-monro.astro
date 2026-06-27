@@ -1,35 +1,30 @@
 ---
 import Base from '../layouts/Base.astro';
-import ImagePlaceholder from '../components/ImagePlaceholder.astro';
+import Hero from '../components/Hero.astro';
 ---
 
 <Base
   title="Manuel Monró"
   description="Manuel Monró, director, coreógrafo, dramaturgo e intérprete. Creador de La Tulpa."
 >
+  <!-- ASSET: Replace with portrait of Manuel (image prop) when available -->
+  <Hero title="Manuel Monró" subtitle="Creador" height="section" />
+
   <article class="section container">
     <div class="creator-grid">
       <div class="creator-portrait reveal">
-        <ImagePlaceholder
-          aspect="3/4"
-          label="[Retrato de Manuel Monró — pendiente de Manuel]"
-        />
+        <!-- ASSET: Replace with portrait photo of Manuel Monró -->
+        <div class="portrait-empty" role="img" aria-label="Manuel Monró"></div>
       </div>
-      <div class="prose reveal">
-        <span class="accent-line"></span>
-        <h1>Manuel Monró</h1>
+      <div class="prose reveal reveal-delay-1">
         <p class="creator-role">Director. Coreógrafo. Dramaturgo. Intérprete.</p>
-
         <p>
           Manuel Monró trabaja entre Barcelona y Sevilla. Su lenguaje se mueve en el territorio de la danza contemporánea, la danza teatro y la creación inclusiva. No busca ilustrar la diferencia. Trabaja desde ella.
         </p>
         <p>
           Vinculado al circuito de la danza inclusiva, colabora estrechamente con la Compañía Danza Mobile de Sevilla. En 2023, a raíz de su participación en el XVI Festival Internacional Escena Mobile de Arte y Diversidad, funda La Tulpa.
         </p>
-
-        <div class="placeholder">
-          [Pendiente de Manuel: formación, trayectoria detallada, declaración de artista. No se han inventado datos biográficos. Este apartado se completará con la información que Manuel proporcione.]
-        </div>
+        <!-- PENDING FROM MANUEL: training, detailed career, artist statement -->
       </div>
     </div>
   </article>
@@ -48,9 +43,19 @@ import ImagePlaceholder from '../components/ImagePlaceholder.astro';
     }
   }
 
+  .portrait-empty {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    border-radius: 2px;
+    background:
+      radial-gradient(ellipse at 50% 30%, #1a1520 0%, transparent 60%),
+      linear-gradient(165deg, #0f0e12, #0B0B0D 50%, #100d14);
+  }
+
   .creator-role {
     font-size: 1.125rem;
-    color: var(--color-text-secondary);
+    font-weight: 600;
+    color: var(--color-accent-interactive);
     margin-bottom: var(--space-md);
     letter-spacing: 0.02em;
   }

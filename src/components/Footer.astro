@@ -1,46 +1,89 @@
 ---
-import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import { getLangFromUrl, useTranslations, getLocalePath } from '../i18n/utils';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const year = new Date().getFullYear();
+
+const navItems = [
+  { label: t('nav.company'), href: getLocalePath('/la-compania', lang) },
+  { label: t('nav.creator'), href: getLocalePath('/manuel-monro', lang) },
+  { label: t('nav.works'), href: getLocalePath('/obras', lang) },
+  { label: t('nav.touring'), href: getLocalePath('/en-gira', lang) },
+  { label: t('nav.press'), href: getLocalePath('/prensa', lang) },
+  { label: t('nav.contact'), href: getLocalePath('/contacto', lang) },
+];
 ---
 
 <footer class="site-footer" role="contentinfo">
   <div class="container footer-inner">
-    <div class="footer-brand">
-      <p class="footer-logo">La Tulpa</p>
-      <p class="footer-tagline">
-        {lang === 'es' ? 'Compañía de danza' : 'Dance company'}
+    <div class="footer-top">
+      <div class="footer-brand">
+        <p class="footer-logo">La Tulpa</p>
+        <p class="footer-tagline">
+          {lang === 'es' ? 'Compañía de danza' : 'Dance company'}
+        </p>
+      </div>
+      <nav class="footer-nav" aria-label={lang === 'es' ? 'Navegación del pie' : 'Footer navigation'}>
+        <ul class="footer-nav-list">
+          {navItems.map((item) => (
+            <li><a href={item.href} class="footer-link">{item.label}</a></li>
+          ))}
+        </ul>
+      </nav>
+      <div class="footer-contact">
+        <p class="footer-heading">
+          {lang === 'es' ? 'Contacto y contratación' : 'Contact and booking'}
+        </p>
+        <!-- PENDING FROM MANUEL: contact email address -->
+        <!-- PENDING FROM MANUEL: social media profiles (Instagram, Vimeo/YouTube) -->
+        <p class="footer-collab">
+          {lang === 'es'
+            ? 'En colaboración con Danza Mobile, Sevilla.'
+            : 'In collaboration with Danza Mobile, Seville.'}
+        </p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">
+        &copy; {year} La Tulpa. {t('footer.rights')}
       </p>
     </div>
-    <p class="footer-copy">
-      &copy; {year} La Tulpa. {t('footer.rights')}
-    </p>
   </div>
 </footer>
 
 <style>
   .site-footer {
-    border-top: 1px solid var(--color-accent);
+    border-top: 1px solid var(--color-warm-grey);
     padding-block: var(--space-lg);
     margin-top: var(--space-xl);
+    background-color: var(--color-base-raised);
   }
 
   .footer-inner {
     display: flex;
     flex-direction: column;
-    gap: var(--space-md);
-    align-items: center;
-    text-align: center;
+    gap: var(--space-lg);
+  }
+
+  .footer-top {
+    display: grid;
+    gap: var(--space-lg);
+  }
+
+  @media (min-width: 48rem) {
+    .footer-top {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
   }
 
   .footer-logo {
     font-family: var(--font-display);
-    font-size: 1.25rem;
+    font-size: 1.35rem;
     font-weight: 700;
     color: var(--color-text);
-    letter-spacing: 0.05em;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
   }
 
   .footer-tagline {
@@ -49,16 +92,49 @@ const year = new Date().getFullYear();
     margin-top: 0.25rem;
   }
 
-  .footer-copy {
+  .footer-heading {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
     color: var(--color-text-secondary);
-    font-size: 0.875rem;
+    margin-bottom: var(--space-xs);
   }
 
-  @media (min-width: 48rem) {
-    .footer-inner {
-      flex-direction: row;
-      justify-content: space-between;
-      text-align: left;
-    }
+  .footer-collab {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    margin-top: var(--space-sm);
+  }
+
+  .footer-nav-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .footer-link {
+    color: var(--color-text-secondary);
+    font-size: 0.875rem;
+    background-image: none;
+    transition: color var(--transition-fast);
+  }
+
+  .footer-link:hover {
+    color: var(--color-text);
+    background-image: none;
+  }
+
+  .footer-bottom {
+    border-top: 1px solid var(--color-warm-grey);
+    padding-top: var(--space-md);
+  }
+
+  .footer-copy {
+    color: var(--color-text-secondary);
+    font-size: 0.8rem;
   }
 </style>

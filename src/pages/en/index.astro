@@ -1,32 +1,23 @@
 ---
 import Base from '../../layouts/Base.astro';
-import ImagePlaceholder from '../../components/ImagePlaceholder.astro';
+import Hero from '../../components/Hero.astro';
 ---
 
 <Base
   title="Home"
   description="La Tulpa, dance company directed by Manuel Monró. Contemporary dance, dance theatre and inclusive creation."
 >
-  <section class="hero" aria-label="Cover">
-    <div class="hero-bg">
-      <ImagePlaceholder
-        aspect="16/9"
-        label="[Main photograph of La Tulpa in chiaroscuro — pending from Manuel]"
-      />
-    </div>
-    <div class="hero-content container">
-      <h1 class="hero-title">La Tulpa</h1>
-      <p class="hero-subtitle">Dance company</p>
-      <p class="hero-phrase">
-        A thought that becomes body.
-      </p>
-    </div>
-  </section>
+  <!-- ASSET: Replace with hero video (video prop) or photo (image prop) when Manuel provides them -->
+  <Hero
+    title="La Tulpa"
+    subtitle="Dance company"
+    phrase="A thought that becomes body."
+    height="full"
+  />
 
-  <section class="section container home-intro reveal" aria-labelledby="home-about">
-    <div class="prose">
-      <span class="accent-line"></span>
-      <h2 id="home-about">Dance that questions</h2>
+  <section class="section container" aria-labelledby="home-about">
+    <div class="prose reveal">
+      <h2 id="home-about" class="accent-underline">Dance that questions</h2>
       <p>
         La Tulpa was born in 2023 from the hand of Manuel Monró, at the heart of the Escena Mobile International Festival of Art and Diversity in Seville. It is not a company that illustrates themes. It is a place where the body investigates what words cannot reach.
       </p>
@@ -36,121 +27,131 @@ import ImagePlaceholder from '../../components/ImagePlaceholder.astro';
     </div>
   </section>
 
-  <section class="section container home-work reveal" aria-labelledby="home-work-title">
-    <span class="accent-line"></span>
-    <h2 id="home-work-title">On stage</h2>
-    <div class="home-work-card">
-      <ImagePlaceholder
-        aspect="16/9"
-        label="[Photograph of Ensayo sobre nadie — pending from Manuel]"
-      />
-      <div class="home-work-info">
+  <section class="section container" aria-labelledby="home-work-title">
+    <h2 id="home-work-title" class="accent-underline reveal">On stage</h2>
+    <div class="home-work-card reveal reveal-delay-1">
+      <div class="work-card-image">
+        <!-- ASSET: Replace with production photo of Ensayo sobre nadie -->
+        <div class="work-card-empty" aria-hidden="true"></div>
+        <div class="work-card-scrim"></div>
+      </div>
+      <div class="work-card-info">
+        <span class="label">On tour</span>
         <h3><a href="/en/obras/ensayo-sobre-nadie">Ensayo sobre nadie</a></h3>
         <p>
           Almost no one asks whether what you see is more real than what you hear, or what you hold inside.
         </p>
-        <p class="home-work-meta">2023 — On tour</p>
+        <p class="work-card-meta">2023 — Short dance theatre piece</p>
       </div>
     </div>
   </section>
 
-  <section class="section container home-cta reveal" aria-labelledby="home-contact">
-    <span class="accent-line"></span>
-    <h2 id="home-contact">Contact</h2>
-    <p class="prose">
-      For booking, programming or any enquiry about the company and its works.
-    </p>
-    <a href="/en/contacto" class="cta-link">Get in touch &rarr;</a>
+  <section class="section container home-cta" aria-labelledby="home-contact">
+    <div class="reveal">
+      <h2 id="home-contact" class="accent-underline">Contact</h2>
+      <p class="prose">
+        For booking, programming or any enquiry about the company and its works.
+      </p>
+      <a href="/en/contacto" class="cta-link">Get in touch &rarr;</a>
+    </div>
   </section>
 </Base>
 
 <style>
-  .hero {
-    position: relative;
-    min-height: 90vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-  }
-
-  .hero-bg {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    opacity: 0.4;
-  }
-
-  .hero-bg > :global(*) {
-    width: 100%;
-    height: 100%;
-    aspect-ratio: auto;
-  }
-
-  .hero-content {
-    position: relative;
-    z-index: 1;
-    text-align: center;
-    padding-block: var(--space-2xl);
-  }
-
-  .hero-title {
-    font-size: clamp(3rem, 8vw, 7rem);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    margin-bottom: var(--space-xs);
-  }
-
-  .hero-subtitle {
-    font-family: var(--font-body);
-    font-size: 1.125rem;
-    font-weight: 400;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--color-text-secondary);
-    margin-bottom: var(--space-lg);
-  }
-
-  .hero-phrase {
-    font-family: var(--font-display);
-    font-size: clamp(1.25rem, 3vw, 2rem);
-    font-style: italic;
-    color: var(--color-text);
-    max-width: 36rem;
-    margin-inline: auto;
-  }
-
   .home-work-card {
     display: grid;
     gap: var(--space-md);
-    margin-top: var(--space-md);
+    margin-top: var(--space-lg);
+    overflow: hidden;
+    border-radius: 2px;
+    background-color: var(--color-base-raised);
   }
 
   @media (min-width: 48rem) {
     .home-work-card {
-      grid-template-columns: 1fr 1fr;
-      align-items: center;
+      grid-template-columns: 1.2fr 1fr;
     }
   }
 
-  .home-work-info h3 {
-    font-size: 1.5rem;
+  .work-card-image {
+    position: relative;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+  }
+
+  .work-card-empty {
+    width: 100%;
+    height: 100%;
+    background:
+      radial-gradient(ellipse at 40% 50%, #1a1520 0%, transparent 60%),
+      linear-gradient(165deg, #0f0e12, #0B0B0D 50%, #100d14);
+  }
+
+  .work-card-scrim {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, transparent 50%, var(--color-base-raised) 100%);
+  }
+
+  @media (max-width: 47.99rem) {
+    .work-card-scrim {
+      background: linear-gradient(to bottom, transparent 50%, var(--color-base-raised) 100%);
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .work-card-image:hover .work-card-empty,
+    .home-work-card:hover .work-card-empty {
+      transform: scale(1.03);
+      transition: transform 0.8s ease-out;
+    }
+  }
+
+  .work-card-info {
+    padding: var(--space-md);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  @media (min-width: 48rem) {
+    .work-card-info {
+      padding: var(--space-lg) var(--space-md);
+    }
+  }
+
+  .work-card-info .label {
+    align-self: flex-start;
+    margin-bottom: var(--space-sm);
+  }
+
+  .work-card-info h3 {
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
     margin-bottom: var(--space-xs);
   }
 
-  .home-work-info h3 a {
+  .work-card-info h3 a {
     color: var(--color-text);
-    text-decoration: none;
+    background-image: none;
+    transition: color var(--transition-fast);
   }
 
-  .home-work-info h3 a:hover {
+  .work-card-info h3 a:hover {
     color: var(--color-accent-interactive);
   }
 
-  .home-work-meta {
+  .work-card-meta {
     color: var(--color-text-secondary);
     font-size: 0.875rem;
     margin-top: var(--space-sm);
+  }
+
+  .home-cta {
+    text-align: center;
+  }
+
+  .home-cta .prose {
+    margin-inline: auto;
   }
 
   .cta-link {
@@ -159,8 +160,8 @@ import ImagePlaceholder from '../../components/ImagePlaceholder.astro';
     font-family: var(--font-display);
     font-size: 1.25rem;
     color: var(--color-accent-interactive);
-    text-decoration: none;
-    border-bottom: 1px solid var(--color-accent);
+    background-image: none;
+    border-bottom: 3px solid var(--color-accent);
     padding-bottom: 0.25rem;
     transition: color var(--transition-fast), border-color var(--transition-fast);
   }
@@ -168,17 +169,5 @@ import ImagePlaceholder from '../../components/ImagePlaceholder.astro';
   .cta-link:hover {
     color: var(--color-accent-hover);
     border-color: var(--color-accent-hover);
-  }
-
-  .home-cta {
-    text-align: center;
-  }
-
-  .home-cta .accent-line {
-    margin-inline: auto;
-  }
-
-  .home-cta .prose {
-    margin-inline: auto;
   }
 </style>

@@ -10,4 +10,5 @@ export default defineConfig({
     },
   },
   site: 'https://latulpa.es',
+  prefetch: true,
 });

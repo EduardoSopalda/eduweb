@@ -1,167 +1,442 @@
 ---
 import Base from '../../layouts/Base.astro';
-import ImagePlaceholder from '../../components/ImagePlaceholder.astro';
+import Hero from '../../components/Hero.astro';
+import { getCollection } from 'astro:content';
+
+const obras = (await getCollection('obras')).sort((a, b) => (b.data.order || 0) - (a.data.order || 0));
+const featured = obras.find((o) => o.data.touring) || obras[0];
 ---
 
 <Base
   title="Home"
-  description="La Tulpa, dance company directed by Manuel Monró. Contemporary dance, dance theatre and inclusive creation."
+  description="Manuel Monró — choreographer, performer and director of La Tulpa. Contemporary dance, dance theatre and inclusive creation."
 >
-  <section class="hero" aria-label="Cover">
-    <div class="hero-bg">
-      <ImagePlaceholder
-        aspect="16/9"
-        label="[Main photograph of La Tulpa in chiaroscuro — pending from Manuel]"
-      />
+  <Hero
+    title="Manuel Monró"
+    subtitle="Choreographer · Performer · Creator"
+    phrase="He does not seek to illustrate difference. He works from it."
+    height="full"
+  />
+
+  <!-- Identity -->
+  <section class="section container" aria-labelledby="home-identity">
+    <div class="identity reveal">
+      <h2 id="home-identity" class="identity-statement">
+        Director, choreographer, playwright and performer. Working between Barcelona and Seville at the intersection of contemporary dance, dance theatre and inclusive creation.
+      </h2>
     </div>
-    <div class="hero-content container">
-      <h1 class="hero-title">La Tulpa</h1>
-      <p class="hero-subtitle">Dance company</p>
-      <p class="hero-phrase">
-        A thought that becomes body.
-      </p>
+
+    <div class="disciplines reveal reveal-delay-1">
+      <span class="discipline-tag">Contemporary dance</span>
+      <span class="discipline-tag">Dance theatre</span>
+      <span class="discipline-tag">Inclusive creation</span>
     </div>
   </section>
 
-  <section class="section container home-intro reveal" aria-labelledby="home-about">
-    <div class="prose">
-      <span class="accent-line"></span>
-      <h2 id="home-about">Dance that questions</h2>
-      <p>
-        La Tulpa was born in 2023 from the hand of Manuel Monró, at the heart of the Escena Mobile International Festival of Art and Diversity in Seville. It is not a company that illustrates themes. It is a place where the body investigates what words cannot reach.
-      </p>
-      <p>
-        Contemporary dance, dance theatre. Simple, precise movement. A chiaroscuro aesthetic that seeks the half-light to look more carefully.
-      </p>
-    </div>
-  </section>
-
-  <section class="section container home-work reveal" aria-labelledby="home-work-title">
-    <span class="accent-line"></span>
-    <h2 id="home-work-title">On stage</h2>
-    <div class="home-work-card">
-      <ImagePlaceholder
-        aspect="16/9"
-        label="[Photograph of Ensayo sobre nadie — pending from Manuel]"
-      />
-      <div class="home-work-info">
-        <h3><a href="/en/obras/ensayo-sobre-nadie">Ensayo sobre nadie</a></h3>
-        <p>
-          Almost no one asks whether what you see is more real than what you hear, or what you hold inside.
+  <!-- Approach -->
+  <section class="section container home-approach" aria-labelledby="home-approach-title">
+    <div class="approach-grid">
+      <div class="approach-main reveal">
+        <h2 id="home-approach-title" class="sr-only">Language</h2>
+        <p class="approach-text">
+          What happens on stage is born from difference: from distinct bodies that meet, listen, transform one another. Simple, precise movement. A chiaroscuro aesthetic that seeks the half-light to look more carefully.
         </p>
-        <p class="home-work-meta">2023 — On tour</p>
+        <p class="approach-text approach-text--emphasis">
+          Each piece is an investigation. Each performance, an act of presence.
+        </p>
+      </div>
+      <aside class="approach-aside reveal reveal-delay-1 chaos-shift">
+        <blockquote class="approach-quote">
+          <p>&ldquo;Almost no one asks whether what can be seen, what can be heard, or what is held back is more real.&rdquo;</p>
+        </blockquote>
+        <p class="marginalia">— <em>Ensayo sobre nadie</em></p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- Featured work -->
+  {featured && (
+    <section class="section container" aria-labelledby="home-work-title">
+      <div class="work-header reveal">
+        <span class="marginalia">On stage</span>
+        <h2 id="home-work-title" class="accent-underline">{featured.data.title}</h2>
+      </div>
+      <div class="home-work-card reveal reveal-delay-1">
+        <div class="work-card-media">
+          {featured.data.image
+            ? <img class="work-card-img" src={featured.data.image} alt={featured.data.title} loading="lazy" />
+            : <div class="empty-media empty-media--landscape" aria-hidden="true"></div>
+          }
+        </div>
+        <div class="work-card-info">
+          {featured.data.touring && <span class="label">On tour</span>}
+          <h3>
+            <a href={`/en/obra/${featured.data.slug}`}>{featured.data.title}</a>
+          </h3>
+          <p class="work-card-meta marginalia">
+            {featured.data.year} — {featured.data.type}
+          </p>
+          <p class="work-card-desc">
+            Short dance theatre piece. Choreography by {featured.data.choreography}.
+          </p>
+          <a href="/en/obra" class="work-card-link">See full body of work &rarr;</a>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- International presence -->
+  <section class="section container home-presence" aria-labelledby="home-presence-title">
+    <h2 id="home-presence-title" class="accent-underline reveal">International presence</h2>
+    <div class="presence-grid reveal reveal-delay-1">
+      <div class="presence-item">
+        <span class="presence-year marginalia">2023</span>
+        <span class="presence-place">Seville</span>
+        <span class="presence-detail">Escena Mobile Festival — Premiere</span>
+      </div>
+      <div class="presence-item">
+        <span class="presence-year marginalia">2024</span>
+        <span class="presence-place">Seoul</span>
+        <span class="presence-detail">Kiada Festival — Opening</span>
+      </div>
+      <div class="presence-item">
+        <span class="presence-year marginalia">2024</span>
+        <span class="presence-place">Germany</span>
+        <span class="presence-detail">Kirchheimbolanden Festival</span>
+      </div>
+      <div class="presence-item">
+        <span class="presence-year marginalia">2025</span>
+        <span class="presence-place">Madrid</span>
+        <span class="presence-detail">Madrid en Danza, Teatros del Canal</span>
       </div>
     </div>
   </section>
 
-  <section class="section container home-cta reveal" aria-labelledby="home-contact">
-    <span class="accent-line"></span>
-    <h2 id="home-contact">Contact</h2>
-    <p class="prose">
-      For booking, programming or any enquiry about the company and its works.
-    </p>
-    <a href="/en/contacto" class="cta-link">Get in touch &rarr;</a>
+  <!-- La Tulpa -->
+  <section class="section container home-tulpa" aria-labelledby="home-tulpa-title">
+    <div class="tulpa-grid reveal">
+      <div class="tulpa-main">
+        <span class="marginalia">Company</span>
+        <h2 id="home-tulpa-title" class="accent-underline">La Tulpa</h2>
+        <p>
+          In the Tibetan tradition, a tulpa is a being that takes form through thought and will. A thought made body. Founded in 2023 in collaboration with Danza Mobile, Seville.
+        </p>
+        <a href="/en/obra/la-tulpa" class="cta-link">About La Tulpa &rarr;</a>
+      </div>
+      <div class="tulpa-aside">
+        <div class="empty-media empty-media--square chaos-tilt" aria-hidden="true"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="section container home-cta" aria-labelledby="home-contact">
+    <div class="reveal">
+      <span class="marginalia">Booking and programming</span>
+      <h2 id="home-contact" class="accent-underline">Contact</h2>
+      <p class="cta-text">
+        To book performances, request a press kit or technical rider, or for any enquiry about Manuel Monró and La Tulpa.
+      </p>
+      <a href="/en/contacto" class="cta-link cta-link--large">Get in touch &rarr;</a>
+    </div>
   </section>
 </Base>
 
 <style>
-  .hero {
-    position: relative;
-    min-height: 90vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-  }
-
-  .hero-bg {
+  .sr-only {
     position: absolute;
-    inset: 0;
-    z-index: 0;
-    opacity: 0.4;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
   }
 
-  .hero-bg > :global(*) {
-    width: 100%;
-    height: 100%;
-    aspect-ratio: auto;
-  }
-
-  .hero-content {
-    position: relative;
-    z-index: 1;
-    text-align: center;
-    padding-block: var(--space-2xl);
-  }
-
-  .hero-title {
-    font-size: clamp(3rem, 8vw, 7rem);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    margin-bottom: var(--space-xs);
-  }
-
-  .hero-subtitle {
-    font-family: var(--font-body);
-    font-size: 1.125rem;
+  /* Identity */
+  .identity-statement {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 3.5vw, 2.5rem);
     font-weight: 400;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--color-text-secondary);
+    line-height: 1.35;
+    color: var(--color-text);
+    max-width: var(--content-width);
     margin-bottom: var(--space-lg);
   }
 
-  .hero-phrase {
+  .disciplines {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+  }
+
+  .discipline-tag {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    border: 1px solid var(--color-warm-grey);
+    padding: 0.4em 1em;
+    border-radius: 2px;
+  }
+
+  /* Approach */
+  .approach-grid {
+    display: grid;
+    gap: var(--space-lg);
+  }
+
+  @media (min-width: 48rem) {
+    .approach-grid {
+      grid-template-columns: 1.5fr 1fr;
+      align-items: start;
+    }
+  }
+
+  .home-approach {
+    border-top: 1px solid var(--color-warm-grey);
+  }
+
+  .approach-text {
+    font-size: 1.125rem;
+    line-height: 1.7;
+    max-width: var(--content-width);
+    margin-bottom: var(--space-sm);
+  }
+
+  .approach-text--emphasis {
     font-family: var(--font-display);
-    font-size: clamp(1.25rem, 3vw, 2rem);
+    font-style: italic;
+    font-size: 1.25rem;
+    color: var(--color-text);
+    margin-top: var(--space-md);
+  }
+
+  .approach-quote {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
     font-style: italic;
     color: var(--color-text);
-    max-width: 36rem;
-    margin-inline: auto;
+    border-left: 3px solid var(--color-accent-solid);
+    padding-left: var(--space-md);
+    margin-bottom: var(--space-xs);
+    line-height: 1.5;
+  }
+
+  @media (min-width: 48rem) {
+    .approach-aside {
+      padding-top: var(--space-md);
+    }
+  }
+
+  /* Featured work */
+  .work-header {
+    margin-bottom: var(--space-md);
+  }
+
+  .work-header .marginalia {
+    display: block;
+    margin-bottom: var(--space-xs);
   }
 
   .home-work-card {
     display: grid;
     gap: var(--space-md);
-    margin-top: var(--space-md);
+    overflow: hidden;
+    border-radius: 2px;
+    background-color: var(--color-base-raised);
   }
 
   @media (min-width: 48rem) {
     .home-work-card {
-      grid-template-columns: 1fr 1fr;
-      align-items: center;
+      grid-template-columns: 1.2fr 1fr;
     }
   }
 
-  .home-work-info h3 {
-    font-size: 1.5rem;
-    margin-bottom: var(--space-xs);
+  .work-card-media {
+    position: relative;
+    overflow: hidden;
   }
 
-  .home-work-info h3 a {
+  .work-card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    aspect-ratio: 16 / 10;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .work-card-media:hover .work-card-img,
+    .work-card-media:hover .empty-media {
+      transform: scale(1.03);
+      transition: transform 0.8s ease-out;
+    }
+  }
+
+  .work-card-info {
+    padding: var(--space-md);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: var(--space-xs);
+  }
+
+  @media (min-width: 48rem) {
+    .work-card-info {
+      padding: var(--space-lg) var(--space-md);
+    }
+  }
+
+  .work-card-info .label {
+    align-self: flex-start;
+  }
+
+  .work-card-info h3 {
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+  }
+
+  .work-card-info h3 a {
     color: var(--color-text);
-    text-decoration: none;
+    background-image: none;
+    transition: color var(--transition-fast);
   }
 
-  .home-work-info h3 a:hover {
+  .work-card-info h3 a:hover {
     color: var(--color-accent-interactive);
   }
 
-  .home-work-meta {
+  .work-card-meta {
+    font-size: 0.8rem;
+  }
+
+  .work-card-desc {
+    font-size: 0.95rem;
     color: var(--color-text-secondary);
+  }
+
+  .work-card-link {
     font-size: 0.875rem;
+    margin-top: var(--space-xs);
+  }
+
+  /* International presence */
+  .home-presence {
+    border-top: 1px solid var(--color-warm-grey);
+  }
+
+  .presence-grid {
+    display: grid;
+    gap: 0;
+    margin-top: var(--space-md);
+  }
+
+  @media (min-width: 48rem) {
+    .presence-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .presence-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .presence-item {
+    padding: var(--space-md);
+    border-bottom: 1px solid var(--color-warm-grey);
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  @media (min-width: 48rem) {
+    .presence-item {
+      border-bottom: none;
+      border-right: 1px solid var(--color-warm-grey);
+    }
+
+    .presence-item:last-child {
+      border-right: none;
+    }
+  }
+
+  .presence-place {
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--color-text);
+  }
+
+  .presence-detail {
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+  }
+
+  /* La Tulpa */
+  .home-tulpa {
+    border-top: 1px solid var(--color-warm-grey);
+  }
+
+  .tulpa-grid {
+    display: grid;
+    gap: var(--space-lg);
+    align-items: center;
+  }
+
+  @media (min-width: 48rem) {
+    .tulpa-grid {
+      grid-template-columns: 1.5fr 1fr;
+    }
+  }
+
+  .tulpa-main .marginalia {
+    display: block;
+    margin-bottom: var(--space-xs);
+  }
+
+  .tulpa-main p {
     margin-top: var(--space-sm);
+    max-width: 36rem;
+    color: var(--color-text-secondary);
+  }
+
+  .tulpa-aside .empty-media {
+    max-width: 16rem;
+    margin-left: auto;
+  }
+
+  /* Contact CTA */
+  .home-cta {
+    text-align: center;
+    border-top: 1px solid var(--color-warm-grey);
+  }
+
+  .home-cta .marginalia {
+    display: block;
+    margin-bottom: var(--space-xs);
+  }
+
+  .cta-text {
+    max-width: 32rem;
+    margin-inline: auto;
+    margin-top: var(--space-sm);
+    color: var(--color-text-secondary);
   }
 
   .cta-link {
     display: inline-block;
     margin-top: var(--space-md);
     font-family: var(--font-display);
-    font-size: 1.25rem;
+    font-size: 1rem;
     color: var(--color-accent-interactive);
-    text-decoration: none;
-    border-bottom: 1px solid var(--color-accent);
-    padding-bottom: 0.25rem;
+    background-image: none;
+    border-bottom: 2px solid var(--color-accent);
+    padding-bottom: 0.2rem;
     transition: color var(--transition-fast), border-color var(--transition-fast);
   }
 
@@ -170,15 +445,8 @@ import ImagePlaceholder from '../../components/ImagePlaceholder.astro';
     border-color: var(--color-accent-hover);
   }
 
-  .home-cta {
-    text-align: center;
-  }
-
-  .home-cta .accent-line {
-    margin-inline: auto;
-  }
-
-  .home-cta .prose {
-    margin-inline: auto;
+  .cta-link--large {
+    font-size: 1.35rem;
+    border-bottom-width: 3px;
   }
 </style>

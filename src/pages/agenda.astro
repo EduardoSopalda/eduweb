@@ -1,0 +1,129 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+---
+
+<Base
+  title="Agenda"
+  description="Funciones, giras y próximos proyectos de Manuel Monró y La Tulpa."
+>
+  <Hero title="Agenda" subtitle="Funciones y gira" height="section" />
+
+  <section class="section container">
+    <article class="agenda-obra reveal">
+      <div class="agenda-grid">
+        <div class="agenda-image">
+          <!-- PENDING FROM MANUEL: production photo -->
+          <div class="empty-media empty-media--landscape" aria-hidden="true"></div>
+        </div>
+        <div class="agenda-info">
+          <span class="label">En gira</span>
+          <h2><a href="/obra/ensayo-sobre-nadie">Ensayo sobre nadie</a></h2>
+          <p class="agenda-meta marginalia">2023 — Pieza breve de danza teatro</p>
+        </div>
+      </div>
+
+      <div class="agenda-dates reveal reveal-delay-1">
+        <h3 class="accent-underline">Funciones realizadas</h3>
+        <ul class="agenda-list">
+          <li>
+            <span class="agenda-date">Sep 2023</span>
+            <span class="agenda-venue">XVI Festival Internacional Escena Mobile, Teatro Alameda, Sevilla — <em>Estreno</em></span>
+          </li>
+          <li>
+            <span class="agenda-date">2024</span>
+            <span class="agenda-venue">Festival Kiada, Festival Internacional de Danza Accesible, Seúl, Corea — <em>Inauguración de la edición</em></span>
+          </li>
+          <li>
+            <span class="agenda-date">2024</span>
+            <span class="agenda-venue">Festival de Kirchheimbolanden, Alemania</span>
+          </li>
+          <li>
+            <span class="agenda-date">May 2025</span>
+            <span class="agenda-venue">Festival Madrid en Danza, BETA PUBLICA, XII Muestra Coreográfica Internacional, Teatros del Canal, Madrid</span>
+          </li>
+        </ul>
+      </div>
+      <!-- PENDING FROM MANUEL: upcoming performances, new projects, residencies -->
+    </article>
+  </section>
+</Base>
+
+<style>
+  .agenda-grid {
+    display: grid;
+    gap: var(--space-lg);
+  }
+
+  @media (min-width: 48rem) {
+    .agenda-grid {
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+    }
+  }
+
+  .agenda-image {
+    overflow: hidden;
+    border-radius: 2px;
+  }
+
+  .agenda-info .label {
+    margin-bottom: var(--space-sm);
+  }
+
+  .agenda-info h2 {
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+  }
+
+  .agenda-info h2 a {
+    color: var(--color-text);
+    background-image: none;
+  }
+
+  .agenda-info h2 a:hover {
+    color: var(--color-accent-interactive);
+  }
+
+  .agenda-meta {
+    margin-top: 0.25rem;
+  }
+
+  .agenda-dates {
+    margin-top: var(--space-xl);
+    padding-top: var(--space-lg);
+    border-top: 1px solid var(--color-warm-grey);
+  }
+
+  .agenda-dates h3 {
+    margin-bottom: var(--space-lg);
+  }
+
+  .agenda-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .agenda-list li {
+    display: grid;
+    grid-template-columns: 7rem 1fr;
+    gap: var(--space-sm);
+    padding-block: var(--space-sm);
+    border-bottom: 1px solid var(--color-warm-grey);
+  }
+
+  .agenda-date {
+    font-family: var(--font-mono);
+    font-weight: 500;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-accent-interactive);
+    padding-top: 0.15em;
+  }
+
+  .agenda-venue {
+    font-size: 0.95rem;
+  }
+</style>

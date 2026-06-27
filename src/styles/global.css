@@ -1,38 +1,54 @@
 /* ============================================
-   LA TULPA — Global Styles
+   MANUEL MONRÓ — Global Styles
    ============================================ */
 
 :root {
-  /* Color tokens */
   --color-base: #0B0B0D;
-  --color-base-raised: #141417;
+  --color-base-raised: #16151A;
+  --color-base-surface: #1E1D23;
+  --color-warm-grey: #2A2830;
+  --color-warm-grey-light: #3D3A45;
   --color-text: #ECE7DE;
   --color-text-secondary: #9E9890;
   --color-accent: #7A2222;
+  --color-accent-solid: #8B2E2E;
   --color-accent-interactive: #C44040;
   --color-accent-hover: #D45555;
   --color-focus-ring: #C44040;
 
-  /* Typography */
   --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
   --font-body: 'Source Sans 3', 'Source Sans Pro', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
 
-  /* Spacing scale */
   --space-xs: 0.5rem;
   --space-sm: 1rem;
   --space-md: 2rem;
   --space-lg: 4rem;
-  --space-xl: 6rem;
-  --space-2xl: 8rem;
+  --space-xl: 8rem;
+  --space-2xl: 12rem;
 
-  /* Layout */
   --max-width: 72rem;
   --content-width: 48rem;
 
-  /* Transitions */
   --transition-fast: 150ms ease;
   --transition-base: 300ms ease;
   --transition-slow: 600ms ease-out;
+
+  /* Chaos layout offsets — zeroed in calm mode */
+  --chaos-rotate: 0deg;
+  --chaos-shift-x: 0px;
+  --chaos-shift-y: 0px;
+  --chaos-scale: 1;
+  --grain-opacity: 0.035;
+}
+
+/* Chaos mode active (default for non-reduced-motion users) */
+html.chaos {
+  --chaos-rotate: 1deg;
+  --chaos-shift-x: 2vw;
+  --chaos-shift-y: 0.5rem;
+  --chaos-scale: 1;
+  --grain-opacity: 0.04;
 }
 
 /* ---- Reset ---- */
@@ -76,11 +92,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-img,
-picture,
-video,
-canvas,
-svg {
+img, picture, video, canvas, svg {
   display: block;
   max-width: 100%;
   height: auto;
@@ -88,13 +100,17 @@ svg {
 
 a {
   color: var(--color-accent-interactive);
-  text-decoration: underline;
-  text-underline-offset: 0.15em;
-  transition: color var(--transition-fast);
+  text-decoration: none;
+  background-image: linear-gradient(var(--color-accent), var(--color-accent));
+  background-size: 0% 2px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size var(--transition-base), color var(--transition-fast);
 }
 
 a:hover {
   color: var(--color-accent-hover);
+  background-size: 100% 2px;
 }
 
 a:focus-visible {
@@ -106,38 +122,23 @@ a:focus-visible {
 h1, h2, h3, h4 {
   font-family: var(--font-display);
   font-weight: 700;
-  line-height: 1.2;
+  line-height: 1.15;
   color: var(--color-text);
 }
 
-h1 {
-  font-size: clamp(2.25rem, 5vw, 4rem);
-  letter-spacing: -0.01em;
-}
+h1 { font-size: clamp(2.75rem, 6vw, 5rem); letter-spacing: -0.02em; }
+h2 { font-size: clamp(2rem, 4vw, 3.25rem); margin-bottom: var(--space-md); }
+h3 { font-size: clamp(1.25rem, 2.5vw, 1.75rem); margin-bottom: var(--space-sm); }
 
-h2 {
-  font-size: clamp(1.75rem, 3.5vw, 2.75rem);
-  margin-bottom: var(--space-md);
-}
-
-h3 {
-  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
-  margin-bottom: var(--space-sm);
-}
-
-p + p {
-  margin-top: var(--space-sm);
-}
-
-ul, ol {
-  padding-left: 1.5em;
-}
+p + p { margin-top: var(--space-sm); }
+ul, ol { padding-left: 1.5em; }
 
 blockquote {
-  border-left: 3px solid var(--color-accent);
+  border-left: 4px solid var(--color-accent-solid);
   padding-left: var(--space-md);
   font-style: italic;
-  color: var(--color-text-secondary);
+  color: var(--color-text);
+  font-family: var(--font-display);
 }
 
 /* ---- Skip link ---- */
@@ -152,14 +153,13 @@ blockquote {
   z-index: 1000;
   font-weight: 600;
   text-decoration: none;
+  background-image: none;
   border-radius: 0 0 4px 4px;
 }
 
-.skip-link:focus {
-  top: 0;
-}
+.skip-link:focus { top: 0; }
 
-/* ---- Layout utilities ---- */
+/* ---- Layout ---- */
 
 .container {
   width: 100%;
@@ -169,9 +169,7 @@ blockquote {
 }
 
 @media (min-width: 48rem) {
-  .container {
-    padding-inline: var(--space-md);
-  }
+  .container { padding-inline: var(--space-md); }
 }
 
 .section {
@@ -179,49 +177,123 @@ blockquote {
 }
 
 @media (min-width: 48rem) {
-  .section {
-    padding-block: var(--space-2xl);
-  }
+  .section { padding-block: var(--space-2xl); }
 }
 
 .prose {
   max-width: var(--content-width);
 }
 
-.prose p,
-.prose ul,
-.prose ol,
-.prose blockquote {
+.prose p, .prose ul, .prose ol, .prose blockquote {
   margin-bottom: var(--space-sm);
 }
 
-/* ---- Decorative line ---- */
+/* ---- Accent underline ---- */
 
-.accent-line {
-  display: block;
-  width: 3rem;
-  height: 2px;
-  background-color: var(--color-accent);
-  margin-bottom: var(--space-md);
+.accent-underline {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 0.35em;
 }
 
-/* ---- Placeholder markers ---- */
+.accent-underline::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 2.5em;
+  height: 4px;
+  background-color: var(--color-accent-solid);
+}
 
-.placeholder {
-  border: 1px dashed var(--color-accent);
-  padding: var(--space-md);
-  border-radius: 4px;
+/* ---- Label ---- */
+
+.label {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--color-text);
+  background-color: var(--color-accent-solid);
+  padding: 0.3em 0.8em;
+  border-radius: 2px;
+}
+
+.label--outline {
+  background: none;
+  border: 1px solid var(--color-accent-interactive);
+  color: var(--color-accent-interactive);
+}
+
+/* ---- Marginalia (monospaced annotation) ---- */
+
+.marginalia {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.5;
   color: var(--color-text-secondary);
-  font-style: italic;
-  background-color: var(--color-base-raised);
+  letter-spacing: -0.02em;
+  opacity: 0.7;
 }
 
-/* ---- Scroll reveal animations ---- */
+.marginalia--accent {
+  color: var(--color-accent-interactive);
+  opacity: 0.5;
+}
+
+.marginalia--large {
+  font-size: 0.875rem;
+}
+
+/* Chaos-only: offset marginalia */
+html.chaos .marginalia--offset {
+  transform: translateX(var(--chaos-shift-x)) rotate(calc(var(--chaos-rotate) * -1));
+}
+
+/* ---- Broken grid (chaos mode) ---- */
+
+html.chaos .chaos-tilt {
+  transform: rotate(calc(var(--chaos-rotate) * -0.5));
+}
+
+html.chaos .chaos-shift {
+  transform: translateX(calc(var(--chaos-shift-x) * -1));
+}
+
+html.chaos .chaos-overlap {
+  margin-top: calc(var(--space-lg) * -0.5);
+  position: relative;
+  z-index: 2;
+}
+
+html:not(.chaos) .chaos-tilt,
+html:not(.chaos) .chaos-shift,
+html:not(.chaos) .chaos-overlap {
+  transform: none;
+  margin-top: 0;
+}
+
+/* ---- Film grain overlay ---- */
+
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: var(--grain-opacity);
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+}
+
+/* ---- Scroll reveal ---- */
 
 .reveal {
   opacity: 0;
-  transform: translateY(1.5rem);
-  transition: opacity var(--transition-slow), transform var(--transition-slow);
+  transform: translateY(2rem);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 
 .reveal.is-visible {
@@ -229,14 +301,20 @@ blockquote {
   transform: translateY(0);
 }
 
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
 @media (prefers-reduced-motion: reduce) {
   .reveal {
     opacity: 1;
     transform: none;
+    transition: none;
   }
 }
 
-/* ---- Focus visible for interactive elements ---- */
+/* ---- Focus ---- */
 
 button:focus-visible,
 [role="button"]:focus-visible,
@@ -256,10 +334,113 @@ select:focus-visible {
   border-radius: 2px;
 }
 
-.img-portrait {
+.empty-media {
   width: 100%;
-  max-width: 28rem;
-  aspect-ratio: 3 / 4;
-  object-fit: cover;
   border-radius: 2px;
+  background:
+    radial-gradient(ellipse at 40% 50%, #1a1520 0%, transparent 60%),
+    linear-gradient(165deg, #0f0e12, #0B0B0D 50%, #100d14);
+}
+
+.empty-media--landscape { aspect-ratio: 16 / 10; }
+.empty-media--portrait { aspect-ratio: 3 / 4; }
+.empty-media--square { aspect-ratio: 1 / 1; }
+
+/* ---- Easter egg: name glitch on hover ---- */
+
+html.chaos .glitch-name {
+  position: relative;
+  display: inline-block;
+  cursor: default;
+}
+
+html.chaos .glitch-name:hover {
+  animation: glitch 0.3s steps(2) 1;
+}
+
+@keyframes glitch {
+  0% { transform: none; text-shadow: none; }
+  25% { transform: translateX(-2px) skewX(-1deg); text-shadow: 2px 0 var(--color-accent), -2px 0 var(--color-accent-interactive); }
+  50% { transform: translateX(1px) skewX(0.5deg); text-shadow: -1px 0 var(--color-accent-interactive), 1px 0 var(--color-accent); }
+  75% { transform: translateX(-1px); text-shadow: 1px 0 var(--color-accent); }
+  100% { transform: none; text-shadow: none; }
+}
+
+html:not(.chaos) .glitch-name:hover {
+  animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.chaos .glitch-name:hover {
+    animation: none;
+  }
+}
+
+/* ---- Cursor trail (chaos mode, pointer devices) ---- */
+
+.cursor-dot {
+  position: fixed;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--color-accent-interactive);
+  pointer-events: none;
+  z-index: 9998;
+  opacity: 0;
+  transition: opacity 0.3s;
+  mix-blend-mode: screen;
+}
+
+html.chaos .cursor-dot {
+  opacity: 0.4;
+}
+
+@media (pointer: coarse) {
+  .cursor-dot { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cursor-dot { display: none; }
+}
+
+/* ---- Hidden manifesto ---- */
+
+.manifesto {
+  position: fixed;
+  bottom: var(--space-sm);
+  right: var(--space-sm);
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: var(--color-warm-grey);
+  opacity: 0;
+  transition: opacity 0.6s;
+  pointer-events: none;
+  max-width: 18rem;
+  text-align: right;
+  line-height: 1.6;
+  z-index: 50;
+}
+
+html.chaos .manifesto {
+  opacity: 0.15;
+}
+
+html.chaos .manifesto:hover {
+  opacity: 0.6;
+  pointer-events: auto;
+}
+
+/* ---- View Transitions ---- */
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.3s;
+  animation-timing-function: ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+  }
 }

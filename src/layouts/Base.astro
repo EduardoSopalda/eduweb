@@ -1,4 +1,5 @@
 ---
+import { ClientRouter } from 'astro:transitions';
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
@@ -23,42 +24,101 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
-    <title>{title} — La Tulpa</title>
+    <title>{title} — Manuel Monró</title>
     <link rel="canonical" href={canonicalUrl.href} />
     <link rel="alternate" hreflang={alternateLang} href={new URL(alternateUrl, Astro.site).href} />
     <link rel="alternate" hreflang={lang} href={canonicalUrl.href} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap"
       rel="stylesheet"
     />
+    <script is:inline>
+      (function() {
+        var stored = localStorage.getItem('calm-mode');
+        var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var calm = stored === 'true' || (stored === null && prefersReduced);
+        if (!calm) document.documentElement.classList.add('chaos');
+      })();
+    </script>
+    <ClientRouter />
   </head>
   <body>
+    <div class="grain" aria-hidden="true"></div>
     <a class="skip-link" href="#main-content">{t('skip.link')}</a>
     <Header />
     <main id="main-content" tabindex="-1">
       <slot />
     </main>
     <Footer />
+    <div class="cursor-dot" aria-hidden="true"></div>
+    <div class="manifesto" aria-hidden="true">
+      {lang === 'es'
+        ? 'El cuerpo piensa. El pensamiento se mueve. Lo siniestro es inofensivo. Lo inofensivo es siniestro. Cada función es la primera. Cada función es la última.'
+        : 'The body thinks. Thought moves. The sinister is harmless. The harmless is sinister. Every performance is the first. Every performance is the last.'}
+    </div>
     <script>
-      const reveals = document.querySelectorAll('.reveal');
-      if (window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
-        const observer = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                entry.target.classList.add('is-visible');
-                observer.unobserve(entry.target);
-              }
-            });
-          },
-          { threshold: 0.15 }
-        );
-        reveals.forEach((el) => observer.observe(el));
-      } else {
-        reveals.forEach((el) => el.classList.add('is-visible'));
+      function initReveals() {
+        const reveals = document.querySelectorAll('.reveal:not(.is-visible)');
+        if (window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+          const observer = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  entry.target.classList.add('is-visible');
+                  observer.unobserve(entry.target);
+                }
+              });
+            },
+            { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+          );
+          reveals.forEach((el) => observer.observe(el));
+        } else {
+          reveals.forEach((el) => el.classList.add('is-visible'));
+        }
       }
+
+      function initCalmToggle() {
+        const btn = document.querySelector('.calm-toggle') as HTMLButtonElement;
+        if (!btn) return;
+
+        const isChaos = document.documentElement.classList.contains('chaos');
+        btn.setAttribute('aria-pressed', String(!isChaos));
+
+        btn.addEventListener('click', () => {
+          const wasCalm = btn.getAttribute('aria-pressed') === 'true';
+          const nowCalm = !wasCalm;
+          btn.setAttribute('aria-pressed', String(nowCalm));
+          document.documentElement.classList.toggle('chaos', !nowCalm);
+          localStorage.setItem('calm-mode', String(nowCalm));
+        });
+      }
+
+      function initCursorTrail() {
+        const dot = document.querySelector('.cursor-dot') as HTMLElement;
+        if (!dot || window.matchMedia('(pointer: coarse)').matches) return;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+        let x = 0, y = 0, dx = 0, dy = 0;
+        document.addEventListener('mousemove', (e) => { x = e.clientX; y = e.clientY; });
+
+        function tick() {
+          dx += (x - dx) * 0.15;
+          dy += (y - dy) * 0.15;
+          dot.style.transform = `translate(${dx - 3}px, ${dy - 3}px)`;
+          requestAnimationFrame(tick);
+        }
+        tick();
+      }
+
+      initReveals();
+      initCalmToggle();
+      initCursorTrail();
+      document.addEventListener('astro:after-swap', () => {
+        initReveals();
+        initCalmToggle();
+      });
     </script>
   </body>
 </html>

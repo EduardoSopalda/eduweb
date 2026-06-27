@@ -1,0 +1,122 @@
+---
+import Base from '../../../layouts/Base.astro';
+import Hero from '../../../components/Hero.astro';
+---
+
+<Base
+  title="La Tulpa"
+  description="La Tulpa, Manuel Monró's dance company. Founded in 2023 in collaboration with Danza Mobile, Seville."
+>
+  <Hero
+    title="La Tulpa"
+    subtitle="Dance company"
+    phrase="A thought made body."
+    height="section"
+  />
+
+  <section class="section container" aria-labelledby="tulpa-about">
+    <div class="tulpa-grid">
+      <div class="tulpa-main reveal">
+        <h2 id="tulpa-about" class="accent-underline">The company</h2>
+        <div class="prose">
+          <p>
+            La Tulpa was born in 2023 from the hand of Manuel Monró, at the heart of the Escena Mobile International Festival of Art and Diversity in Seville. It is not a company that illustrates themes. It is a place where the body investigates what words cannot reach.
+          </p>
+          <p>
+            Contemporary dance, dance theatre. Simple, precise movement. A chiaroscuro aesthetic that seeks the half-light to look more carefully.
+          </p>
+          <p>
+            The company works in collaboration with Danza Mobile, a creative centre that has been part of the cultural and social fabric of Seville for over two decades.
+          </p>
+          <!-- PENDING FROM MANUEL: extended company description, artistic vision statement -->
+        </div>
+      </div>
+
+      <aside class="tulpa-aside reveal reveal-delay-1">
+        <div class="tulpa-meta">
+          <dl class="tulpa-facts">
+            <div class="tulpa-fact">
+              <dt class="marginalia">Artistic direction</dt>
+              <dd><a href="/en/sobre">Manuel Monró</a></dd>
+            </div>
+            <div class="tulpa-fact">
+              <dt class="marginalia">Founded</dt>
+              <dd>2023, Seville</dd>
+            </div>
+            <div class="tulpa-fact">
+              <dt class="marginalia">Collaboration</dt>
+              <dd>Danza Mobile</dd>
+            </div>
+            <div class="tulpa-fact">
+              <dt class="marginalia">Disciplines</dt>
+              <dd>Contemporary dance, dance theatre, inclusive creation</dd>
+            </div>
+          </dl>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section container" aria-labelledby="tulpa-obra">
+    <div class="reveal">
+      <h2 id="tulpa-obra" class="accent-underline">Work</h2>
+      <p class="prose">
+        All pieces produced under La Tulpa.
+      </p>
+      <a href="/en/obra" class="cta-link">See work &rarr;</a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .tulpa-grid {
+    display: grid;
+    gap: var(--space-lg);
+  }
+
+  @media (min-width: 48rem) {
+    .tulpa-grid {
+      grid-template-columns: 2fr 1fr;
+      align-items: start;
+    }
+  }
+
+  .tulpa-meta {
+    background-color: var(--color-base-raised);
+    padding: var(--space-md);
+    border-radius: 2px;
+    border-left: 3px solid var(--color-accent-solid);
+  }
+
+  .tulpa-facts {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .tulpa-fact dt {
+    margin-bottom: 0.2rem;
+  }
+
+  .tulpa-fact dd {
+    font-size: 0.95rem;
+    color: var(--color-text);
+  }
+
+  .cta-link {
+    display: inline-block;
+    margin-top: var(--space-md);
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    color: var(--color-accent-interactive);
+    background-image: none;
+    border-bottom: 3px solid var(--color-accent);
+    padding-bottom: 0.25rem;
+    transition: color var(--transition-fast), border-color var(--transition-fast);
+  }
+
+  .cta-link:hover {
+    color: var(--color-accent-hover);
+    border-color: var(--color-accent-hover);
+  }
+</style>

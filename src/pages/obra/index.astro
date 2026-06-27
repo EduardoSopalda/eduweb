@@ -1,0 +1,133 @@
+---
+import Base from '../../layouts/Base.astro';
+import Hero from '../../components/Hero.astro';
+import { getCollection } from 'astro:content';
+
+const obras = (await getCollection('obras')).sort((a, b) => a.data.order - b.data.order);
+---
+
+<Base
+  title="Obra"
+  description="Obra de Manuel Monró — coreografías, piezas de danza teatro y creación escénica."
+>
+  <Hero title="Obra" subtitle="Cuerpo de trabajo" height="section" />
+
+  <section class="section container">
+    <div class="obra-intro reveal">
+      <p class="prose">
+        Piezas creadas desde La Tulpa, compañía de danza fundada por Manuel Monró en 2023 en colaboración con Danza Mobile, Sevilla.
+      </p>
+      <a href="/obra/la-tulpa" class="tulpa-link marginalia">Sobre La Tulpa &rarr;</a>
+    </div>
+
+    <div class="obras-list">
+      {obras.map((obra, i) => (
+        <article class:list={['obra-card', 'reveal', `reveal-delay-${Math.min(i + 1, 4)}`]}>
+          <a href={`/obra/${obra.data.slug}`} class="obra-card-link">
+            <div class="obra-card-image">
+              {obra.data.image
+                ? <img src={obra.data.image} alt={obra.data.title} loading="lazy" class="obra-card-img" />
+                : <div class="empty-media empty-media--landscape" aria-hidden="true"></div>
+              }
+              <div class="obra-card-overlay">
+                <span class="label">{obra.data.year}</span>
+              </div>
+            </div>
+            <div class="obra-card-info">
+              <h2>{obra.data.title}</h2>
+              <p class="obra-card-meta marginalia">{obra.data.type}</p>
+              {obra.data.touring && (
+                <span class="label label--outline">En gira</span>
+              )}
+            </div>
+          </a>
+        </article>
+      ))}
+    </div>
+  </section>
+</Base>
+
+<style>
+  .obra-intro {
+    margin-bottom: var(--space-lg);
+  }
+
+  .tulpa-link {
+    display: inline-block;
+    margin-top: var(--space-sm);
+    font-size: 0.8rem;
+  }
+
+  .obras-list {
+    display: grid;
+    gap: var(--space-lg);
+  }
+
+  @media (min-width: 48rem) {
+    .obras-list {
+      grid-template-columns: repeat(auto-fill, minmax(28rem, 1fr));
+    }
+  }
+
+  .obra-card-link {
+    display: block;
+    color: inherit;
+    background-image: none;
+    border-radius: 2px;
+    overflow: hidden;
+    background-color: var(--color-base-raised);
+    transition: background-color var(--transition-fast);
+  }
+
+  .obra-card-link:hover {
+    background-color: var(--color-base-surface);
+    background-image: none;
+  }
+
+  .obra-card-link:hover h2 {
+    color: var(--color-accent-interactive);
+  }
+
+  .obra-card-image {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .obra-card-img {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    transition: transform 0.8s ease-out;
+  }
+
+  .obra-card-image .empty-media {
+    transition: transform 0.8s ease-out;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .obra-card-link:hover .obra-card-img,
+    .obra-card-link:hover .empty-media {
+      transform: scale(1.05);
+    }
+  }
+
+  .obra-card-overlay {
+    position: absolute;
+    bottom: var(--space-sm);
+    left: var(--space-sm);
+  }
+
+  .obra-card-info {
+    padding: var(--space-md);
+  }
+
+  .obra-card-info h2 {
+    font-size: 1.5rem;
+    margin-bottom: 0.25rem;
+    transition: color var(--transition-fast);
+  }
+
+  .obra-card-meta {
+    margin-bottom: var(--space-xs);
+  }
+</style>

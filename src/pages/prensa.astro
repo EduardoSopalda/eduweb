@@ -1,40 +1,35 @@
 ---
 import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
 ---
 
 <Base
   title="Prensa"
-  description="Reseñas y notas de prensa sobre La Tulpa y las obras de Manuel Monró."
+  description="Reseñas y notas de prensa sobre el trabajo de Manuel Monró y La Tulpa."
 >
-  <section class="section container">
-    <span class="accent-line"></span>
-    <h1>Prensa</h1>
+  <Hero title="Prensa" height="section" />
 
+  <section class="section container">
     <div class="prose reveal">
       <p>
-        Fragmentos seleccionados de reseñas y notas de medios sobre el trabajo de La Tulpa.
+        Fragmentos seleccionados de reseñas y notas de medios sobre el trabajo de Manuel Monró y La Tulpa.
       </p>
     </div>
 
     <div class="press-list">
-      <article class="press-item reveal">
+      <article class="press-item reveal reveal-delay-1">
         <blockquote>
           <p>
             &laquo;La estética puede resultar siniestra, pero estos seres son inofensivos.&raquo;
           </p>
         </blockquote>
-        <p class="press-source">
+        <p class="press-source marginalia">
           Reseña de <em>Ensayo sobre nadie</em>, a raíz de su estreno en la XVI edición del Festival Escena Mobile, Sevilla, 2023.
         </p>
-        <p class="placeholder">
-          [Pendiente: autor y medio de la reseña, para acreditar correctamente. Edu facilitará el texto completo. Enlace al artículo original cuando esté disponible.]
-        </p>
+        <!-- PENDING: author and publication for proper attribution -->
       </article>
     </div>
-
-    <div class="placeholder reveal" style="margin-top: var(--space-lg);">
-      [Pendiente: más reseñas y notas de prensa. Este apartado se ampliará con los recortes que facilite Manuel.]
-    </div>
+    <!-- PENDING: additional reviews and press coverage -->
   </section>
 </Base>
 
@@ -48,20 +43,16 @@ import Base from '../layouts/Base.astro';
 
   .press-item blockquote {
     font-family: var(--font-display);
-    font-size: clamp(1.25rem, 2.5vw, 1.75rem);
-    border-left: 3px solid var(--color-accent);
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    border-left: 3px solid var(--color-accent-solid);
     padding-left: var(--space-md);
     color: var(--color-text);
     font-style: italic;
-    margin-bottom: var(--space-sm);
+    margin-bottom: var(--space-md);
+    line-height: 1.4;
   }
 
   .press-source {
-    color: var(--color-text-secondary);
-    font-size: 0.875rem;
-  }
-
-  .press-source em {
-    font-style: italic;
+    padding-left: calc(var(--space-md) + 3px);
   }
 </style>

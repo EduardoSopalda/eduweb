@@ -346,6 +346,90 @@ select:focus-visible {
 .empty-media--portrait { aspect-ratio: 3 / 4; }
 .empty-media--square { aspect-ratio: 1 / 1; }
 
+/* ---- Easter egg: name glitch on hover ---- */
+
+html.chaos .glitch-name {
+  position: relative;
+  display: inline-block;
+  cursor: default;
+}
+
+html.chaos .glitch-name:hover {
+  animation: glitch 0.3s steps(2) 1;
+}
+
+@keyframes glitch {
+  0% { transform: none; text-shadow: none; }
+  25% { transform: translateX(-2px) skewX(-1deg); text-shadow: 2px 0 var(--color-accent), -2px 0 var(--color-accent-interactive); }
+  50% { transform: translateX(1px) skewX(0.5deg); text-shadow: -1px 0 var(--color-accent-interactive), 1px 0 var(--color-accent); }
+  75% { transform: translateX(-1px); text-shadow: 1px 0 var(--color-accent); }
+  100% { transform: none; text-shadow: none; }
+}
+
+html:not(.chaos) .glitch-name:hover {
+  animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.chaos .glitch-name:hover {
+    animation: none;
+  }
+}
+
+/* ---- Cursor trail (chaos mode, pointer devices) ---- */
+
+.cursor-dot {
+  position: fixed;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--color-accent-interactive);
+  pointer-events: none;
+  z-index: 9998;
+  opacity: 0;
+  transition: opacity 0.3s;
+  mix-blend-mode: screen;
+}
+
+html.chaos .cursor-dot {
+  opacity: 0.4;
+}
+
+@media (pointer: coarse) {
+  .cursor-dot { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cursor-dot { display: none; }
+}
+
+/* ---- Hidden manifesto ---- */
+
+.manifesto {
+  position: fixed;
+  bottom: var(--space-sm);
+  right: var(--space-sm);
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: var(--color-warm-grey);
+  opacity: 0;
+  transition: opacity 0.6s;
+  pointer-events: none;
+  max-width: 18rem;
+  text-align: right;
+  line-height: 1.6;
+  z-index: 50;
+}
+
+html.chaos .manifesto {
+  opacity: 0.15;
+}
+
+html.chaos .manifesto:hover {
+  opacity: 0.6;
+  pointer-events: auto;
+}
+
 /* ---- View Transitions ---- */
 
 ::view-transition-old(root),

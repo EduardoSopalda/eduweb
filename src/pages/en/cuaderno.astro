@@ -1,0 +1,124 @@
+---
+import Base from '../../layouts/Base.astro';
+import Hero from '../../components/Hero.astro';
+---
+
+<Base
+  title="Notebook"
+  description="Process notes, images and fragments from Manuel Monró's creative work."
+>
+  <Hero title="Notebook" height="section" />
+
+  <section class="section container" aria-labelledby="cuaderno-heading">
+    <div class="cuaderno-intro reveal">
+      <h2 id="cuaderno-heading" class="sr-only">Process notebook</h2>
+      <p class="cuaderno-lead">
+        Process notes. Images that never made it to a programme. Fragments of something that doesn't yet have a name.
+      </p>
+    </div>
+
+    <div class="cuaderno-grid">
+      <article class="cuaderno-entry reveal reveal-delay-1 chaos-tilt">
+        <div class="empty-media empty-media--landscape" aria-hidden="true"></div>
+        <div class="cuaderno-entry-text">
+          <span class="marginalia marginalia--accent">Rehearsal</span>
+          <p>The body thinks before the word does. Sometimes movement arrives and understanding follows.</p>
+        </div>
+      </article>
+
+      <article class="cuaderno-entry cuaderno-entry--text-only reveal reveal-delay-2">
+        <blockquote class="cuaderno-fragment">
+          <p>&ldquo;Almost no one asks whether what can be seen, what can be heard, or what is held back is more real.&rdquo;</p>
+        </blockquote>
+        <span class="marginalia">— <em>Ensayo sobre nadie</em></span>
+      </article>
+
+      <article class="cuaderno-entry reveal reveal-delay-3 chaos-shift">
+        <div class="empty-media empty-media--square" aria-hidden="true"></div>
+        <div class="cuaderno-entry-text">
+          <span class="marginalia marginalia--accent">Process</span>
+          <p>Half-light is not the absence of light. It is another way of looking.</p>
+        </div>
+      </article>
+    </div>
+    <!-- PENDING FROM MANUEL: process photos, rehearsal notes, writing fragments -->
+  </section>
+</Base>
+
+<style>
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .cuaderno-lead {
+    font-family: var(--font-display);
+    font-size: clamp(1.25rem, 3vw, 2rem);
+    font-weight: 400;
+    font-style: italic;
+    line-height: 1.4;
+    color: var(--color-text);
+    max-width: var(--content-width);
+    margin-bottom: var(--space-xl);
+  }
+
+  .cuaderno-grid {
+    display: grid;
+    gap: var(--space-lg);
+  }
+
+  @media (min-width: 48rem) {
+    .cuaderno-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .cuaderno-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .cuaderno-entry {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .cuaderno-entry-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .cuaderno-entry-text p {
+    font-size: 0.95rem;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+  }
+
+  .cuaderno-entry--text-only {
+    background-color: var(--color-base-raised);
+    padding: var(--space-md);
+    border-left: 3px solid var(--color-accent-solid);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: var(--space-sm);
+  }
+
+  .cuaderno-fragment {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    font-style: italic;
+    color: var(--color-text);
+    line-height: 1.5;
+  }
+</style>

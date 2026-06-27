@@ -52,6 +52,12 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
       <slot />
     </main>
     <Footer />
+    <div class="cursor-dot" aria-hidden="true"></div>
+    <div class="manifesto" aria-hidden="true">
+      {lang === 'es'
+        ? 'El cuerpo piensa. El pensamiento se mueve. Lo siniestro es inofensivo. Lo inofensivo es siniestro. Cada función es la primera. Cada función es la última.'
+        : 'The body thinks. Thought moves. The sinister is harmless. The harmless is sinister. Every performance is the first. Every performance is the last.'}
+    </div>
     <script>
       function initReveals() {
         const reveals = document.querySelectorAll('.reveal:not(.is-visible)');
@@ -89,8 +95,26 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
         });
       }
 
+      function initCursorTrail() {
+        const dot = document.querySelector('.cursor-dot') as HTMLElement;
+        if (!dot || window.matchMedia('(pointer: coarse)').matches) return;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+        let x = 0, y = 0, dx = 0, dy = 0;
+        document.addEventListener('mousemove', (e) => { x = e.clientX; y = e.clientY; });
+
+        function tick() {
+          dx += (x - dx) * 0.15;
+          dy += (y - dy) * 0.15;
+          dot.style.transform = `translate(${dx - 3}px, ${dy - 3}px)`;
+          requestAnimationFrame(tick);
+        }
+        tick();
+      }
+
       initReveals();
       initCalmToggle();
+      initCursorTrail();
       document.addEventListener('astro:after-swap', () => {
         initReveals();
         initCalmToggle();

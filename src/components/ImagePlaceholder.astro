@@ -1,0 +1,43 @@
+---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+interface Props {
+  aspect?: '16/9' | '3/4' | '1/1';
+  label?: string;
+  class?: string;
+}
+
+const { aspect = '16/9', label, class: className } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const displayLabel = label || t('placeholder.image');
+---
+
+<div
+  class:list={['image-placeholder', className]}
+  style={`aspect-ratio: ${aspect}`}
+  role="img"
+  aria-label={displayLabel}
+>
+  <span class="image-placeholder-text">{displayLabel}</span>
+</div>
+
+<style>
+  .image-placeholder {
+    width: 100%;
+    background-color: var(--color-base-raised);
+    border: 1px dashed var(--color-accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 2px;
+  }
+
+  .image-placeholder-text {
+    color: var(--color-text-secondary);
+    font-style: italic;
+    font-size: 0.875rem;
+    padding: var(--space-sm);
+    text-align: center;
+  }
+</style>

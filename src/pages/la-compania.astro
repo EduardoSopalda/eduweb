@@ -1,0 +1,52 @@
+---
+import Base from '../layouts/Base.astro';
+import ImagePlaceholder from '../components/ImagePlaceholder.astro';
+---
+
+<Base
+  title="La compañía"
+  description="La Tulpa, compañía de danza contemporánea y danza teatro fundada en 2023 por Manuel Monró. Creación inclusiva desde Sevilla y Barcelona."
+>
+  <article class="section container">
+    <div class="prose">
+      <span class="accent-line"></span>
+      <h1>La compañía</h1>
+
+      <div class="reveal">
+        <p>
+          La Tulpa nace en 2023. No surge de un plan, sino de un encuentro: el de Manuel Monró con el XVI Festival Internacional Escena Mobile de Arte y Diversidad, en Sevilla. Un festival que desde 2007 abre espacio a las artes inclusivas y a todo lo que la escena convencional deja fuera.
+        </p>
+        <p>
+          De ese encuentro sale <em>Ensayo sobre nadie</em>, la primera pieza de la compañía. Y de esa pieza, una forma de trabajar: danza contemporánea y danza teatro, movimiento simple y preciso, investigación escénica, una estética de claroscuro donde la penumbra no esconde sino que invita a mirar más despacio.
+        </p>
+      </div>
+
+      <div class="reveal">
+        <ImagePlaceholder
+          aspect="16/9"
+          label="[Fotografía de la compañía en escena — pendiente de Manuel]"
+        />
+      </div>
+
+      <div class="reveal">
+        <h2>El nombre</h2>
+        <p>
+          En la tradición tibetana, una tulpa es un ser que cobra forma a través del pensamiento y la voluntad. Un pensamiento que se hace cuerpo. La imagen encaja con la poética de la compañía: cuerpos que piensan, pensamiento que se mueve.
+        </p>
+        <p class="placeholder">
+          [Nota para Manuel: confirmar el sentido que le das al nombre. ¿Es este el origen que te interesa o hay otra lectura?]
+        </p>
+      </div>
+
+      <div class="reveal">
+        <h2>Lenguaje</h2>
+        <p>
+          La Tulpa trabaja en el territorio de la creación inclusiva. No como tema, sino como forma. Lo que ocurre en escena nace de la diferencia: de cuerpos distintos que se encuentran, se escuchan, se transforman. Cada pieza es una investigación. Cada función, un acto de presencia.
+        </p>
+        <p>
+          La compañía se mueve entre Barcelona y Sevilla. Ha girado por España, Corea del Sur y Alemania. Trabaja en estrecha relación con la Compañía Danza Mobile de Sevilla y con el circuito internacional de la danza accesible.
+        </p>
+      </div>
+    </div>
+  </article>
+</Base>

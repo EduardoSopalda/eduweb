@@ -1,0 +1,204 @@
+---
+import { getLangFromUrl, useTranslations, getLocalePath, getAlternateUrl, getAlternateLang } from '../i18n/utils';
+import { languages } from '../i18n/ui';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const alternateLang = getAlternateLang(lang);
+const alternateUrl = getAlternateUrl(Astro.url, lang);
+
+const navItems = [
+  { label: t('nav.company'), href: getLocalePath('/la-compania', lang) },
+  { label: t('nav.creator'), href: getLocalePath('/manuel-monro', lang) },
+  { label: t('nav.works'), href: getLocalePath('/obras', lang) },
+  { label: t('nav.touring'), href: getLocalePath('/en-gira', lang) },
+  { label: t('nav.press'), href: getLocalePath('/prensa', lang) },
+  { label: t('nav.contact'), href: getLocalePath('/contacto', lang) },
+];
+---
+
+<header class="site-header" role="banner">
+  <div class="header-inner container">
+    <a href={getLocalePath('/', lang)} class="site-logo" aria-label="La Tulpa — Inicio">
+      La Tulpa
+    </a>
+    <nav class="site-nav" aria-label={lang === 'es' ? 'Navegación principal' : 'Main navigation'}>
+      <button
+        class="nav-toggle"
+        aria-expanded="false"
+        aria-controls="nav-menu"
+        aria-label={t('nav.menu')}
+        type="button"
+      >
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+      </button>
+      <ul id="nav-menu" class="nav-list" role="list">
+        {navItems.map((item) => (
+          <li>
+            <a href={item.href} class="nav-link">{item.label}</a>
+          </li>
+        ))}
+        <li class="nav-lang">
+          <a href={alternateUrl} class="nav-link" lang={alternateLang} hreflang={alternateLang}>
+            {languages[alternateLang]}
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const toggle = document.querySelector('.nav-toggle') as HTMLButtonElement;
+  const menu = document.getElementById('nav-menu') as HTMLUListElement;
+
+  toggle?.addEventListener('click', () => {
+    const expanded = toggle.getAttribute('aria-expanded') === 'true';
+    toggle.setAttribute('aria-expanded', String(!expanded));
+    menu.classList.toggle('is-open');
+
+    if (!expanded) {
+      const firstLink = menu.querySelector('a');
+      firstLink?.focus();
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && menu.classList.contains('is-open')) {
+      toggle.setAttribute('aria-expanded', 'false');
+      menu.classList.remove('is-open');
+      toggle.focus();
+    }
+  });
+</script>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: rgba(11, 11, 13, 0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--color-accent);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-block: var(--space-sm);
+  }
+
+  .site-logo {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-text);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+  }
+
+  .site-logo:hover {
+    color: var(--color-accent-interactive);
+  }
+
+  .nav-toggle {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: var(--space-xs);
+  }
+
+  .nav-toggle-bar {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background-color: var(--color-text);
+    transition: transform var(--transition-fast), opacity var(--transition-fast);
+  }
+
+  .nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  .nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  .nav-list {
+    display: none;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .nav-list.is-open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: var(--color-base);
+    border-bottom: 1px solid var(--color-accent);
+    padding: var(--space-sm);
+    gap: var(--space-xs);
+  }
+
+  .nav-link {
+    color: var(--color-text);
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: var(--space-xs) 0;
+    display: block;
+    transition: color var(--transition-fast);
+  }
+
+  .nav-link:hover {
+    color: var(--color-accent-interactive);
+  }
+
+  .nav-lang {
+    border-top: 1px solid var(--color-accent);
+    padding-top: var(--space-xs);
+    margin-top: var(--space-xs);
+  }
+
+  @media (min-width: 64rem) {
+    .nav-toggle {
+      display: none;
+    }
+
+    .nav-list {
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+    }
+
+    .nav-list.is-open {
+      position: static;
+      flex-direction: row;
+      background: none;
+      border: none;
+      padding: 0;
+    }
+
+    .nav-lang {
+      border-top: none;
+      padding-top: 0;
+      margin-top: 0;
+      border-left: 1px solid var(--color-accent);
+      padding-left: var(--space-md);
+    }
+  }
+</style>

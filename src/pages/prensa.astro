@@ -1,0 +1,67 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base
+  title="Prensa"
+  description="Reseñas y notas de prensa sobre La Tulpa y las obras de Manuel Monró."
+>
+  <section class="section container">
+    <span class="accent-line"></span>
+    <h1>Prensa</h1>
+
+    <div class="prose reveal">
+      <p>
+        Fragmentos seleccionados de reseñas y notas de medios sobre el trabajo de La Tulpa.
+      </p>
+    </div>
+
+    <div class="press-list">
+      <article class="press-item reveal">
+        <blockquote>
+          <p>
+            &laquo;La estética puede resultar siniestra, pero estos seres son inofensivos.&raquo;
+          </p>
+        </blockquote>
+        <p class="press-source">
+          Reseña de <em>Ensayo sobre nadie</em>, a raíz de su estreno en la XVI edición del Festival Escena Mobile, Sevilla, 2023.
+        </p>
+        <p class="placeholder">
+          [Pendiente: autor y medio de la reseña, para acreditar correctamente. Edu facilitará el texto completo. Enlace al artículo original cuando esté disponible.]
+        </p>
+      </article>
+    </div>
+
+    <div class="placeholder reveal" style="margin-top: var(--space-lg);">
+      [Pendiente: más reseñas y notas de prensa. Este apartado se ampliará con los recortes que facilite Manuel.]
+    </div>
+  </section>
+</Base>
+
+<style>
+  .press-list {
+    margin-top: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+
+  .press-item blockquote {
+    font-family: var(--font-display);
+    font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+    border-left: 3px solid var(--color-accent);
+    padding-left: var(--space-md);
+    color: var(--color-text);
+    font-style: italic;
+    margin-bottom: var(--space-sm);
+  }
+
+  .press-source {
+    color: var(--color-text-secondary);
+    font-size: 0.875rem;
+  }
+
+  .press-source em {
+    font-style: italic;
+  }
+</style>

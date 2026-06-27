@@ -1,0 +1,184 @@
+---
+import Base from '../layouts/Base.astro';
+import ImagePlaceholder from '../components/ImagePlaceholder.astro';
+---
+
+<Base
+  title="Inicio"
+  description="La Tulpa, compañía de danza dirigida por Manuel Monró. Danza contemporánea, danza teatro y creación inclusiva."
+>
+  <section class="hero" aria-label="Portada">
+    <div class="hero-bg">
+      <ImagePlaceholder
+        aspect="16/9"
+        label="[Fotografía principal de La Tulpa en claroscuro — pendiente de Manuel]"
+      />
+    </div>
+    <div class="hero-content container">
+      <h1 class="hero-title">La Tulpa</h1>
+      <p class="hero-subtitle">Compañía de danza</p>
+      <p class="hero-phrase">
+        Un pensamiento que se hace cuerpo.
+      </p>
+    </div>
+  </section>
+
+  <section class="section container home-intro reveal" aria-labelledby="home-about">
+    <div class="prose">
+      <span class="accent-line"></span>
+      <h2 id="home-about">Danza que se pregunta</h2>
+      <p>
+        La Tulpa nace en 2023 de la mano de Manuel Monró, en el corazón del Festival Internacional Escena Mobile de Arte y Diversidad en Sevilla. No es una compañía que ilustra temas. Es un lugar donde el cuerpo investiga lo que las palabras no alcanzan.
+      </p>
+      <p>
+        Danza contemporánea, danza teatro. Movimiento simple y preciso. Una estética de claroscuro que busca la penumbra para mirar con más cuidado.
+      </p>
+    </div>
+  </section>
+
+  <section class="section container home-work reveal" aria-labelledby="home-work-title">
+    <span class="accent-line"></span>
+    <h2 id="home-work-title">En escena</h2>
+    <div class="home-work-card">
+      <ImagePlaceholder
+        aspect="16/9"
+        label="[Fotografía de Ensayo sobre nadie — pendiente de Manuel]"
+      />
+      <div class="home-work-info">
+        <h3><a href="/obras/ensayo-sobre-nadie">Ensayo sobre nadie</a></h3>
+        <p>
+          Casi nadie se pregunta si es más real lo que se puede ver, lo que se puede oír, o lo que se contiene.
+        </p>
+        <p class="home-work-meta">2023 — En gira</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section container home-cta reveal" aria-labelledby="home-contact">
+    <span class="accent-line"></span>
+    <h2 id="home-contact">Contacto</h2>
+    <p class="prose">
+      Para contratación, programación de funciones o cualquier consulta.
+    </p>
+    <a href="/contacto" class="cta-link">Contactar &rarr;</a>
+  </section>
+</Base>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  .hero-bg > :global(*) {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: auto;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding-block: var(--space-2xl);
+  }
+
+  .hero-title {
+    font-size: clamp(3rem, 8vw, 7rem);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: var(--space-xs);
+  }
+
+  .hero-subtitle {
+    font-family: var(--font-body);
+    font-size: 1.125rem;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-lg);
+  }
+
+  .hero-phrase {
+    font-family: var(--font-display);
+    font-size: clamp(1.25rem, 3vw, 2rem);
+    font-style: italic;
+    color: var(--color-text);
+    max-width: 36rem;
+    margin-inline: auto;
+  }
+
+  .home-work-card {
+    display: grid;
+    gap: var(--space-md);
+    margin-top: var(--space-md);
+  }
+
+  @media (min-width: 48rem) {
+    .home-work-card {
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+    }
+  }
+
+  .home-work-info h3 {
+    font-size: 1.5rem;
+    margin-bottom: var(--space-xs);
+  }
+
+  .home-work-info h3 a {
+    color: var(--color-text);
+    text-decoration: none;
+  }
+
+  .home-work-info h3 a:hover {
+    color: var(--color-accent-interactive);
+  }
+
+  .home-work-meta {
+    color: var(--color-text-secondary);
+    font-size: 0.875rem;
+    margin-top: var(--space-sm);
+  }
+
+  .cta-link {
+    display: inline-block;
+    margin-top: var(--space-md);
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    color: var(--color-accent-interactive);
+    text-decoration: none;
+    border-bottom: 1px solid var(--color-accent);
+    padding-bottom: 0.25rem;
+    transition: color var(--transition-fast), border-color var(--transition-fast);
+  }
+
+  .cta-link:hover {
+    color: var(--color-accent-hover);
+    border-color: var(--color-accent-hover);
+  }
+
+  .home-cta {
+    text-align: center;
+  }
+
+  .home-cta .accent-line {
+    margin-inline: auto;
+  }
+
+  .home-cta .prose {
+    margin-inline: auto;
+  }
+</style>

@@ -1,0 +1,67 @@
+---
+import Base from '../../layouts/Base.astro';
+---
+
+<Base
+  title="Press"
+  description="Reviews and press coverage of La Tulpa and the works of Manuel Monró."
+>
+  <section class="section container">
+    <span class="accent-line"></span>
+    <h1>Press</h1>
+
+    <div class="prose reveal">
+      <p>
+        Selected excerpts from reviews and media coverage of La Tulpa's work.
+      </p>
+    </div>
+
+    <div class="press-list">
+      <article class="press-item reveal">
+        <blockquote>
+          <p>
+            &laquo;The aesthetic may seem sinister, but these beings are harmless.&raquo;
+          </p>
+        </blockquote>
+        <p class="press-source">
+          Review of <em>Ensayo sobre nadie</em>, following its premiere at the 16th Escena Mobile Festival, Seville, 2023.
+        </p>
+        <p class="placeholder">
+          [Pending: author and publication of the review, for proper attribution. Edu will provide the full text. Link to original article when available.]
+        </p>
+      </article>
+    </div>
+
+    <div class="placeholder reveal" style="margin-top: var(--space-lg);">
+      [Pending: additional reviews and press coverage. This section will be expanded with clippings provided by Manuel.]
+    </div>
+  </section>
+</Base>
+
+<style>
+  .press-list {
+    margin-top: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+
+  .press-item blockquote {
+    font-family: var(--font-display);
+    font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+    border-left: 3px solid var(--color-accent);
+    padding-left: var(--space-md);
+    color: var(--color-text);
+    font-style: italic;
+    margin-bottom: var(--space-sm);
+  }
+
+  .press-source {
+    color: var(--color-text-secondary);
+    font-size: 0.875rem;
+  }
+
+  .press-source em {
+    font-style: italic;
+  }
+</style>

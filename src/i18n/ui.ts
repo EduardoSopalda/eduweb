@@ -11,7 +11,7 @@ export const ui = {
   es: {
     'nav.home': 'Inicio',
     'nav.about': 'Manuel Monró',
-    'nav.work': 'Obra',
+    'nav.work': 'La Tulpa',
     'nav.tulpa': 'La Tulpa',
     'nav.schedule': 'Agenda',
     'nav.press': 'Prensa',
@@ -36,7 +36,7 @@ export const ui = {
   en: {
     'nav.home': 'Home',
     'nav.about': 'Manuel Monró',
-    'nav.work': 'Work',
+    'nav.work': 'La Tulpa',
     'nav.tulpa': 'La Tulpa',
     'nav.schedule': 'Schedule',
     'nav.press': 'Press',

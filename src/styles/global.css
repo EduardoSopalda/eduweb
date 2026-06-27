@@ -2,6 +2,24 @@
    MANUEL MONRÓ — Global Styles
    ============================================ */
 
+@font-face {
+  font-family: 'Melisen';
+  src: url('/fonts/Melisen.woff2') format('woff2'),
+       url('/fonts/Melisen.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Melisen';
+  src: url('/fonts/MelisenItalic.woff2') format('woff2'),
+       url('/fonts/MelisenItalic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
 :root {
   --color-base: #0B0B0D;
   --color-base-raised: #16151A;
@@ -16,7 +34,7 @@
   --color-accent-hover: #D45555;
   --color-focus-ring: #C44040;
 
-  --font-display: 'Instrument Serif', Georgia, 'Times New Roman', serif;
+  --font-display: 'Melisen', Georgia, 'Times New Roman', serif;
   --font-body: 'Inter', system-ui, -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
 

@@ -1,0 +1,57 @@
+---
+import Base from '../../layouts/Base.astro';
+import ImagePlaceholder from '../../components/ImagePlaceholder.astro';
+---
+
+<Base
+  title="Manuel Monró"
+  description="Manuel Monró, director, choreographer, playwright and performer. Creator of La Tulpa."
+>
+  <article class="section container">
+    <div class="creator-grid">
+      <div class="creator-portrait reveal">
+        <ImagePlaceholder
+          aspect="3/4"
+          label="[Portrait of Manuel Monró — pending from Manuel]"
+        />
+      </div>
+      <div class="prose reveal">
+        <span class="accent-line"></span>
+        <h1>Manuel Monró</h1>
+        <p class="creator-role">Director. Choreographer. Playwright. Performer.</p>
+
+        <p>
+          Manuel Monró works between Barcelona and Seville. His language moves in the territory of contemporary dance, dance theatre and inclusive creation. He does not seek to illustrate difference. He works from it.
+        </p>
+        <p>
+          Linked to the inclusive dance circuit, he collaborates closely with Compañía Danza Mobile in Seville. In 2023, following his participation in the 16th Escena Mobile International Festival of Art and Diversity, he founded La Tulpa.
+        </p>
+
+        <div class="placeholder">
+          [Pending from Manuel: training, detailed career, artist statement. No biographical data has been invented. This section will be completed with the information Manuel provides.]
+        </div>
+      </div>
+    </div>
+  </article>
+</Base>
+
+<style>
+  .creator-grid {
+    display: grid;
+    gap: var(--space-lg);
+  }
+
+  @media (min-width: 48rem) {
+    .creator-grid {
+      grid-template-columns: 1fr 1.5fr;
+      align-items: start;
+    }
+  }
+
+  .creator-role {
+    font-size: 1.125rem;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-md);
+    letter-spacing: 0.02em;
+  }
+</style>

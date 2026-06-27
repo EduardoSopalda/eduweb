@@ -1,0 +1,265 @@
+/* ============================================
+   LA TULPA — Global Styles
+   ============================================ */
+
+:root {
+  /* Color tokens */
+  --color-base: #0B0B0D;
+  --color-base-raised: #141417;
+  --color-text: #ECE7DE;
+  --color-text-secondary: #9E9890;
+  --color-accent: #7A2222;
+  --color-accent-interactive: #C44040;
+  --color-accent-hover: #D45555;
+  --color-focus-ring: #C44040;
+
+  /* Typography */
+  --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-body: 'Source Sans 3', 'Source Sans Pro', system-ui, -apple-system, sans-serif;
+
+  /* Spacing scale */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 6rem;
+  --space-2xl: 8rem;
+
+  /* Layout */
+  --max-width: 72rem;
+  --content-width: 48rem;
+
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-base: 300ms ease;
+  --transition-slow: 600ms ease-out;
+}
+
+/* ---- Reset ---- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 100%;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 1.125rem;
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--color-text);
+  background-color: var(--color-base);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: var(--color-accent-interactive);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--color-accent-hover);
+}
+
+a:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--color-text);
+}
+
+h1 {
+  font-size: clamp(2.25rem, 5vw, 4rem);
+  letter-spacing: -0.01em;
+}
+
+h2 {
+  font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+  margin-bottom: var(--space-md);
+}
+
+h3 {
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  margin-bottom: var(--space-sm);
+}
+
+p + p {
+  margin-top: var(--space-sm);
+}
+
+ul, ol {
+  padding-left: 1.5em;
+}
+
+blockquote {
+  border-left: 3px solid var(--color-accent);
+  padding-left: var(--space-md);
+  font-style: italic;
+  color: var(--color-text-secondary);
+}
+
+/* ---- Skip link ---- */
+
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: var(--space-sm);
+  background: var(--color-accent-interactive);
+  color: var(--color-text);
+  padding: var(--space-xs) var(--space-sm);
+  z-index: 1000;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 0 0 4px 4px;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* ---- Layout utilities ---- */
+
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin-inline: auto;
+  padding-inline: var(--space-sm);
+}
+
+@media (min-width: 48rem) {
+  .container {
+    padding-inline: var(--space-md);
+  }
+}
+
+.section {
+  padding-block: var(--space-xl);
+}
+
+@media (min-width: 48rem) {
+  .section {
+    padding-block: var(--space-2xl);
+  }
+}
+
+.prose {
+  max-width: var(--content-width);
+}
+
+.prose p,
+.prose ul,
+.prose ol,
+.prose blockquote {
+  margin-bottom: var(--space-sm);
+}
+
+/* ---- Decorative line ---- */
+
+.accent-line {
+  display: block;
+  width: 3rem;
+  height: 2px;
+  background-color: var(--color-accent);
+  margin-bottom: var(--space-md);
+}
+
+/* ---- Placeholder markers ---- */
+
+.placeholder {
+  border: 1px dashed var(--color-accent);
+  padding: var(--space-md);
+  border-radius: 4px;
+  color: var(--color-text-secondary);
+  font-style: italic;
+  background-color: var(--color-base-raised);
+}
+
+/* ---- Scroll reveal animations ---- */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(1.5rem);
+  transition: opacity var(--transition-slow), transform var(--transition-slow);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---- Focus visible for interactive elements ---- */
+
+button:focus-visible,
+[role="button"]:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 3px;
+}
+
+/* ---- Image treatments ---- */
+
+.img-full {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 2px;
+}
+
+.img-portrait {
+  width: 100%;
+  max-width: 28rem;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border-radius: 2px;
+}

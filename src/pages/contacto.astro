@@ -1,0 +1,91 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base
+  title="Contacto"
+  description="Contacto y contratación de La Tulpa, compañía de danza de Manuel Monró."
+>
+  <section class="section container">
+    <span class="accent-line"></span>
+    <h1>Contacto y contratación</h1>
+
+    <div class="contact-grid">
+      <div class="prose reveal">
+        <p>
+          Para programar funciones, solicitar dossier o rider técnico, o cualquier consulta sobre la compañía y sus obras.
+        </p>
+
+        <div class="contact-block">
+          <h2>Correo electrónico</h2>
+          <p class="placeholder">
+            [Pendiente de Manuel: dirección de correo de contacto]
+          </p>
+        </div>
+
+        <div class="contact-block">
+          <h2>Redes</h2>
+          <p class="placeholder">
+            [Pendiente de Manuel: perfiles de redes sociales (Instagram, etc.)]
+          </p>
+        </div>
+
+        <div class="contact-block">
+          <h2>Dossier y rider técnico</h2>
+          <p class="placeholder">
+            [Pendiente de Manuel: archivo PDF del dossier de la compañía y rider técnico para descarga]
+          </p>
+        </div>
+      </div>
+
+      <div class="contact-aside reveal">
+        <div class="contact-note">
+          <h3>Para programadores y festivales</h3>
+          <p>
+            Si desea programar <em>Ensayo sobre nadie</em> u otras piezas de La Tulpa en su espacio o festival, contacte directamente por correo electrónico. Enviamos dossier completo, ficha técnica y rider bajo petición.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .contact-grid {
+    display: grid;
+    gap: var(--space-lg);
+    margin-top: var(--space-md);
+  }
+
+  @media (min-width: 48rem) {
+    .contact-grid {
+      grid-template-columns: 1.5fr 1fr;
+    }
+  }
+
+  .contact-block {
+    margin-top: var(--space-lg);
+  }
+
+  .contact-block h2 {
+    font-size: 1.25rem;
+    margin-bottom: var(--space-xs);
+  }
+
+  .contact-note {
+    background-color: var(--color-base-raised);
+    border-left: 3px solid var(--color-accent);
+    padding: var(--space-md);
+    border-radius: 2px;
+  }
+
+  .contact-note h3 {
+    font-size: 1.125rem;
+    margin-bottom: var(--space-xs);
+  }
+
+  .contact-note p {
+    font-size: 0.95rem;
+    color: var(--color-text-secondary);
+  }
+</style>

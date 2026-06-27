@@ -1,0 +1,64 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { getLangFromUrl, useTranslations, getAlternateUrl } from '../i18n/utils';
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const alternateUrl = getAlternateUrl(Astro.url, lang);
+const alternateLang = lang === 'es' ? 'en' : 'es';
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <title>{title} — La Tulpa</title>
+    <link rel="canonical" href={canonicalUrl.href} />
+    <link rel="alternate" hreflang={alternateLang} href={new URL(alternateUrl, Astro.site).href} />
+    <link rel="alternate" hreflang={lang} href={canonicalUrl.href} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">{t('skip.link')}</a>
+    <Header />
+    <main id="main-content" tabindex="-1">
+      <slot />
+    </main>
+    <Footer />
+    <script>
+      const reveals = document.querySelectorAll('.reveal');
+      if (window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.15 }
+        );
+        reveals.forEach((el) => observer.observe(el));
+      } else {
+        reveals.forEach((el) => el.classList.add('is-visible'));
+      }
+    </script>
+  </body>
+</html>

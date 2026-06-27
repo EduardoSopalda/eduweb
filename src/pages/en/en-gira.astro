@@ -1,0 +1,130 @@
+---
+import Base from '../../layouts/Base.astro';
+import ImagePlaceholder from '../../components/ImagePlaceholder.astro';
+---
+
+<Base
+  title="On tour"
+  description="Touring works and current projects by La Tulpa, Manuel Monró's dance company."
+>
+  <section class="section container">
+    <span class="accent-line"></span>
+    <h1>Touring works and other projects</h1>
+
+    <article class="gira-obra reveal">
+      <div class="gira-obra-grid">
+        <ImagePlaceholder
+          aspect="16/9"
+          label="[Photograph of Ensayo sobre nadie on tour — pending from Manuel]"
+        />
+        <div class="gira-obra-info">
+          <h2><a href="/en/obras/ensayo-sobre-nadie">Ensayo sobre nadie</a></h2>
+          <p class="gira-obra-meta">2023 — Short dance theatre piece</p>
+          <p>
+            Almost no one asks whether what you see is more real than what you hear, or what you hold inside.
+          </p>
+        </div>
+      </div>
+
+      <div class="gira-fechas">
+        <h3>Past performances</h3>
+        <ul class="gira-list">
+          <li>
+            <span class="gira-date">Sep 2023</span>
+            <span class="gira-venue">16th Escena Mobile International Festival, Teatro Alameda, Seville — <em>Premiere</em></span>
+          </li>
+          <li>
+            <span class="gira-date">2024</span>
+            <span class="gira-venue">Kiada Festival, Seoul International Accessible Dance Festival, South Korea — <em>Opening performance</em></span>
+          </li>
+          <li>
+            <span class="gira-date">2024</span>
+            <span class="gira-venue">Kirchheimbolanden Festival, Germany</span>
+          </li>
+          <li>
+            <span class="gira-date">May 2025</span>
+            <span class="gira-venue">Madrid en Danza Festival, BETA PUBLICA, 12th International Choreographic Showcase, Teatros del Canal, Madrid</span>
+          </li>
+        </ul>
+      </div>
+    </article>
+
+    <div class="placeholder reveal" style="margin-top: var(--space-lg);">
+      [Pending from Manuel: upcoming performances, new projects in development, artistic residencies.]
+    </div>
+  </section>
+</Base>
+
+<style>
+  .gira-obra {
+    margin-top: var(--space-lg);
+  }
+
+  .gira-obra-grid {
+    display: grid;
+    gap: var(--space-md);
+  }
+
+  @media (min-width: 48rem) {
+    .gira-obra-grid {
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+    }
+  }
+
+  .gira-obra-info h2 {
+    font-size: 1.75rem;
+  }
+
+  .gira-obra-info h2 a {
+    color: var(--color-text);
+    text-decoration: none;
+  }
+
+  .gira-obra-info h2 a:hover {
+    color: var(--color-accent-interactive);
+  }
+
+  .gira-obra-meta {
+    color: var(--color-text-secondary);
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+    margin-bottom: var(--space-sm);
+  }
+
+  .gira-fechas {
+    margin-top: var(--space-lg);
+    border-top: 1px solid var(--color-accent);
+    padding-top: var(--space-md);
+  }
+
+  .gira-fechas h3 {
+    margin-bottom: var(--space-md);
+  }
+
+  .gira-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .gira-list li {
+    display: grid;
+    grid-template-columns: 6rem 1fr;
+    gap: var(--space-sm);
+    padding-bottom: var(--space-sm);
+    border-bottom: 1px solid var(--color-base-raised);
+  }
+
+  .gira-date {
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: var(--color-accent-interactive);
+  }
+
+  .gira-venue {
+    font-size: 0.95rem;
+  }
+</style>

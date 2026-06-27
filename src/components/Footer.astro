@@ -1,0 +1,64 @@
+---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer" role="contentinfo">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <p class="footer-logo">La Tulpa</p>
+      <p class="footer-tagline">
+        {lang === 'es' ? 'Compañía de danza' : 'Dance company'}
+      </p>
+    </div>
+    <p class="footer-copy">
+      &copy; {year} La Tulpa. {t('footer.rights')}
+    </p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid var(--color-accent);
+    padding-block: var(--space-lg);
+    margin-top: var(--space-xl);
+  }
+
+  .footer-inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer-logo {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-text);
+    letter-spacing: 0.05em;
+  }
+
+  .footer-tagline {
+    color: var(--color-text-secondary);
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+  }
+
+  .footer-copy {
+    color: var(--color-text-secondary);
+    font-size: 0.875rem;
+  }
+
+  @media (min-width: 48rem) {
+    .footer-inner {
+      flex-direction: row;
+      justify-content: space-between;
+      text-align: left;
+    }
+  }
+</style>

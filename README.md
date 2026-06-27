@@ -1,40 +1,113 @@
-# Eduardo Sopalda | Architect of Systems
+# La Tulpa — Compañía de danza
 
-Welcome to my digital experiment in creative web design, AI collaboration, and human-centered storytelling.
+Sitio web de **La Tulpa**, compañía de danza dirigida por Manuel Monró. Construido con [Astro](https://astro.build). Bilingüe: español e inglés.
 
-👉 **See the live progress:** [eduardosopalda.com](https://eduardosopalda.com)
+## Arrancar en local
 
-## 🌟 My Journey
+```bash
+npm install
+npm run dev
+```
 
-I’m Eduardo Sopalda, and this project is a showcase of playful branding, cinematic web design, and real-time collaboration with GitHub Copilot.  
-I’m documenting every step—from ideation to launch—through articles and community feedback.
+El sitio se sirve en `http://localhost:4321`.
 
-## 🚀 Featured Articles
+## Estructura del proyecto
 
-- [Speed Dating AI](https://www.linkedin.com/pulse/speed-dating-ai-eduardo-sopalda-6jt2f)
-- [Speed Dating Vertex AI: Corduroy Pants & Red Flags](https://www.linkedin.com/pulse/speed-dating-vertex-ai-corduroy-pants-red-flags-eduardo-sopalda-mi3lf)
-- [Speed Dating AI Grok: Enfant Terrible of LLMs](https://www.linkedin.com/pulse/speed-dating-ai-grok-enfant-terrible-llms-eduardo-sopalda-eyqrf)
+```
+src/
+├── content/
+│   └── obras/              ← Colección de contenido: un .md por obra
+├── components/              ← Componentes reutilizables (Header, Footer, etc.)
+├── i18n/                    ← Traducciones y utilidades de idioma
+├── layouts/                 ← Layout base (head, header, footer, scripts)
+├── pages/                   ← Páginas en español (idioma por defecto)
+│   ├── en/                  ← Páginas en inglés (misma estructura)
+│   └── obras/
+│       ├── index.astro      ← Listado de obras
+│       └── [slug].astro     ← Página individual de obra
+├── styles/
+│   └── global.css           ← Variables CSS, reset, utilidades
+└── content.config.ts        ← Esquema de la colección de obras
+```
 
-And yes—GitHub Copilot has gracefully accepted to go out on a date with me (in the spirit of joyful collaboration)!
+## Cómo añadir una nueva obra
 
-## 💬 Join the Conversation!
+1. Crea un archivo `.md` en `src/content/obras/`, por ejemplo `nueva-obra.md`.
+2. Copia el frontmatter de una obra existente y rellena los campos:
 
-Your feedback, stories, and ideas matter!  
-Are you building something similar or experimenting with AI and digital storytelling?  
-Share your thoughts and experiences—you might be featured in future articles!
-
-- [Open an Issue for feedback or ideas](https://github.com/EduSopa/eduweb/issues)
-- [Join Discussions](https://github.com/EduSopa/eduweb/discussions)
-
-## 🤖 Discover GitHub Copilot
-
-I’ve built this project alongside Copilot—a powerful AI assistant for brainstorming, coding, and documentation.  
-Whether you’re new to GitHub or a seasoned developer, Copilot can help you build, learn, and create together.
-
-- [Learn more about GitHub Copilot](https://github.com/features/copilot)
-- [Create your own public project](https://github.com/new)
-
+```yaml
 ---
+title: Nombre de la obra
+slug: nombre-de-la-obra
+year: 2025
+choreography: Manuel Monró
+performers: Nombre y nombre
+music: Nombre
+production: Producción
+premiere: Fecha y lugar
+type: Pieza breve de danza teatro
+touring: true
+order: 2
+---
+```
 
-Let’s make digital creativity accessible to everyone.  
-**Your story is part of this journey.**
+3. Escribe el contenido debajo del frontmatter, usando las secciones `## es` y `## en` para cada idioma.
+4. La obra aparecerá automáticamente en el listado y tendrá su página propia.
+
+## Cómo editar textos
+
+Los textos de cada página están directamente en los archivos `.astro` de `src/pages/`:
+
+- **Español:** archivos en `src/pages/`.
+- **Inglés:** archivos en `src/pages/en/`.
+
+Las traducciones de la interfaz (menú, etiquetas) están en `src/i18n/ui.ts`.
+
+## Contenido pendiente
+
+Busca `[Pendiente` o `[Pending` en los archivos para encontrar todos los marcadores de contenido que falta:
+
+```bash
+grep -r "\[Pendiente\|Pending" src/
+```
+
+## Construir para producción
+
+```bash
+npm run build
+```
+
+Genera el sitio estático en `dist/`. Listo para desplegar en Netlify, Vercel o GitHub Pages.
+
+## Desplegar
+
+### Netlify
+
+Conecta el repositorio. Build command: `npm run build`. Publish directory: `dist`.
+
+### Vercel
+
+Conecta el repositorio. Astro se detecta automáticamente.
+
+### GitHub Pages
+
+Configura GitHub Actions con el adaptador oficial de Astro para GitHub Pages.
+
+## Paleta de color
+
+| Token | Hex | Uso |
+|---|---|---|
+| Base | `#0B0B0D` | Fondo |
+| Texto | `#ECE7DE` | Cuerpo y títulos |
+| Acento | `#7A2222` | Filetes, bordes decorativos |
+| Acento interactivo | `#C44040` | Enlaces, hover, focus |
+| Secundario | `#9E9890` | Texto secundario |
+
+## Tipografías
+
+- **Playfair Display** — Titulares (serif display).
+- **Source Sans 3** — Cuerpo (sans humanista).
+
+## Accesibilidad
+
+Ver el [autochequeo de accesibilidad](ACCESSIBILITY.md) para el estado actual de cumplimiento WCAG 2.1 AA.

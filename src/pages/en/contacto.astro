@@ -1,0 +1,91 @@
+---
+import Base from '../../layouts/Base.astro';
+---
+
+<Base
+  title="Contact"
+  description="Contact and booking for La Tulpa, Manuel Monró's dance company."
+>
+  <section class="section container">
+    <span class="accent-line"></span>
+    <h1>Contact and booking</h1>
+
+    <div class="contact-grid">
+      <div class="prose reveal">
+        <p>
+          To book performances, request a press kit or technical rider, or for any enquiry about the company and its works.
+        </p>
+
+        <div class="contact-block">
+          <h2>Email</h2>
+          <p class="placeholder">
+            [Pending from Manuel: contact email address]
+          </p>
+        </div>
+
+        <div class="contact-block">
+          <h2>Social media</h2>
+          <p class="placeholder">
+            [Pending from Manuel: social media profiles (Instagram, etc.)]
+          </p>
+        </div>
+
+        <div class="contact-block">
+          <h2>Press kit and technical rider</h2>
+          <p class="placeholder">
+            [Pending from Manuel: PDF file of the company press kit and technical rider for download]
+          </p>
+        </div>
+      </div>
+
+      <div class="contact-aside reveal">
+        <div class="contact-note">
+          <h3>For programmers and festivals</h3>
+          <p>
+            If you would like to programme <em>Ensayo sobre nadie</em> or other La Tulpa pieces at your venue or festival, please contact us directly by email. We send a full press kit, technical sheet and rider on request.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .contact-grid {
+    display: grid;
+    gap: var(--space-lg);
+    margin-top: var(--space-md);
+  }
+
+  @media (min-width: 48rem) {
+    .contact-grid {
+      grid-template-columns: 1.5fr 1fr;
+    }
+  }
+
+  .contact-block {
+    margin-top: var(--space-lg);
+  }
+
+  .contact-block h2 {
+    font-size: 1.25rem;
+    margin-bottom: var(--space-xs);
+  }
+
+  .contact-note {
+    background-color: var(--color-base-raised);
+    border-left: 3px solid var(--color-accent);
+    padding: var(--space-md);
+    border-radius: 2px;
+  }
+
+  .contact-note h3 {
+    font-size: 1.125rem;
+    margin-bottom: var(--space-xs);
+  }
+
+  .contact-note p {
+    font-size: 0.95rem;
+    color: var(--color-text-secondary);
+  }
+</style>

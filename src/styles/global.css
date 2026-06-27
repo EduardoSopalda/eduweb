@@ -20,6 +20,30 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'Glacial Indifference';
+  src: url('/fonts/glacial-indifference-400.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Glacial Indifference';
+  src: url('/fonts/glacial-indifference-400italic.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Glacial Indifference';
+  src: url('/fonts/glacial-indifference-700.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --color-base: #0B0B0D;
   --color-base-raised: #16151A;
@@ -35,7 +59,7 @@
   --color-focus-ring: #C44040;
 
   --font-display: 'Melisen', Georgia, 'Times New Roman', serif;
-  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-body: 'Glacial Indifference', system-ui, -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
 
   --space-xs: 0.5rem;

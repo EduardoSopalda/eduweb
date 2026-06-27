@@ -24,16 +24,24 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
-    <title>{title} — La Tulpa</title>
+    <title>{title} — Manuel Monró</title>
     <link rel="canonical" href={canonicalUrl.href} />
     <link rel="alternate" hreflang={alternateLang} href={new URL(alternateUrl, Astro.site).href} />
     <link rel="alternate" hreflang={lang} href={canonicalUrl.href} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap"
       rel="stylesheet"
     />
+    <script is:inline>
+      (function() {
+        var stored = localStorage.getItem('calm-mode');
+        var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var calm = stored === 'true' || (stored === null && prefersReduced);
+        if (!calm) document.documentElement.classList.add('chaos');
+      })();
+    </script>
     <ClientRouter />
   </head>
   <body>
@@ -65,8 +73,28 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
         }
       }
 
+      function initCalmToggle() {
+        const btn = document.querySelector('.calm-toggle') as HTMLButtonElement;
+        if (!btn) return;
+
+        const isChaos = document.documentElement.classList.contains('chaos');
+        btn.setAttribute('aria-pressed', String(!isChaos));
+
+        btn.addEventListener('click', () => {
+          const wasCalm = btn.getAttribute('aria-pressed') === 'true';
+          const nowCalm = !wasCalm;
+          btn.setAttribute('aria-pressed', String(nowCalm));
+          document.documentElement.classList.toggle('chaos', !nowCalm);
+          localStorage.setItem('calm-mode', String(nowCalm));
+        });
+      }
+
       initReveals();
-      document.addEventListener('astro:after-swap', initReveals);
+      initCalmToggle();
+      document.addEventListener('astro:after-swap', () => {
+        initReveals();
+        initCalmToggle();
+      });
     </script>
   </body>
 </html>

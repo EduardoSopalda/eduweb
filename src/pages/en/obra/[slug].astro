@@ -1,0 +1,132 @@
+---
+import Base from '../../../layouts/Base.astro';
+import Hero from '../../../components/Hero.astro';
+import { getCollection, render } from 'astro:content';
+import { useTranslations } from '../../../i18n/utils';
+
+const t = useTranslations('en');
+
+export async function getStaticPaths() {
+  const obras = await getCollection('obras');
+  return obras.map((obra) => ({
+    params: { slug: obra.data.slug },
+    props: { obra },
+  }));
+}
+
+const { obra } = Astro.props;
+const { Content } = await render(obra);
+const d = obra.data;
+---
+
+<Base
+  title={d.title}
+  description={`${d.title} (${d.year}). ${d.type}. Choreography by ${d.choreography}.`}
+>
+  <Hero title={d.title} subtitle={String(d.year)} height="section" />
+
+  <article class="section container">
+    <div class="obra-header reveal">
+      <a href="/en/obra" class="obra-back">&larr; {t('works.back')}</a>
+    </div>
+
+    <div class="obra-layout">
+      <div class="obra-media reveal">
+        {d.image
+          ? <img src={d.image} alt={d.title} class="img-full" />
+          : <div class="empty-media empty-media--landscape" aria-hidden="true"></div>
+        }
+      </div>
+
+      <div class="obra-details reveal reveal-delay-1">
+        {d.touring && <span class="label" style="margin-bottom: var(--space-md); display: inline-block;">On tour</span>}
+        <dl class="obra-ficha">
+          <dt class="marginalia">{t('works.choreography')}</dt>
+          <dd>{d.choreography}</dd>
+          <dt class="marginalia">{t('works.performers')}</dt>
+          <dd>{d.performers}</dd>
+          <dt class="marginalia">{t('works.music')}</dt>
+          <dd>{d.music}</dd>
+          <dt class="marginalia">{t('works.production')}</dt>
+          <dd>{d.production}</dd>
+          <dt class="marginalia">{t('works.premiere')}</dt>
+          <dd>{d.premiere}</dd>
+          <dt class="marginalia">{t('works.type')}</dt>
+          <dd>{d.type}</dd>
+        </dl>
+      </div>
+    </div>
+
+    <div class="obra-body prose reveal reveal-delay-2">
+      <Content />
+    </div>
+  </article>
+</Base>
+
+<style>
+  .obra-back {
+    display: inline-block;
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    background-image: none;
+    margin-bottom: var(--space-md);
+    transition: color var(--transition-fast);
+  }
+
+  .obra-back:hover {
+    color: var(--color-accent-interactive);
+  }
+
+  .obra-layout {
+    display: grid;
+    gap: var(--space-lg);
+    margin-top: var(--space-md);
+  }
+
+  @media (min-width: 48rem) {
+    .obra-layout {
+      grid-template-columns: 1.5fr 1fr;
+    }
+  }
+
+  .obra-ficha {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.75rem var(--space-md);
+    padding: var(--space-md);
+    background-color: var(--color-base-raised);
+    border-left: 3px solid var(--color-accent-solid);
+    border-radius: 2px;
+  }
+
+  .obra-ficha dt {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding-top: 0.15em;
+  }
+
+  .obra-ficha dd {
+    margin: 0;
+  }
+
+  .obra-body {
+    margin-top: var(--space-xl);
+    border-top: 1px solid var(--color-warm-grey);
+    padding-top: var(--space-lg);
+  }
+
+  .obra-body :global(h2) {
+    font-size: 1.5rem;
+    margin-top: var(--space-lg);
+  }
+
+  .obra-body :global(h3) {
+    font-size: 1.25rem;
+    margin-top: var(--space-md);
+  }
+
+  .obra-body :global(li) {
+    margin-bottom: 0.5rem;
+  }
+</style>

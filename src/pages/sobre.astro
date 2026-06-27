@@ -1,0 +1,126 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+---
+
+<Base
+  title="Manuel Monró"
+  description="Manuel Monró — coreógrafo, intérprete y director artístico de La Tulpa. Trayectoria en danza contemporánea y creación inclusiva."
+>
+  <Hero
+    title="Manuel Monró"
+    subtitle="Coreógrafo · Intérprete"
+    height="section"
+  />
+
+  <section class="section container about-content" aria-labelledby="about-heading">
+    <div class="about-grid">
+      <div class="about-main reveal">
+        <h2 id="about-heading" class="sr-only">Sobre Manuel Monró</h2>
+
+        <div class="about-portrait">
+          <!-- PENDING FROM MANUEL: portrait photo -->
+          <div class="empty-media empty-media--portrait" aria-hidden="true"></div>
+        </div>
+
+        <div class="prose about-text">
+          <p>
+            Manuel Monró es coreógrafo, intérprete y director artístico de La Tulpa, compañía de danza fundada en 2023 dentro del Festival Internacional Escena Mobile de Arte y Diversidad en Sevilla.
+          </p>
+          <p>
+            Su trabajo se sitúa en el cruce entre danza contemporánea, danza teatro y creación inclusiva. Una práctica donde el movimiento, simple y preciso, busca lo que las palabras no alcanzan.
+          </p>
+          <!-- PENDING FROM MANUEL: extended bio, personal statement, artistic trajectory -->
+        </div>
+      </div>
+
+      <aside class="about-aside reveal reveal-delay-1">
+        <div class="about-meta">
+          <dl class="about-facts">
+            <div class="about-fact">
+              <dt class="marginalia">Compañía</dt>
+              <dd>La Tulpa</dd>
+            </div>
+            <div class="about-fact">
+              <dt class="marginalia">Fundación</dt>
+              <dd>2023, Sevilla</dd>
+            </div>
+            <div class="about-fact">
+              <dt class="marginalia">Colaboración</dt>
+              <dd>Danza Mobile</dd>
+            </div>
+            <div class="about-fact">
+              <dt class="marginalia">Disciplinas</dt>
+              <dd>Danza contemporánea, danza teatro, creación inclusiva</dd>
+            </div>
+          </dl>
+        </div>
+      </aside>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .about-grid {
+    display: grid;
+    gap: var(--space-lg);
+  }
+
+  @media (min-width: 48rem) {
+    .about-grid {
+      grid-template-columns: 2fr 1fr;
+      align-items: start;
+    }
+  }
+
+  .about-portrait {
+    max-width: 20rem;
+    margin-bottom: var(--space-lg);
+  }
+
+  html.chaos .about-portrait {
+    transform: rotate(calc(var(--chaos-rotate) * -0.7));
+  }
+
+  html:not(.chaos) .about-portrait {
+    transform: none;
+  }
+
+  .about-text p {
+    margin-bottom: var(--space-sm);
+  }
+
+  .about-meta {
+    background-color: var(--color-base-raised);
+    padding: var(--space-md);
+    border-radius: 2px;
+    border-left: 3px solid var(--color-accent-solid);
+  }
+
+  .about-facts {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .about-fact dt {
+    margin-bottom: 0.2rem;
+  }
+
+  .about-fact dd {
+    font-size: 0.95rem;
+    color: var(--color-text);
+  }
+</style>

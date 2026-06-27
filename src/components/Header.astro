@@ -1,6 +1,7 @@
 ---
 import { getLangFromUrl, useTranslations, getLocalePath, getAlternateUrl, getAlternateLang } from '../i18n/utils';
 import { languages } from '../i18n/ui';
+import CalmToggle from './CalmToggle.astro';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -8,10 +9,9 @@ const alternateLang = getAlternateLang(lang);
 const alternateUrl = getAlternateUrl(Astro.url, lang);
 
 const navItems = [
-  { label: t('nav.company'), href: getLocalePath('/la-compania', lang) },
-  { label: t('nav.creator'), href: getLocalePath('/manuel-monro', lang) },
-  { label: t('nav.works'), href: getLocalePath('/obras', lang) },
-  { label: t('nav.touring'), href: getLocalePath('/en-gira', lang) },
+  { label: t('nav.about'), href: getLocalePath('/sobre', lang) },
+  { label: t('nav.work'), href: getLocalePath('/obra', lang) },
+  { label: t('nav.schedule'), href: getLocalePath('/agenda', lang) },
   { label: t('nav.press'), href: getLocalePath('/prensa', lang) },
   { label: t('nav.contact'), href: getLocalePath('/contacto', lang) },
 ];
@@ -19,21 +19,24 @@ const navItems = [
 
 <header class="site-header" role="banner" transition:persist>
   <div class="header-inner container">
-    <a href={getLocalePath('/', lang)} class="site-logo" aria-label="La Tulpa — Inicio">
-      La Tulpa
+    <a href={getLocalePath('/', lang)} class="site-logo" aria-label="Manuel Monró — Inicio">
+      <span class="logo-name">Manuel Monró</span>
     </a>
     <nav class="site-nav" aria-label={lang === 'es' ? 'Navegación principal' : 'Main navigation'}>
-      <button
-        class="nav-toggle"
-        aria-expanded="false"
-        aria-controls="nav-menu"
-        aria-label={t('nav.menu')}
-        type="button"
-      >
-        <span class="nav-toggle-bar" aria-hidden="true"></span>
-        <span class="nav-toggle-bar" aria-hidden="true"></span>
-        <span class="nav-toggle-bar" aria-hidden="true"></span>
-      </button>
+      <div class="nav-actions">
+        <CalmToggle />
+        <button
+          class="nav-toggle"
+          aria-expanded="false"
+          aria-controls="nav-menu"
+          aria-label={t('nav.menu')}
+          type="button"
+        >
+          <span class="nav-toggle-bar" aria-hidden="true"></span>
+          <span class="nav-toggle-bar" aria-hidden="true"></span>
+          <span class="nav-toggle-bar" aria-hidden="true"></span>
+        </button>
+      </div>
       <ul id="nav-menu" class="nav-list" role="list">
         {navItems.map((item) => (
           <li>
@@ -89,8 +92,7 @@ const navItems = [
     background-color: rgba(11, 11, 13, 0.85);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(122, 34, 34, 0.3);
-    transition: background-color var(--transition-base);
+    border-bottom: 1px solid rgba(122, 34, 34, 0.2);
   }
 
   .header-inner {
@@ -98,23 +100,35 @@ const navItems = [
     align-items: center;
     justify-content: space-between;
     padding-block: var(--space-sm);
+    gap: var(--space-sm);
   }
 
   .site-logo {
-    font-family: var(--font-display);
-    font-size: 1.35rem;
-    font-weight: 700;
-    color: var(--color-text);
-    text-decoration: none;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
     background-image: none;
+    text-decoration: none;
     transition: color var(--transition-fast);
   }
 
-  .site-logo:hover {
-    color: var(--color-accent-interactive);
-    background-image: none;
+  .site-logo:hover { background-image: none; }
+
+  .logo-name {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--color-text);
+    letter-spacing: 0.02em;
+  }
+
+  .site-nav {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+  }
+
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
   }
 
   .nav-toggle {
@@ -129,7 +143,7 @@ const navItems = [
 
   .nav-toggle-bar {
     display: block;
-    width: 24px;
+    width: 22px;
     height: 2px;
     background-color: var(--color-text);
     transition: transform var(--transition-fast), opacity var(--transition-fast);
@@ -138,11 +152,7 @@ const navItems = [
   .nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(1) {
     transform: translateY(7px) rotate(45deg);
   }
-
-  .nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(2) {
-    opacity: 0;
-  }
-
+  .nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(2) { opacity: 0; }
   .nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(3) {
     transform: translateY(-7px) rotate(-45deg);
   }
@@ -163,17 +173,16 @@ const navItems = [
     right: 0;
     background-color: rgba(11, 11, 13, 0.97);
     backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(122, 34, 34, 0.3);
+    border-bottom: 1px solid rgba(122, 34, 34, 0.2);
     padding: var(--space-md) var(--space-sm);
     gap: var(--space-xs);
   }
 
   .nav-link {
     color: var(--color-text-secondary);
-    text-decoration: none;
-    font-size: 0.875rem;
+    font-size: 0.8rem;
     font-weight: 600;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     padding: var(--space-xs) 0;
     display: block;
@@ -186,9 +195,7 @@ const navItems = [
     background-image: none;
   }
 
-  .nav-link--lang {
-    color: var(--color-accent-interactive);
-  }
+  .nav-link--lang { color: var(--color-accent-interactive); }
 
   .nav-lang {
     border-top: 1px solid var(--color-warm-grey);
@@ -197,9 +204,7 @@ const navItems = [
   }
 
   @media (min-width: 64rem) {
-    .nav-toggle {
-      display: none;
-    }
+    .nav-toggle { display: none; }
 
     .nav-list {
       display: flex;

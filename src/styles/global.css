@@ -1,9 +1,8 @@
 /* ============================================
-   LA TULPA — Global Styles v2
+   MANUEL MONRÓ — Global Styles
    ============================================ */
 
 :root {
-  /* Color tokens */
   --color-base: #0B0B0D;
   --color-base-raised: #16151A;
   --color-base-surface: #1E1D23;
@@ -17,11 +16,10 @@
   --color-accent-hover: #D45555;
   --color-focus-ring: #C44040;
 
-  /* Typography */
   --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
   --font-body: 'Source Sans 3', 'Source Sans Pro', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
 
-  /* Spacing scale */
   --space-xs: 0.5rem;
   --space-sm: 1rem;
   --space-md: 2rem;
@@ -29,14 +27,28 @@
   --space-xl: 8rem;
   --space-2xl: 12rem;
 
-  /* Layout */
   --max-width: 72rem;
   --content-width: 48rem;
 
-  /* Transitions */
   --transition-fast: 150ms ease;
   --transition-base: 300ms ease;
   --transition-slow: 600ms ease-out;
+
+  /* Chaos layout offsets — zeroed in calm mode */
+  --chaos-rotate: 0deg;
+  --chaos-shift-x: 0px;
+  --chaos-shift-y: 0px;
+  --chaos-scale: 1;
+  --grain-opacity: 0.035;
+}
+
+/* Chaos mode active (default for non-reduced-motion users) */
+html.chaos {
+  --chaos-rotate: 1deg;
+  --chaos-shift-x: 2vw;
+  --chaos-shift-y: 0.5rem;
+  --chaos-scale: 1;
+  --grain-opacity: 0.04;
 }
 
 /* ---- Reset ---- */
@@ -80,11 +92,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-img,
-picture,
-video,
-canvas,
-svg {
+img, picture, video, canvas, svg {
   display: block;
   max-width: 100%;
   height: auto;
@@ -118,28 +126,12 @@ h1, h2, h3, h4 {
   color: var(--color-text);
 }
 
-h1 {
-  font-size: clamp(2.75rem, 6vw, 5rem);
-  letter-spacing: -0.02em;
-}
+h1 { font-size: clamp(2.75rem, 6vw, 5rem); letter-spacing: -0.02em; }
+h2 { font-size: clamp(2rem, 4vw, 3.25rem); margin-bottom: var(--space-md); }
+h3 { font-size: clamp(1.25rem, 2.5vw, 1.75rem); margin-bottom: var(--space-sm); }
 
-h2 {
-  font-size: clamp(2rem, 4vw, 3.25rem);
-  margin-bottom: var(--space-md);
-}
-
-h3 {
-  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
-  margin-bottom: var(--space-sm);
-}
-
-p + p {
-  margin-top: var(--space-sm);
-}
-
-ul, ol {
-  padding-left: 1.5em;
-}
+p + p { margin-top: var(--space-sm); }
+ul, ol { padding-left: 1.5em; }
 
 blockquote {
   border-left: 4px solid var(--color-accent-solid);
@@ -165,11 +157,9 @@ blockquote {
   border-radius: 0 0 4px 4px;
 }
 
-.skip-link:focus {
-  top: 0;
-}
+.skip-link:focus { top: 0; }
 
-/* ---- Layout utilities ---- */
+/* ---- Layout ---- */
 
 .container {
   width: 100%;
@@ -179,9 +169,7 @@ blockquote {
 }
 
 @media (min-width: 48rem) {
-  .container {
-    padding-inline: var(--space-md);
-  }
+  .container { padding-inline: var(--space-md); }
 }
 
 .section {
@@ -189,23 +177,18 @@ blockquote {
 }
 
 @media (min-width: 48rem) {
-  .section {
-    padding-block: var(--space-2xl);
-  }
+  .section { padding-block: var(--space-2xl); }
 }
 
 .prose {
   max-width: var(--content-width);
 }
 
-.prose p,
-.prose ul,
-.prose ol,
-.prose blockquote {
+.prose p, .prose ul, .prose ol, .prose blockquote {
   margin-bottom: var(--space-sm);
 }
 
-/* ---- Accent underline for headings ---- */
+/* ---- Accent underline ---- */
 
 .accent-underline {
   position: relative;
@@ -223,12 +206,12 @@ blockquote {
   background-color: var(--color-accent-solid);
 }
 
-/* ---- Label style ---- */
+/* ---- Label ---- */
 
 .label {
   display: inline-block;
   font-family: var(--font-body);
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.15em;
@@ -244,6 +227,54 @@ blockquote {
   color: var(--color-accent-interactive);
 }
 
+/* ---- Marginalia (monospaced annotation) ---- */
+
+.marginalia {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: var(--color-text-secondary);
+  letter-spacing: -0.02em;
+  opacity: 0.7;
+}
+
+.marginalia--accent {
+  color: var(--color-accent-interactive);
+  opacity: 0.5;
+}
+
+.marginalia--large {
+  font-size: 0.875rem;
+}
+
+/* Chaos-only: offset marginalia */
+html.chaos .marginalia--offset {
+  transform: translateX(var(--chaos-shift-x)) rotate(calc(var(--chaos-rotate) * -1));
+}
+
+/* ---- Broken grid (chaos mode) ---- */
+
+html.chaos .chaos-tilt {
+  transform: rotate(calc(var(--chaos-rotate) * -0.5));
+}
+
+html.chaos .chaos-shift {
+  transform: translateX(calc(var(--chaos-shift-x) * -1));
+}
+
+html.chaos .chaos-overlap {
+  margin-top: calc(var(--space-lg) * -0.5);
+  position: relative;
+  z-index: 2;
+}
+
+html:not(.chaos) .chaos-tilt,
+html:not(.chaos) .chaos-shift,
+html:not(.chaos) .chaos-overlap {
+  transform: none;
+  margin-top: 0;
+}
+
 /* ---- Film grain overlay ---- */
 
 .grain {
@@ -251,13 +282,13 @@ blockquote {
   inset: 0;
   z-index: 9999;
   pointer-events: none;
-  opacity: 0.035;
+  opacity: var(--grain-opacity);
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
   background-repeat: repeat;
   background-size: 256px 256px;
 }
 
-/* ---- Scroll reveal animations ---- */
+/* ---- Scroll reveal ---- */
 
 .reveal {
   opacity: 0;
@@ -283,7 +314,7 @@ blockquote {
   }
 }
 
-/* ---- Focus visible for interactive elements ---- */
+/* ---- Focus ---- */
 
 button:focus-visible,
 [role="button"]:focus-visible,
@@ -303,13 +334,17 @@ select:focus-visible {
   border-radius: 2px;
 }
 
-.img-portrait {
+.empty-media {
   width: 100%;
-  max-width: 28rem;
-  aspect-ratio: 3 / 4;
-  object-fit: cover;
   border-radius: 2px;
+  background:
+    radial-gradient(ellipse at 40% 50%, #1a1520 0%, transparent 60%),
+    linear-gradient(165deg, #0f0e12, #0B0B0D 50%, #100d14);
 }
+
+.empty-media--landscape { aspect-ratio: 16 / 10; }
+.empty-media--portrait { aspect-ratio: 3 / 4; }
+.empty-media--square { aspect-ratio: 1 / 1; }
 
 /* ---- View Transitions ---- */
 

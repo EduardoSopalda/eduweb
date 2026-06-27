@@ -5,14 +5,14 @@ import Hero from '../../components/Hero.astro';
 
 <Base
   title="Press"
-  description="Reviews and press coverage of La Tulpa and the works of Manuel Monró."
+  description="Reviews and press coverage of Manuel Monró and La Tulpa."
 >
   <Hero title="Press" height="section" />
 
   <section class="section container">
     <div class="prose reveal">
       <p>
-        Selected excerpts from reviews and media coverage of La Tulpa's work.
+        Selected excerpts from reviews and media coverage of Manuel Monró and La Tulpa's work.
       </p>
     </div>
 
@@ -23,11 +23,10 @@ import Hero from '../../components/Hero.astro';
             &laquo;The aesthetic may seem sinister, but these beings are harmless.&raquo;
           </p>
         </blockquote>
-        <p class="press-source">
+        <p class="press-source marginalia">
           Review of <em>Ensayo sobre nadie</em>, following its premiere at the 16th Escena Mobile Festival, Seville, 2023.
         </p>
-        <!-- PENDING: author and publication of the review, for proper attribution -->
-        <!-- PENDING: link to original article when available -->
+        <!-- PENDING: author and publication for proper attribution -->
       </article>
     </div>
     <!-- PENDING: additional reviews and press coverage -->
@@ -45,7 +44,7 @@ import Hero from '../../components/Hero.astro';
   .press-item blockquote {
     font-family: var(--font-display);
     font-size: clamp(1.5rem, 3vw, 2.25rem);
-    border-left: 4px solid var(--color-accent-solid);
+    border-left: 3px solid var(--color-accent-solid);
     padding-left: var(--space-md);
     color: var(--color-text);
     font-style: italic;
@@ -54,8 +53,6 @@ import Hero from '../../components/Hero.astro';
   }
 
   .press-source {
-    color: var(--color-text-secondary);
-    font-size: 0.875rem;
-    padding-left: calc(var(--space-md) + 4px);
+    padding-left: calc(var(--space-md) + 3px);
   }
 </style>

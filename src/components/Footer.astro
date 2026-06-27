@@ -6,10 +6,9 @@ const t = useTranslations(lang);
 const year = new Date().getFullYear();
 
 const navItems = [
-  { label: t('nav.company'), href: getLocalePath('/la-compania', lang) },
-  { label: t('nav.creator'), href: getLocalePath('/manuel-monro', lang) },
-  { label: t('nav.works'), href: getLocalePath('/obras', lang) },
-  { label: t('nav.touring'), href: getLocalePath('/en-gira', lang) },
+  { label: t('nav.about'), href: getLocalePath('/sobre', lang) },
+  { label: t('nav.work'), href: getLocalePath('/obra', lang) },
+  { label: t('nav.schedule'), href: getLocalePath('/agenda', lang) },
   { label: t('nav.press'), href: getLocalePath('/prensa', lang) },
   { label: t('nav.contact'), href: getLocalePath('/contacto', lang) },
 ];
@@ -19,9 +18,9 @@ const navItems = [
   <div class="container footer-inner">
     <div class="footer-top">
       <div class="footer-brand">
-        <p class="footer-logo">La Tulpa</p>
-        <p class="footer-tagline">
-          {lang === 'es' ? 'Compañía de danza' : 'Dance company'}
+        <p class="footer-logo">Manuel Monró</p>
+        <p class="footer-tagline marginalia">
+          {lang === 'es' ? 'Coreógrafo · Intérprete · Creador' : 'Choreographer · Performer · Creator'}
         </p>
       </div>
       <nav class="footer-nav" aria-label={lang === 'es' ? 'Navegación del pie' : 'Footer navigation'}>
@@ -36,17 +35,17 @@ const navItems = [
           {lang === 'es' ? 'Contacto y contratación' : 'Contact and booking'}
         </p>
         <!-- PENDING FROM MANUEL: contact email address -->
-        <!-- PENDING FROM MANUEL: social media profiles (Instagram, Vimeo/YouTube) -->
-        <p class="footer-collab">
+        <!-- PENDING FROM MANUEL: social media profiles -->
+        <p class="footer-collab marginalia">
           {lang === 'es'
-            ? 'En colaboración con Danza Mobile, Sevilla.'
-            : 'In collaboration with Danza Mobile, Seville.'}
+            ? 'La Tulpa · En colaboración con Danza Mobile, Sevilla.'
+            : 'La Tulpa · In collaboration with Danza Mobile, Seville.'}
         </p>
       </div>
     </div>
     <div class="footer-bottom">
       <p class="footer-copy">
-        &copy; {year} La Tulpa. {t('footer.rights')}
+        &copy; {year} Manuel Monró. {t('footer.rights')}
       </p>
     </div>
   </div>
@@ -82,14 +81,11 @@ const navItems = [
     font-size: 1.35rem;
     font-weight: 700;
     color: var(--color-text);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+    letter-spacing: 0.02em;
   }
 
   .footer-tagline {
-    color: var(--color-text-secondary);
-    font-size: 0.875rem;
-    margin-top: 0.25rem;
+    margin-top: 0.35rem;
   }
 
   .footer-heading {
@@ -103,8 +99,6 @@ const navItems = [
   }
 
   .footer-collab {
-    font-size: 0.875rem;
-    color: var(--color-text-secondary);
     margin-top: var(--space-sm);
   }
 

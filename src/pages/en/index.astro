@@ -15,7 +15,7 @@ const featured = obras.find((o) => o.data.touring) || obras[0];
     title="Manuel"
     titleAccent="Monrò"
     subtitle="Direction · Choreography · Dramaturgy · Pedagogy · Performance"
-    phrase="Señalo a aquél caballo / Y lo apuesto todo, incluso / Hasta el dinero para la Universidad / De nuestros hijxs / A que el hombre es un perro para el hombre, / Desnutrido y sin miedo a nada / Más que a sí mismo."
+    phrase="Cuando el reflejo mira la sombra, nadie aquí respira."
     height="full"
     image="/images/manuel-monro-hero.jpg"
     imageAlt="Manuel Monrò in movement, chiaroscuro photography"
@@ -129,7 +129,7 @@ const featured = obras.find((o) => o.data.touring) || obras[0];
         <a href="/en/obra/la-tulpa" class="cta-link">About La Tulpa &rarr;</a>
       </div>
       <div class="tulpa-aside">
-        <div class="empty-media empty-media--square chaos-tilt" aria-hidden="true"></div>
+        <img class="tulpa-logo chaos-tilt" src="/images/la-tulpa-logo.jpg" alt="La Tulpa logo" loading="lazy" />
       </div>
     </div>
   </section>
@@ -410,9 +410,10 @@ const featured = obras.find((o) => o.data.touring) || obras[0];
     color: var(--color-text-secondary);
   }
 
-  .tulpa-aside .empty-media {
-    max-width: 16rem;
+  .tulpa-logo {
+    max-width: 14rem;
     margin-left: auto;
+    border-radius: 2px;
   }
 
   /* Contact CTA */

@@ -1,0 +1,80 @@
+---
+import { type Locale, t } from '../i18n';
+
+interface Props {
+  url?: string;
+  title: string;
+  transcription?: string;
+  locale: Locale;
+}
+
+const { url, title, transcription, locale } = Astro.props;
+const hasVideo = url && url.length > 0;
+---
+
+{hasVideo ? (
+  <figure class="video-embed">
+    <div class="video-wrapper">
+      <iframe
+        src={url}
+        title={title}
+        allow="autoplay; fullscreen; picture-in-picture"
+        allowfullscreen
+        loading="lazy"
+      ></iframe>
+    </div>
+    {transcription && (
+      <details class="video-transcription">
+        <summary>{t(locale, 'accessibility.videoDescription')}</summary>
+        <p>{transcription}</p>
+      </details>
+    )}
+  </figure>
+) : (
+  <div class="placeholder-content">
+    {locale === 'es'
+      ? 'Vídeo promocional pendiente de recibir.'
+      : 'Promotional video pending.'}
+  </div>
+)}
+
+<style>
+  .video-embed {
+    margin: var(--space-md) 0;
+  }
+
+  .video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    border-radius: 4px;
+    background-color: var(--color-bg-elevated);
+  }
+
+  .video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+
+  .video-transcription {
+    margin-top: var(--space-sm);
+    color: var(--color-text-secondary);
+    font-size: 0.95rem;
+  }
+
+  .video-transcription summary {
+    cursor: pointer;
+    color: var(--color-accent-light);
+    font-weight: 600;
+  }
+
+  .video-transcription p {
+    margin-top: var(--space-xs);
+    line-height: 1.6;
+  }
+</style>

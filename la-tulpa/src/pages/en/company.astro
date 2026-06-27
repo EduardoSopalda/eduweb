@@ -1,0 +1,68 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { t } from '../../i18n';
+
+const locale = 'en';
+---
+
+<BaseLayout title={t(locale, 'company.title')} locale={locale}>
+  <section class="section page-header">
+    <div class="container">
+      <span class="accent-line" aria-hidden="true"></span>
+      <h1>{t(locale, 'company.heading')}</h1>
+    </div>
+  </section>
+
+  <section class="section container">
+    <div class="content-width reveal">
+      <p>
+        La Tulpa is a contemporary dance company directed by Manuel Monró. It was founded in 2023, following his participation in the XVI Festival Internacional Escena Mobile de Arte y Diversidad, held at the Teatro Alameda in Seville from 21 to 24 September 2023.
+      </p>
+
+      <p>
+        Escena Mobile is an inclusive arts and diversity festival held annually in Seville since 2007. La Tulpa was born in that context: at the crossroads of contemporary creation and inclusive dance.
+      </p>
+
+      <h2 class="reveal">The language</h2>
+      <span class="accent-line" aria-hidden="true"></span>
+
+      <p class="reveal">
+        Contemporary dance and dance theatre in the field of inclusive creation. Simple, precise movement. Scenic research. Chiaroscuro aesthetics. Each piece seeks the threshold between the visible and the contained.
+      </p>
+
+      <h2 class="reveal">The name</h2>
+      <span class="accent-line" aria-hidden="true"></span>
+
+      <p class="reveal">
+        A tulpa is, in its Tibetan origin, a being that takes form through thought and will. A thought made flesh. The image resonates with the company's poetics: bodies that embody what cannot be said in words.
+      </p>
+
+      <aside class="placeholder-content reveal">
+        Confirm with Manuel the personal meaning he attributes to the company name.
+      </aside>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-header {
+    padding-top: calc(4rem + var(--space-xl));
+  }
+
+  .page-header h1 {
+    margin-top: var(--space-sm);
+  }
+
+  .content-width p {
+    margin-bottom: var(--space-md);
+  }
+
+  .content-width h2 {
+    margin-top: var(--space-lg);
+    margin-bottom: var(--space-xs);
+  }
+
+  .content-width aside {
+    margin-top: var(--space-md);
+  }
+</style>

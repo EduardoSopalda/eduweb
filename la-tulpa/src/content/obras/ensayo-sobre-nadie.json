@@ -1,0 +1,60 @@
+{
+  "title": "Ensayo sobre nadie",
+  "titleEn": "Essay on Nobody",
+  "slug": "ensayo-sobre-nadie",
+  "year": 2023,
+  "type": "Pieza breve de danza teatro",
+  "typeEn": "Short dance theatre piece",
+  "choreography": "Manuel Monró",
+  "performers": ["Susana Villegas", "Manuel Monró"],
+  "music": "Kevin Lisbona",
+  "production": "Festival Escena Mobile, en coproducción con la Compañía Danza Mobile",
+  "premiereDate": "23 de septiembre de 2023",
+  "premiereVenue": "Teatro Alameda",
+  "premiereCity": "Sevilla",
+  "synopsis": "Casi nadie se pregunta si es más real lo que se puede ver, lo que se puede oír, o lo que se contiene. Esta pieza habita ese umbral. Dos cuerpos en penumbra tantean lo no dicho, lo no visible, lo que existe solo porque alguien lo sostiene.",
+  "synopsisEn": "Almost nobody asks whether what can be seen, what can be heard, or what is held within is more real. This piece inhabits that threshold. Two bodies in half-light grope for the unsaid, the unseen, what exists only because someone sustains it.",
+  "themes": ["Salud mental", "Disidencias", "Lo no verbal", "Lo real frente a lo percibido"],
+  "themesEn": ["Mental health", "Dissidence", "The non-verbal", "The real versus the perceived"],
+  "videoSubtitles": false,
+  "onTour": true,
+  "order": 1,
+  "tourDates": [
+    {
+      "venue": "Teatro Alameda",
+      "city": "Sevilla",
+      "country": "España",
+      "year": 2023,
+      "festival": "XVI Festival Internacional Escena Mobile de Arte y Diversidad",
+      "notes": "Estreno mundial",
+      "notesEn": "World premiere"
+    },
+    {
+      "venue": "Festival Kiada",
+      "city": "Seúl",
+      "country": "Corea del Sur",
+      "year": 2024,
+      "festival": "Festival Internacional de Danza Accesible de Seúl",
+      "notes": "Pieza inaugural de la edición, en colaboración con Danza Mobile",
+      "notesEn": "Opening piece of the edition, in collaboration with Danza Mobile"
+    },
+    {
+      "venue": "Festival de Kirchheimbolanden",
+      "city": "Kirchheimbolanden",
+      "country": "Alemania",
+      "year": 2024,
+      "festival": "Festival de Kirchheimbolanden",
+      "notes": "Junto a Danza Mobile",
+      "notesEn": "With Danza Mobile"
+    },
+    {
+      "venue": "Teatros del Canal",
+      "city": "Madrid",
+      "country": "España",
+      "year": 2025,
+      "festival": "Festival Madrid en Danza 2025 — BETA PUBLICA, XII Muestra Coreográfica Internacional",
+      "notes": "Mayo de 2025",
+      "notesEn": "May 2025"
+    }
+  ]
+}

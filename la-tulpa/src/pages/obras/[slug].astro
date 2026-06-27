@@ -1,0 +1,231 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import VideoEmbed from '../../components/VideoEmbed.astro';
+import { getCollection } from 'astro:content';
+import { t } from '../../i18n';
+
+const locale = 'es';
+
+export async function getStaticPaths() {
+  const obras = await getCollection('obras');
+  return obras.map((obra) => ({
+    params: { slug: obra.data.slug },
+    props: { obra: obra.data },
+  }));
+}
+
+const { obra } = Astro.props;
+---
+
+<BaseLayout title={obra.title} locale={locale}>
+  <section class="section page-header">
+    <div class="container">
+      <span class="accent-line" aria-hidden="true"></span>
+      <h1 class="obra-title">{obra.title}</h1>
+      <p class="obra-type">{obra.type} &middot; {obra.year}</p>
+    </div>
+  </section>
+
+  <section class="section container">
+    <div class="obra-detail-grid">
+      <div class="obra-image-col reveal">
+        {obra.image ? (
+          <img src={obra.image} alt={obra.imageAlt || obra.title} />
+        ) : (
+          <div class="placeholder-content" style="aspect-ratio: 16/10; display: flex; align-items: center; justify-content: center;">
+            Fotografías de la pieza pendientes de recibir.
+          </div>
+        )}
+      </div>
+
+      <div class="obra-info-col content-width reveal">
+        <p class="synopsis">{obra.synopsis}</p>
+
+        {obra.themes && obra.themes.length > 0 && (
+          <div class="themes">
+            {obra.themes.map((theme: string) => (
+              <span class="theme-tag">{theme}</span>
+            ))}
+          </div>
+        )}
+
+        <dl class="ficha">
+          <div class="ficha-item">
+            <dt>{t(locale, 'works.choreography')}</dt>
+            <dd>{obra.choreography}</dd>
+          </div>
+          <div class="ficha-item">
+            <dt>{t(locale, 'works.performers')}</dt>
+            <dd>{obra.performers.join(', ')}</dd>
+          </div>
+          {obra.music && (
+            <div class="ficha-item">
+              <dt>{t(locale, 'works.music')}</dt>
+              <dd>{obra.music}</dd>
+            </div>
+          )}
+          {obra.production && (
+            <div class="ficha-item">
+              <dt>{t(locale, 'works.production')}</dt>
+              <dd>{obra.production}</dd>
+            </div>
+          )}
+          {obra.premiereDate && (
+            <div class="ficha-item">
+              <dt>{t(locale, 'works.premiere')}</dt>
+              <dd>{obra.premiereDate}{obra.premiereVenue && `, ${obra.premiereVenue}`}{obra.premiereCity && `, ${obra.premiereCity}`}</dd>
+            </div>
+          )}
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section class="section container reveal">
+    <h2>{t(locale, 'home.videoTitle')}</h2>
+    <span class="accent-line" aria-hidden="true"></span>
+    <VideoEmbed
+      url={obra.video}
+      title={`${t(locale, 'home.videoTitle')} — ${obra.title}`}
+      transcription={obra.videoTranscription}
+      locale={locale}
+    />
+  </section>
+
+  {obra.tourDates && obra.tourDates.length > 0 && (
+    <section class="section container reveal">
+      <h2>{t(locale, 'tour.venues')}</h2>
+      <span class="accent-line" aria-hidden="true"></span>
+      <ol class="tour-list" role="list">
+        {obra.tourDates.map((date: { venue: string; city: string; country: string; year: number; festival?: string; notes?: string }) => (
+          <li class="tour-item">
+            <span class="tour-year">{date.year}</span>
+            <div class="tour-info">
+              <strong>{date.venue}</strong>, {date.city}, {date.country}
+              {date.festival && <span class="tour-festival">{date.festival}</span>}
+              {date.notes && <span class="tour-notes">{date.notes}</span>}
+            </div>
+          </li>
+        ))}
+      </ol>
+    </section>
+  )}
+
+  <section class="section container">
+    <div class="placeholder-content reveal">
+      Ficha técnica completa, fotos adicionales y vídeo promocional pendientes de recibir.
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-header {
+    padding-top: calc(4rem + var(--space-xl));
+  }
+
+  .obra-title {
+    font-style: italic;
+  }
+
+  .obra-type {
+    color: var(--color-text-secondary);
+    margin-top: var(--space-xs);
+  }
+
+  .obra-detail-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  @media (min-width: 768px) {
+    .obra-detail-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .synopsis {
+    font-size: 1.15rem;
+    line-height: 1.7;
+    margin-bottom: var(--space-md);
+  }
+
+  .themes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+    margin-bottom: var(--space-md);
+  }
+
+  .theme-tag {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border: 1px solid var(--color-accent);
+    border-radius: 2px;
+    font-size: 0.85rem;
+    color: var(--color-accent-light);
+  }
+
+  .ficha {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .ficha-item {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .ficha-item dt {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-secondary);
+  }
+
+  .ficha-item dd {
+    margin: 0;
+    font-size: 1rem;
+  }
+
+  .tour-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    margin-top: var(--space-md);
+  }
+
+  .tour-item {
+    display: flex;
+    gap: var(--space-md);
+    padding: var(--space-sm) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .tour-year {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    color: var(--color-accent-light);
+    min-width: 3.5rem;
+  }
+
+  .tour-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .tour-festival {
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+  }
+
+  .tour-notes {
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+    font-style: italic;
+  }
+</style>

@@ -1,0 +1,83 @@
+{
+  "site": {
+    "title": "La Tulpa — Compañía de Danza",
+    "description": "Compañía de danza contemporánea dirigida por Manuel Monró. Creación inclusiva, danza teatro y estética de claroscuro."
+  },
+  "nav": {
+    "home": "Inicio",
+    "company": "La compañía",
+    "creator": "Manuel Monró",
+    "works": "Obras",
+    "onTour": "En gira",
+    "media": "Multimedia",
+    "press": "Prensa",
+    "contact": "Contacto",
+    "skipToContent": "Saltar al contenido principal",
+    "menu": "Menú",
+    "closeMenu": "Cerrar menú",
+    "switchLang": "English"
+  },
+  "home": {
+    "tagline": "Un pensamiento que se hace cuerpo.",
+    "subtitle": "Compañía de danza contemporánea",
+    "enterSite": "Entrar",
+    "currentWork": "Obra en gira",
+    "videoTitle": "Vídeo promocional"
+  },
+  "company": {
+    "title": "La compañía",
+    "heading": "La Tulpa"
+  },
+  "creator": {
+    "title": "Manuel Monró. Creador",
+    "role": "Director, coreógrafo, dramaturgo e intérprete"
+  },
+  "works": {
+    "title": "Obras producidas",
+    "heading": "Histórico",
+    "premiere": "Estreno",
+    "choreography": "Coreografía",
+    "performers": "Intérpretes",
+    "music": "Música",
+    "production": "Producción",
+    "viewWork": "Ver ficha completa"
+  },
+  "tour": {
+    "title": "En gira",
+    "heading": "Obras en gira y otros proyectos",
+    "venues": "Gira",
+    "upcoming": "Próximas funciones"
+  },
+  "media": {
+    "title": "Multimedia",
+    "heading": "Material promocional",
+    "filterAll": "Todo",
+    "filterVideo": "Vídeo",
+    "filterAudio": "Audio",
+    "filterImage": "Imagen",
+    "filterText": "Texto",
+    "filterBanner": "Banner"
+  },
+  "press": {
+    "title": "Prensa",
+    "heading": "Reseñas y notas de medios"
+  },
+  "contact": {
+    "title": "Contacto y contratación",
+    "heading": "Contacto",
+    "intro": "Para contrataciones, residencias y programación de espectáculos.",
+    "email": "Correo electrónico",
+    "dossier": "Descargar dossier",
+    "rider": "Rider técnico",
+    "networks": "Redes"
+  },
+  "footer": {
+    "rights": "Todos los derechos reservados.",
+    "accessibility": "Declaración de accesibilidad"
+  },
+  "accessibility": {
+    "newWindow": "se abre en ventana nueva",
+    "externalLink": "enlace externo",
+    "videoDescription": "Descripción del vídeo"
+  }
+}

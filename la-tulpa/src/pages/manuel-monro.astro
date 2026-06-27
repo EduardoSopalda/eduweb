@@ -1,0 +1,92 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { t } from '../i18n';
+
+const locale = 'es';
+---
+
+<BaseLayout title={t(locale, 'creator.title')} locale={locale}>
+  <section class="section page-header">
+    <div class="container">
+      <span class="accent-line" aria-hidden="true"></span>
+      <h1>Manuel Monró</h1>
+      <p class="role">{t(locale, 'creator.role')}</p>
+    </div>
+  </section>
+
+  <section class="section container">
+    <div class="creator-grid">
+      <div class="creator-portrait reveal">
+        <div class="placeholder-content">
+          Fotografía de retrato de Manuel Monró.
+        </div>
+      </div>
+      <div class="creator-bio content-width reveal">
+        <p>
+          Director, coreógrafo, dramaturgo e intérprete. Trabaja entre Barcelona y Sevilla. Vinculado al circuito de la danza inclusiva y a la Compañía Danza Mobile de Sevilla.
+        </p>
+
+        <p>
+          En 2023 funda La Tulpa a partir de su participación en el Festival Internacional Escena Mobile. Desde entonces, sus piezas han girado por España, Corea del Sur y Alemania.
+        </p>
+
+        <h2>Formación</h2>
+        <span class="accent-line" aria-hidden="true"></span>
+        <div class="placeholder-content">
+          Formación y trayectoria detallada pendiente de recibir.
+        </div>
+
+        <h2>Declaración de artista</h2>
+        <span class="accent-line" aria-hidden="true"></span>
+        <div class="placeholder-content">
+          Declaración personal del artista pendiente de recibir.
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-header {
+    padding-top: calc(4rem + var(--space-xl));
+  }
+
+  .role {
+    color: var(--color-text-secondary);
+    font-size: 1.1rem;
+    margin-top: var(--space-xs);
+  }
+
+  .creator-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  .creator-portrait .placeholder-content {
+    aspect-ratio: 3 / 4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 24rem;
+  }
+
+  .creator-bio p {
+    margin-bottom: var(--space-md);
+  }
+
+  .creator-bio h2 {
+    margin-top: var(--space-lg);
+    margin-bottom: var(--space-xs);
+  }
+
+  .creator-bio .placeholder-content {
+    margin-top: var(--space-sm);
+  }
+
+  @media (min-width: 768px) {
+    .creator-grid {
+      grid-template-columns: 1fr 1.5fr;
+    }
+  }
+</style>

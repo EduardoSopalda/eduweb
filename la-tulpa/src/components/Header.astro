@@ -1,0 +1,255 @@
+---
+import { type Locale, t, getAlternateUrl } from '../i18n';
+
+interface Props {
+  locale: Locale;
+  currentPath: string;
+}
+
+const { locale, currentPath } = Astro.props;
+const altUrl = getAlternateUrl(currentPath);
+
+const navItems = locale === 'es'
+  ? [
+      { href: '/compania', label: t(locale, 'nav.company') },
+      { href: '/manuel-monro', label: t(locale, 'nav.creator') },
+      { href: '/obras', label: t(locale, 'nav.works') },
+      { href: '/en-gira', label: t(locale, 'nav.onTour') },
+      { href: '/media', label: t(locale, 'nav.media') },
+      { href: '/prensa', label: t(locale, 'nav.press') },
+      { href: '/contacto', label: t(locale, 'nav.contact') },
+    ]
+  : [
+      { href: '/en/company', label: t(locale, 'nav.company') },
+      { href: '/en/manuel-monro', label: t(locale, 'nav.creator') },
+      { href: '/en/works', label: t(locale, 'nav.works') },
+      { href: '/en/on-tour', label: t(locale, 'nav.onTour') },
+      { href: '/en/media', label: t(locale, 'nav.media') },
+      { href: '/en/press', label: t(locale, 'nav.press') },
+      { href: '/en/contact', label: t(locale, 'nav.contact') },
+    ];
+
+const homePath = locale === 'es' ? '/' : '/en';
+
+function isActive(href: string): boolean {
+  const clean = currentPath.replace(/\/$/, '') || '/';
+  return clean === href || clean.startsWith(href + '/');
+}
+---
+
+<header class="site-header" role="banner">
+  <div class="header-inner container">
+    <a href={homePath} class="logo" aria-label={`La Tulpa — ${t(locale, 'nav.home')}`}>
+      La Tulpa
+    </a>
+
+    <button
+      class="menu-toggle"
+      aria-expanded="false"
+      aria-controls="main-nav"
+      aria-label={t(locale, 'nav.menu')}
+    >
+      <span class="menu-bar"></span>
+      <span class="menu-bar"></span>
+      <span class="menu-bar"></span>
+    </button>
+
+    <nav id="main-nav" class="main-nav" aria-label={locale === 'es' ? 'Navegación principal' : 'Main navigation'}>
+      <ul role="list">
+        {navItems.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              class:list={['nav-link', { active: isActive(item.href) }]}
+              aria-current={isActive(item.href) ? 'page' : undefined}
+            >
+              {item.label}
+            </a>
+          </li>
+        ))}
+        <li class="lang-switch">
+          <a href={altUrl} lang={locale === 'es' ? 'en' : 'es'}>
+            {t(locale, 'nav.switchLang')}
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const toggle = document.querySelector('.menu-toggle');
+  const nav = document.querySelector('#main-nav');
+
+  if (toggle && nav) {
+    toggle.addEventListener('click', () => {
+      const expanded = toggle.getAttribute('aria-expanded') === 'true';
+      toggle.setAttribute('aria-expanded', String(!expanded));
+      nav.classList.toggle('open');
+      document.body.classList.toggle('nav-open');
+    });
+
+    nav.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        toggle.setAttribute('aria-expanded', 'false');
+        nav.classList.remove('open');
+        document.body.classList.remove('nav-open');
+      });
+    });
+  }
+</script>
+
+<style>
+  .site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    background-color: rgba(11, 11, 13, 0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 4rem;
+  }
+
+  .logo {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--color-text);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+  }
+
+  .logo:hover {
+    color: var(--color-accent-light);
+  }
+
+  .menu-toggle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 44px;
+    height: 44px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+  }
+
+  .menu-bar {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background-color: var(--color-text);
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+
+  .menu-toggle[aria-expanded='true'] .menu-bar:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  .menu-toggle[aria-expanded='true'] .menu-bar:nth-child(2) {
+    opacity: 0;
+  }
+  .menu-toggle[aria-expanded='true'] .menu-bar:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  .main-nav {
+    display: none;
+    position: fixed;
+    top: 4rem;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--color-bg);
+    padding: var(--space-lg) var(--space-md);
+    overflow-y: auto;
+  }
+
+  .main-nav.open {
+    display: block;
+  }
+
+  .main-nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .nav-link,
+  .lang-switch a {
+    display: block;
+    padding: var(--space-xs) 0;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    font-size: 1.1rem;
+    transition: color 0.2s ease;
+  }
+
+  .nav-link:hover,
+  .nav-link.active,
+  .lang-switch a:hover {
+    color: var(--color-text);
+  }
+
+  .nav-link.active {
+    color: var(--color-accent-light);
+  }
+
+  .lang-switch {
+    margin-top: var(--space-sm);
+    padding-top: var(--space-sm);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .lang-switch a {
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  @media (min-width: 960px) {
+    .menu-toggle {
+      display: none;
+    }
+
+    .main-nav {
+      display: block;
+      position: static;
+      background: none;
+      padding: 0;
+      overflow: visible;
+    }
+
+    .main-nav ul {
+      flex-direction: row;
+      align-items: center;
+      gap: 0;
+    }
+
+    .nav-link,
+    .lang-switch a {
+      padding: var(--space-xs) 0.75rem;
+      font-size: 0.9rem;
+    }
+
+    .lang-switch {
+      margin-top: 0;
+      margin-left: 0.5rem;
+      padding-top: 0;
+      padding-left: 0.75rem;
+      border-top: none;
+      border-left: 1px solid var(--color-border);
+    }
+  }
+</style>

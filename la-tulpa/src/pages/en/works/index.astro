@@ -1,0 +1,62 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ObraCard from '../../../components/ObraCard.astro';
+import { getCollection } from 'astro:content';
+import { t } from '../../../i18n';
+
+const locale = 'en';
+const obras = (await getCollection('obras')).sort((a, b) => b.data.year - a.data.year);
+---
+
+<BaseLayout title={t(locale, 'works.title')} locale={locale}>
+  <section class="section page-header">
+    <div class="container">
+      <span class="accent-line" aria-hidden="true"></span>
+      <p class="page-label">{t(locale, 'works.heading')}</p>
+      <h1>{t(locale, 'works.title')}</h1>
+    </div>
+  </section>
+
+  <section class="section container">
+    <div class="obras-list">
+      {obras.map((obra) => (
+        <ObraCard
+          title={obra.data.titleEn}
+          year={obra.data.year}
+          type={obra.data.typeEn}
+          synopsis={obra.data.synopsisEn}
+          slug={obra.data.slug}
+          image={obra.data.image}
+          imageAlt={obra.data.imageAltEn || obra.data.imageAlt}
+          locale={locale}
+        />
+      ))}
+    </div>
+
+    <aside class="placeholder-content reveal" style="margin-top: var(--space-lg);">
+      Other works produced after Essay on Nobody, if any.
+    </aside>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-header {
+    padding-top: calc(4rem + var(--space-xl));
+  }
+
+  .page-label {
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .page-header h1 {
+    margin-top: var(--space-xs);
+  }
+
+  .obras-list {
+    display: flex;
+    flex-direction: column;
+  }
+</style>

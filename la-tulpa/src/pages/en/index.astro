@@ -1,0 +1,167 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import { t } from '../../i18n';
+
+const locale = 'en';
+const obras = await getCollection('obras');
+const obraEnGira = obras.find((o) => o.data.onTour);
+---
+
+<BaseLayout title="" locale={locale}>
+  <section class="hero" aria-label="Landing">
+    <div class="hero-inner container">
+      <span class="accent-line" aria-hidden="true"></span>
+      <h1 class="hero-title">La Tulpa</h1>
+      <p class="hero-subtitle">{t(locale, 'home.subtitle')}</p>
+      <p class="hero-tagline">{t(locale, 'home.tagline')}</p>
+      <a href="/en/company" class="hero-cta">
+        {t(locale, 'home.enterSite')}
+        <span aria-hidden="true">&rarr;</span>
+      </a>
+    </div>
+  </section>
+
+  {obraEnGira && (
+    <section class="section container" aria-labelledby="current-work">
+      <div class="reveal">
+        <span class="accent-line" aria-hidden="true"></span>
+        <h2 id="current-work">{t(locale, 'home.currentWork')}</h2>
+        <article class="featured-work">
+          <h3 class="featured-title">{obraEnGira.data.titleEn}</h3>
+          <p class="featured-type">{obraEnGira.data.typeEn} &middot; {obraEnGira.data.year}</p>
+          <p class="featured-synopsis">{obraEnGira.data.synopsisEn}</p>
+
+          {obraEnGira.data.video ? (
+            <div class="featured-video">
+              <div class="video-wrapper">
+                <iframe
+                  src={obraEnGira.data.video}
+                  title={`${t(locale, 'home.videoTitle')} — ${obraEnGira.data.titleEn}`}
+                  allow="autoplay; fullscreen; picture-in-picture"
+                  allowfullscreen
+                  loading="lazy"
+                ></iframe>
+              </div>
+            </div>
+          ) : (
+            <div class="placeholder-content">
+              Promotional video pending.
+            </div>
+          )}
+
+          <a href={`/en/works/${obraEnGira.data.slug}`} class="featured-link">
+            {t(locale, 'works.viewWork')}
+            <span aria-hidden="true">&rarr;</span>
+          </a>
+        </article>
+      </div>
+    </section>
+  )}
+</BaseLayout>
+
+<style>
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding-top: 4rem;
+  }
+
+  .hero-inner {
+    max-width: var(--content-width);
+  }
+
+  .hero-title {
+    font-size: clamp(3.5rem, 8vw + 1rem, 7rem);
+    line-height: 1;
+    margin-bottom: var(--space-sm);
+    letter-spacing: -0.02em;
+  }
+
+  .hero-subtitle {
+    font-size: 1.1rem;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: var(--space-lg);
+  }
+
+  .hero-tagline {
+    font-family: var(--font-display);
+    font-size: clamp(1.3rem, 2.5vw, 2rem);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--color-text);
+    max-width: 30ch;
+    line-height: 1.4;
+    margin-bottom: var(--space-lg);
+  }
+
+  .hero-cta {
+    display: inline-block;
+    padding: 0.8rem 2rem;
+    border: 1px solid var(--color-accent-light);
+    color: var(--color-accent-light);
+    text-decoration: none;
+    font-size: 1rem;
+    letter-spacing: 0.05em;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  .hero-cta:hover {
+    background-color: var(--color-accent-light);
+    color: var(--color-bg);
+  }
+
+  .featured-work {
+    margin-top: var(--space-md);
+  }
+
+  .featured-title {
+    font-size: 2rem;
+    font-style: italic;
+  }
+
+  .featured-type {
+    color: var(--color-text-secondary);
+    font-size: 0.95rem;
+    margin: var(--space-xs) 0 var(--space-sm);
+  }
+
+  .featured-synopsis {
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+    max-width: 55ch;
+    margin-bottom: var(--space-md);
+  }
+
+  .featured-video {
+    margin: var(--space-md) 0;
+    max-width: 48rem;
+  }
+
+  .video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    border-radius: 4px;
+    background-color: var(--color-bg-elevated);
+  }
+
+  .video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+
+  .featured-link {
+    display: inline-block;
+    font-weight: 600;
+    font-size: 1rem;
+  }
+</style>

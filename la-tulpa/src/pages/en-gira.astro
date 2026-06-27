@@ -1,0 +1,128 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import { t } from '../i18n';
+
+const locale = 'es';
+const obras = (await getCollection('obras')).filter((o) => o.data.onTour);
+---
+
+<BaseLayout title={t(locale, 'tour.title')} locale={locale}>
+  <section class="section page-header">
+    <div class="container">
+      <span class="accent-line" aria-hidden="true"></span>
+      <h1>{t(locale, 'tour.heading')}</h1>
+    </div>
+  </section>
+
+  <section class="section container">
+    {obras.map((obra) => (
+      <article class="tour-obra reveal">
+        <h2>
+          <a href={`/obras/${obra.data.slug}`}>{obra.data.title}</a>
+        </h2>
+        <p class="tour-obra-type">{obra.data.type} &middot; {obra.data.year}</p>
+        <p class="tour-obra-synopsis">{obra.data.synopsis}</p>
+
+        {obra.data.tourDates && obra.data.tourDates.length > 0 && (
+          <div class="tour-dates">
+            <h3>{t(locale, 'tour.venues')}</h3>
+            <ul role="list">
+              {obra.data.tourDates.map((date) => (
+                <li class="tour-date-item">
+                  <span class="tour-date-year">{date.year}</span>
+                  <div>
+                    <strong>{date.venue}</strong>, {date.city}, {date.country}
+                    {date.festival && <span class="tour-date-festival"> — {date.festival}</span>}
+                    {date.notes && <p class="tour-date-notes">{date.notes}</p>}
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </article>
+    ))}
+
+    <aside class="reveal" style="margin-top: var(--space-lg);">
+      <h2>{t(locale, 'tour.upcoming')}</h2>
+      <span class="accent-line" aria-hidden="true"></span>
+      <div class="placeholder-content">
+        Próximas funciones, nuevos proyectos en desarrollo y residencias pendientes de confirmar.
+      </div>
+    </aside>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-header {
+    padding-top: calc(4rem + var(--space-xl));
+  }
+
+  .tour-obra {
+    padding: var(--space-lg) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .tour-obra h2 {
+    font-style: italic;
+  }
+
+  .tour-obra h2 a {
+    color: var(--color-text);
+    text-decoration: none;
+  }
+
+  .tour-obra h2 a:hover {
+    color: var(--color-accent-light);
+  }
+
+  .tour-obra-type {
+    color: var(--color-text-secondary);
+    font-size: 0.95rem;
+    margin: var(--space-xs) 0;
+  }
+
+  .tour-obra-synopsis {
+    color: var(--color-text-secondary);
+    max-width: 55ch;
+    margin-bottom: var(--space-md);
+  }
+
+  .tour-dates h3 {
+    font-size: 1.1rem;
+    margin-bottom: var(--space-sm);
+  }
+
+  .tour-dates ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .tour-date-item {
+    display: flex;
+    gap: var(--space-md);
+    padding: var(--space-xs) 0;
+  }
+
+  .tour-date-year {
+    font-family: var(--font-display);
+    color: var(--color-accent-light);
+    min-width: 3rem;
+  }
+
+  .tour-date-festival {
+    color: var(--color-text-secondary);
+    font-size: 0.9rem;
+  }
+
+  .tour-date-notes {
+    color: var(--color-text-secondary);
+    font-size: 0.85rem;
+    font-style: italic;
+    margin-top: 0.15rem;
+  }
+</style>

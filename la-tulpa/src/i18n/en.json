@@ -1,0 +1,83 @@
+{
+  "site": {
+    "title": "La Tulpa — Dance Company",
+    "description": "Contemporary dance company directed by Manuel Monró. Inclusive creation, dance theatre and chiaroscuro aesthetics."
+  },
+  "nav": {
+    "home": "Home",
+    "company": "The company",
+    "creator": "Manuel Monró",
+    "works": "Works",
+    "onTour": "On tour",
+    "media": "Media",
+    "press": "Press",
+    "contact": "Contact",
+    "skipToContent": "Skip to main content",
+    "menu": "Menu",
+    "closeMenu": "Close menu",
+    "switchLang": "Español"
+  },
+  "home": {
+    "tagline": "A thought made flesh.",
+    "subtitle": "Contemporary dance company",
+    "enterSite": "Enter",
+    "currentWork": "Currently on tour",
+    "videoTitle": "Promotional video"
+  },
+  "company": {
+    "title": "The company",
+    "heading": "La Tulpa"
+  },
+  "creator": {
+    "title": "Manuel Monró. Creator",
+    "role": "Director, choreographer, playwright and performer"
+  },
+  "works": {
+    "title": "Works produced",
+    "heading": "Archive",
+    "premiere": "Premiere",
+    "choreography": "Choreography",
+    "performers": "Performers",
+    "music": "Music",
+    "production": "Production",
+    "viewWork": "View full details"
+  },
+  "tour": {
+    "title": "On tour",
+    "heading": "Works on tour and other projects",
+    "venues": "Tour",
+    "upcoming": "Upcoming shows"
+  },
+  "media": {
+    "title": "Media",
+    "heading": "Promotional material",
+    "filterAll": "All",
+    "filterVideo": "Video",
+    "filterAudio": "Audio",
+    "filterImage": "Image",
+    "filterText": "Text",
+    "filterBanner": "Banner"
+  },
+  "press": {
+    "title": "Press",
+    "heading": "Reviews and media coverage"
+  },
+  "contact": {
+    "title": "Contact and booking",
+    "heading": "Contact",
+    "intro": "For bookings, residencies and programming.",
+    "email": "Email",
+    "dossier": "Download dossier",
+    "rider": "Technical rider",
+    "networks": "Social media"
+  },
+  "footer": {
+    "rights": "All rights reserved.",
+    "accessibility": "Accessibility statement"
+  },
+  "accessibility": {
+    "newWindow": "opens in new window",
+    "externalLink": "external link",
+    "videoDescription": "Video description"
+  }
+}

@@ -1,0 +1,68 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { t } from '../i18n';
+
+const locale = 'es';
+---
+
+<BaseLayout title={t(locale, 'company.title')} locale={locale}>
+  <section class="section page-header">
+    <div class="container">
+      <span class="accent-line" aria-hidden="true"></span>
+      <h1>{t(locale, 'company.heading')}</h1>
+    </div>
+  </section>
+
+  <section class="section container">
+    <div class="content-width reveal">
+      <p>
+        La Tulpa es una compañía de danza contemporánea dirigida por Manuel Monró. Surge en 2023, a raíz de su participación en el XVI Festival Internacional Escena Mobile de Arte y Diversidad, celebrado en el Teatro Alameda de Sevilla del 21 al 24 de septiembre de 2023.
+      </p>
+
+      <p>
+        Escena Mobile es un festival de artes inclusivas y diversidad que se celebra en Sevilla desde 2007. En ese contexto nace La Tulpa: en el cruce entre la creación contemporánea y la danza inclusiva.
+      </p>
+
+      <h2 class="reveal">El lenguaje</h2>
+      <span class="accent-line" aria-hidden="true"></span>
+
+      <p class="reveal">
+        Danza contemporánea y danza teatro en el ámbito de la creación inclusiva. Movimiento simple y preciso. Investigación escénica. Estética de claroscuro. Cada pieza busca el umbral entre lo visible y lo que se contiene.
+      </p>
+
+      <h2 class="reveal">El nombre</h2>
+      <span class="accent-line" aria-hidden="true"></span>
+
+      <p class="reveal">
+        Una tulpa es, en su origen tibetano, un ser que cobra forma a través del pensamiento y la voluntad. Un pensamiento que se hace cuerpo. La imagen resuena con la poética de la compañía: cuerpos que encarnan lo que no puede decirse con palabras.
+      </p>
+
+      <aside class="placeholder-content reveal">
+        Confirmar con Manuel el sentido personal que él atribuye al nombre de la compañía.
+      </aside>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-header {
+    padding-top: calc(4rem + var(--space-xl));
+  }
+
+  .page-header h1 {
+    margin-top: var(--space-sm);
+  }
+
+  .content-width p {
+    margin-bottom: var(--space-md);
+  }
+
+  .content-width h2 {
+    margin-top: var(--space-lg);
+    margin-bottom: var(--space-xs);
+  }
+
+  .content-width aside {
+    margin-top: var(--space-md);
+  }
+</style>

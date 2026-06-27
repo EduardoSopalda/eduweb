@@ -1,0 +1,133 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import MediaCard from '../../components/MediaCard.astro';
+import { getCollection } from 'astro:content';
+import { t } from '../../i18n';
+
+const locale = 'en';
+const mediaItems = (await getCollection('media')).sort((a, b) => a.data.order - b.data.order);
+const types = ['all', 'video', 'audio', 'image', 'text', 'banner'] as const;
+---
+
+<BaseLayout title={t(locale, 'media.title')} locale={locale}>
+  <section class="section page-header">
+    <div class="container">
+      <span class="accent-line" aria-hidden="true"></span>
+      <h1>{t(locale, 'media.heading')}</h1>
+    </div>
+  </section>
+
+  <section class="section container">
+    <nav class="media-filters" aria-label="Filter by type">
+      {types.map((type) => (
+        <button
+          class:list={['filter-btn', { active: type === 'all' }]}
+          data-filter={type}
+          aria-pressed={type === 'all' ? 'true' : 'false'}
+        >
+          {t(locale, `media.filter${type.charAt(0).toUpperCase() + type.slice(1)}`)}
+        </button>
+      ))}
+    </nav>
+
+    <div class="media-grid">
+      {mediaItems.map((item) => (
+        <MediaCard
+          title={item.data.titleEn}
+          type={item.data.type}
+          description={item.data.descriptionEn}
+          url={item.data.url}
+          thumbnail={item.data.thumbnail}
+          thumbnailAlt={item.data.thumbnailAltEn || item.data.thumbnailAlt}
+          locale={locale}
+        />
+      ))}
+    </div>
+
+    {mediaItems.length === 0 && (
+      <div class="placeholder-content">
+        Multimedia material pending. This section will host videos, audio, images, texts and promotional banners.
+      </div>
+    )}
+  </section>
+</BaseLayout>
+
+<script>
+  const buttons = document.querySelectorAll('.filter-btn');
+  const cards = document.querySelectorAll('.media-card');
+
+  buttons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const filter = (btn as HTMLElement).dataset.filter;
+
+      buttons.forEach((b) => {
+        b.classList.remove('active');
+        b.setAttribute('aria-pressed', 'false');
+      });
+      btn.classList.add('active');
+      btn.setAttribute('aria-pressed', 'true');
+
+      cards.forEach((card) => {
+        const cardType = (card as HTMLElement).dataset.type;
+        if (filter === 'all' || cardType === filter) {
+          (card as HTMLElement).style.display = '';
+        } else {
+          (card as HTMLElement).style.display = 'none';
+        }
+      });
+    });
+  });
+</script>
+
+<style>
+  .page-header {
+    padding-top: calc(4rem + var(--space-xl));
+  }
+
+  .media-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+    margin-bottom: var(--space-lg);
+  }
+
+  .filter-btn {
+    padding: 0.4rem 1rem;
+    background: none;
+    border: 1px solid var(--color-border);
+    color: var(--color-text-secondary);
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: border-color 0.2s ease, color 0.2s ease;
+  }
+
+  .filter-btn:hover {
+    border-color: var(--color-accent-light);
+    color: var(--color-text);
+  }
+
+  .filter-btn.active {
+    border-color: var(--color-accent-light);
+    color: var(--color-accent-light);
+  }
+
+  .media-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+
+  @media (min-width: 640px) {
+    .media-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .media-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

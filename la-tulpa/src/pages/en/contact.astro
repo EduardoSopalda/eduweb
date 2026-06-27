@@ -1,0 +1,103 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { t } from '../../i18n';
+
+const locale = 'en';
+---
+
+<BaseLayout title={t(locale, 'contact.title')} locale={locale}>
+  <section class="section page-header">
+    <div class="container">
+      <span class="accent-line" aria-hidden="true"></span>
+      <h1>{t(locale, 'contact.heading')}</h1>
+      <p class="contact-intro">{t(locale, 'contact.intro')}</p>
+    </div>
+  </section>
+
+  <section class="section container">
+    <div class="contact-grid">
+      <div class="contact-info content-width reveal">
+        <h2>{t(locale, 'contact.email')}</h2>
+        <span class="accent-line" aria-hidden="true"></span>
+        <div class="placeholder-content">
+          Contact and booking email address.
+        </div>
+
+        <h2>{t(locale, 'contact.networks')}</h2>
+        <span class="accent-line" aria-hidden="true"></span>
+        <div class="placeholder-content">
+          Social media profiles (Instagram, etc.).
+        </div>
+
+        <h2>{t(locale, 'contact.dossier')}</h2>
+        <span class="accent-line" aria-hidden="true"></span>
+        <div class="placeholder-content">
+          Company dossier and artistic sheets for download.
+        </div>
+
+        <h2>{t(locale, 'contact.rider')}</h2>
+        <span class="accent-line" aria-hidden="true"></span>
+        <div class="placeholder-content">
+          Technical rider for touring works.
+        </div>
+      </div>
+
+      <aside class="contact-note reveal">
+        <p>
+          If you are a festival programmer, venue or performing arts space interested in programming our pieces, contact us directly.
+        </p>
+      </aside>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-header {
+    padding-top: calc(4rem + var(--space-xl));
+  }
+
+  .contact-intro {
+    color: var(--color-text-secondary);
+    margin-top: var(--space-xs);
+    font-size: 1.1rem;
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  .contact-info h2 {
+    margin-top: var(--space-lg);
+    margin-bottom: var(--space-xs);
+    font-size: 1.3rem;
+  }
+
+  .contact-info h2:first-child {
+    margin-top: 0;
+  }
+
+  .contact-info .placeholder-content {
+    margin-top: var(--space-sm);
+  }
+
+  .contact-note {
+    padding: var(--space-md);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    align-self: start;
+  }
+
+  .contact-note p {
+    color: var(--color-text-secondary);
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  @media (min-width: 768px) {
+    .contact-grid {
+      grid-template-columns: 2fr 1fr;
+    }
+  }
+</style>

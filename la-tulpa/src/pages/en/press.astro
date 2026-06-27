@@ -1,0 +1,71 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { t } from '../../i18n';
+
+const locale = 'en';
+---
+
+<BaseLayout title={t(locale, 'press.title')} locale={locale}>
+  <section class="section page-header">
+    <div class="container">
+      <span class="accent-line" aria-hidden="true"></span>
+      <h1>{t(locale, 'press.heading')}</h1>
+    </div>
+  </section>
+
+  <section class="section container">
+    <div class="content-width">
+      <article class="press-item reveal">
+        <blockquote>
+          <p>&laquo;The aesthetics may seem sinister, but these beings are harmless.&raquo;</p>
+        </blockquote>
+        <p class="press-source">
+          Review of <cite>Essay on Nobody</cite>, on the occasion of its premiere at the XVI edition of the Festival Escena Mobile.
+        </p>
+        <aside class="placeholder-content">
+          Author and publication pending confirmation for proper attribution.
+        </aside>
+      </article>
+
+      <div class="placeholder-content reveal" style="margin-top: var(--space-lg);">
+        Additional reviews and press notes pending.
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-header {
+    padding-top: calc(4rem + var(--space-xl));
+  }
+
+  .press-item {
+    padding: var(--space-lg) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  blockquote {
+    font-family: var(--font-display);
+    font-size: clamp(1.3rem, 2vw, 1.8rem);
+    font-style: italic;
+    color: var(--color-text);
+    line-height: 1.5;
+    padding-left: var(--space-md);
+    border-left: 2px solid var(--color-accent);
+  }
+
+  .press-source {
+    margin-top: var(--space-sm);
+    color: var(--color-text-secondary);
+    font-size: 0.95rem;
+  }
+
+  .press-source cite {
+    font-style: italic;
+    color: var(--color-text);
+  }
+
+  .press-item .placeholder-content {
+    margin-top: var(--space-sm);
+  }
+</style>

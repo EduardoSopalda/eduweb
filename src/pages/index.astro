@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import Hero from '../components/Hero.astro';
-import { getCollection, render } from 'astro:content';
+import { getCollection } from 'astro:content';
 
 const obras = (await getCollection('obras')).sort((a, b) => (b.data.order || 0) - (a.data.order || 0));
 const featured = obras.find((o) => o.data.touring) || obras[0];
@@ -13,33 +13,54 @@ const featured = obras.find((o) => o.data.touring) || obras[0];
 >
   <Hero
     title="Manuel Monró"
-    phrase="Un pensamiento que se hace cuerpo."
+    subtitle="Coreógrafo · Intérprete · Creador"
+    phrase="No busca ilustrar la diferencia. Trabaja desde ella."
     height="full"
   />
 
-  <section class="section container home-intro" aria-labelledby="home-statement">
-    <div class="home-intro-grid">
-      <div class="home-intro-main reveal">
-        <h2 id="home-statement" class="accent-underline">Coreógrafo. Intérprete. Creador.</h2>
-        <p>
-          Manuel Monró trabaja en el cruce entre danza contemporánea, danza teatro y creación inclusiva. Fundó La Tulpa en 2023, dentro del Festival Internacional Escena Mobile de Arte y Diversidad en Sevilla.
+  <!-- Identity -->
+  <section class="section container" aria-labelledby="home-identity">
+    <div class="identity reveal">
+      <h2 id="home-identity" class="identity-statement">
+        Director, coreógrafo, dramaturgo e intérprete. Trabaja entre Barcelona y Sevilla en el cruce entre danza contemporánea, danza teatro y creación inclusiva.
+      </h2>
+    </div>
+
+    <div class="disciplines reveal reveal-delay-1">
+      <span class="discipline-tag">Danza contemporánea</span>
+      <span class="discipline-tag">Danza teatro</span>
+      <span class="discipline-tag">Creación inclusiva</span>
+    </div>
+  </section>
+
+  <!-- Approach -->
+  <section class="section container home-approach" aria-labelledby="home-approach-title">
+    <div class="approach-grid">
+      <div class="approach-main reveal">
+        <h2 id="home-approach-title" class="sr-only">Lenguaje</h2>
+        <p class="approach-text">
+          Lo que ocurre en escena nace de la diferencia: de cuerpos distintos que se encuentran, se escuchan, se transforman. Movimiento simple y preciso. Una estética de claroscuro que busca la penumbra para mirar con más cuidado.
         </p>
-        <p>
-          Un lugar donde el cuerpo investiga lo que las palabras no alcanzan.
+        <p class="approach-text approach-text--emphasis">
+          Cada pieza es una investigación. Cada función, un acto de presencia.
         </p>
       </div>
-      <aside class="home-intro-aside reveal reveal-delay-1">
-        <p class="marginalia marginalia--offset">
-          &ldquo;Casi nadie se pregunta si es más real lo que se puede ver, lo que se puede oír, o lo que se contiene.&rdquo;
-        </p>
+      <aside class="approach-aside reveal reveal-delay-1">
+        <blockquote class="approach-quote">
+          <p>&ldquo;Casi nadie se pregunta si es más real lo que se puede ver, lo que se puede oír, o lo que se contiene.&rdquo;</p>
+        </blockquote>
+        <p class="marginalia">— <em>Ensayo sobre nadie</em></p>
       </aside>
     </div>
   </section>
 
+  <!-- Featured work -->
   {featured && (
     <section class="section container" aria-labelledby="home-work-title">
-      <span class="marginalia reveal">En escena</span>
-      <h2 id="home-work-title" class="accent-underline reveal">{featured.data.title}</h2>
+      <div class="work-header reveal">
+        <span class="marginalia">En escena</span>
+        <h2 id="home-work-title" class="accent-underline">{featured.data.title}</h2>
+      </div>
       <div class="home-work-card reveal reveal-delay-1">
         <div class="work-card-media">
           {featured.data.image
@@ -55,60 +76,176 @@ const featured = obras.find((o) => o.data.touring) || obras[0];
           <p class="work-card-meta marginalia">
             {featured.data.year} — {featured.data.type}
           </p>
+          <p class="work-card-desc">
+            Pieza breve de danza teatro. Coreografía de {featured.data.choreography}.
+          </p>
           <a href="/obra" class="work-card-link">Ver obra completa &rarr;</a>
         </div>
       </div>
     </section>
   )}
 
+  <!-- International presence -->
+  <section class="section container home-presence" aria-labelledby="home-presence-title">
+    <h2 id="home-presence-title" class="accent-underline reveal">Presencia internacional</h2>
+    <div class="presence-grid reveal reveal-delay-1">
+      <div class="presence-item">
+        <span class="presence-year marginalia">2023</span>
+        <span class="presence-place">Sevilla</span>
+        <span class="presence-detail">Festival Escena Mobile — Estreno</span>
+      </div>
+      <div class="presence-item">
+        <span class="presence-year marginalia">2024</span>
+        <span class="presence-place">Seúl</span>
+        <span class="presence-detail">Festival Kiada — Inauguración</span>
+      </div>
+      <div class="presence-item">
+        <span class="presence-year marginalia">2024</span>
+        <span class="presence-place">Alemania</span>
+        <span class="presence-detail">Festival de Kirchheimbolanden</span>
+      </div>
+      <div class="presence-item">
+        <span class="presence-year marginalia">2025</span>
+        <span class="presence-place">Madrid</span>
+        <span class="presence-detail">Madrid en Danza, Teatros del Canal</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- La Tulpa -->
+  <section class="section container home-tulpa" aria-labelledby="home-tulpa-title">
+    <div class="tulpa-grid reveal">
+      <div class="tulpa-main">
+        <span class="marginalia">Compañía</span>
+        <h2 id="home-tulpa-title" class="accent-underline">La Tulpa</h2>
+        <p>
+          En la tradición tibetana, una tulpa es un ser que cobra forma a través del pensamiento y la voluntad. Un pensamiento que se hace cuerpo. Fundada en 2023 en colaboración con Danza Mobile, Sevilla.
+        </p>
+        <a href="/obra/la-tulpa" class="cta-link">Conocer La Tulpa &rarr;</a>
+      </div>
+      <div class="tulpa-aside">
+        <div class="empty-media empty-media--square chaos-tilt" aria-hidden="true"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
   <section class="section container home-cta" aria-labelledby="home-contact">
     <div class="reveal">
+      <span class="marginalia">Contratación y programación</span>
       <h2 id="home-contact" class="accent-underline">Contacto</h2>
-      <p class="prose">
-        Para contratación, programación de funciones o cualquier consulta.
+      <p class="cta-text">
+        Para programar funciones, solicitar dossier o rider técnico, o cualquier consulta sobre Manuel Monró y La Tulpa.
       </p>
-      <a href="/contacto" class="cta-link">Contactar &rarr;</a>
+      <a href="/contacto" class="cta-link cta-link--large">Contactar &rarr;</a>
     </div>
   </section>
 </Base>
 
 <style>
-  .home-intro-grid {
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* Identity */
+  .identity-statement {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 3.5vw, 2.5rem);
+    font-weight: 400;
+    line-height: 1.35;
+    color: var(--color-text);
+    max-width: var(--content-width);
+    margin-bottom: var(--space-lg);
+  }
+
+  .disciplines {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+  }
+
+  .discipline-tag {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    border: 1px solid var(--color-warm-grey);
+    padding: 0.4em 1em;
+    border-radius: 2px;
+  }
+
+  /* Approach */
+  .approach-grid {
     display: grid;
     gap: var(--space-lg);
   }
 
   @media (min-width: 48rem) {
-    .home-intro-grid {
-      grid-template-columns: 2fr 1fr;
+    .approach-grid {
+      grid-template-columns: 1.5fr 1fr;
       align-items: start;
     }
   }
 
-  .home-intro-main {
+  .home-approach {
+    border-top: 1px solid var(--color-warm-grey);
+  }
+
+  .approach-text {
+    font-size: 1.125rem;
+    line-height: 1.7;
     max-width: var(--content-width);
+    margin-bottom: var(--space-sm);
   }
 
-  .home-intro-main h2 {
-    margin-bottom: var(--space-md);
+  .approach-text--emphasis {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.25rem;
+    color: var(--color-text);
+    margin-top: var(--space-md);
   }
 
-  .home-intro-aside {
-    padding-top: var(--space-sm);
+  .approach-quote {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    font-style: italic;
+    color: var(--color-text);
+    border-left: 3px solid var(--color-accent-solid);
+    padding-left: var(--space-md);
+    margin-bottom: var(--space-xs);
+    line-height: 1.5;
   }
 
   @media (min-width: 48rem) {
-    .home-intro-aside {
-      padding-top: var(--space-lg);
-      border-left: 1px solid var(--color-warm-grey);
-      padding-left: var(--space-md);
+    .approach-aside {
+      padding-top: var(--space-md);
     }
+  }
+
+  /* Featured work */
+  .work-header {
+    margin-bottom: var(--space-md);
+  }
+
+  .work-header .marginalia {
+    display: block;
+    margin-bottom: var(--space-xs);
   }
 
   .home-work-card {
     display: grid;
     gap: var(--space-md);
-    margin-top: var(--space-md);
     overflow: hidden;
     border-radius: 2px;
     background-color: var(--color-base-raised);
@@ -176,33 +313,140 @@ const featured = obras.find((o) => o.data.touring) || obras[0];
     font-size: 0.8rem;
   }
 
+  .work-card-desc {
+    font-size: 0.95rem;
+    color: var(--color-text-secondary);
+  }
+
   .work-card-link {
     font-size: 0.875rem;
-    margin-top: var(--space-sm);
+    margin-top: var(--space-xs);
   }
 
+  /* International presence */
+  .home-presence {
+    border-top: 1px solid var(--color-warm-grey);
+  }
+
+  .presence-grid {
+    display: grid;
+    gap: 0;
+    margin-top: var(--space-md);
+  }
+
+  @media (min-width: 48rem) {
+    .presence-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .presence-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .presence-item {
+    padding: var(--space-md);
+    border-bottom: 1px solid var(--color-warm-grey);
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  @media (min-width: 48rem) {
+    .presence-item {
+      border-bottom: none;
+      border-right: 1px solid var(--color-warm-grey);
+    }
+
+    .presence-item:last-child {
+      border-right: none;
+    }
+  }
+
+  .presence-place {
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--color-text);
+  }
+
+  .presence-detail {
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+  }
+
+  /* La Tulpa */
+  .home-tulpa {
+    border-top: 1px solid var(--color-warm-grey);
+  }
+
+  .tulpa-grid {
+    display: grid;
+    gap: var(--space-lg);
+    align-items: center;
+  }
+
+  @media (min-width: 48rem) {
+    .tulpa-grid {
+      grid-template-columns: 1.5fr 1fr;
+    }
+  }
+
+  .tulpa-main .marginalia {
+    display: block;
+    margin-bottom: var(--space-xs);
+  }
+
+  .tulpa-main p {
+    margin-top: var(--space-sm);
+    max-width: 36rem;
+    color: var(--color-text-secondary);
+  }
+
+  .tulpa-aside .empty-media {
+    max-width: 16rem;
+    margin-left: auto;
+  }
+
+  /* Contact CTA */
   .home-cta {
     text-align: center;
+    border-top: 1px solid var(--color-warm-grey);
   }
 
-  .home-cta .prose {
+  .home-cta .marginalia {
+    display: block;
+    margin-bottom: var(--space-xs);
+  }
+
+  .cta-text {
+    max-width: 32rem;
     margin-inline: auto;
+    margin-top: var(--space-sm);
+    color: var(--color-text-secondary);
   }
 
   .cta-link {
     display: inline-block;
     margin-top: var(--space-md);
     font-family: var(--font-display);
-    font-size: 1.25rem;
+    font-size: 1rem;
     color: var(--color-accent-interactive);
     background-image: none;
-    border-bottom: 3px solid var(--color-accent);
-    padding-bottom: 0.25rem;
+    border-bottom: 2px solid var(--color-accent);
+    padding-bottom: 0.2rem;
     transition: color var(--transition-fast), border-color var(--transition-fast);
   }
 
   .cta-link:hover {
     color: var(--color-accent-hover);
     border-color: var(--color-accent-hover);
+  }
+
+  .cta-link--large {
+    font-size: 1.35rem;
+    border-bottom-width: 3px;
   }
 </style>

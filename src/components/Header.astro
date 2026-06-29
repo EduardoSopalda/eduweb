@@ -17,7 +17,7 @@ const navItems = [
 ];
 ---
 
-<header class="site-header" role="banner" transition:persist>
+<header class="site-header" role="banner">
   <div class="header-inner container">
     <a href={getLocalePath('/', lang)} class="site-logo" aria-label="Manuel Monrò — Inicio">
       <span class="logo-name">Manuel Monrò</span>
@@ -244,6 +244,10 @@ const navItems = [
   }
 
   /* Fullscreen curtain */
+  .curtain[hidden] {
+    display: none !important;
+  }
+
   .curtain {
     position: fixed;
     inset: 0;

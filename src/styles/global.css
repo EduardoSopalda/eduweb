@@ -482,12 +482,13 @@ html.chaos .cursor-dot {
 
 .manifesto {
   position: fixed;
-  bottom: var(--space-sm);
+  bottom: var(--space-md);
   right: var(--space-sm);
-  font-family: var(--font-mono);
-  font-size: 0.6rem;
-  color: var(--color-warm-grey);
-  opacity: 0.12;
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-style: italic;
+  color: var(--color-text-secondary);
+  opacity: 0.35;
   transition: opacity 0.6s;
   pointer-events: auto;
   max-width: 18rem;
@@ -498,11 +499,12 @@ html.chaos .cursor-dot {
 }
 
 html.chaos .manifesto {
-  opacity: 0.25;
+  opacity: 0.45;
+  color: var(--color-bronze-light);
 }
 
 .manifesto:hover {
-  opacity: 0.7;
+  opacity: 0.85;
   background-image: none;
 }
 

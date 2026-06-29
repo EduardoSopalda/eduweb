@@ -1,0 +1,184 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base
+  title="Nadie"
+  description="Has encontrado la habitación secreta."
+>
+  <section class="nadie">
+    <div class="nadie-inner">
+      <p class="nadie-pre">Has encontrado la habitación que no existe.</p>
+
+      <h1 class="nadie-title">Nadie</h1>
+
+      <div class="nadie-body">
+        <p>Este sitio fue construido con cuidado, con código y con cariño.</p>
+        <p>Para un artista que crea desde un lugar real. Que no pide permiso. Que sube al escenario cada vez como si fuera la primera y la última.</p>
+        <p>No hacía falta dinero. Hacía falta que alguien mirara.</p>
+      </div>
+
+      <div class="nadie-gifts">
+        <p class="nadie-gifts-title">Lo que hicimos para ti:</p>
+        <ul class="nadie-gifts-list">
+          <li>Un cuaderno íntimo para tus notas de proceso</li>
+          <li>Carteles imprimibles de cada una de tus obras</li>
+          <li>Un contador de funciones — porque cada escenario cuenta</li>
+          <li>Esta habitación secreta que acabas de encontrar</li>
+          <li>Una declaración de creación inclusiva — porque el escenario no pide certificados</li>
+          <li>Un telón final que cae al terminar cada página</li>
+        </ul>
+      </div>
+
+      <div class="nadie-dedication">
+        <p class="nadie-from">De Claudio y Edu,</p>
+        <p class="nadie-to">para Manuel.</p>
+      </div>
+
+      <p class="nadie-whisper marginalia">Ahora cierra esta puerta y vuelve al escenario.</p>
+      <a href="/" class="nadie-back">&larr; Volver</a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .nadie {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-xl) var(--space-md);
+    background-color: #000;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .nadie::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40rem;
+    height: 40rem;
+    background: radial-gradient(ellipse at center, rgba(139, 111, 71, 0.08) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .nadie-inner {
+    max-width: 32rem;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .nadie-pre {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--color-text-secondary);
+    opacity: 0.5;
+    margin-bottom: var(--space-lg);
+  }
+
+  .nadie-title {
+    font-family: var(--font-display);
+    font-size: clamp(4rem, 12vw, 8rem);
+    font-weight: 700;
+    color: var(--color-accent-interactive);
+    line-height: 1;
+    margin-bottom: var(--space-xl);
+    letter-spacing: -0.02em;
+  }
+
+  .nadie-body {
+    margin-bottom: var(--space-xl);
+  }
+
+  .nadie-body p {
+    font-family: var(--font-display);
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    font-style: italic;
+    line-height: 1.6;
+    color: rgba(236, 231, 222, 0.7);
+    margin-bottom: var(--space-sm);
+  }
+
+  .nadie-gifts {
+    margin-bottom: var(--space-xl);
+    text-align: left;
+    max-width: 24rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .nadie-gifts-title {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--color-accent-interactive);
+    margin-bottom: var(--space-sm);
+  }
+
+  .nadie-gifts-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .nadie-gifts-list li {
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    font-style: italic;
+    color: rgba(236, 231, 222, 0.6);
+    padding: 0.4em 0;
+    border-bottom: 1px solid rgba(139, 111, 71, 0.15);
+    line-height: 1.5;
+  }
+
+  .nadie-gifts-list li:last-child {
+    border-bottom: none;
+  }
+
+  .nadie-dedication {
+    margin-bottom: var(--space-xl);
+    padding-top: var(--space-md);
+    border-top: 1px solid rgba(139, 111, 71, 0.3);
+  }
+
+  .nadie-from {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    color: var(--color-bronze-light);
+    font-style: italic;
+  }
+
+  .nadie-to {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    color: var(--color-text);
+    font-weight: 700;
+    margin-top: var(--space-xs);
+  }
+
+  .nadie-whisper {
+    font-style: italic;
+    margin-bottom: var(--space-md);
+  }
+
+  .nadie-back {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-text-secondary);
+    background-image: none;
+    opacity: 0.5;
+    transition: opacity var(--transition-fast);
+  }
+
+  .nadie-back:hover {
+    opacity: 1;
+    background-image: none;
+  }
+</style>

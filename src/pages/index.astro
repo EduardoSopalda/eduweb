@@ -98,6 +98,30 @@ const featured = obras.find((o) => o.data.touring) || obras[0];
     </section>
   )}
 
+  <!-- Performance counter -->
+  <section class="counter" aria-label="Trayectoria en cifras">
+    <div class="counter-inner container reveal">
+      <div class="counter-item">
+        <span class="counter-number">5</span>
+        <span class="counter-label">países</span>
+      </div>
+      <div class="counter-divider" aria-hidden="true"></div>
+      <div class="counter-item">
+        <span class="counter-number">8</span>
+        <span class="counter-label">festivales</span>
+      </div>
+      <div class="counter-divider" aria-hidden="true"></div>
+      <div class="counter-item">
+        <span class="counter-number">3</span>
+        <span class="counter-label">creaciones</span>
+      </div>
+      <div class="counter-divider" aria-hidden="true"></div>
+      <div class="counter-item counter-item--accent">
+        <span class="counter-status">En gira</span>
+      </div>
+    </div>
+  </section>
+
   <!-- International presence -->
   <section class="section container home-presence" aria-labelledby="home-presence-title">
     <h2 id="home-presence-title" class="accent-underline reveal">Presencia internacional</h2>
@@ -158,6 +182,12 @@ const featured = obras.find((o) => o.data.touring) || obras[0];
       <a href="mailto:cialatulpa@gmail.com" class="cta-link cta-link--large">cialatulpa@gmail.com</a>
     </div>
   </section>
+
+  <!-- Final curtain -->
+  <div class="final-curtain" aria-hidden="true">
+    <div class="final-curtain-line"></div>
+    <p class="final-curtain-text">Fin de la función.</p>
+  </div>
 </Base>
 
 <style>
@@ -467,5 +497,91 @@ const featured = obras.find((o) => o.data.touring) || obras[0];
   .cta-link--large {
     font-size: 1.35rem;
     border-bottom-width: 3px;
+  }
+
+  /* Performance counter */
+  .counter {
+    background-color: var(--color-base-raised);
+    border-top: 3px solid var(--color-accent-solid);
+    border-bottom: 3px solid var(--color-accent-solid);
+    padding-block: var(--space-lg);
+  }
+
+  .counter-inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-lg);
+    flex-wrap: wrap;
+  }
+
+  .counter-item {
+    text-align: center;
+  }
+
+  .counter-number {
+    display: block;
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 8vw, 5rem);
+    font-weight: 700;
+    line-height: 1;
+    color: var(--color-text);
+  }
+
+  .counter-label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--color-text-secondary);
+    margin-top: var(--space-xs);
+  }
+
+  .counter-divider {
+    width: 1px;
+    height: 3rem;
+    background-color: var(--color-warm-grey);
+  }
+
+  .counter-item--accent {
+    display: flex;
+    align-items: center;
+  }
+
+  .counter-status {
+    font-family: var(--font-display);
+    font-size: clamp(1.25rem, 3vw, 1.75rem);
+    font-style: italic;
+    color: var(--color-accent-interactive);
+  }
+
+  @media (max-width: 30rem) {
+    .counter-divider { display: none; }
+    .counter-inner { gap: var(--space-md); }
+  }
+
+  /* Final curtain */
+  .final-curtain {
+    padding: var(--space-xl) 0 var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-md);
+  }
+
+  .final-curtain-line {
+    width: 1px;
+    height: 4rem;
+    background: linear-gradient(to bottom, transparent, var(--color-accent-solid));
+  }
+
+  .final-curtain-text {
+    font-family: var(--font-display);
+    font-size: 0.85rem;
+    font-style: italic;
+    color: var(--color-text-secondary);
+    opacity: 0.4;
+    letter-spacing: 0.1em;
   }
 </style>

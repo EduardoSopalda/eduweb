@@ -1,0 +1,119 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+---
+
+<Base
+  title="Creación inclusiva"
+  description="El compromiso de Manuel Monrò con la creación inclusiva y la diversidad en las artes escénicas."
+>
+  <Hero title="Creación inclusiva" height="section" />
+
+  <section class="section container">
+    <div class="inclusive-statement reveal">
+      <p class="inclusive-lead">
+        El escenario no pide certificados. Pide presencia.
+      </p>
+    </div>
+
+    <div class="inclusive-body reveal reveal-delay-1">
+      <p>
+        Manuel Monrò crea desde la diferencia. Su trabajo nace del encuentro entre cuerpos distintos — cada uno con su historia, su forma de moverse, su manera de estar en el mundo.
+      </p>
+      <p>
+        La Tulpa fue fundada en 2023 en colaboración con Danza Mobile, Sevilla — una compañía referente en la integración de personas con diversidad funcional en las artes escénicas. Esta alianza no es decorativa: es la raíz del lenguaje artístico.
+      </p>
+      <p>
+        La diversidad no es una concesión. Es el material. Es lo que hace que cada función sea irrepetible.
+      </p>
+    </div>
+
+    <div class="inclusive-principles reveal reveal-delay-2">
+      <h2 class="accent-underline">Principios</h2>
+      <div class="principles-grid">
+        <div class="principle">
+          <h3>Acceso</h3>
+          <p>Este sitio cumple las pautas WCAG 2.1 nivel AA. Navegación por teclado completa. Modo calma sin animaciones. Textos alternativos en todas las imágenes.</p>
+        </div>
+        <div class="principle">
+          <h3>Lenguaje</h3>
+          <p>Bilingüe español-inglés. Sin jerga innecesaria. La información profesional es accesible en menos de dos minutos.</p>
+        </div>
+        <div class="principle">
+          <h3>Representación</h3>
+          <p>Las personas con diversidad funcional no son sujetos de inspiración. Son artistas, compañeros de escena, creadores.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="inclusive-close reveal reveal-delay-3">
+      <blockquote>
+        <p>Lo que ocurre en escena nace de la diferencia: de cuerpos distintos que se encuentran, se escuchan, se transforman.</p>
+      </blockquote>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .inclusive-lead {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 3.5vw, 2.5rem);
+    font-weight: 400;
+    line-height: 1.35;
+    color: var(--color-text);
+    max-width: var(--content-width);
+    margin-bottom: var(--space-xl);
+  }
+
+  .inclusive-body {
+    max-width: var(--content-width);
+    margin-bottom: var(--space-xl);
+  }
+
+  .inclusive-body p {
+    font-size: 1.125rem;
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-sm);
+  }
+
+  .inclusive-principles {
+    margin-bottom: var(--space-xl);
+  }
+
+  .principles-grid {
+    display: grid;
+    gap: var(--space-md);
+    margin-top: var(--space-md);
+  }
+
+  @media (min-width: 48rem) {
+    .principles-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .principle {
+    padding: var(--space-md);
+    background-color: var(--color-base-raised);
+    border-left: 3px solid var(--color-bronze, var(--color-accent-solid));
+    border-radius: 2px;
+  }
+
+  .principle h3 {
+    font-size: 1rem;
+    margin-bottom: var(--space-xs);
+  }
+
+  .principle p {
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+  }
+
+  .inclusive-close blockquote {
+    font-size: clamp(1.25rem, 3vw, 1.75rem);
+    max-width: var(--content-width);
+    padding-left: var(--space-lg);
+  }
+</style>

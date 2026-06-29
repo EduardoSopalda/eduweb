@@ -13,33 +13,58 @@ import Hero from '../../components/Hero.astro';
     <div class="cuaderno-intro reveal">
       <h2 id="cuaderno-heading" class="sr-only">Process notebook</h2>
       <p class="cuaderno-lead">
-        Process notes. Images that never made it to a programme. Fragments of something that doesn't yet have a name.
+        This is not a portfolio.<br />
+        It's what remains when the rehearsal lights go dark.
       </p>
     </div>
 
-    <div class="cuaderno-grid">
-      <article class="cuaderno-entry reveal reveal-delay-1 chaos-tilt">
-        <div class="empty-media empty-media--landscape" aria-hidden="true"></div>
-        <div class="cuaderno-entry-text">
+    <div class="cuaderno-spine" aria-hidden="true"></div>
+
+    <div class="cuaderno-entries">
+      <article class="cuaderno-page reveal">
+        <span class="cuaderno-date marginalia">undated</span>
+        <div class="cuaderno-page-body">
           <span class="marginalia marginalia--accent">Rehearsal</span>
           <p>The body thinks before the word does. Sometimes movement arrives and understanding follows.</p>
         </div>
       </article>
 
-      <article class="cuaderno-entry cuaderno-entry--text-only reveal reveal-delay-2">
-        <blockquote class="cuaderno-fragment">
-          <p>&ldquo;Almost no one asks whether what can be seen, what can be heard, or what is held back is more real.&rdquo;</p>
-        </blockquote>
-        <span class="marginalia">— <em>Ensayo sobre nadie</em></span>
+      <article class="cuaderno-page cuaderno-page--quote reveal">
+        <div class="cuaderno-page-body">
+          <blockquote>
+            <p>&ldquo;Almost no one asks whether what can be seen, what can be heard, or what is held back is more real.&rdquo;</p>
+          </blockquote>
+          <span class="marginalia">— <em>Ensayo sobre nadie</em></span>
+        </div>
       </article>
 
-      <article class="cuaderno-entry reveal reveal-delay-3 chaos-shift">
-        <div class="empty-media empty-media--square" aria-hidden="true"></div>
-        <div class="cuaderno-entry-text">
+      <article class="cuaderno-page reveal">
+        <span class="cuaderno-date marginalia">undated</span>
+        <div class="cuaderno-page-body">
           <span class="marginalia marginalia--accent">Process</span>
           <p>Half-light is not the absence of light. It is another way of looking.</p>
         </div>
       </article>
+
+      <article class="cuaderno-page cuaderno-page--quote reveal">
+        <div class="cuaderno-page-body">
+          <blockquote>
+            <p>There are days when the body refuses. Those days are also part of the work.</p>
+          </blockquote>
+        </div>
+      </article>
+
+      <article class="cuaderno-page reveal">
+        <span class="cuaderno-date marginalia">undated</span>
+        <div class="cuaderno-page-body">
+          <span class="marginalia marginalia--accent">Note</span>
+          <p>It's not about making it perfect. It's about making it true.</p>
+        </div>
+      </article>
+    </div>
+
+    <div class="cuaderno-close reveal">
+      <p class="cuaderno-whisper marginalia">This notebook will keep filling. Like everything that matters.</p>
     </div>
     <!-- PENDING FROM MANUEL: process photos, rehearsal notes, writing fragments -->
   </section>
@@ -69,56 +94,125 @@ import Hero from '../../components/Hero.astro';
     margin-bottom: var(--space-xl);
   }
 
-  .cuaderno-grid {
-    display: grid;
-    gap: var(--space-lg);
+  .cuaderno-spine {
+    width: 1px;
+    height: 0;
+    margin: 0 auto var(--space-lg);
+    background-color: var(--color-accent-solid);
+    transition: height 1.2s ease-out;
   }
 
-  @media (min-width: 48rem) {
-    .cuaderno-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
+  .cuaderno-spine.visible {
+    height: 3rem;
   }
 
-  @media (min-width: 64rem) {
-    .cuaderno-grid {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  }
-
-  .cuaderno-entry {
+  .cuaderno-entries {
+    max-width: 40rem;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
-    gap: var(--space-sm);
+    gap: 0;
+    position: relative;
   }
 
-  .cuaderno-entry-text {
-    display: flex;
-    flex-direction: column;
-    gap: 0.35rem;
+  .cuaderno-entries::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(
+      to bottom,
+      transparent,
+      var(--color-accent-solid) 10%,
+      var(--color-accent-solid) 90%,
+      transparent
+    );
   }
 
-  .cuaderno-entry-text p {
-    font-size: 0.95rem;
+  .cuaderno-page {
+    padding: var(--space-lg) 0 var(--space-lg) var(--space-lg);
+    position: relative;
+    border-bottom: 1px solid var(--color-warm-grey);
+  }
+
+  .cuaderno-page::before {
+    content: '';
+    position: absolute;
+    left: -3px;
+    top: 50%;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background-color: var(--color-accent-solid);
+    transform: translateY(-50%);
+  }
+
+  .cuaderno-page:last-child {
+    border-bottom: none;
+  }
+
+  .cuaderno-date {
+    display: block;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: var(--space-xs);
+    opacity: 0.5;
+  }
+
+  .cuaderno-page-body p {
+    font-size: 1.05rem;
     color: var(--color-text-secondary);
-    line-height: 1.6;
+    line-height: 1.7;
+    font-style: italic;
   }
 
-  .cuaderno-entry--text-only {
-    background-color: var(--color-base-raised);
-    padding: var(--space-md);
-    border-left: 3px solid var(--color-accent-solid);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: var(--space-sm);
+  .cuaderno-page-body .marginalia {
+    display: block;
+    margin-bottom: 0.35rem;
   }
 
-  .cuaderno-fragment {
+  .cuaderno-page--quote {
+    padding-top: var(--space-xl);
+    padding-bottom: var(--space-xl);
+  }
+
+  .cuaderno-page--quote blockquote {
     font-family: var(--font-display);
-    font-size: 1.15rem;
+    font-size: clamp(1.1rem, 2.5vw, 1.4rem);
     font-style: italic;
     color: var(--color-text);
     line-height: 1.5;
   }
+
+  .cuaderno-page--quote .marginalia {
+    margin-top: var(--space-sm);
+  }
+
+  .cuaderno-close {
+    max-width: 40rem;
+    margin: var(--space-xl) auto 0;
+    text-align: center;
+  }
+
+  .cuaderno-whisper {
+    font-style: italic;
+    opacity: 0.6;
+  }
 </style>
+
+<script>
+  function initSpine() {
+    const spine = document.querySelector('.cuaderno-spine');
+    if (!spine) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) spine.classList.add('visible'); },
+      { threshold: 0.5 }
+    );
+    observer.observe(spine);
+  }
+  initSpine();
+  document.addEventListener('astro:after-swap', initSpine);
+</script>

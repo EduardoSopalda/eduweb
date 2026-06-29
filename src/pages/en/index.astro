@@ -87,6 +87,31 @@ const featured = obras.find((o) => o.data.touring) || obras[0];
     </section>
   )}
 
+  <!-- Performance counter -->
+  <section class="counter" aria-label="Career in numbers">
+    <div class="counter-inner container reveal">
+      <div class="counter-item">
+        <span class="counter-number">5</span>
+        <span class="counter-label">countries</span>
+      </div>
+      <div class="counter-divider" aria-hidden="true"></div>
+      <div class="counter-item">
+        <span class="counter-number">8</span>
+        <span class="counter-label">festivals</span>
+      </div>
+      <div class="counter-divider" aria-hidden="true"></div>
+      <div class="counter-item">
+        <span class="counter-number">3</span>
+        <span class="counter-label">creations</span>
+      </div>
+      <div class="counter-divider" aria-hidden="true"></div>
+      <div class="counter-item counter-item--accent">
+        <span class="counter-status">On tour</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- International presence -->
   <section class="section container home-presence" aria-labelledby="home-presence-title">
     <h2 id="home-presence-title" class="accent-underline reveal">International presence</h2>
     <div class="presence-grid reveal reveal-delay-1">
@@ -140,6 +165,12 @@ const featured = obras.find((o) => o.data.touring) || obras[0];
       <a href="mailto:cialatulpa@gmail.com" class="cta-link cta-link--large">cialatulpa@gmail.com</a>
     </div>
   </section>
+
+  <!-- Final curtain -->
+  <div class="final-curtain" aria-hidden="true">
+    <div class="final-curtain-line"></div>
+    <p class="final-curtain-text">End of the performance.</p>
+  </div>
 </Base>
 
 <style>
@@ -184,10 +215,26 @@ const featured = obras.find((o) => o.data.touring) || obras[0];
   .tulpa-main .marginalia { display: block; margin-bottom: var(--space-xs); }
   .tulpa-main p { margin-top: var(--space-sm); max-width: 36rem; color: var(--color-text-secondary); }
   .tulpa-logo { max-width: 14rem; margin-left: auto; border-radius: 2px; }
-  .home-cta { text-align: center; border-top: 1px solid var(--color-warm-grey); }
+  .home-cta { text-align: center; border-top: 3px solid var(--color-accent-solid); }
   .home-cta .marginalia { display: block; margin-bottom: var(--space-xs); }
   .cta-text { max-width: 32rem; margin-inline: auto; margin-top: var(--space-sm); color: var(--color-text-secondary); }
   .cta-link { display: inline-block; margin-top: var(--space-md); font-family: var(--font-display); font-size: 1rem; color: var(--color-accent-interactive); background-image: none; border-bottom: 2px solid var(--color-accent); padding-bottom: 0.2rem; transition: color var(--transition-fast), border-color var(--transition-fast); }
   .cta-link:hover { color: var(--color-accent-hover); border-color: var(--color-accent-hover); }
   .cta-link--large { font-size: 1.35rem; border-bottom-width: 3px; }
+
+  /* Performance counter */
+  .counter { background-color: var(--color-base-raised); border-top: 3px solid var(--color-accent-solid); border-bottom: 3px solid var(--color-accent-solid); padding-block: var(--space-lg); }
+  .counter-inner { display: flex; align-items: center; justify-content: center; gap: var(--space-lg); flex-wrap: wrap; }
+  .counter-item { text-align: center; }
+  .counter-number { display: block; font-family: var(--font-display); font-size: clamp(3rem, 8vw, 5rem); font-weight: 700; line-height: 1; color: var(--color-text); }
+  .counter-label { display: block; font-family: var(--font-mono); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--color-text-secondary); margin-top: var(--space-xs); }
+  .counter-divider { width: 1px; height: 3rem; background-color: var(--color-warm-grey); }
+  .counter-item--accent { display: flex; align-items: center; }
+  .counter-status { font-family: var(--font-display); font-size: clamp(1.25rem, 3vw, 1.75rem); font-style: italic; color: var(--color-accent-interactive); }
+  @media (max-width: 30rem) { .counter-divider { display: none; } .counter-inner { gap: var(--space-md); } }
+
+  /* Final curtain */
+  .final-curtain { padding: var(--space-xl) 0 var(--space-lg); display: flex; flex-direction: column; align-items: center; gap: var(--space-md); }
+  .final-curtain-line { width: 1px; height: 4rem; background: linear-gradient(to bottom, transparent, var(--color-accent-solid)); }
+  .final-curtain-text { font-family: var(--font-display); font-size: 0.85rem; font-style: italic; color: var(--color-text-secondary); opacity: 0.4; letter-spacing: 0.1em; }
 </style>

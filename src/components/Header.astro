@@ -11,9 +11,10 @@ const alternateUrl = getAlternateUrl(Astro.url, lang);
 const navItems = [
   { label: t('nav.about'), href: getLocalePath('/sobre', lang), num: 'I' },
   { label: t('nav.work'), href: getLocalePath('/obra', lang), num: 'II' },
-  { label: t('nav.schedule'), href: getLocalePath('/agenda', lang), num: 'III' },
-  { label: t('nav.press'), href: getLocalePath('/prensa', lang), num: 'IV' },
-  { label: t('nav.contact'), href: getLocalePath('/contacto', lang), num: 'V' },
+  { label: t('nav.notebook'), href: getLocalePath('/cuaderno', lang), num: 'III' },
+  { label: t('nav.schedule'), href: getLocalePath('/agenda', lang), num: 'IV' },
+  { label: t('nav.press'), href: getLocalePath('/prensa', lang), num: 'V' },
+  { label: t('nav.contact'), href: getLocalePath('/contacto', lang), num: 'VI' },
 ];
 ---
 

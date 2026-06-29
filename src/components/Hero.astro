@@ -238,6 +238,41 @@ const phraseLines = phrase ? phrase.split(' / ') : [];
     overflow: hidden;
   }
 
+  html.chaos .hero-split-media::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: radial-gradient(
+      ellipse at 50% 35%,
+      rgba(166, 135, 94, 0.5) 0%,
+      rgba(139, 111, 71, 0.2) 30%,
+      transparent 65%
+    );
+    mix-blend-mode: screen;
+    pointer-events: none;
+    animation: haloHeartbeat 1.8s ease-in-out infinite;
+  }
+
+  @keyframes haloHeartbeat {
+    0%, 55%, 100% { opacity: 0.3; transform: scale(1); }
+    15% { opacity: 1; transform: scale(1.15); }
+    28% { opacity: 0.45; transform: scale(1.05); }
+    42% { opacity: 0.85; transform: scale(1.1); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html.chaos .hero-split-media::after {
+      animation: none;
+      opacity: 0.5;
+      transform: none;
+    }
+  }
+
+  html:not(.chaos) .hero-split-media::after {
+    display: none;
+  }
+
   .hero-split-img {
     width: 100%;
     height: 100%;
@@ -254,6 +289,7 @@ const phraseLines = phrase ? phrase.split(' / ') : [];
   .hero-vignette-split {
     position: absolute;
     inset: 0;
+    z-index: 2;
     background:
       radial-gradient(ellipse at center, transparent 50%, rgba(10, 10, 12, 0.5) 100%),
       linear-gradient(to bottom, transparent 70%, rgba(10, 10, 12, 0.6) 100%);

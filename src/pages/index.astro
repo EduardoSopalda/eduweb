@@ -27,6 +27,18 @@ const featured = obras.find((o) => o.data.touring) || obras[0];
   <!-- Second punch: veiled faces -->
   <VeiledFaces lang="es" />
 
+  <!-- Dramatic interstitial -->
+  <section class="interstitial" aria-hidden="true">
+    <div class="interstitial-inner">
+      <p class="interstitial-text reveal">
+        Casi nadie se pregunta si es más real<br />
+        lo que se puede ver, lo que se puede oír,<br />
+        <span class="interstitial-accent">o lo que se contiene.</span>
+      </p>
+      <span class="interstitial-source reveal reveal-delay-1 marginalia">— Ensayo sobre nadie</span>
+    </div>
+  </section>
+
   <!-- Identity -->
   <section class="section container" aria-labelledby="home-identity">
     <div class="identity reveal">
@@ -48,52 +60,48 @@ const featured = obras.find((o) => o.data.touring) || obras[0];
 
   <!-- Approach -->
   <section class="section container home-approach" aria-labelledby="home-approach-title">
-    <div class="approach-grid">
-      <div class="approach-main reveal">
-        <h2 id="home-approach-title" class="sr-only">Lenguaje</h2>
+    <h2 id="home-approach-title" class="sr-only">Lenguaje</h2>
+    <div class="approach-statement reveal">
+      <p class="approach-text-large">
+        Lo que ocurre en escena nace de la diferencia: de cuerpos distintos que se encuentran, se escuchan, se transforman.
+      </p>
+    </div>
+    <div class="approach-grid reveal reveal-delay-1">
+      <div class="approach-main">
         <p class="approach-text">
-          Lo que ocurre en escena nace de la diferencia: de cuerpos distintos que se encuentran, se escuchan, se transforman. Movimiento simple y preciso. Una estética de claroscuro que busca la penumbra para mirar con más cuidado.
+          Movimiento simple y preciso. Una estética de claroscuro que busca la penumbra para mirar con más cuidado.
         </p>
         <p class="approach-text approach-text--emphasis">
           Cada pieza es una investigación. Cada función, un acto de presencia.
         </p>
       </div>
-      <aside class="approach-aside reveal reveal-delay-1 chaos-shift">
-        <blockquote class="approach-quote">
-          <p>&ldquo;Casi nadie se pregunta si es más real lo que se puede ver, lo que se puede oír, o lo que se contiene.&rdquo;</p>
-        </blockquote>
-        <p class="marginalia">— <em>Ensayo sobre nadie</em></p>
+      <aside class="approach-aside chaos-shift">
+        <div class="approach-line" aria-hidden="true"></div>
       </aside>
     </div>
   </section>
 
   <!-- Featured work -->
   {featured && (
-    <section class="section container" aria-labelledby="home-work-title">
-      <div class="work-header reveal">
-        <span class="marginalia">En escena</span>
-        <h2 id="home-work-title" class="accent-underline">{featured.data.title}</h2>
+    <section class="section home-featured" aria-labelledby="home-work-title">
+      <div class="featured-media reveal">
+        {featured.data.image
+          ? <img class="featured-img" src={featured.data.image} alt={featured.data.title} loading="lazy" />
+          : <div class="empty-media empty-media--landscape" aria-hidden="true"></div>
+        }
+        <div class="featured-scrim" aria-hidden="true"></div>
       </div>
-      <div class="home-work-card reveal reveal-delay-1">
-        <div class="work-card-media">
-          {featured.data.image
-            ? <img class="work-card-img" src={featured.data.image} alt={featured.data.title} loading="lazy" />
-            : <div class="empty-media empty-media--landscape" aria-hidden="true"></div>
-          }
-        </div>
-        <div class="work-card-info">
-          {featured.data.touring && <span class="label">En gira</span>}
-          <h3>
-            <a href={`/obra/${featured.data.slug}`}>{featured.data.title}</a>
-          </h3>
-          <p class="work-card-meta marginalia">
-            {featured.data.year} — {featured.data.type}
-          </p>
-          <p class="work-card-desc">
-            Pieza breve de danza teatro. Coreografía de {featured.data.choreography}.
-          </p>
-          <a href="/obra" class="work-card-link">Ver obra completa &rarr;</a>
-        </div>
+      <div class="featured-content container reveal reveal-delay-1">
+        {featured.data.touring && <span class="label">En gira</span>}
+        <span class="marginalia">En escena</span>
+        <h2 id="home-work-title">{featured.data.title}</h2>
+        <p class="featured-meta marginalia">
+          {featured.data.year} — {featured.data.type}
+        </p>
+        <p class="featured-desc">
+          Pieza breve de danza teatro. Coreografía de {featured.data.choreography}.
+        </p>
+        <a href={`/obra/${featured.data.slug}`} class="cta-link">Descubrir &rarr;</a>
       </div>
     </section>
   )}
@@ -173,6 +181,58 @@ const featured = obras.find((o) => o.data.touring) || obras[0];
     border: 0;
   }
 
+  /* Dramatic interstitial */
+  .interstitial {
+    position: relative;
+    background-color: #000;
+    padding-block: var(--space-xl);
+    overflow: hidden;
+  }
+
+  @media (min-width: 48rem) {
+    .interstitial {
+      padding-block: var(--space-2xl);
+    }
+  }
+
+  .interstitial::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1px;
+    height: 4rem;
+    background: linear-gradient(to bottom, transparent, var(--color-accent-solid));
+  }
+
+  .interstitial-inner {
+    max-width: var(--max-width);
+    margin-inline: auto;
+    padding-inline: var(--space-md);
+    text-align: center;
+  }
+
+  .interstitial-text {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 4vw, 3rem);
+    font-weight: 400;
+    font-style: italic;
+    line-height: 1.5;
+    color: rgba(236, 231, 222, 0.85);
+    letter-spacing: 0.01em;
+  }
+
+  .interstitial-accent {
+    color: var(--color-accent-interactive);
+  }
+
+  .interstitial-source {
+    display: block;
+    margin-top: var(--space-md);
+    font-style: italic;
+  }
+
   /* Identity */
   .identity-statement {
     font-family: var(--font-display);
@@ -203,6 +263,23 @@ const featured = obras.find((o) => o.data.touring) || obras[0];
   }
 
   /* Approach */
+  .home-approach {
+    border-top: 3px solid var(--color-accent-solid);
+  }
+
+  .approach-statement {
+    margin-bottom: var(--space-lg);
+  }
+
+  .approach-text-large {
+    font-family: var(--font-display);
+    font-size: clamp(1.75rem, 4vw, 3rem);
+    font-weight: 400;
+    line-height: 1.35;
+    color: var(--color-text);
+    max-width: 42rem;
+  }
+
   .approach-grid {
     display: grid;
     gap: var(--space-lg);
@@ -213,10 +290,6 @@ const featured = obras.find((o) => o.data.touring) || obras[0];
       grid-template-columns: 1.5fr 1fr;
       align-items: start;
     }
-  }
-
-  .home-approach {
-    border-top: 1px solid var(--color-warm-grey);
   }
 
   .approach-text {
@@ -234,15 +307,11 @@ const featured = obras.find((o) => o.data.touring) || obras[0];
     margin-top: var(--space-md);
   }
 
-  .approach-quote {
-    font-family: var(--font-display);
-    font-size: 1.15rem;
-    font-style: italic;
-    color: var(--color-text);
-    border-left: 3px solid var(--color-bronze, var(--color-accent-solid));
-    padding-left: var(--space-md);
-    margin-bottom: var(--space-xs);
-    line-height: 1.5;
+  .approach-line {
+    width: 3px;
+    height: 6rem;
+    background: linear-gradient(to bottom, var(--color-accent-solid), transparent);
+    margin-left: auto;
   }
 
   @media (min-width: 48rem) {
@@ -251,99 +320,86 @@ const featured = obras.find((o) => o.data.touring) || obras[0];
     }
   }
 
-  /* Featured work */
-  .work-header {
-    margin-bottom: var(--space-md);
-  }
-
-  .work-header .marginalia {
-    display: block;
-    margin-bottom: var(--space-xs);
-  }
-
-  .home-work-card {
-    display: grid;
-    gap: var(--space-md);
-    overflow: hidden;
-    border-radius: 2px;
-    background-color: var(--color-base-raised);
-  }
-
-  @media (min-width: 48rem) {
-    .home-work-card {
-      grid-template-columns: 1.2fr 1fr;
-    }
-  }
-
-  .work-card-media {
+  /* Featured work — cinematic full-bleed */
+  .home-featured {
     position: relative;
+    min-height: 70vh;
+    display: flex;
+    align-items: flex-end;
     overflow: hidden;
   }
 
-  .work-card-img {
+  .featured-media {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .featured-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    aspect-ratio: 16 / 10;
+    object-position: center 20%;
   }
 
-  @media (prefers-reduced-motion: no-preference) {
-    .work-card-media:hover .work-card-img,
-    .work-card-media:hover .empty-media {
-      transform: scale(1.03);
-      transition: transform 0.8s ease-out;
-    }
+  .featured-scrim {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to top,
+      rgba(10, 10, 12, 0.95) 0%,
+      rgba(10, 10, 12, 0.6) 40%,
+      rgba(10, 10, 12, 0.2) 70%,
+      transparent 100%
+    );
   }
 
-  .work-card-info {
-    padding: var(--space-md);
+  html:not(.chaos) .featured-scrim {
+    background: linear-gradient(
+      to top,
+      rgba(245, 242, 237, 0.95) 0%,
+      rgba(245, 242, 237, 0.6) 40%,
+      rgba(245, 242, 237, 0.2) 70%,
+      transparent 100%
+    );
+  }
+
+  .featured-content {
+    position: relative;
+    z-index: 1;
+    padding-block: var(--space-xl);
     display: flex;
     flex-direction: column;
-    justify-content: center;
     gap: var(--space-xs);
   }
 
-  @media (min-width: 48rem) {
-    .work-card-info {
-      padding: var(--space-lg) var(--space-md);
-    }
+  .featured-content .marginalia {
+    display: block;
   }
 
-  .work-card-info .label {
-    align-self: flex-start;
+  .featured-content h2 {
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    margin-bottom: 0;
+    line-height: 1.1;
   }
 
-  .work-card-info h3 {
-    font-size: clamp(1.5rem, 3vw, 2.25rem);
-  }
-
-  .work-card-info h3 a {
-    color: var(--color-text);
-    background-image: none;
-    transition: color var(--transition-fast);
-  }
-
-  .work-card-info h3 a:hover {
-    color: var(--color-accent-interactive);
-  }
-
-  .work-card-meta {
+  .featured-meta {
     font-size: 0.8rem;
   }
 
-  .work-card-desc {
-    font-size: 0.95rem;
+  .featured-desc {
+    font-size: 1rem;
     color: var(--color-text-secondary);
+    max-width: 28rem;
   }
 
-  .work-card-link {
-    font-size: 0.875rem;
-    margin-top: var(--space-xs);
+  .featured-content .label {
+    align-self: flex-start;
   }
 
   /* International presence */
   .home-presence {
-    border-top: 1px solid var(--color-warm-grey);
+    border-top: 3px solid var(--color-accent-solid);
   }
 
   .presence-grid {
@@ -397,7 +453,7 @@ const featured = obras.find((o) => o.data.touring) || obras[0];
 
   /* La Tulpa */
   .home-tulpa {
-    border-top: 1px solid var(--color-warm-grey);
+    border-top: 3px solid var(--color-accent-solid);
   }
 
   .tulpa-grid {
@@ -432,7 +488,7 @@ const featured = obras.find((o) => o.data.touring) || obras[0];
   /* Contact CTA */
   .home-cta {
     text-align: center;
-    border-top: 1px solid var(--color-warm-grey);
+    border-top: 3px solid var(--color-accent-solid);
   }
 
   .home-cta .marginalia {

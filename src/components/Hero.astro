@@ -238,6 +238,39 @@ const phraseLines = phrase ? phrase.split(' / ') : [];
     overflow: hidden;
   }
 
+  /* Black sheer curtain — rises slowly to reveal Manuel */
+  html.chaos .hero-split-media::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 4;
+    background: linear-gradient(
+      to bottom,
+      rgba(10, 10, 12, 0.97) 0%,
+      rgba(10, 10, 12, 0.92) 60%,
+      rgba(10, 10, 12, 0.5) 85%,
+      transparent 100%
+    );
+    pointer-events: none;
+    animation: curtainRise 4s cubic-bezier(0.22, 0.61, 0.36, 1) 0.5s forwards;
+  }
+
+  @keyframes curtainRise {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-105%); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html.chaos .hero-split-media::before {
+      display: none;
+    }
+  }
+
+  html:not(.chaos) .hero-split-media::before {
+    display: none;
+  }
+
+  /* Gold heartbeat halo */
   html.chaos .hero-split-media::after {
     content: '';
     position: absolute;

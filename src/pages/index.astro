@@ -196,9 +196,9 @@ const featured = obras.find((o) => o.data.touring) || obras[0];
   </section>
 
   <!-- Final curtain -->
-  <div class="final-curtain" aria-hidden="true">
-    <div class="final-curtain-line"></div>
-    <p class="final-curtain-text">— Fin de la función —</p>
+  <div class="final-curtain">
+    <div class="final-curtain-line" aria-hidden="true"></div>
+    <a href="/nadie" class="final-curtain-text">— Fin de la función —</a>
   </div>
 </Base>
 
@@ -647,5 +647,12 @@ const featured = obras.find((o) => o.data.touring) || obras[0];
     color: var(--color-accent-interactive);
     opacity: 0.7;
     letter-spacing: 0.1em;
+    background-image: none;
+    transition: opacity var(--transition-fast);
+  }
+
+  .final-curtain-text:hover {
+    opacity: 1;
+    background-image: none;
   }
 </style>

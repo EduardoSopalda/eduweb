@@ -4,44 +4,273 @@ import Hero from '../components/Hero.astro';
 ---
 
 <Base
-  title="Prensa"
-  description="Reseñas y notas de prensa sobre el trabajo de Manuel Monró y La Tulpa."
+  title="Press kit"
+  description="Press kit, dossier, rider técnico y materiales profesionales de Manuel Monrò y La Tulpa."
 >
-  <Hero title="Prensa" height="section" />
+  <Hero title="Press kit" subtitle="Materiales profesionales" height="section" />
 
   <section class="section container">
-    <div class="prose reveal">
-      <p>
-        Fragmentos seleccionados de reseñas y notas de medios sobre el trabajo de Manuel Monró y La Tulpa.
+    <div class="press-intro prose reveal">
+      <p class="press-lead">
+        Todo lo necesario para programar una función, evaluar un proyecto o cubrir el trabajo de Manuel Monrò y La Tulpa.
       </p>
     </div>
 
-    <div class="press-list">
-      <article class="press-item reveal reveal-delay-1">
+    <!-- Two-minute test: who, what, where, can they tour, materials, contact -->
+    <div class="press-grid">
+
+      <div class="press-card reveal">
+        <h2 class="press-card-title">Quién</h2>
+        <p>Manuel Monrò — director, coreógrafo, dramaturgo, pedagogo e intérprete. Trabaja entre Barcelona y Sevilla.</p>
+        <p class="marginalia" style="margin-top: var(--space-sm);">Formación: Arte Dramático (Sevilla), SEAD (Salzburgo), Institut del Teatre (Barcelona).</p>
+      </div>
+
+      <div class="press-card reveal reveal-delay-1">
+        <h2 class="press-card-title">Qué ha creado</h2>
+        <ul class="press-list">
+          <li>
+            <a href="/obra/ensayo-sobre-nadie"><strong>Ensayo sobre nadie</strong></a> (2023)
+            <span class="label label--outline" style="margin-left: 0.5rem;">En gira</span>
+            <p class="marginalia">Pieza breve de danza teatro. Coreografía de Manuel Monrò. Con Susana Villegas.</p>
+          </li>
+          <li>
+            <a href="/obra/aqui-nadie"><strong>Aquí Nadie</strong></a> (2021)
+            <p class="marginalia">Primer solo. Estreno en Terrassa.</p>
+          </li>
+          <li>
+            <a href="/obra/amours"><strong>Amours</strong></a> (2026)
+            <p class="marginalia">Con Richard Bonnot-Saltet. Théâtre Antique d'Arles.</p>
+          </li>
+        </ul>
+      </div>
+
+      <div class="press-card reveal reveal-delay-2">
+        <h2 class="press-card-title">Dónde ha actuado</h2>
+        <ul class="press-tour-list">
+          <li><span class="marginalia">2023</span> XVI Festival Internacional Escena Mobile, Sevilla — Estreno</li>
+          <li><span class="marginalia">2024</span> Festival Kiada, Seúl, Corea del Sur — Inauguración</li>
+          <li><span class="marginalia">2024</span> Festival de Kirchheimbolanden, Alemania</li>
+          <!-- PENDING: Zaragoza 2024, festival/venue details -->
+          <li><span class="marginalia">2025</span> Madrid en Danza, Teatros del Canal, Madrid</li>
+          <li><span class="marginalia">2026</span> Théâtre Antique d'Arles, Francia</li>
+        </ul>
+      </div>
+
+      <div class="press-card press-card--accent reveal reveal-delay-3">
+        <h2 class="press-card-title">¿Puede girar?</h2>
+        <p><strong>Sí.</strong> <em>Ensayo sobre nadie</em> está en gira activa. Ha girado por España, Corea del Sur, Alemania y Francia.</p>
+        <p style="margin-top: var(--space-sm);">Compañía: <strong>La Tulpa</strong>, fundada en 2023 en colaboración con Danza Mobile, Sevilla.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section container press-downloads" aria-labelledby="press-downloads-title">
+    <h2 id="press-downloads-title" class="accent-underline reveal">Descargables</h2>
+    <div class="downloads-grid reveal reveal-delay-1">
+      <div class="download-item">
+        <span class="download-icon" aria-hidden="true">PDF</span>
+        <div>
+          <h3>Dossier</h3>
+          <p class="marginalia">Biografía, obra y trayectoria.</p>
+          <!-- PENDING FROM MANUEL: PDF dossier file -->
+          <p class="download-pending">Disponible bajo petición</p>
+        </div>
+      </div>
+      <div class="download-item">
+        <span class="download-icon" aria-hidden="true">PDF</span>
+        <div>
+          <h3>Rider técnico</h3>
+          <p class="marginalia">Requisitos técnicos para programar funciones.</p>
+          <!-- PENDING FROM MANUEL: PDF technical rider -->
+          <p class="download-pending">Disponible bajo petición</p>
+        </div>
+      </div>
+      <div class="download-item">
+        <span class="download-icon" aria-hidden="true">PDF</span>
+        <div>
+          <h3>CV y biografía</h3>
+          <p class="marginalia">Currículum artístico completo.</p>
+          <!-- PENDING FROM MANUEL: PDF CV -->
+          <p class="download-pending">Disponible bajo petición</p>
+        </div>
+      </div>
+      <div class="download-item">
+        <span class="download-icon" aria-hidden="true">ZIP</span>
+        <div>
+          <h3>Fotos en alta resolución</h3>
+          <p class="marginalia">Imágenes de producción para prensa.</p>
+          <!-- PENDING FROM MANUEL: hi-res photo pack -->
+          <p class="download-pending">Disponible bajo petición</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section container press-quotes" aria-labelledby="press-quotes-title">
+    <h2 id="press-quotes-title" class="accent-underline reveal">Prensa</h2>
+    <div class="press-quote-list">
+      <article class="press-quote-item reveal reveal-delay-1">
         <blockquote>
-          <p>
-            &laquo;La estética puede resultar siniestra, pero estos seres son inofensivos.&raquo;
-          </p>
+          <p>&laquo;La estética puede resultar siniestra, pero estos seres son inofensivos.&raquo;</p>
         </blockquote>
         <p class="press-source marginalia">
-          Reseña de <em>Ensayo sobre nadie</em>, a raíz de su estreno en la XVI edición del Festival Escena Mobile, Sevilla, 2023.
+          Reseña de <em>Ensayo sobre nadie</em>, XVI Festival Escena Mobile, Sevilla, 2023.
         </p>
         <!-- PENDING: author and publication for proper attribution -->
       </article>
     </div>
-    <!-- PENDING: additional reviews and press coverage -->
+  </section>
+
+  <section class="section container press-contact" aria-labelledby="press-contact-title">
+    <div class="reveal">
+      <h2 id="press-contact-title" class="accent-underline">Contacto</h2>
+      <p>Para solicitar materiales, programar funciones o cualquier consulta profesional:</p>
+      <p class="press-email">
+        <a href="mailto:cialatulpa@gmail.com">cialatulpa@gmail.com</a>
+      </p>
+    </div>
   </section>
 </Base>
 
 <style>
-  .press-list {
-    margin-top: var(--space-lg);
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-lg);
+  .press-lead {
+    font-family: var(--font-display);
+    font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+    font-weight: 400;
+    line-height: 1.4;
+    max-width: var(--content-width);
+    margin-bottom: var(--space-lg);
   }
 
-  .press-item blockquote {
+  .press-grid {
+    display: grid;
+    gap: var(--space-md);
+    margin-top: var(--space-md);
+  }
+
+  @media (min-width: 48rem) {
+    .press-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .press-card {
+    background-color: var(--color-base-raised);
+    padding: var(--space-md);
+    border-radius: 2px;
+    border-left: 3px solid var(--color-warm-grey);
+  }
+
+  .press-card--accent {
+    border-left-color: var(--color-accent-solid);
+  }
+
+  .press-card-title {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-sm);
+  }
+
+  .press-card p {
+    font-size: 0.95rem;
+    color: var(--color-text-secondary);
+  }
+
+  .press-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .press-list a {
+    background-image: none;
+    font-size: 0.95rem;
+  }
+
+  .press-tour-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+  }
+
+  .press-tour-list .marginalia {
+    display: inline-block;
+    min-width: 3rem;
+    margin-right: var(--space-xs);
+  }
+
+  /* Downloads */
+  .press-downloads {
+    border-top: 1px solid var(--color-warm-grey);
+  }
+
+  .downloads-grid {
+    display: grid;
+    gap: var(--space-md);
+    margin-top: var(--space-md);
+  }
+
+  @media (min-width: 48rem) {
+    .downloads-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .download-item {
+    display: flex;
+    gap: var(--space-md);
+    align-items: flex-start;
+    padding: var(--space-md);
+    background-color: var(--color-base-raised);
+    border-radius: 2px;
+  }
+
+  .download-icon {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-accent-interactive);
+    border: 1px solid var(--color-accent);
+    padding: 0.5em 0.7em;
+    border-radius: 2px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .download-item h3 {
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .download-pending {
+    font-style: italic;
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+    margin-top: var(--space-xs);
+  }
+
+  /* Quotes */
+  .press-quotes {
+    border-top: 1px solid var(--color-warm-grey);
+  }
+
+  .press-quote-list {
+    margin-top: var(--space-md);
+  }
+
+  .press-quote-item blockquote {
     font-family: var(--font-display);
     font-size: clamp(1.5rem, 3vw, 2.25rem);
     border-left: 3px solid var(--color-accent-solid);
@@ -54,5 +283,33 @@ import Hero from '../components/Hero.astro';
 
   .press-source {
     padding-left: calc(var(--space-md) + 3px);
+  }
+
+  /* Contact */
+  .press-contact {
+    border-top: 1px solid var(--color-warm-grey);
+  }
+
+  .press-contact p {
+    color: var(--color-text-secondary);
+    margin-top: var(--space-sm);
+  }
+
+  .press-email {
+    margin-top: var(--space-md);
+  }
+
+  .press-email a {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    color: var(--color-accent-interactive);
+    background-image: none;
+    border-bottom: 2px solid var(--color-accent);
+    padding-bottom: 0.15rem;
+  }
+
+  .press-email a:hover {
+    color: var(--color-accent-hover);
+    border-color: var(--color-accent-hover);
   }
 </style>

@@ -24,14 +24,14 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
-    <title>{title} — Manuel Monró</title>
+    <title>{title} — Manuel Monrò</title>
     <link rel="canonical" href={canonicalUrl.href} />
     <link rel="alternate" hreflang={alternateLang} href={new URL(alternateUrl, Astro.site).href} />
     <link rel="alternate" hreflang={lang} href={canonicalUrl.href} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
     <script is:inline>
@@ -55,8 +55,8 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
     <div class="cursor-dot" aria-hidden="true"></div>
     <div class="manifesto" aria-hidden="true">
       {lang === 'es'
-        ? 'El cuerpo piensa. El pensamiento se mueve. Lo siniestro es inofensivo. Lo inofensivo es siniestro. Cada función es la primera. Cada función es la última.'
-        : 'The body thinks. Thought moves. The sinister is harmless. The harmless is sinister. Every performance is the first. Every performance is the last.'}
+        ? 'Cada función es la primera. Cada función es la última.'
+        : 'Every performance is the first. Every performance is the last.'}
     </div>
     <script>
       function initReveals() {

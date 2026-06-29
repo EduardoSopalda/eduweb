@@ -1,0 +1,123 @@
+---
+interface Props {
+  lang?: 'es' | 'en';
+}
+
+const { lang = 'es' } = Astro.props;
+
+const faces = [
+  { src: '/images/cara-velada-1.jpg', alt: lang === 'es' ? 'Cara velada, retrato en bronce sobre negro — Ensayo sobre nadie' : 'Veiled face, bronze portrait on black — Ensayo sobre nadie' },
+  { src: '/images/cara-velada-2.jpg', alt: lang === 'es' ? 'Cara velada, claroscuro en bronce — Ensayo sobre nadie' : 'Veiled face, bronze chiaroscuro — Ensayo sobre nadie' },
+  { src: '/images/cara-velada-3.jpg', alt: lang === 'es' ? 'Cara velada, perfil en penumbra — Ensayo sobre nadie' : 'Veiled face, profile in half-light — Ensayo sobre nadie' },
+  { src: '/images/cara-velada-4.jpg', alt: lang === 'es' ? 'Cara velada, mirada cubierta — Ensayo sobre nadie' : 'Veiled face, covered gaze — Ensayo sobre nadie' },
+  { src: '/images/cara-velada-5.jpg', alt: lang === 'es' ? 'Cara velada, tono cálido sobre negro — Ensayo sobre nadie' : 'Veiled face, warm tone on black — Ensayo sobre nadie' },
+  { src: '/images/cara-velada-6.jpg', alt: lang === 'es' ? 'Cara velada, presencia y enigma — Ensayo sobre nadie' : 'Veiled face, presence and enigma — Ensayo sobre nadie' },
+];
+---
+
+<section class="veiled" aria-label={lang === 'es' ? 'Caras veladas — Ensayo sobre nadie' : 'Veiled faces — Ensayo sobre nadie'}>
+  <div class="veiled-stage">
+    <div class="veiled-halo" aria-hidden="true"></div>
+    {faces.map((face, i) => (
+      <img
+        class:list={['veiled-img', i === 0 && 'veiled-img--active']}
+        src={face.src}
+        alt={face.alt}
+        loading={i === 0 ? 'eager' : 'lazy'}
+        data-index={i}
+      />
+    ))}
+    <!-- PENDING: photographer credit for veiled face series -->
+  </div>
+</section>
+
+<script>
+  function initVeiledFaces() {
+    const imgs = document.querySelectorAll<HTMLImageElement>('.veiled-img');
+    if (!imgs.length) return;
+
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isCalm = !document.documentElement.classList.contains('chaos');
+    if (prefersReduced || isCalm) return;
+
+    let current = 0;
+    const total = imgs.length;
+    const holdDuration = 4000;
+    const fadeDuration = 2000;
+
+    function cycle() {
+      const prev = current;
+      current = (current + 1) % total;
+      imgs[prev].classList.remove('veiled-img--active');
+      imgs[current].classList.add('veiled-img--active');
+    }
+
+    setInterval(cycle, holdDuration + fadeDuration);
+  }
+
+  initVeiledFaces();
+  document.addEventListener('astro:after-swap', initVeiledFaces);
+</script>
+
+<style>
+  .veiled {
+    position: relative;
+    background-color: #000;
+    overflow: hidden;
+  }
+
+  .veiled-stage {
+    position: relative;
+    width: 100%;
+    max-width: 36rem;
+    margin-inline: auto;
+    aspect-ratio: 2 / 3;
+    overflow: hidden;
+  }
+
+  @media (min-width: 48rem) {
+    .veiled-stage {
+      aspect-ratio: 3 / 4;
+      max-width: 48rem;
+    }
+  }
+
+  .veiled-halo {
+    position: absolute;
+    inset: -20%;
+    z-index: 1;
+    background: radial-gradient(
+      ellipse at 50% 40%,
+      rgba(139, 111, 71, 0.15) 0%,
+      rgba(139, 111, 71, 0.08) 30%,
+      transparent 60%
+    );
+    pointer-events: none;
+  }
+
+  .veiled-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 20%;
+    opacity: 0;
+    transition: opacity 2s ease-in-out;
+    z-index: 0;
+  }
+
+  .veiled-img--active {
+    opacity: 1;
+    z-index: 1;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .veiled-img {
+      transition: none;
+    }
+    .veiled-img:first-of-type {
+      opacity: 1;
+    }
+  }
+</style>

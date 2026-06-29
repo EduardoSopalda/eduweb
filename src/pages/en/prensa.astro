@@ -4,55 +4,152 @@ import Hero from '../../components/Hero.astro';
 ---
 
 <Base
-  title="Press"
-  description="Reviews and press coverage of Manuel Monró and La Tulpa."
+  title="Press kit"
+  description="Press kit, dossier, technical rider and professional materials for Manuel Monrò and La Tulpa."
 >
-  <Hero title="Press" height="section" />
+  <Hero title="Press kit" subtitle="Professional materials" height="section" />
 
   <section class="section container">
-    <div class="prose reveal">
-      <p>
-        Selected excerpts from reviews and media coverage of Manuel Monró and La Tulpa's work.
+    <div class="press-intro prose reveal">
+      <p class="press-lead">
+        Everything needed to programme a performance, evaluate a project, or cover the work of Manuel Monrò and La Tulpa.
       </p>
     </div>
 
-    <div class="press-list">
-      <article class="press-item reveal reveal-delay-1">
+    <div class="press-grid">
+      <div class="press-card reveal">
+        <h2 class="press-card-title">Who</h2>
+        <p>Manuel Monrò — director, choreographer, dramaturg, pedagogue and performer. Working between Barcelona and Seville.</p>
+        <p class="marginalia" style="margin-top: var(--space-sm);">Training: Dramatic Art (Seville), SEAD (Salzburg), Institut del Teatre (Barcelona).</p>
+      </div>
+
+      <div class="press-card reveal reveal-delay-1">
+        <h2 class="press-card-title">What he has created</h2>
+        <ul class="press-list">
+          <li>
+            <a href="/en/obra/ensayo-sobre-nadie"><strong>Ensayo sobre nadie</strong></a> (2023)
+            <span class="label label--outline" style="margin-left: 0.5rem;">On tour</span>
+            <p class="marginalia">Short dance theatre piece. Choreography by Manuel Monrò. With Susana Villegas.</p>
+          </li>
+          <li>
+            <a href="/en/obra/aqui-nadie"><strong>Aquí Nadie</strong></a> (2021)
+            <p class="marginalia">First solo. Premiered in Terrassa.</p>
+          </li>
+          <li>
+            <a href="/en/obra/amours"><strong>Amours</strong></a> (2026)
+            <p class="marginalia">With Richard Bonnot-Saltet. Théâtre Antique d'Arles.</p>
+          </li>
+        </ul>
+      </div>
+
+      <div class="press-card reveal reveal-delay-2">
+        <h2 class="press-card-title">Where he has performed</h2>
+        <ul class="press-tour-list">
+          <li><span class="marginalia">2023</span> 16th Escena Mobile International Festival, Seville — Premiere</li>
+          <li><span class="marginalia">2024</span> Kiada Festival, Seoul, South Korea — Opening</li>
+          <li><span class="marginalia">2024</span> Kirchheimbolanden Festival, Germany</li>
+          <li><span class="marginalia">2025</span> Madrid en Danza, Teatros del Canal, Madrid</li>
+          <li><span class="marginalia">2026</span> Théâtre Antique d'Arles, France</li>
+        </ul>
+      </div>
+
+      <div class="press-card press-card--accent reveal reveal-delay-3">
+        <h2 class="press-card-title">Can he tour?</h2>
+        <p><strong>Yes.</strong> <em>Ensayo sobre nadie</em> is on active tour. He has toured across Spain, South Korea, Germany and France.</p>
+        <p style="margin-top: var(--space-sm);">Company: <strong>La Tulpa</strong>, founded in 2023 in collaboration with Danza Mobile, Seville.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section container press-downloads" aria-labelledby="press-downloads-title">
+    <h2 id="press-downloads-title" class="accent-underline reveal">Downloads</h2>
+    <div class="downloads-grid reveal reveal-delay-1">
+      <div class="download-item">
+        <span class="download-icon" aria-hidden="true">PDF</span>
+        <div>
+          <h3>Press dossier</h3>
+          <p class="marginalia">Biography, body of work, trajectory.</p>
+          <p class="download-pending">Available on request</p>
+        </div>
+      </div>
+      <div class="download-item">
+        <span class="download-icon" aria-hidden="true">PDF</span>
+        <div>
+          <h3>Technical rider</h3>
+          <p class="marginalia">Technical requirements to programme performances.</p>
+          <p class="download-pending">Available on request</p>
+        </div>
+      </div>
+      <div class="download-item">
+        <span class="download-icon" aria-hidden="true">PDF</span>
+        <div>
+          <h3>CV and biography</h3>
+          <p class="marginalia">Full artistic curriculum.</p>
+          <p class="download-pending">Available on request</p>
+        </div>
+      </div>
+      <div class="download-item">
+        <span class="download-icon" aria-hidden="true">ZIP</span>
+        <div>
+          <h3>High-resolution photos</h3>
+          <p class="marginalia">Production images for press use.</p>
+          <p class="download-pending">Available on request</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section container press-quotes" aria-labelledby="press-quotes-title">
+    <h2 id="press-quotes-title" class="accent-underline reveal">Press</h2>
+    <div class="press-quote-list">
+      <article class="press-quote-item reveal reveal-delay-1">
         <blockquote>
-          <p>
-            &laquo;The aesthetic may seem sinister, but these beings are harmless.&raquo;
-          </p>
+          <p>&ldquo;The aesthetic may seem sinister, but these beings are harmless.&rdquo;</p>
         </blockquote>
         <p class="press-source marginalia">
-          Review of <em>Ensayo sobre nadie</em>, following its premiere at the 16th Escena Mobile Festival, Seville, 2023.
+          Review of <em>Ensayo sobre nadie</em>, 16th Escena Mobile Festival, Seville, 2023.
         </p>
-        <!-- PENDING: author and publication for proper attribution -->
       </article>
     </div>
-    <!-- PENDING: additional reviews and press coverage -->
+  </section>
+
+  <section class="section container press-contact" aria-labelledby="press-contact-title">
+    <div class="reveal">
+      <h2 id="press-contact-title" class="accent-underline">Contact</h2>
+      <p>To request materials, programme performances, or any professional enquiry:</p>
+      <p class="press-email">
+        <a href="mailto:cialatulpa@gmail.com">cialatulpa@gmail.com</a>
+      </p>
+    </div>
   </section>
 </Base>
 
 <style>
-  .press-list {
-    margin-top: var(--space-lg);
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-lg);
-  }
-
-  .press-item blockquote {
-    font-family: var(--font-display);
-    font-size: clamp(1.5rem, 3vw, 2.25rem);
-    border-left: 3px solid var(--color-accent-solid);
-    padding-left: var(--space-md);
-    color: var(--color-text);
-    font-style: italic;
-    margin-bottom: var(--space-md);
-    line-height: 1.4;
-  }
-
-  .press-source {
-    padding-left: calc(var(--space-md) + 3px);
-  }
+  .press-lead { font-family: var(--font-display); font-size: clamp(1.25rem, 2.5vw, 1.75rem); font-weight: 400; line-height: 1.4; max-width: var(--content-width); margin-bottom: var(--space-lg); }
+  .press-grid { display: grid; gap: var(--space-md); margin-top: var(--space-md); }
+  @media (min-width: 48rem) { .press-grid { grid-template-columns: repeat(2, 1fr); } }
+  .press-card { background-color: var(--color-base-raised); padding: var(--space-md); border-radius: 2px; border-left: 3px solid var(--color-warm-grey); }
+  .press-card--accent { border-left-color: var(--color-accent-solid); }
+  .press-card-title { font-family: var(--font-body); font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: var(--color-text-secondary); margin-bottom: var(--space-sm); }
+  .press-card p { font-size: 0.95rem; color: var(--color-text-secondary); }
+  .press-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: var(--space-sm); }
+  .press-list a { background-image: none; font-size: 0.95rem; }
+  .press-tour-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: var(--space-xs); font-size: 0.9rem; color: var(--color-text-secondary); }
+  .press-tour-list .marginalia { display: inline-block; min-width: 3rem; margin-right: var(--space-xs); }
+  .press-downloads { border-top: 1px solid var(--color-warm-grey); }
+  .downloads-grid { display: grid; gap: var(--space-md); margin-top: var(--space-md); }
+  @media (min-width: 48rem) { .downloads-grid { grid-template-columns: repeat(2, 1fr); } }
+  .download-item { display: flex; gap: var(--space-md); align-items: flex-start; padding: var(--space-md); background-color: var(--color-base-raised); border-radius: 2px; }
+  .download-icon { font-family: var(--font-mono); font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-accent-interactive); border: 1px solid var(--color-accent); padding: 0.5em 0.7em; border-radius: 2px; white-space: nowrap; flex-shrink: 0; }
+  .download-item h3 { font-size: 1rem; margin-bottom: 0.25rem; }
+  .download-pending { font-style: italic; font-size: 0.85rem; color: var(--color-text-secondary); margin-top: var(--space-xs); }
+  .press-quotes { border-top: 1px solid var(--color-warm-grey); }
+  .press-quote-list { margin-top: var(--space-md); }
+  .press-quote-item blockquote { font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2.25rem); border-left: 3px solid var(--color-accent-solid); padding-left: var(--space-md); color: var(--color-text); font-style: italic; margin-bottom: var(--space-md); line-height: 1.4; }
+  .press-source { padding-left: calc(var(--space-md) + 3px); }
+  .press-contact { border-top: 1px solid var(--color-warm-grey); }
+  .press-contact p { color: var(--color-text-secondary); margin-top: var(--space-sm); }
+  .press-email { margin-top: var(--space-md); }
+  .press-email a { font-family: var(--font-display); font-size: 1.25rem; color: var(--color-accent-interactive); background-image: none; border-bottom: 2px solid var(--color-accent); padding-bottom: 0.15rem; }
+  .press-email a:hover { color: var(--color-accent-hover); border-color: var(--color-accent-hover); }
 </style>

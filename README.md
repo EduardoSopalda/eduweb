@@ -1,6 +1,6 @@
 # La Tulpa — Compañía de danza
 
-Sitio web de **La Tulpa**, compañía de danza dirigida por Manuel Monró. Construido con [Astro](https://astro.build). Bilingüe: español e inglés.
+Sitio web de **La Tulpa**, compañía de danza dirigida por Manuel Monrò. Construido con [Astro](https://astro.build). Bilingüe: español e inglés.
 
 ## Arrancar en local
 
@@ -40,7 +40,7 @@ src/
 title: Nombre de la obra
 slug: nombre-de-la-obra
 year: 2025
-choreography: Manuel Monró
+choreography: Manuel Monrò
 performers: Nombre y nombre
 music: Nombre
 production: Producción

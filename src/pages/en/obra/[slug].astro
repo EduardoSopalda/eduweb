@@ -1,6 +1,7 @@
 ---
 import Base from '../../../layouts/Base.astro';
 import Hero from '../../../components/Hero.astro';
+import VideoEmbed from '../../../components/VideoEmbed.astro';
 import { getCollection, render } from 'astro:content';
 import { useTranslations } from '../../../i18n/utils';
 
@@ -17,13 +18,37 @@ export async function getStaticPaths() {
 const { obra } = Astro.props;
 const { Content } = await render(obra);
 const d = obra.data;
+
+const galleryImages = d.slug === 'ensayo-sobre-nadie' ? [
+  { src: '/images/cara-velada-1.jpg', alt: 'Veiled face — Ensayo sobre nadie' },
+  { src: '/images/cara-velada-2.jpg', alt: 'Veiled face, chiaroscuro — Ensayo sobre nadie' },
+  { src: '/images/cara-velada-3.jpg', alt: 'Veiled face, profile — Ensayo sobre nadie' },
+  { src: '/images/cara-velada-4.jpg', alt: 'Veiled face, gaze — Ensayo sobre nadie' },
+  { src: '/images/cara-velada-5.jpg', alt: 'Veiled face, bronze — Ensayo sobre nadie' },
+  { src: '/images/cara-velada-6.jpg', alt: 'Veiled face, presence — Ensayo sobre nadie' },
+] : [];
+
+let videoProvider: 'youtube' | 'vimeo' | null = null;
+let videoId = '';
+let videoHash = '';
+if (d.videoUrl) {
+  if (d.videoUrl.startsWith('youtube:')) {
+    videoProvider = 'youtube';
+    videoId = d.videoUrl.replace('youtube:', '');
+  } else if (d.videoUrl.startsWith('vimeo:')) {
+    videoProvider = 'vimeo';
+    const parts = d.videoUrl.replace('vimeo:', '').split(':');
+    videoId = parts[0];
+    videoHash = parts[1] || '';
+  }
+}
 ---
 
 <Base
   title={d.title}
   description={`${d.title} (${d.year}). ${d.type}. Choreography by ${d.choreography}.`}
 >
-  <Hero title={d.title} subtitle={String(d.year)} height="section" />
+  <Hero title={d.title} subtitle={String(d.year)} height="section" image={d.image} imageAlt={d.title} />
 
   <article class="section container">
     <div class="obra-header reveal">
@@ -54,8 +79,38 @@ const d = obra.data;
           <dt class="marginalia">{t('works.type')}</dt>
           <dd>{d.type}</dd>
         </dl>
+
+        <div class="obra-downloads">
+          <p class="marginalia" style="margin-top: var(--space-md);">Dossier and technical rider available on request.</p>
+        </div>
       </div>
     </div>
+
+    {videoProvider && (
+      <div class="obra-video reveal">
+        <h2 class="accent-underline">Video</h2>
+        <VideoEmbed
+          provider={videoProvider}
+          videoId={videoId}
+          hash={videoHash}
+          title={d.title}
+          lang="en"
+        />
+      </div>
+    )}
+
+    {galleryImages.length > 0 && (
+      <div class="obra-gallery reveal">
+        <h2 class="accent-underline">Gallery</h2>
+        <div class="gallery-grid">
+          {galleryImages.map((img) => (
+            <div class="gallery-item">
+              <img src={img.src} alt={img.alt} loading="lazy" class="gallery-img" />
+            </div>
+          ))}
+        </div>
+      </div>
+    )}
 
     <div class="obra-body prose reveal reveal-delay-2">
       <Content />
@@ -64,69 +119,24 @@ const d = obra.data;
 </Base>
 
 <style>
-  .obra-back {
-    display: inline-block;
-    font-size: 0.875rem;
-    color: var(--color-text-secondary);
-    background-image: none;
-    margin-bottom: var(--space-md);
-    transition: color var(--transition-fast);
-  }
-
-  .obra-back:hover {
-    color: var(--color-accent-interactive);
-  }
-
-  .obra-layout {
-    display: grid;
-    gap: var(--space-lg);
-    margin-top: var(--space-md);
-  }
-
-  @media (min-width: 48rem) {
-    .obra-layout {
-      grid-template-columns: 1.5fr 1fr;
-    }
-  }
-
-  .obra-ficha {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 0.75rem var(--space-md);
-    padding: var(--space-md);
-    background-color: var(--color-base-raised);
-    border-left: 3px solid var(--color-accent-solid);
-    border-radius: 2px;
-  }
-
-  .obra-ficha dt {
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    padding-top: 0.15em;
-  }
-
-  .obra-ficha dd {
-    margin: 0;
-  }
-
-  .obra-body {
-    margin-top: var(--space-xl);
-    border-top: 1px solid var(--color-warm-grey);
-    padding-top: var(--space-lg);
-  }
-
-  .obra-body :global(h2) {
-    font-size: 1.5rem;
-    margin-top: var(--space-lg);
-  }
-
-  .obra-body :global(h3) {
-    font-size: 1.25rem;
-    margin-top: var(--space-md);
-  }
-
-  .obra-body :global(li) {
-    margin-bottom: 0.5rem;
-  }
+  .obra-back { display: inline-block; font-size: 0.875rem; color: var(--color-text-secondary); background-image: none; margin-bottom: var(--space-md); transition: color var(--transition-fast); }
+  .obra-back:hover { color: var(--color-accent-interactive); }
+  .obra-layout { display: grid; gap: var(--space-lg); margin-top: var(--space-md); }
+  @media (min-width: 48rem) { .obra-layout { grid-template-columns: 1.5fr 1fr; } }
+  .obra-ficha { display: grid; grid-template-columns: auto 1fr; gap: 0.75rem var(--space-md); padding: var(--space-md); background-color: var(--color-base-raised); border-left: 3px solid var(--color-accent-solid); border-radius: 2px; }
+  .obra-ficha dt { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; padding-top: 0.15em; }
+  .obra-ficha dd { margin: 0; }
+  .obra-video { margin-top: var(--space-xl); padding-top: var(--space-lg); border-top: 1px solid var(--color-warm-grey); }
+  .obra-video h2 { margin-bottom: var(--space-md); }
+  .obra-gallery { margin-top: var(--space-xl); padding-top: var(--space-lg); border-top: 1px solid var(--color-warm-grey); }
+  .obra-gallery h2 { margin-bottom: var(--space-md); }
+  .gallery-grid { display: grid; gap: var(--space-sm); grid-template-columns: repeat(2, 1fr); }
+  @media (min-width: 48rem) { .gallery-grid { grid-template-columns: repeat(3, 1fr); } }
+  .gallery-item { overflow: hidden; border-radius: 2px; aspect-ratio: 3 / 4; }
+  .gallery-img { width: 100%; height: 100%; object-fit: cover; object-position: center 20%; transition: transform 0.6s ease-out; }
+  @media (prefers-reduced-motion: no-preference) { .gallery-item:hover .gallery-img { transform: scale(1.05); } }
+  .obra-body { margin-top: var(--space-xl); border-top: 1px solid var(--color-warm-grey); padding-top: var(--space-lg); }
+  .obra-body :global(h2) { font-size: 1.5rem; margin-top: var(--space-lg); }
+  .obra-body :global(h3) { font-size: 1.25rem; margin-top: var(--space-md); }
+  .obra-body :global(li) { margin-bottom: 0.5rem; }
 </style>

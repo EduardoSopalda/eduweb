@@ -5,7 +5,7 @@ import Hero from '../components/Hero.astro';
 
 <Base
   title="Agenda"
-  description="Funciones, giras y próximos proyectos de Manuel Monró y La Tulpa."
+  description="Funciones, giras y próximos proyectos de Manuel Monrò y La Tulpa."
 >
   <Hero title="Agenda" subtitle="Funciones y gira" height="section" />
 
@@ -45,6 +45,43 @@ import Hero from '../components/Hero.astro';
         </ul>
       </div>
       <!-- PENDING FROM MANUEL: upcoming performances, new projects, residencies -->
+    </article>
+  </section>
+
+  <section class="section container">
+    <div class="workshop-header reveal">
+      <span class="marginalia marginalia--accent">Pedagogía</span>
+      <h2 class="accent-underline">Talleres</h2>
+    </div>
+    <article class="workshop-card reveal reveal-delay-1">
+      <div class="workshop-grid">
+        <div class="workshop-image">
+          <img src="/images/workshop-que-nadie-se-mueva.jpg" alt="Cartel del taller Que nadie se mueva — Mecánicas inverosímiles de Expresión Corporal" loading="lazy" class="img-full" />
+        </div>
+        <div class="workshop-info">
+          <span class="label">Taller</span>
+          <h3>Que nadie se mueva</h3>
+          <p class="workshop-subtitle">&ldquo;Mecánicas inverosímiles de Expresión Corporal&rdquo;</p>
+          <p class="workshop-meta marginalia">Manuel Monrò &amp; Susana Villegas</p>
+          <dl class="workshop-details">
+            <div>
+              <dt class="marginalia">Fecha</dt>
+              <dd>31 mayo / 1 junio</dd>
+            </div>
+            <div>
+              <dt class="marginalia">Horario</dt>
+              <dd>10:00 — 14:00 h</dd>
+            </div>
+            <div>
+              <dt class="marginalia">Lugar</dt>
+              <dd>La Vieja Imprenta 51, calle del Monte Oliveti 51, Madrid</dd>
+            </div>
+          </dl>
+          <p class="workshop-contact">
+            Info y reservas: <a href="mailto:cialatulpa@gmail.com">cialatulpa@gmail.com</a>
+          </p>
+        </div>
+      </div>
     </article>
   </section>
 </Base>
@@ -125,5 +162,74 @@ import Hero from '../components/Hero.astro';
 
   .agenda-venue {
     font-size: 0.95rem;
+  }
+
+  .workshop-header {
+    margin-bottom: var(--space-md);
+  }
+
+  .workshop-header .marginalia {
+    display: block;
+    margin-bottom: var(--space-xs);
+  }
+
+  .workshop-card {
+    background-color: var(--color-base-raised);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .workshop-grid {
+    display: grid;
+    gap: var(--space-md);
+  }
+
+  @media (min-width: 48rem) {
+    .workshop-grid {
+      grid-template-columns: 1fr 1.2fr;
+    }
+  }
+
+  .workshop-image img {
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    object-position: top;
+  }
+
+  .workshop-info {
+    padding: var(--space-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    justify-content: center;
+  }
+
+  .workshop-info h3 {
+    font-size: clamp(1.35rem, 2.5vw, 1.75rem);
+  }
+
+  .workshop-subtitle {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--color-text-secondary);
+  }
+
+  .workshop-details {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    margin-top: var(--space-sm);
+  }
+
+  .workshop-details dd {
+    font-size: 0.95rem;
+    color: var(--color-text);
+  }
+
+  .workshop-contact {
+    margin-top: var(--space-sm);
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
   }
 </style>

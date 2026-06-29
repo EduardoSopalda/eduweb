@@ -9,6 +9,6 @@ export default defineConfig({
       prefixDefaultLocale: false,
     },
   },
-  site: 'https://latulpa.es',
+  site: 'https://manuelmonro.com',
   prefetch: true,
 });

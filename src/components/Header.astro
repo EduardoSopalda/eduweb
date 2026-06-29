@@ -9,91 +9,179 @@ const alternateLang = getAlternateLang(lang);
 const alternateUrl = getAlternateUrl(Astro.url, lang);
 
 const navItems = [
-  { label: t('nav.about'), href: getLocalePath('/sobre', lang) },
-  { label: t('nav.work'), href: getLocalePath('/obra', lang) },
-  { label: t('nav.schedule'), href: getLocalePath('/agenda', lang) },
-  { label: t('nav.press'), href: getLocalePath('/prensa', lang) },
-  { label: t('nav.notebook'), href: getLocalePath('/cuaderno', lang) },
-  { label: t('nav.contact'), href: getLocalePath('/contacto', lang) },
+  { label: t('nav.about'), href: getLocalePath('/sobre', lang), num: 'I' },
+  { label: t('nav.work'), href: getLocalePath('/obra', lang), num: 'II' },
+  { label: t('nav.schedule'), href: getLocalePath('/agenda', lang), num: 'III' },
+  { label: t('nav.press'), href: getLocalePath('/prensa', lang), num: 'IV' },
+  { label: t('nav.contact'), href: getLocalePath('/contacto', lang), num: 'V' },
 ];
 ---
 
 <header class="site-header" role="banner" transition:persist>
   <div class="header-inner container">
-    <a href={getLocalePath('/', lang)} class="site-logo" aria-label="Manuel Monró — Inicio">
-      <span class="logo-name">Manuel Monró</span>
+    <a href={getLocalePath('/', lang)} class="site-logo" aria-label="Manuel Monrò — Inicio">
+      <span class="logo-name">Manuel Monrò</span>
     </a>
-    <nav class="site-nav" aria-label={lang === 'es' ? 'Navegación principal' : 'Main navigation'}>
-      <div class="nav-actions">
-        <CalmToggle />
-        <button
-          class="nav-toggle"
-          aria-expanded="false"
-          aria-controls="nav-menu"
-          aria-label={t('nav.menu')}
-          type="button"
-        >
-          <span class="nav-toggle-bar" aria-hidden="true"></span>
-          <span class="nav-toggle-bar" aria-hidden="true"></span>
-          <span class="nav-toggle-bar" aria-hidden="true"></span>
-        </button>
-      </div>
-      <ul id="nav-menu" class="nav-list" role="list">
-        {navItems.map((item) => (
-          <li>
-            <a href={item.href} class="nav-link">{item.label}</a>
-          </li>
-        ))}
-        <li class="nav-lang">
-          <a href={alternateUrl} class="nav-link nav-link--lang" lang={alternateLang} hreflang={alternateLang}>
-            {languages[alternateLang]}
-          </a>
-        </li>
-      </ul>
-    </nav>
+    <div class="header-actions">
+      <CalmToggle />
+      <button
+        class="nav-trigger"
+        aria-expanded="false"
+        aria-controls="nav-curtain"
+        aria-label={t('nav.menu')}
+        type="button"
+      >
+        <span class="nav-trigger-bar" aria-hidden="true"></span>
+        <span class="nav-trigger-bar" aria-hidden="true"></span>
+      </button>
+    </div>
   </div>
 </header>
 
-<script>
-  function initNav() {
-    const toggle = document.querySelector('.nav-toggle') as HTMLButtonElement;
-    const menu = document.getElementById('nav-menu') as HTMLUListElement;
-    if (!toggle || !menu) return;
+<div id="nav-curtain" class="curtain" role="dialog" aria-modal="true" aria-label={lang === 'es' ? 'Navegación' : 'Navigation'} hidden>
+  <nav class="curtain-nav" aria-label={lang === 'es' ? 'Navegación principal' : 'Main navigation'}>
+    <ul class="curtain-list" role="list">
+      {navItems.map((item) => (
+        <li class="curtain-item">
+          <span class="curtain-num marginalia">{item.num}</span>
+          <a href={item.href} class="curtain-link">{item.label}</a>
+        </li>
+      ))}
+    </ul>
+    <div class="curtain-footer">
+      <a href={alternateUrl} class="curtain-lang" lang={alternateLang} hreflang={alternateLang}>
+        {languages[alternateLang]}
+      </a>
+      <p class="curtain-verse marginalia">
+        {lang === 'es'
+          ? 'Los cuerdos de atar preparan la soga de mi juicio final.'
+          : 'The sane ones tie the rope for my final judgment.'}
+      </p>
+    </div>
+  </nav>
+</div>
 
-    toggle.addEventListener('click', () => {
-      const expanded = toggle.getAttribute('aria-expanded') === 'true';
-      toggle.setAttribute('aria-expanded', String(!expanded));
-      menu.classList.toggle('is-open');
-      if (!expanded) {
-        const firstLink = menu.querySelector('a');
-        firstLink?.focus();
+<script>
+  function initCurtain() {
+    const trigger = document.querySelector('.nav-trigger') as HTMLButtonElement;
+    const curtain = document.getElementById('nav-curtain') as HTMLElement;
+    if (!trigger || !curtain) return;
+
+    let focusableEls: HTMLElement[] = [];
+    let firstFocusable: HTMLElement | null = null;
+    let lastFocusable: HTMLElement | null = null;
+
+    function open() {
+      curtain.hidden = false;
+      trigger.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+
+      focusableEls = Array.from(
+        curtain.querySelectorAll<HTMLElement>('a[href], button, [tabindex]:not([tabindex="-1"])')
+      );
+      firstFocusable = focusableEls[0] || null;
+      lastFocusable = focusableEls[focusableEls.length - 1] || null;
+
+      requestAnimationFrame(() => {
+        curtain.classList.add('is-open');
+        if (firstFocusable) firstFocusable.focus();
+      });
+    }
+
+    function close() {
+      curtain.classList.remove('is-open');
+      trigger.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+
+      const onEnd = () => {
+        curtain.hidden = true;
+        curtain.removeEventListener('transitionend', onEnd);
+      };
+
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        curtain.hidden = true;
+      } else {
+        curtain.addEventListener('transitionend', onEnd, { once: true });
+        setTimeout(() => { curtain.hidden = true; }, 800);
+      }
+
+      trigger.focus();
+    }
+
+    trigger.addEventListener('click', () => {
+      const isOpen = trigger.getAttribute('aria-expanded') === 'true';
+      isOpen ? close() : open();
+    });
+
+    curtain.addEventListener('keydown', (e: KeyboardEvent) => {
+      if (e.key === 'Escape') { close(); return; }
+      if (e.key !== 'Tab') return;
+
+      if (e.shiftKey) {
+        if (document.activeElement === firstFocusable) {
+          e.preventDefault();
+          lastFocusable?.focus();
+        }
+      } else {
+        if (document.activeElement === lastFocusable) {
+          e.preventDefault();
+          firstFocusable?.focus();
+        }
       }
     });
 
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && menu.classList.contains('is-open')) {
-        toggle.setAttribute('aria-expanded', 'false');
-        menu.classList.remove('is-open');
-        toggle.focus();
-      }
+    curtain.querySelectorAll('.curtain-link').forEach(link => {
+      link.addEventListener('click', () => close());
     });
   }
 
-  initNav();
-  document.addEventListener('astro:after-swap', initNav);
+  function initHeaderScroll() {
+    const header = document.querySelector('.site-header') as HTMLElement;
+    if (!header) return;
+    let lastY = 0;
+
+    const onScroll = () => {
+      const y = window.scrollY;
+      if (y > 80 && y > lastY) {
+        header.classList.add('header-hidden');
+      } else {
+        header.classList.remove('header-hidden');
+      }
+      lastY = y;
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
+
+  initCurtain();
+  initHeaderScroll();
+  document.addEventListener('astro:after-swap', () => {
+    initCurtain();
+    initHeaderScroll();
+  });
 </script>
 
 <style>
+  /* Header bar — minimal in repose */
   .site-header {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     z-index: 100;
-    background-color: rgba(11, 11, 13, 0.85);
+    background-color: rgba(10, 10, 12, 0.85);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(122, 34, 34, 0.2);
+    border-bottom: 1px solid var(--color-bronze-subtle, rgba(139, 111, 71, 0.15));
+    transition: transform var(--transition-base);
+  }
+
+  html:not(.chaos) .site-header {
+    background-color: rgba(245, 242, 237, 0.9);
+  }
+
+  .header-hidden {
+    transform: translateY(-100%);
   }
 
   .header-inner {
@@ -120,114 +208,193 @@ const navItems = [
     letter-spacing: 0.02em;
   }
 
-  .site-nav {
-    display: flex;
-    align-items: center;
-    gap: var(--space-sm);
-  }
-
-  .nav-actions {
+  .header-actions {
     display: flex;
     align-items: center;
     gap: var(--space-xs);
   }
 
-  .nav-toggle {
+  /* Trigger button */
+  .nav-trigger {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 6px;
     background: none;
     border: none;
     cursor: pointer;
     padding: var(--space-xs);
+    position: relative;
+    z-index: 200;
   }
 
-  .nav-toggle-bar {
+  .nav-trigger-bar {
     display: block;
-    width: 22px;
+    width: 24px;
     height: 2px;
     background-color: var(--color-text);
-    transition: transform var(--transition-fast), opacity var(--transition-fast);
+    transition: transform var(--transition-base), opacity var(--transition-base);
   }
 
-  .nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(1) {
-    transform: translateY(7px) rotate(45deg);
-  }
-  .nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(2) { opacity: 0; }
-  .nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(3) {
-    transform: translateY(-7px) rotate(-45deg);
+  .nav-trigger[aria-expanded="true"] .nav-trigger-bar:nth-child(1) {
+    transform: translateY(4px) rotate(45deg);
   }
 
-  .nav-list {
-    display: none;
+  .nav-trigger[aria-expanded="true"] .nav-trigger-bar:nth-child(2) {
+    transform: translateY(-4px) rotate(-45deg);
+  }
+
+  /* Fullscreen curtain */
+  .curtain {
+    position: fixed;
+    inset: 0;
+    z-index: 150;
+    background-color: rgba(10, 10, 12, 0.97);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+
+  html:not(.chaos) .curtain {
+    background-color: rgba(245, 242, 237, 0.98);
+  }
+
+  .curtain.is-open {
+    opacity: 1;
+  }
+
+  .curtain-nav {
+    width: 100%;
+    max-width: var(--max-width);
+    padding-inline: var(--space-md);
+  }
+
+  .curtain-list {
     list-style: none;
     padding: 0;
     margin: 0;
-  }
-
-  .nav-list.is-open {
     display: flex;
     flex-direction: column;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background-color: rgba(11, 11, 13, 0.97);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(122, 34, 34, 0.2);
-    padding: var(--space-md) var(--space-sm);
-    gap: var(--space-xs);
+    gap: var(--space-sm);
   }
 
-  .nav-link {
-    color: var(--color-text-secondary);
-    font-size: 0.8rem;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: var(--space-xs) 0;
-    display: block;
+  .curtain-item {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-md);
+    opacity: 0;
+    transform: translateY(1rem);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+
+  .is-open .curtain-item {
+    opacity: 1;
+    transform: none;
+  }
+
+  .is-open .curtain-item:nth-child(1) { transition-delay: 0.1s; }
+  .is-open .curtain-item:nth-child(2) { transition-delay: 0.15s; }
+  .is-open .curtain-item:nth-child(3) { transition-delay: 0.2s; }
+  .is-open .curtain-item:nth-child(4) { transition-delay: 0.25s; }
+  .is-open .curtain-item:nth-child(5) { transition-delay: 0.3s; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .curtain-item {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+    .curtain {
+      transition: none;
+    }
+  }
+
+  .curtain-num {
+    font-size: 0.7rem;
+    min-width: 2rem;
+    text-align: right;
+  }
+
+  .curtain-link {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 6vw, 4rem);
+    font-weight: 700;
+    color: var(--color-text);
     background-image: none;
+    text-decoration: none;
+    position: relative;
+    display: inline-block;
+    line-height: 1.2;
     transition: color var(--transition-fast);
   }
 
-  .nav-link:hover {
-    color: var(--color-text);
+  .curtain-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0.05em;
+    left: 0;
+    width: 0;
+    height: 4px;
+    background-color: var(--color-accent-solid);
+    transition: width 0.3s ease;
+  }
+
+  .curtain-link:hover {
+    color: var(--color-accent-interactive);
     background-image: none;
   }
 
-  .nav-link--lang { color: var(--color-accent-interactive); }
-
-  .nav-lang {
-    border-top: 1px solid var(--color-warm-grey);
-    padding-top: var(--space-xs);
-    margin-top: var(--space-xs);
+  .curtain-link:hover::after {
+    width: 100%;
   }
 
-  @media (min-width: 64rem) {
-    .nav-toggle { display: none; }
+  .curtain-link:focus-visible {
+    outline: 2px solid var(--color-focus-ring);
+    outline-offset: 4px;
+  }
 
-    .nav-list {
-      display: flex;
-      align-items: center;
-      gap: var(--space-md);
-    }
+  .curtain-footer {
+    margin-top: var(--space-xl);
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--color-warm-grey);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: var(--space-md);
+    opacity: 0;
+    transition: opacity 0.4s ease 0.35s;
+  }
 
-    .nav-list.is-open {
-      position: static;
-      flex-direction: row;
-      background: none;
-      border: none;
-      padding: 0;
-      backdrop-filter: none;
-    }
+  .is-open .curtain-footer {
+    opacity: 1;
+  }
 
-    .nav-lang {
-      border-top: none;
-      padding-top: 0;
-      margin-top: 0;
-      border-left: 1px solid var(--color-warm-grey);
-      padding-left: var(--space-md);
+  @media (prefers-reduced-motion: reduce) {
+    .curtain-footer {
+      opacity: 1;
+      transition: none;
     }
+  }
+
+  .curtain-lang {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-accent-interactive);
+    background-image: none;
+  }
+
+  .curtain-lang:hover {
+    background-image: none;
+    color: var(--color-accent-hover);
+  }
+
+  .curtain-verse {
+    max-width: 20rem;
+    text-align: right;
+    font-style: italic;
   }
 </style>

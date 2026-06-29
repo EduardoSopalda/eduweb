@@ -485,17 +485,35 @@ html.chaos .cursor-dot {
   bottom: var(--space-md);
   right: var(--space-sm);
   font-family: var(--font-display);
-  font-size: 0.75rem;
   font-style: italic;
   color: var(--color-text-secondary);
   opacity: 0.35;
   transition: opacity 0.6s;
   pointer-events: auto;
-  max-width: 18rem;
   text-align: right;
-  line-height: 1.6;
+  line-height: 1.2;
   z-index: 50;
   background-image: none;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.manifesto-line1 {
+  font-size: 0.85rem;
+}
+
+.manifesto-line2 {
+  font-size: 0.7rem;
+}
+
+@media (min-width: 48rem) {
+  .manifesto-line1 {
+    font-size: 1rem;
+  }
+  .manifesto-line2 {
+    font-size: 0.8rem;
+  }
 }
 
 html.chaos .manifesto {

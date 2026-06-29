@@ -54,9 +54,8 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
     <Footer />
     <div class="cursor-dot" aria-hidden="true"></div>
     <a href={lang === 'es' ? '/nadie' : '/en/nadie'} class="manifesto" aria-hidden="true" tabindex="-1">
-      {lang === 'es'
-        ? 'Cada función es la primera. Cada función es la última.'
-        : 'Every performance is the first. Every performance is the last.'}
+      <span class="manifesto-line1">{lang === 'es' ? 'Cada' : 'Every'}</span>
+      <span class="manifesto-line2">{lang === 'es' ? 'función es la última.' : 'performance is the last.'}</span>
     </a>
     <script>
       function initReveals() {

@@ -27,6 +27,18 @@ const featured = obras.find((o) => o.data.touring) || obras[0];
   <!-- Second punch: veiled faces -->
   <VeiledFaces lang="es" />
 
+  <!-- Dramatic interstitial -->
+  <section class="interstitial" aria-hidden="true">
+    <div class="interstitial-inner">
+      <p class="interstitial-text reveal">
+        Casi nadie se pregunta si es más real<br />
+        lo que se puede ver, lo que se puede oír,<br />
+        <span class="interstitial-accent">o lo que se contiene.</span>
+      </p>
+      <span class="interstitial-source reveal reveal-delay-1 marginalia">— Ensayo sobre nadie</span>
+    </div>
+  </section>
+
   <!-- Identity -->
   <section class="section container" aria-labelledby="home-identity">
     <div class="identity reveal">
@@ -201,6 +213,58 @@ const featured = obras.find((o) => o.data.touring) || obras[0];
     clip: rect(0, 0, 0, 0);
     white-space: nowrap;
     border: 0;
+  }
+
+  /* Dramatic interstitial */
+  .interstitial {
+    position: relative;
+    background-color: #000;
+    padding-block: var(--space-xl);
+    overflow: hidden;
+  }
+
+  @media (min-width: 48rem) {
+    .interstitial {
+      padding-block: var(--space-2xl);
+    }
+  }
+
+  .interstitial::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1px;
+    height: 4rem;
+    background: linear-gradient(to bottom, transparent, var(--color-accent-solid));
+  }
+
+  .interstitial-inner {
+    max-width: var(--max-width);
+    margin-inline: auto;
+    padding-inline: var(--space-md);
+    text-align: center;
+  }
+
+  .interstitial-text {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 4vw, 3rem);
+    font-weight: 400;
+    font-style: italic;
+    line-height: 1.5;
+    color: rgba(236, 231, 222, 0.85);
+    letter-spacing: 0.01em;
+  }
+
+  .interstitial-accent {
+    color: var(--color-accent-interactive);
+  }
+
+  .interstitial-source {
+    display: block;
+    margin-top: var(--space-md);
+    font-style: italic;
   }
 
   /* Identity */

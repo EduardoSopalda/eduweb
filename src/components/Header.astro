@@ -135,12 +135,19 @@ const navItems = [
     });
   }
 
+  let scrollHandler: (() => void) | null = null;
+
   function initHeaderScroll() {
     const header = document.querySelector('.site-header') as HTMLElement;
     if (!header) return;
-    let lastY = 0;
 
-    const onScroll = () => {
+    if (scrollHandler) {
+      window.removeEventListener('scroll', scrollHandler);
+    }
+
+    let lastY = window.scrollY;
+
+    scrollHandler = () => {
       const y = window.scrollY;
       if (y > 80 && y > lastY) {
         header.classList.add('header-hidden');
@@ -150,7 +157,7 @@ const navItems = [
       lastY = y;
     };
 
-    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('scroll', scrollHandler, { passive: true });
   }
 
   initCurtain();

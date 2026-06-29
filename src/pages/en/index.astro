@@ -26,6 +26,18 @@ const featured = obras.find((o) => o.data.touring) || obras[0];
 
   <VeiledFaces lang="en" />
 
+  <!-- Dramatic interstitial -->
+  <section class="interstitial" aria-hidden="true">
+    <div class="interstitial-inner">
+      <p class="interstitial-text reveal">
+        Almost no one asks whether what can be seen,<br />
+        what can be heard,<br />
+        <span class="interstitial-accent">or what is held back is more real.</span>
+      </p>
+      <span class="interstitial-source reveal reveal-delay-1 marginalia">— Ensayo sobre nadie</span>
+    </div>
+  </section>
+
   <section class="section container" aria-labelledby="home-identity">
     <div class="identity reveal">
       <h2 id="home-identity" class="identity-statement">
@@ -175,6 +187,16 @@ const featured = obras.find((o) => o.data.touring) || obras[0];
 
 <style>
   .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+
+  /* Dramatic interstitial */
+  .interstitial { position: relative; background-color: #000; padding-block: var(--space-xl); overflow: hidden; }
+  @media (min-width: 48rem) { .interstitial { padding-block: var(--space-2xl); } }
+  .interstitial::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 1px; height: 4rem; background: linear-gradient(to bottom, transparent, var(--color-accent-solid)); }
+  .interstitial-inner { max-width: var(--max-width); margin-inline: auto; padding-inline: var(--space-md); text-align: center; }
+  .interstitial-text { font-family: var(--font-display); font-size: clamp(1.5rem, 4vw, 3rem); font-weight: 400; font-style: italic; line-height: 1.5; color: rgba(236, 231, 222, 0.85); letter-spacing: 0.01em; }
+  .interstitial-accent { color: var(--color-accent-interactive); }
+  .interstitial-source { display: block; margin-top: var(--space-md); font-style: italic; }
+
   .identity-statement { font-family: var(--font-display); font-size: clamp(1.5rem, 3.5vw, 2.5rem); font-weight: 400; line-height: 1.35; color: var(--color-text); max-width: var(--content-width); margin-bottom: var(--space-lg); }
   .disciplines { display: flex; flex-wrap: wrap; gap: var(--space-sm); }
   .discipline-tag { font-family: var(--font-mono); font-size: 0.7rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-text-secondary); border: 1px solid var(--color-warm-grey); padding: 0.4em 1em; border-radius: 2px; }

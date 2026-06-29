@@ -29,6 +29,11 @@ const faces = [
     ))}
     <!-- PENDING: photographer credit for veiled face series -->
   </div>
+  <p class="veiled-caption" aria-hidden="true">
+    {lang === 'es'
+      ? 'Lo que se oculta es lo que permanece.'
+      : 'What is hidden is what remains.'}
+  </p>
 </section>
 
 <script>
@@ -64,12 +69,13 @@ const faces = [
     position: relative;
     background-color: #000;
     overflow: hidden;
+    padding-block: var(--space-xl);
   }
 
   .veiled-stage {
     position: relative;
     width: 100%;
-    max-width: 36rem;
+    max-width: 40rem;
     margin-inline: auto;
     aspect-ratio: 2 / 3;
     overflow: hidden;
@@ -78,7 +84,7 @@ const faces = [
   @media (min-width: 48rem) {
     .veiled-stage {
       aspect-ratio: 3 / 4;
-      max-width: 48rem;
+      max-width: 52rem;
     }
   }
 
@@ -88,8 +94,8 @@ const faces = [
     z-index: 1;
     background: radial-gradient(
       ellipse at 50% 40%,
-      rgba(139, 111, 71, 0.15) 0%,
-      rgba(139, 111, 71, 0.08) 30%,
+      rgba(139, 111, 71, 0.2) 0%,
+      rgba(139, 111, 71, 0.1) 30%,
       transparent 60%
     );
     pointer-events: none;
@@ -119,5 +125,15 @@ const faces = [
     .veiled-img:first-of-type {
       opacity: 1;
     }
+  }
+
+  .veiled-caption {
+    font-family: var(--font-display);
+    font-size: clamp(0.85rem, 1.5vw, 1rem);
+    font-style: italic;
+    color: rgba(236, 231, 222, 0.4);
+    text-align: center;
+    margin-top: var(--space-md);
+    letter-spacing: 0.05em;
   }
 </style>

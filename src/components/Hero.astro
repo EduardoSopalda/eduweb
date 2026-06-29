@@ -246,13 +246,14 @@ const phraseLines = phrase ? phrase.split(' / ') : [];
     z-index: 4;
     background: linear-gradient(
       to bottom,
-      rgba(10, 10, 12, 0.97) 0%,
-      rgba(10, 10, 12, 0.92) 60%,
-      rgba(10, 10, 12, 0.5) 85%,
+      rgba(10, 10, 12, 1) 0%,
+      rgba(10, 10, 12, 0.98) 50%,
+      rgba(10, 10, 12, 0.88) 80%,
+      rgba(10, 10, 12, 0.4) 95%,
       transparent 100%
     );
     pointer-events: none;
-    animation: curtainRise 4s cubic-bezier(0.22, 0.61, 0.36, 1) 0.5s forwards;
+    animation: curtainRise 7s cubic-bezier(0.16, 0.7, 0.3, 1) 0.8s forwards;
   }
 
   @keyframes curtainRise {

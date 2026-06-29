@@ -7,8 +7,10 @@ interface Props {
   height?: 'full' | 'section';
   image?: string;
   imageAlt?: string;
+  imageCredit?: string;
   video?: string;
   videoPoster?: string;
+  layout?: 'center' | 'split';
 }
 
 const {
@@ -19,57 +21,99 @@ const {
   height = 'section',
   image,
   imageAlt = '',
+  imageCredit,
   video,
   videoPoster,
+  layout = 'center',
 } = Astro.props;
 
 const hasMedia = !!image || !!video;
 const heightClass = height === 'full' ? 'hero--full' : 'hero--section';
+const layoutClass = layout === 'split' ? 'hero--split' : '';
 const phraseLines = phrase ? phrase.split(' / ') : [];
 ---
 
-<section class:list={['hero', heightClass]} aria-label={titleAccent ? `${title} ${titleAccent}` : title}>
-  <div class="hero-bg">
-    {video && (
-      <video
-        class="hero-media hero-video"
-        autoplay
-        muted
-        loop
-        playsinline
-        preload="auto"
-        poster={videoPoster}
-        aria-hidden="true"
-      >
-        <source src={video} type="video/mp4" />
-      </video>
-    )}
-    {image && !video && (
-      <img
-        class="hero-media"
-        src={image}
-        alt={imageAlt}
-        loading={height === 'full' ? 'eager' : 'lazy'}
-      />
-    )}
-    {!hasMedia && <div class="hero-empty" aria-hidden="true"></div>}
-    <div class="hero-scrim" aria-hidden="true"></div>
-    <div class="hero-vignette" aria-hidden="true"></div>
-  </div>
-  <div class="hero-content container">
-    {subtitle && <p class="hero-label hero-anim hero-anim-1">{subtitle}</p>}
-    <h1 class="hero-title hero-anim hero-anim-2 glitch-name">
-      {title}{titleAccent && <span class="hero-title-accent"> {titleAccent}</span>}
-    </h1>
-    {phrase && (
-      <p class="hero-phrase hero-anim hero-anim-3">
-        {phraseLines.length > 1
-          ? phraseLines.map((line, i) => <>{i > 0 && <br />}{line}</>)
-          : phrase}
-      </p>
-    )}
-    <slot />
-  </div>
+<section class:list={['hero', heightClass, layoutClass]} aria-label={titleAccent ? `${title} ${titleAccent}` : title}>
+  {layout === 'split' ? (
+    <div class="hero-split-grid">
+      <div class="hero-split-media">
+        {image && (
+          <img
+            class="hero-media hero-split-img"
+            src={image}
+            alt={imageAlt}
+            loading="eager"
+          />
+        )}
+        <div class="hero-vignette-split" aria-hidden="true"></div>
+        {imageCredit && (
+          <p class="hero-credit marginalia">
+            <!-- PENDING: photographer credit -->
+          </p>
+        )}
+      </div>
+      <div class="hero-split-content">
+        <div class="hero-split-text">
+          {subtitle && <p class="hero-label hero-entrance hero-entrance-1">{subtitle}</p>}
+          <h1 class="hero-title hero-entrance hero-entrance-2 glitch-name">
+            {title}{titleAccent && <span class="hero-title-accent"> {titleAccent}</span>}
+          </h1>
+          {phrase && (
+            <p class="hero-phrase hero-entrance hero-entrance-3">
+              {phraseLines.length > 1
+                ? phraseLines.map((line: string, i: number) => <>{i > 0 && <br />}{line}</>)
+                : phrase}
+            </p>
+          )}
+          <slot />
+        </div>
+      </div>
+    </div>
+  ) : (
+    <>
+      <div class="hero-bg">
+        {video && (
+          <video
+            class="hero-media hero-video"
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="auto"
+            poster={videoPoster}
+            aria-hidden="true"
+          >
+            <source src={video} type="video/mp4" />
+          </video>
+        )}
+        {image && !video && (
+          <img
+            class="hero-media"
+            src={image}
+            alt={imageAlt}
+            loading={height === 'full' ? 'eager' : 'lazy'}
+          />
+        )}
+        {!hasMedia && <div class="hero-empty" aria-hidden="true"></div>}
+        <div class="hero-scrim" aria-hidden="true"></div>
+        <div class="hero-vignette" aria-hidden="true"></div>
+      </div>
+      <div class="hero-content container">
+        {subtitle && <p class="hero-label hero-entrance hero-entrance-1">{subtitle}</p>}
+        <h1 class="hero-title hero-entrance hero-entrance-2 glitch-name">
+          {title}{titleAccent && <span class="hero-title-accent"> {titleAccent}</span>}
+        </h1>
+        {phrase && (
+          <p class="hero-phrase hero-entrance hero-entrance-3">
+            {phraseLines.length > 1
+              ? phraseLines.map((line: string, i: number) => <>{i > 0 && <br />}{line}</>)
+              : phrase}
+          </p>
+        )}
+        <slot />
+      </div>
+    </>
+  )}
 </section>
 
 <style>
@@ -97,6 +141,8 @@ const phraseLines = phrase ? phrase.split(' / ') : [];
     }
   }
 
+  /* ---- Centered layout (default) ---- */
+
   .hero-bg {
     position: absolute;
     inset: 0;
@@ -110,19 +156,17 @@ const phraseLines = phrase ? phrase.split(' / ') : [];
     object-position: center 20%;
   }
 
-  /* Ken Burns slow zoom */
   @media (prefers-reduced-motion: no-preference) {
-    .hero-media {
+    html.chaos .hero-media {
       animation: kenburns 25s ease-in-out infinite alternate;
     }
   }
 
   @keyframes kenburns {
     0% { transform: scale(1); }
-    100% { transform: scale(1.08); }
+    100% { transform: scale(1.06); }
   }
 
-  /* Empty state: gradient + grain texture */
   .hero-empty {
     width: 100%;
     height: 100%;
@@ -132,23 +176,22 @@ const phraseLines = phrase ? phrase.split(' / ') : [];
       linear-gradient(165deg, #0f0e12 0%, #0B0B0D 40%, #100d14 100%);
   }
 
-  /* Dark scrim overlay */
   .hero-scrim {
     position: absolute;
     inset: 0;
     background: linear-gradient(
       to bottom,
-      rgba(11, 11, 13, 0.3) 0%,
-      rgba(11, 11, 13, 0.15) 40%,
-      rgba(11, 11, 13, 0.5) 75%,
-      rgba(11, 11, 13, 0.85) 100%
+      rgba(10, 10, 12, 0.3) 0%,
+      rgba(10, 10, 12, 0.15) 40%,
+      rgba(10, 10, 12, 0.5) 75%,
+      rgba(10, 10, 12, 0.85) 100%
     );
   }
 
   .hero-vignette {
     position: absolute;
     inset: 0;
-    background: radial-gradient(ellipse at center, transparent 40%, rgba(11, 11, 13, 0.6) 100%);
+    background: radial-gradient(ellipse at center, transparent 40%, rgba(10, 10, 12, 0.6) 100%);
   }
 
   .hero-content {
@@ -160,6 +203,96 @@ const phraseLines = phrase ? phrase.split(' / ') : [];
   .hero--section .hero-content {
     text-align: center;
   }
+
+  /* ---- Split layout (homepage) ---- */
+
+  .hero--split {
+    min-height: 100vh;
+    min-height: 100svh;
+    background-color: var(--color-base);
+  }
+
+  .hero-split-grid {
+    width: 100%;
+    min-height: 100vh;
+    min-height: 100svh;
+    display: grid;
+    grid-template-rows: 60vh auto;
+  }
+
+  @media (min-width: 48rem) {
+    .hero-split-grid {
+      grid-template-rows: none;
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .hero-split-grid {
+      grid-template-columns: 55% 45%;
+    }
+  }
+
+  .hero-split-media {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-split-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 15%;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html.chaos .hero-split-img {
+      animation: kenburns 30s ease-in-out infinite alternate;
+    }
+  }
+
+  .hero-vignette-split {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at center, transparent 50%, rgba(10, 10, 12, 0.5) 100%),
+      linear-gradient(to bottom, transparent 70%, rgba(10, 10, 12, 0.6) 100%);
+  }
+
+  @media (min-width: 48rem) {
+    .hero-vignette-split {
+      background:
+        radial-gradient(ellipse at center, transparent 50%, rgba(10, 10, 12, 0.4) 100%),
+        linear-gradient(to right, transparent 60%, rgba(10, 10, 12, 0.7) 100%);
+    }
+  }
+
+  .hero-split-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  @media (min-width: 48rem) {
+    .hero-split-content {
+      padding: var(--space-xl) var(--space-lg);
+    }
+  }
+
+  .hero-split-text {
+    max-width: 28rem;
+  }
+
+  .hero-credit {
+    position: absolute;
+    bottom: var(--space-sm);
+    left: var(--space-sm);
+    font-size: 0.65rem;
+    opacity: 0.5;
+  }
+
+  /* ---- Shared typography ---- */
 
   .hero-label {
     font-family: var(--font-mono);
@@ -183,6 +316,10 @@ const phraseLines = phrase ? phrase.split(' / ') : [];
     font-size: clamp(2.5rem, 7vw, 5rem);
   }
 
+  .hero--split .hero-title {
+    font-size: clamp(2.5rem, 5vw, 5rem);
+  }
+
   .hero-title-accent {
     color: var(--color-accent-interactive);
   }
@@ -200,30 +337,68 @@ const phraseLines = phrase ? phrase.split(' / ') : [];
     margin-top: var(--space-md);
   }
 
-  /* Staggered entrance animation */
-  @media (prefers-reduced-motion: no-preference) {
-    .hero-anim {
-      opacity: 0;
-      transform: translateY(1.5rem);
-      animation: heroFadeIn 1s ease-out forwards;
-    }
-
-    .hero-anim-1 { animation-delay: 0.2s; }
-    .hero-anim-2 { animation-delay: 0.5s; }
-    .hero-anim-3 { animation-delay: 0.9s; }
+  .hero--split .hero-phrase {
+    margin-left: 0;
+    text-align: left;
+    margin-top: var(--space-lg);
   }
 
-  @keyframes heroFadeIn {
+  /* ---- Choreographed entrance ---- */
+
+  @media (prefers-reduced-motion: no-preference) {
+    html.chaos .hero--split {
+      animation: theatreLightsUp 1.8s ease-out forwards;
+    }
+
+    html.chaos .hero-entrance {
+      opacity: 0;
+      transform: translateY(1.5rem);
+      animation: heroReveal 0.8s ease-out forwards;
+    }
+
+    html.chaos .hero-entrance-1 { animation-delay: 0.8s; }
+    html.chaos .hero-entrance-2 { animation-delay: 1.0s; }
+    html.chaos .hero-entrance-3 { animation-delay: 1.3s; }
+
+    html.chaos .hero--section .hero-entrance {
+      animation-delay: 0s;
+    }
+    html.chaos .hero--section .hero-entrance-1 { animation-delay: 0.1s; }
+    html.chaos .hero--section .hero-entrance-2 { animation-delay: 0.3s; }
+    html.chaos .hero--section .hero-entrance-3 { animation-delay: 0.5s; }
+  }
+
+  @keyframes theatreLightsUp {
+    0% { filter: brightness(0.1); }
+    30% { filter: brightness(0.4); }
+    100% { filter: brightness(1); }
+  }
+
+  @keyframes heroReveal {
     to {
       opacity: 1;
       transform: translateY(0);
     }
   }
 
+  /* Calm mode + reduced-motion: immediate, no drama */
+  html:not(.chaos) .hero-entrance,
+  .hero-entrance {
+    opacity: 1;
+    transform: none;
+  }
+
   @media (prefers-reduced-motion: reduce) {
-    .hero-anim {
+    .hero-entrance,
+    html.chaos .hero-entrance {
       opacity: 1;
       transform: none;
+      animation: none;
+    }
+
+    html.chaos .hero--split {
+      animation: none;
+      filter: none;
     }
   }
 </style>

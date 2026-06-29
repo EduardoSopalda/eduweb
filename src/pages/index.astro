@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import Hero from '../components/Hero.astro';
+import VeiledFaces from '../components/VeiledFaces.astro';
 import { getCollection } from 'astro:content';
 
 const obras = (await getCollection('obras')).sort((a, b) => (b.data.order || 0) - (a.data.order || 0));
@@ -15,11 +16,16 @@ const featured = obras.find((o) => o.data.touring) || obras[0];
     title="Manuel"
     titleAccent="Monrò"
     subtitle="Dirección · Coreografía · Dramaturgia · Pedagogía · Interpretación"
-    phrase="Cuando el reflejo mira la sombra, nadie aquí respira."
+    phrase="Cuando el reflejo mira la sombra, / nadie aquí respira."
     height="full"
+    layout="split"
     image="/images/manuel-monro-hero.jpg"
-    imageAlt="Manuel Monrò en movimiento, fotografía en claroscuro"
+    imageAlt="Manuel Monrò en movimiento, cuerpo en torsión con falda de tul translúcida, fotografía en blanco y negro"
+    imageCredit="pending"
   />
+
+  <!-- Second punch: veiled faces -->
+  <VeiledFaces lang="es" />
 
   <!-- Identity -->
   <section class="section container" aria-labelledby="home-identity">
@@ -35,6 +41,8 @@ const featured = obras.find((o) => o.data.touring) || obras[0];
       <span class="discipline-tag">Dramaturgia</span>
       <span class="discipline-tag">Pedagogía</span>
       <span class="discipline-tag">Interpretación</span>
+      <span class="discipline-tag">Poesía</span>
+      <span class="discipline-tag">Pintura</span>
     </div>
   </section>
 
@@ -114,6 +122,11 @@ const featured = obras.find((o) => o.data.touring) || obras[0];
         <span class="presence-place">Madrid</span>
         <span class="presence-detail">Madrid en Danza, Teatros del Canal</span>
       </div>
+      <div class="presence-item">
+        <span class="presence-year marginalia">2026</span>
+        <span class="presence-place">Arles</span>
+        <span class="presence-detail">Théâtre Antique d'Arles</span>
+      </div>
     </div>
   </section>
 
@@ -142,7 +155,7 @@ const featured = obras.find((o) => o.data.touring) || obras[0];
       <p class="cta-text">
         Para programar funciones, solicitar dossier o rider técnico, o cualquier consulta sobre Manuel Monrò y La Tulpa.
       </p>
-      <a href="/contacto" class="cta-link cta-link--large">Contactar &rarr;</a>
+      <a href="mailto:cialatulpa@gmail.com" class="cta-link cta-link--large">cialatulpa@gmail.com</a>
     </div>
   </section>
 </Base>
@@ -226,7 +239,7 @@ const featured = obras.find((o) => o.data.touring) || obras[0];
     font-size: 1.15rem;
     font-style: italic;
     color: var(--color-text);
-    border-left: 3px solid var(--color-accent-solid);
+    border-left: 3px solid var(--color-bronze, var(--color-accent-solid));
     padding-left: var(--space-md);
     margin-bottom: var(--space-xs);
     line-height: 1.5;
@@ -347,7 +360,7 @@ const featured = obras.find((o) => o.data.touring) || obras[0];
 
   @media (min-width: 64rem) {
     .presence-grid {
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(5, 1fr);
     }
   }
 

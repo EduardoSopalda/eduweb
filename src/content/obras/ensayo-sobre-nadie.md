@@ -8,6 +8,8 @@ music: Kevin Lisbona
 production: Festival Escena Mobile, en coproducción con la Compañía Danza Mobile
 premiere: 23 de septiembre de 2023, Teatro Alameda, Sevilla
 type: Pieza breve de danza teatro
+image: /images/cara-velada-1.jpg
+videoUrl: youtube:ZVB2VN3mIUU
 touring: true
 order: 1
 ---

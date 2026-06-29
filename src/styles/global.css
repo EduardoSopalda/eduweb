@@ -45,18 +45,22 @@
 }
 
 :root {
-  --color-base: #0B0B0D;
-  --color-base-raised: #16151A;
-  --color-base-surface: #1E1D23;
+  /* Chaos palette — blood, bronze, black (default) */
+  --color-base: #0A0A0C;
+  --color-base-raised: #13121A;
+  --color-base-surface: #1B1A22;
   --color-warm-grey: #2A2830;
   --color-warm-grey-light: #3D3A45;
   --color-text: #ECE7DE;
   --color-text-secondary: #9E9890;
-  --color-accent: #7A2222;
-  --color-accent-solid: #8B2E2E;
-  --color-accent-interactive: #C44040;
-  --color-accent-hover: #D45555;
-  --color-focus-ring: #C44040;
+  --color-accent: #7A1A1A;
+  --color-accent-solid: #8B2020;
+  --color-accent-interactive: #C43030;
+  --color-accent-hover: #D44545;
+  --color-focus-ring: #C43030;
+  --color-bronze: #8B6F47;
+  --color-bronze-light: #A6875E;
+  --color-bronze-subtle: rgba(139, 111, 71, 0.15);
 
   --font-display: 'Melisen', Georgia, 'Times New Roman', serif;
   --font-body: 'Glacial Indifference', system-ui, -apple-system, sans-serif;
@@ -81,7 +85,7 @@
   --chaos-shift-x: 0px;
   --chaos-shift-y: 0px;
   --chaos-scale: 1;
-  --grain-opacity: 0.035;
+  --grain-opacity: 0.04;
 }
 
 /* Chaos mode active (default for non-reduced-motion users) */
@@ -90,7 +94,27 @@ html.chaos {
   --chaos-shift-x: 2vw;
   --chaos-shift-y: 0.5rem;
   --chaos-scale: 1;
-  --grain-opacity: 0.04;
+  --grain-opacity: 0.05;
+}
+
+/* Calm palette — white, quiet, order */
+html:not(.chaos) {
+  --color-base: #F5F2ED;
+  --color-base-raised: #FFFFFF;
+  --color-base-surface: #EDE9E3;
+  --color-warm-grey: #D5D0C8;
+  --color-warm-grey-light: #C5BFB5;
+  --color-text: #1A1A1C;
+  --color-text-secondary: #5C5850;
+  --color-accent: #6B1515;
+  --color-accent-solid: #7A1A1A;
+  --color-accent-interactive: #8B2020;
+  --color-accent-hover: #6B1515;
+  --color-focus-ring: #8B2020;
+  --color-bronze: #7A6240;
+  --color-bronze-light: #9E8560;
+  --color-bronze-subtle: rgba(122, 98, 64, 0.1);
+  --grain-opacity: 0.015;
 }
 
 /* ---- Reset ---- */
@@ -176,7 +200,7 @@ p + p { margin-top: var(--space-sm); }
 ul, ol { padding-left: 1.5em; }
 
 blockquote {
-  border-left: 4px solid var(--color-accent-solid);
+  border-left: 4px solid var(--color-bronze);
   padding-left: var(--space-md);
   font-style: italic;
   color: var(--color-text);
@@ -246,6 +270,10 @@ blockquote {
   width: 2.5em;
   height: 4px;
   background-color: var(--color-accent-solid);
+}
+
+html.chaos .accent-underline::after {
+  background-color: var(--color-bronze);
 }
 
 /* ---- Label ---- */
@@ -328,6 +356,11 @@ html:not(.chaos) .chaos-overlap {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
   background-repeat: repeat;
   background-size: 256px 256px;
+}
+
+html.chaos .grain {
+  mix-blend-mode: overlay;
+  background-color: rgba(139, 111, 71, 0.08);
 }
 
 /* ---- Scroll reveal ---- */

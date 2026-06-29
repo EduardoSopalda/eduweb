@@ -198,7 +198,7 @@ const featured = obras.find((o) => o.data.touring) || obras[0];
   <!-- Final curtain -->
   <div class="final-curtain" aria-hidden="true">
     <div class="final-curtain-line"></div>
-    <p class="final-curtain-text">Fin de la función.</p>
+    <p class="final-curtain-text">— Fin de la función —</p>
   </div>
 </Base>
 
@@ -636,16 +636,16 @@ const featured = obras.find((o) => o.data.touring) || obras[0];
 
   .final-curtain-line {
     width: 1px;
-    height: 4rem;
+    height: 6rem;
     background: linear-gradient(to bottom, transparent, var(--color-accent-solid));
   }
 
   .final-curtain-text {
     font-family: var(--font-display);
-    font-size: 0.85rem;
+    font-size: 1rem;
     font-style: italic;
-    color: var(--color-text-secondary);
-    opacity: 0.4;
+    color: var(--color-accent-interactive);
+    opacity: 0.7;
     letter-spacing: 0.1em;
   }
 </style>

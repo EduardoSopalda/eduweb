@@ -146,6 +146,10 @@ const playLabel = lang === 'es' ? `Reproducir ${title}` : `Play ${title}`;
   }
 
   /* Theater mode (sala a oscuras) */
+  .video-theater[hidden] {
+    display: none !important;
+  }
+
   .video-theater {
     position: fixed;
     inset: 0;

@@ -32,6 +32,14 @@ const obras = (await getCollection('obras')).sort((a, b) => a.data.order - b.dat
               <div class="obra-card-overlay">
                 <span class="label">{obra.data.year}</span>
               </div>
+              {obra.data.videoUrl && (
+                <div class="obra-card-play" aria-hidden="true">
+                  <svg viewBox="0 0 48 48" fill="none">
+                    <circle cx="24" cy="24" r="23" stroke="currentColor" stroke-width="2" opacity="0.6" />
+                    <polygon points="19,14 19,34 35,24" fill="currentColor" />
+                  </svg>
+                </div>
+              )}
             </div>
             <div class="obra-card-info">
               <h2>{obra.data.title}</h2>
@@ -115,6 +123,26 @@ const obras = (await getCollection('obras')).sort((a, b) => a.data.order - b.dat
     position: absolute;
     bottom: var(--space-sm);
     left: var(--space-sm);
+  }
+
+  .obra-card-play {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: rgba(236, 231, 222, 0.8);
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.5));
+    transition: transform 0.3s ease, color 0.3s ease;
+  }
+
+  .obra-card-play svg {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+
+  .obra-card-link:hover .obra-card-play {
+    transform: translate(-50%, -50%) scale(1.15);
+    color: var(--color-text);
   }
 
   .obra-card-info {

@@ -135,37 +135,8 @@ const navItems = [
     });
   }
 
-  let scrollHandler: (() => void) | null = null;
-
-  function initHeaderScroll() {
-    const header = document.querySelector('.site-header') as HTMLElement;
-    if (!header) return;
-
-    if (scrollHandler) {
-      window.removeEventListener('scroll', scrollHandler);
-    }
-
-    let lastY = window.scrollY;
-
-    scrollHandler = () => {
-      const y = window.scrollY;
-      if (y > 80 && y > lastY) {
-        header.classList.add('header-hidden');
-      } else {
-        header.classList.remove('header-hidden');
-      }
-      lastY = y;
-    };
-
-    window.addEventListener('scroll', scrollHandler, { passive: true });
-  }
-
   initCurtain();
-  initHeaderScroll();
-  document.addEventListener('astro:after-swap', () => {
-    initCurtain();
-    initHeaderScroll();
-  });
+  document.addEventListener('astro:after-swap', initCurtain);
 </script>
 
 <style>
@@ -185,10 +156,6 @@ const navItems = [
 
   html:not(.chaos) .site-header {
     background-color: rgba(245, 242, 237, 0.9);
-  }
-
-  .header-hidden {
-    transform: translateY(-100%);
   }
 
   .header-inner {

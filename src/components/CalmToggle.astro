@@ -11,10 +11,40 @@ const t = useTranslations(lang);
   aria-pressed="false"
   aria-label={t('calm.label')}
   title={t('calm.label')}
+  data-label-calm={t('calm.label')}
+  data-label-chaos={t('chaos.label')}
 >
   <span class="calm-toggle-icon" aria-hidden="true"></span>
   <span class="calm-toggle-text">{t('calm.label')}</span>
 </button>
+
+<script>
+  function initCalmToggleLabel() {
+    const btn = document.querySelector('.calm-toggle') as HTMLButtonElement;
+    if (!btn) return;
+    const textEl = btn.querySelector('.calm-toggle-text') as HTMLElement;
+    if (!textEl) return;
+
+    const calmLabel = btn.dataset.labelCalm || 'Calm mode';
+    const chaosLabel = btn.dataset.labelChaos || 'Chaos mode';
+
+    function updateLabel() {
+      const isChaos = document.documentElement.classList.contains('chaos');
+      const label = isChaos ? chaosLabel : calmLabel;
+      textEl.textContent = label;
+      btn.setAttribute('aria-label', label);
+      btn.title = label;
+    }
+
+    updateLabel();
+
+    const observer = new MutationObserver(updateLabel);
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+  }
+
+  initCalmToggleLabel();
+  document.addEventListener('astro:after-swap', initCalmToggleLabel);
+</script>
 
 <style>
   .calm-toggle {

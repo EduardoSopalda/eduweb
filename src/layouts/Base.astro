@@ -53,11 +53,11 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
     </main>
     <Footer />
     <div class="cursor-dot" aria-hidden="true"></div>
-    <div class="manifesto" aria-hidden="true">
+    <a href={lang === 'es' ? '/nadie' : '/en/nadie'} class="manifesto" aria-hidden="true" tabindex="-1">
       {lang === 'es'
         ? 'Cada función es la primera. Cada función es la última.'
         : 'Every performance is the first. Every performance is the last.'}
-    </div>
+    </a>
     <script>
       function initReveals() {
         const reveals = document.querySelectorAll('.reveal:not(.is-visible)');

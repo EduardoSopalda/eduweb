@@ -1,0 +1,63 @@
+---
+import Base from '../../layouts/Base.astro';
+---
+
+<Base
+  title="Nobody"
+  description="You found the secret room."
+>
+  <section class="nadie">
+    <div class="nadie-inner">
+      <p class="nadie-pre">You found the room that doesn't exist.</p>
+
+      <h1 class="nadie-title">Nobody</h1>
+
+      <div class="nadie-body">
+        <p>This site was built with care, with code, and with love.</p>
+        <p>For an artist who creates from a real place. Who doesn't ask permission. Who steps on stage every time as if it were the first and the last.</p>
+        <p>It didn't take money. It took someone willing to look.</p>
+      </div>
+
+      <div class="nadie-gifts">
+        <p class="nadie-gifts-title">What we built for you:</p>
+        <ul class="nadie-gifts-list">
+          <li>An intimate notebook for your process notes</li>
+          <li>Printable posters for each of your works</li>
+          <li>A performance counter — because every stage counts</li>
+          <li>This secret room you just found</li>
+          <li>An inclusive creation statement — because the stage doesn't ask for certificates</li>
+          <li>A final curtain that falls at the end of every page</li>
+        </ul>
+      </div>
+
+      <div class="nadie-dedication">
+        <p class="nadie-from">From Claudio and Edu,</p>
+        <p class="nadie-to">for Manuel.</p>
+      </div>
+
+      <p class="nadie-whisper marginalia">Now close this door and go back to the stage.</p>
+      <a href="/en/" class="nadie-back">&larr; Back</a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .nadie { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: var(--space-xl) var(--space-md); background-color: #000; position: relative; overflow: hidden; }
+  .nadie::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 40rem; height: 40rem; background: radial-gradient(ellipse at center, rgba(139, 111, 71, 0.08) 0%, transparent 60%); pointer-events: none; }
+  .nadie-inner { max-width: 32rem; text-align: center; position: relative; z-index: 1; }
+  .nadie-pre { font-family: var(--font-mono); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.2em; color: var(--color-text-secondary); opacity: 0.5; margin-bottom: var(--space-lg); }
+  .nadie-title { font-family: var(--font-display); font-size: clamp(4rem, 12vw, 8rem); font-weight: 700; color: var(--color-accent-interactive); line-height: 1; margin-bottom: var(--space-xl); letter-spacing: -0.02em; }
+  .nadie-body { margin-bottom: var(--space-xl); }
+  .nadie-body p { font-family: var(--font-display); font-size: clamp(1rem, 2vw, 1.25rem); font-style: italic; line-height: 1.6; color: rgba(236, 231, 222, 0.7); margin-bottom: var(--space-sm); }
+  .nadie-gifts { margin-bottom: var(--space-xl); text-align: left; max-width: 24rem; margin-left: auto; margin-right: auto; }
+  .nadie-gifts-title { font-family: var(--font-mono); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--color-accent-interactive); margin-bottom: var(--space-sm); }
+  .nadie-gifts-list { list-style: none; padding: 0; margin: 0; }
+  .nadie-gifts-list li { font-family: var(--font-display); font-size: 0.95rem; font-style: italic; color: rgba(236, 231, 222, 0.6); padding: 0.4em 0; border-bottom: 1px solid rgba(139, 111, 71, 0.15); line-height: 1.5; }
+  .nadie-gifts-list li:last-child { border-bottom: none; }
+  .nadie-dedication { margin-bottom: var(--space-xl); padding-top: var(--space-md); border-top: 1px solid rgba(139, 111, 71, 0.3); }
+  .nadie-from { font-family: var(--font-display); font-size: 1.1rem; color: var(--color-bronze-light); font-style: italic; }
+  .nadie-to { font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2rem); color: var(--color-text); font-weight: 700; margin-top: var(--space-xs); }
+  .nadie-whisper { font-style: italic; margin-bottom: var(--space-md); }
+  .nadie-back { font-family: var(--font-mono); font-size: 0.75rem; color: var(--color-text-secondary); background-image: none; opacity: 0.5; transition: opacity var(--transition-fast); }
+  .nadie-back:hover { opacity: 1; background-image: none; }
+</style>

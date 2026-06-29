@@ -81,8 +81,12 @@ if (d.videoUrl) {
         </dl>
 
         <div class="obra-downloads">
+          <button class="poster-btn" onclick="window.print()" type="button">
+            <span class="poster-btn-icon" aria-hidden="true">A3</span>
+            Imprimir cartel
+          </button>
           <!-- PENDING FROM MANUEL: PDF dossier and technical rider -->
-          <p class="marginalia" style="margin-top: var(--space-md);">Dossier y rider técnico disponibles bajo petición.</p>
+          <p class="marginalia" style="margin-top: var(--space-sm);">Dossier y rider técnico disponibles bajo petición.</p>
         </div>
       </div>
     </div>
@@ -237,5 +241,77 @@ if (d.videoUrl) {
 
   .obra-body :global(li) {
     margin-bottom: 0.5rem;
+  }
+
+  /* Poster button */
+  .poster-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    margin-top: var(--space-md);
+    padding: 0.6em 1.2em;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-accent-interactive);
+    background: none;
+    border: 1px solid var(--color-accent);
+    border-radius: 2px;
+    cursor: pointer;
+    transition: background-color var(--transition-fast), color var(--transition-fast);
+  }
+
+  .poster-btn:hover {
+    background-color: var(--color-accent-solid);
+    color: var(--color-text);
+  }
+
+  .poster-btn-icon {
+    font-size: 0.6rem;
+    font-weight: 700;
+    border: 1px solid currentColor;
+    padding: 0.2em 0.4em;
+    border-radius: 1px;
+  }
+
+  /* Print styles — generates a minimal A3 poster */
+  @media print {
+    * { background: white !important; color: black !important; box-shadow: none !important; }
+    body { margin: 0; padding: 0; font-size: 12pt; }
+    .site-header, .curtain, .grain, .cursor-dot, .manifesto,
+    footer, .skip-link, .obra-back, .obra-video, .obra-gallery,
+    .obra-body, .obra-downloads, .poster-btn, .hero { display: none !important; }
+
+    .obra-layout { display: block !important; }
+    .obra-media { margin-bottom: 2rem; }
+    .obra-media img { max-height: 60vh; object-fit: contain; }
+
+    .obra-ficha {
+      border-left: 4pt solid #8B2020 !important;
+      padding: 1.5rem;
+      page-break-inside: avoid;
+    }
+
+    article::before {
+      content: '';
+      display: block;
+      font-family: Georgia, serif;
+      font-size: 36pt;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    article::after {
+      content: 'Manuel Monrò — cialatulpa@gmail.com — manuelmonro.com';
+      display: block;
+      font-family: monospace;
+      font-size: 8pt;
+      color: #666 !important;
+      margin-top: 3rem;
+      padding-top: 1rem;
+      border-top: 1pt solid #ccc !important;
+    }
   }
 </style>
